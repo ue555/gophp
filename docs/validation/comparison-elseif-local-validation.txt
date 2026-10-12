@@ -1,0 +1,12 @@
+Scalar comparisons and elseif: local validation, not a live official PHP comparison.
+make test vet build: passed (Go tests, Python tests, go vet, build).
+Original 81 PHP fixtures: SHA-256 unchanged; original 81 expected entries unchanged.
+Fixture counts: {'success': 67, 'runtime': 37, 'parser': 18}; total 122.
+Go target 8.3: 122/122 matched saved stdout/stderr/exit expectations; original 81/81, new 41/41; all 67 success fixtures exited 0.
+Go target 8.4: 122/122 matched saved stdout/stderr/exit expectations; original 81/81, new 41/41; all 67 success fixtures exited 0.
+Go target 8.5: 122/122 matched saved stdout/stderr/exit expectations; original 81/81, new 41/41; all 67 success fixtures exited 0.
+Total: 366/366 CLI runs matched saved expectations.
+New expected results are based on official documentation/source, not captured from Go output.
+Live PHP execution of this implementation remains unexecuted due to Podman connection denial.
+Fuzz: go test ./internal/php -run ^$ -fuzz ^FuzzRun$ -fuzztime=3s
+Result: PASS; 745743 inputs, each tested with PHP83/PHP84/PHP85 target settings.

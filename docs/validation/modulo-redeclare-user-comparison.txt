@@ -1,0 +1,58 @@
+ユーザー提供ログによる公式PHP比較（剰余・関数重複定義の修正後）
+ユーザーの make compare-all 出力の集計・修正箇所の抜粋です。全ログの複製ではありません。
+エージェント側で公式PHPを再実行して得たログではありません。
+
+実行ディレクトリ: /Users/kouji/dev/php
+コマンド: make compare-all
+
+Goテスト:
+ok      example.com/gophp/cmd/gophp     (cached)
+ok      example.com/gophp/internal/php  (cached)
+
+Pythonテスト:
+Ran 4 tests in 1.619s
+OK
+
+ビルド: go build -o bin/gophp ./cmd/gophp 成功
+比較: ./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+PHP: 8.3.35 (/Users/kouji/dev/php/containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php (exit 255)
+337 matched, 0 different, 0 errors; 337 fixtures
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+PHP: 8.4.26 (/Users/kouji/dev/php/containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php (exit 255)
+337 matched, 0 different, 0 errors; 337 fixtures
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+PHP: 8.5.11 (/Users/kouji/dev/php/containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php (exit 255)
+337 matched, 0 different, 0 errors; 337 fixtures
+
+集計:
+- 同じ337fixtureを、各PHPに対応するGo対象設定で実行。
+- stdout・stderr・終了コードは1011/1011比較すべて一致。
+- 正常系160件は全版で両処理系とも終了コード0。
+- 既存213件と追加124件を含む回帰比較が完了。
+- 前回の4種類・延べ6件の差分は解消。
+- 337fixture内の実比較に未実施項目なし。
+- go vetはこのユーザーログのコマンドには含まれない。
+  前回のエージェント側の成功記録は modulo-redeclare-local-validation.txt に保存。
+- fixture外の入力・Go単体ケースだけの入力・未対応機能の互換性はこの結果に含めない。

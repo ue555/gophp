@@ -1,0 +1,44 @@
+ユーザー提供ログによる公式PHP比較（項目4〜8追加後・今回の修正前）
+ユーザーの make compare-all 出力の集計・差分抜粋。全ログの複製ではありません。
+
+Goテスト成功、Pythonテスト4件成功（0.776s）、ビルド成功。
+Go target: PHP 8.3 / 8.4 / 8.5 をそれぞれ使用。
+stdout・stderr・終了コードを厳密比較。
+
+PHP 8.3.35: 336 matched, 1 different, 0 errors; 337 fixtures
+PHP 8.4.26: 333 matched, 4 different, 0 errors; 337 fixtures
+PHP 8.5.11: 336 matched, 1 different, 0 errors; 337 fixtures
+
+合計: 1005 matched, 6 different, 0 errors; 1011 comparisons
+正常系160件は各版とも両処理系で終了0。
+既存213件は各版で一致。差分は追加124件中の4種類・延べ6件。
+比較全体および make は不一致を示す終了1。
+
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php [PHP 8.3 / 8.4 / 8.5]
+  exit:
+    PHP: 255
+    Go:  0
+  stdout:
+    PHP: b''
+    Go:  b'1\n'
+  stderr:
+    PHP: b'Fatal error: Uncaught TypeError: Unsupported operand types: stdClass % int in /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php on line 2\n'
+    Go:  b'Warning: Object of class stdClass could not be converted to int in /Users/kouji/dev/php/tests/fixtures/runtime/modulo_object.php on line 2\n'
+
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php [PHP 8.4]
+  stderr:
+    PHP: b'Fatal error: Cannot redeclare function SAME() (previously declared in /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php:3) in /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php on line 4\n'
+    Go:  b'Fatal error: Cannot redeclare SAME() (previously declared in /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php:3) in /Users/kouji/dev/php/tests/fixtures/parser/function_duplicate.php on line 4\n'
+
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php [PHP 8.4]
+  stderr:
+    PHP: b'Fatal error: Cannot redeclare function same() (previously declared in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php:2) in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php on line 4\n'
+    Go:  b'Fatal error: Cannot redeclare same() (previously declared in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php:2) in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_conditional.php on line 4\n'
+
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php [PHP 8.4]
+  stderr:
+    PHP: b'Fatal error: Cannot redeclare function inner() (previously declared in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php:2) in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php on line 2\n'
+    Go:  b'Fatal error: Cannot redeclare inner() (previously declared in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php:2) in /Users/kouji/dev/php/tests/fixtures/runtime/function_duplicate_nested.php on line 2\n'
+
+今回の修正後の公式PHP比較結果ではありません。
+期待値4件は上記PHP出力に合わせて修正。337件のPHPソースは変更していません。

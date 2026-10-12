@@ -1,0 +1,38 @@
+ユーザー提供の実行ログの集計・抜粋（全文の再録ではありません）
+出典: 会話に貼り付けられた、機能追加後の make compare-all の実行結果。
+このファイルはエージェントによる新規実行結果ではありません。
+
+作業ディレクトリ: /Users/kouji/dev/php
+コマンド: make compare-all
+Goテスト: cmd/gophp と internal/php が成功（cached）
+ビルド: go build -o bin/gophp ./cmd/gophp
+比較: ./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+共通fixture: 57件（既存35件 + 新規22件）
+
+ログの集計行:
+PHP 8.3.35: 57 matched, 0 different, 0 errors; 57 fixtures
+PHP 8.4.26: 57 matched, 0 different, 0 errors; 57 fixtures
+PHP 8.5.11: 56 matched, 1 different, 0 errors; 57 fixtures
+
+分類別の集計（一致/対象）:
+                 success   runtime   parser   既存    新規
+PHP 8.3.35       37/37     14/14     6/6      35/35   22/22
+PHP 8.4.26       37/37     14/14     6/6      35/35   22/22
+PHP 8.5.11       36/37     14/14     6/6      35/35   21/22
+
+唯一のDIFFの抜粋（PHP 8.5.11）:
+DIFF /Users/kouji/dev/php/tests/fixtures/success/truth_true.php
+  stderr:
+    PHP: b'Warning: unexpected NAN value was coerced to bool in /Users/kouji/dev/php/tests/fixtures/success/truth_true.php on line 21\n'
+    Go:  b''
+
+ログ末尾:
+56 matched, 1 different, 0 errors; 57 fixtures
+make: *** [compare-all] Error 1
+
+判定:
+- 延べ171比較中170一致・1不一致・検証エラー0件。
+- stdoutと終了コードには差分の報告なし。正常系37件は終了コード0。
+- NaN条件はtrueのまま、PHP 8.5.11だけ追加警告を出す仕様差。
+- 57件の実比較に未実施項目なし。Goの8.5向け警告・バージョン選択は未実装。
+- 修正前に異なっていた構文エラー4件も全3版でMATCH。

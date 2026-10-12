@@ -1,0 +1,15 @@
+Date: 2026-10-11
+Working directory: /Users/kouji/dev/php/containers/php-version
+Command: ./compare-all.sh tests/fixtures ./bin/gophp
+Exit code: 2
+Result: reference version verification failed; no fixture comparisons ran.
+
+
+Comparing with PHP 8.3.35
+ERROR: expected PHP 8.3.35; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.4.26
+ERROR: expected PHP 8.4.26; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.5.11
+ERROR: expected PHP 8.5.11; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'

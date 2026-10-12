@@ -1,0 +1,35 @@
+配列・クラス・式内代入追加後のローカル検証（2026-10-11）
+公式PHPとの実比較ではありません。
+
+$ make test vet build
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	0.648s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.467s
+
+OK
+go vet ./...
+go build -o bin/gophp ./cmd/gophp
+
+exit=0
+
+$ go test ./internal/php -run=^$ -fuzz=FuzzRun -fuzztime=3s -parallel=2
+fuzz: elapsed: 0s, gathering baseline coverage: 0/405 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 405/405 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 193113 (64357/sec), new interesting: 15 (total: 420)
+fuzz: elapsed: 4s, execs: 193113 (0/sec), new interesting: 15 (total: 420)
+PASS
+ok  	example.com/gophp/internal/php	4.413s
+
+exit=0
+
+Built CLI saved-expectation verification (stdout/stderr bytes and exit status)
+Existing fixture SHA-256: 122/122 unchanged
+Existing saved expectations: 122/122 unchanged
+Go CLI target 8.3: 213/213 saved expectations matched; success fixtures 110/110 exit 0; existing 122, added 91
+Go CLI target 8.4: 213/213 saved expectations matched; success fixtures 110/110 exit 0; existing 122, added 91
+Go CLI target 8.5: 213/213 saved expectations matched; success fixtures 110/110 exit 0; existing 122, added 91
+These are saved-expectation checks, not comparisons with official PHP.

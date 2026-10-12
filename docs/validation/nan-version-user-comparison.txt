@@ -1,0 +1,46 @@
+ユーザー提供の実行ログの集計・抜粋（全文の再録ではありません）
+出典: 会話に貼り付けられた、NaN警告・バージョン選択の修正後の make compare-all の実行結果。
+このファイルはエージェントによる新規実行結果ではありません。
+実行日時は提供ログに記載されていません。
+
+作業ディレクトリ: /Users/kouji/dev/php
+コマンド: make compare-all
+Goテスト: cmd/gophp と internal/php が成功（cached）
+Pythonテスト: Ran 1 test in 0.574s / OK
+ビルド: go build -o bin/gophp ./cmd/gophp
+比較: ./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+共通fixture: 57件（既存35件 + 新規22件）
+
+ログのバージョン表示と集計行:
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+PHP: 8.3.35 (/Users/kouji/dev/php/containers/php-version/bin/php83)
+57 matched, 0 different, 0 errors; 57 fixtures
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+PHP: 8.4.26 (/Users/kouji/dev/php/containers/php-version/bin/php84)
+57 matched, 0 different, 0 errors; 57 fixtures
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+PHP: 8.5.11 (/Users/kouji/dev/php/containers/php-version/bin/php85)
+57 matched, 0 different, 0 errors; 57 fixtures
+
+分類別の集計（一致/対象、各MATCH行から集計）:
+                 success   runtime   parser   既存    新規
+PHP 8.3.35       37/37     14/14     6/6      35/35   22/22
+PHP 8.4.26       37/37     14/14     6/6      35/35   22/22
+PHP 8.5.11       37/37     14/14     6/6      35/35   22/22
+
+以前のPHP 8.5.11の不一致ケースも、全3版で次の行が表示されています:
+MATCH /Users/kouji/dev/php/tests/fixtures/success/truth_true.php (exit 0)
+
+判定:
+- 延べ171比較中171一致・不一致0件・検証エラー0件。
+- stdout・stderrはバイト単位、終了コードも一致。
+- 正常系37件はすべて終了コード0。
+- 57fixtureについて修正後の実比較の未実施項目なし。
+- ログにはシェルの終了コードの数値表示はありません。比較集計は全版で成功しています。
+- fixture外の入力・Go単体テストだけのケース・未対応機能はこの検証に含みません。
+- 過去のエージェント側のPodman接続失敗や、修正前の8.5の不一致とは別の結果です。

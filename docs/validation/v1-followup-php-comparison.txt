@@ -1,0 +1,24 @@
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	1.431s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 3.885s
+
+OK
+go build -o bin/gophp ./cmd/gophp
+./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+ERROR: could not verify official PHP: expected PHP 8.3.35; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+ERROR: could not verify official PHP: expected PHP 8.4.26; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+ERROR: could not verify official PHP: expected PHP 8.5.11; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+make: *** [compare-all] Error 2

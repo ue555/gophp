@@ -1,0 +1,6 @@
+Local CLI regression against stored expectations, not a live PHP comparison.
+PHP 8.5 warning expectation: user-provided official output from truth_true.php line 21.
+Go --php-version=8.3: 57/57 expectations matched (stdout, stderr, exit code).
+Go --php-version=8.4: 57/57 expectations matched (stdout, stderr, exit code).
+Go --php-version=8.5: 57/57 expectations matched (stdout, stderr, exit code).
+Total: 171/171 expectations matched. PHP fixture files were not changed.

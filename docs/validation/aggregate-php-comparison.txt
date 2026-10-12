@@ -1,0 +1,30 @@
+配列・クラス・式内代入追加後の公式PHP比較試行（2026-10-11）
+予定: PHP 8.3.35 / 8.4.26 / 8.5.11、それぞれ同じ213 fixture
+
+$ make compare-all
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	(cached)
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.841s
+
+OK
+go build -o bin/gophp ./cmd/gophp
+./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+ERROR: expected PHP 8.3.35; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+ERROR: expected PHP 8.4.26; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+ERROR: expected PHP 8.5.11; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+make: *** [compare-all] Error 2
+
+exit=2

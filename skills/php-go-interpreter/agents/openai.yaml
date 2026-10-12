@@ -1,0 +1,3 @@
+interface:
+  display_name: "Go製PHPインタプリタ開発"
+  short_description: "PHPの対応範囲を限定し、Go実装と公式PHPの結果を比較して開発する"

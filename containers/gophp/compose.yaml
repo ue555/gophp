@@ -1,0 +1,16 @@
+name: gophp
+
+services:
+  gophp:
+    image: ${GOPHP_IMAGE:-localhost/gophp:v1}
+    build:
+      context: ../..
+      dockerfile: containers/gophp/Containerfile
+    working_dir: /workspace
+    command: ["examples/report.php"]
+    volumes:
+      - ../..:/workspace:ro
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges"]

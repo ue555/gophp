@@ -1,0 +1,34 @@
+213 fixtureのユーザー提供ログに基づく診断修正後の検証
+公式PHPとの実比較ではありません。
+
+$ make test vet build
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	1.764s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.126s
+
+OK
+go vet ./...
+go build -o bin/gophp ./cmd/gophp
+
+exit=0
+
+Existing PHP fixture sources: 213/213 unchanged
+Saved expectations: 8 entries corrected from user-provided PHP diagnostics; other 205 entries unchanged.
+Go CLI target 8.3: 213/213 saved expectations matched; success fixtures 110/110 exit 0.
+Go CLI target 8.4: 213/213 saved expectations matched; success fixtures 110/110 exit 0.
+Go CLI target 8.5: 213/213 saved expectations matched; success fixtures 110/110 exit 0.
+Saved-expectation checks are not a new official PHP comparison.
+
+$ go test ./internal/php -run=^$ -fuzz=FuzzRun -fuzztime=3s -parallel=2
+fuzz: elapsed: 0s, gathering baseline coverage: 0/420 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 420/420 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 23174 (7722/sec), new interesting: 1 (total: 421)
+fuzz: elapsed: 4s, execs: 23174 (0/sec), new interesting: 1 (total: 421)
+PASS
+ok  	example.com/gophp/internal/php	4.404s
+
+exit=0

@@ -1,0 +1,35 @@
+NaN boolean warning fix with per-version Go settings
+Date: 2026-10-11T15:46:33+09:00
+Working directory: /Users/kouji/dev/php
+Same binary and 57 fixtures; Go target set to 8.3, 8.4 and 8.5 respectively.
+check.sh exit code: 125
+Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM
+Error: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted
+
+Command: make compare-all
+Exit code: 2
+
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	0.108s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.529s
+
+OK
+go build -o bin/gophp ./cmd/gophp
+./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+ERROR: expected PHP 8.3.35; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+ERROR: expected PHP 8.4.26; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+ERROR: expected PHP 8.5.11; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'
+make: *** [compare-all] Error 2

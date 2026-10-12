@@ -1,0 +1,8 @@
+.cache
+.git
+.agents
+.codex
+.aws
+bin
+**/__pycache__
+**/*.pyc

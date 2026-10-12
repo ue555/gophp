@@ -1,0 +1,54 @@
+ユーザー提供ログによる公式PHP比較（診断修正後）
+ユーザーが /Users/kouji/dev/php で実行した make compare-all の集計・抜粋です。
+全文ログではなく、エージェントが公式PHPを実行した結果でもありません。
+
+前段の検証:
+go test ./...
+ok example.com/gophp/cmd/gophp (cached)
+ok example.com/gophp/internal/php (cached)
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+Ran 1 test in 0.302s
+OK
+go build -o bin/gophp ./cmd/gophp
+ビルド成功後、3バージョンの公式PHP比較を実行。
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+PHP: 8.3.35 (/Users/kouji/dev/php/containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+213 matched, 0 different, 0 errors; 213 fixtures
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+PHP: 8.4.26 (/Users/kouji/dev/php/containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+213 matched, 0 different, 0 errors; 213 fixtures
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+PHP: 8.5.11 (/Users/kouji/dev/php/containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+213 matched, 0 different, 0 errors; 213 fixtures
+
+集計:
+各版: 正常系110件・実行時診断73件・構文/コンパイルエラー30件。
+合計: 639比較、639一致、不一致0、検証エラー0。
+stdout・stderr・終了コードを比較。正常系110件は両処理系とも終了コード0。
+既存122件と追加91件をすべて含み、この213fixture内に実比較の未実施項目はありません。
+
+前回不一致だった8種類のfixtureはすべてMATCH:
+parser/array_unselected_syntax.php: 全版
+runtime/array_scalar_read.php: 全版
+runtime/object_new_dereference.php: 8.3はexit 255、8.4/8.5はexit 0でそれぞれMATCH
+parser/array_append_read.php: 全版（8.5のスタックトレースを含む）
+parser/array_literal_invalid_key.php: 全版（同上）
+parser/class_append_read.php: 全版（同上）
+parser/class_invalid_default.php: 全版（同上）
+parser/class_this_assignment.php: 全版（同上）
+
+範囲:
+結果は収録された213fixtureに対するものです。
+Go単体テストだけの入力、fixture外の入力、未対応機能の互換性は含みません。
+go vetとfuzzの成功は以前のローカル検証記録を参照してください。
+修正前の差分は aggregate-user-comparison.txt、
+エージェント側の接続失敗は aggregate-diagnostics-php-comparison.txt に履歴として保持しています。

@@ -1,0 +1,55 @@
+ユーザー提供ログによる公式PHP比較：集計・抜粋（全文の再録ではありません）
+出典: 会話に貼り付けられた、論理演算 !・&&・|| 追加後の make compare-all の実行結果。
+このファイルはエージェントによる新規実行結果ではありません。
+実行日時は提供ログに記載されていません。
+
+作業ディレクトリ: /Users/kouji/dev/php
+コマンド: make compare-all
+Goテスト: cmd/gophp と internal/php が成功（cached）
+Pythonテスト: Ran 1 test in 0.760s / OK
+ビルド: go build -o bin/gophp ./cmd/gophp
+比較: ./containers/php-version/compare-all.sh tests/fixtures ./bin/gophp
+共通fixture: 81件（既存57件 + 論理演算24件）
+
+ログのバージョン表示と集計行:
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+PHP: 8.3.35 (/Users/kouji/dev/php/containers/php-version/bin/php83)
+81 matched, 0 different, 0 errors; 81 fixtures
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+PHP: 8.4.26 (/Users/kouji/dev/php/containers/php-version/bin/php84)
+81 matched, 0 different, 0 errors; 81 fixtures
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+PHP: 8.5.11 (/Users/kouji/dev/php/containers/php-version/bin/php85)
+81 matched, 0 different, 0 errors; 81 fixtures
+
+分類別の集計（一致/対象、各MATCH行から集計）:
+                 success   runtime   parser   既存    新規
+PHP 8.3.35       46/46     25/25     10/10    57/57   24/24
+PHP 8.4.26       46/46     25/25     10/10    57/57   24/24
+PHP 8.5.11       46/46     25/25     10/10    57/57   24/24
+
+NaNの論理演算を含む次の行は全3版でMATCH:
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/logical_nan_and.php (exit 0)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/logical_nan_before_error.php (exit 255)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/logical_nan_multiline.php (exit 0)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/logical_nan_not.php (exit 0)
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/logical_nan_or.php (exit 0)
+MATCH /Users/kouji/dev/php/tests/fixtures/success/logical_skip_nan.php (exit 0)
+
+判定:
+- 延べ243比較中243一致・不一致0件・検証エラー0件。
+- stdout・stderrはバイト単位、終了コードも一致。
+- 各版の正常系46件は両処理系とも終了コード0。
+- 既存57件に回帰なし。新規24件も全3版で一致。
+- PHP 8.5のNaN変換警告と8.3・8.4との差は、それぞれのGo対象設定で一致。
+- 81fixture内の実比較の未実施項目なし。
+- ログにはシェルの終了コードの数値表示はありません。比較集計は全版で成功しています。
+- このログでの実行は make compare-all であり、go vet の再実行は含まれません。
+- fixture外の入力・Go単体テストだけのケース・未対応機能はこの検証に含みません。
+- print・関数による右辺の直接出力は未対応のため、その比較は未実施です。
+- 過去のエージェント側のPodman接続失敗は logical-php-comparison.txt に履歴として保持しています。

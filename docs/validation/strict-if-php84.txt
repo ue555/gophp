@@ -1,0 +1,7 @@
+Feature: strict comparisons, boolean conversion, braced if/else
+Working directory: /Users/kouji/dev/php
+Command: python3 skills/php-go-interpreter/scripts/compare_php.py --php ./containers/php-version/bin/php84 --php-version 8.4.26 --fixtures tests/fixtures --timeout 15 --interpreter ./bin/gophp '{file}'
+Exit code: 2
+Result: PHP version verification failed. No official fixture comparisons ran.
+
+ERROR: expected PHP 8.4.26; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted\n'

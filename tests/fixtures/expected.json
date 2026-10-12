@@ -1,0 +1,2538 @@
+{
+  "success/hello.php": {
+    "stdout": "Hello, PHP!\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/scalars.php": {
+    "stdout": "42|-7|1||\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variables.php": {
+    "stdout": "value:15:12:lower\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/arithmetic.php": {
+    "stdout": "14|20|11|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/concat_precedence.php": {
+    "stdout": "sum=14|7x|123\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unary.php": {
+    "stdout": "-5|7|2|-6|12|-1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/division.php": {
+    "stdout": "4|3.5|-3.5|0.33333333333333|0.5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/floats.php": {
+    "stdout": "1.5|1000|1.0E-5|0.3|-0|1.0E+14\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/numeric_strings.php": {
+    "stdout": "15|5|25|11|12.5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/coercion.php": {
+    "stdout": "2|3|0|x1|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integers.php": {
+    "stdout": "9223372036854775807|-9223372036854775808|9007199254740995\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/overflow.php": {
+    "stdout": "9.2233720368548E+18|-9.2233720368548E+18|9.2233720370002E+18|9.2233720368548E+18|9.2233720368548E+18|9.2233720368548E+18\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comments.php": {
+    "stdout": "1|||3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strings.php": {
+    "stdout": "it's\\ok\\n|a\nb\tc\r\u000b\u001b\f\\\"$\\q|AJA\u0000\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/multiline.php": {
+    "stdout": "first\nsecond|third\nfourth\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unicode.php": {
+    "stdout": "日本語 😀\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/closing_tag.php": {
+    "stdout": "closed",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/closing_comment.php": {
+    "stdout": "closed",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/crlf.php": {
+    "stdout": "2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/empty.php": {
+    "stdout": "",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/expression.php": {
+    "stdout": "3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/large_float.php": {
+    "stdout": "INF|-INF|1.0E-7|0.0001|10000000000000\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/undefined.php": {
+    "stdout": "[]\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/leading_numeric.php": {
+    "stdout": "15\n",
+    "stderr": "Warning: A non-numeric value encountered in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/division_zero.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/negative_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/type_error.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string + int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/undefined_arithmetic.php": {
+    "stdout": "2\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/crlf_warning.php": {
+    "stdout": "",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 3\n",
+    "exit": 0
+  },
+  "parser/missing_expression.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/missing_semicolon.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected end of file, expecting \",\" or \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/unterminated_string.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected string content \"broken;\" in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/unterminated_comment.php": {
+    "stdout": "",
+    "stderr": "Parse error: Unterminated comment starting line 2 in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/warning_before_type_error.php": {
+    "stdout": "",
+    "stderr": "Warning: A non-numeric value encountered in {file} on line 2\nFatal error: Uncaught TypeError: Unsupported operand types: string + string in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/type_error_before_warning.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string + string in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/strict_type_matrix.php": {
+    "stdout": "1000000000\n0100000000\n0010000000\n0001000000\n0000100000\n0000010000\n0000001000\n0000000100\n0000000010\n0000000001\n0111111111\n1011111111\n1101111111\n1110111111\n1111011111\n1111101111\n1111110111\n1111111011\n1111111101\n1111111110\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strict_strings.php": {
+    "stdout": "00111001\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strict_numeric_boundaries.php": {
+    "stdout": "10101101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strict_float_edges.php": {
+    "stdout": "10100111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strict_precedence.php": {
+    "stdout": "1101101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strict_result_type.php": {
+    "stdout": "110\n11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_basic.php": {
+    "stdout": "then|else|strict\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_nested.php": {
+    "stdout": "deep|outer|else-nested\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_scope.php": {
+    "stdout": "5|visible:else\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_empty.php": {
+    "stdout": "after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/truth_false.php": {
+    "stdout": "0000000000000\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/truth_true.php": {
+    "stdout": "11111111111111111111\n",
+    "stderr": "",
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 21\n"
+    },
+    "exit": 0
+  },
+  "success/if_skip_then.php": {
+    "stdout": "kept\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_skip_else.php": {
+    "stdout": "selected\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_skip_nested_condition.php": {
+    "stdout": "selected\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/if_undefined_condition.php": {
+    "stdout": "else\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/if_selected_failure.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:5\nStack trace:\n#0 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255
+  },
+  "runtime/if_condition_failure.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/strict_evaluates_operands.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/if_skipped_definition.php": {
+    "stdout": "[]\n",
+    "stderr": "Warning: Undefined variable $created in {file} on line 3\n",
+    "exit": 0
+  },
+  "parser/strict_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"!==\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/if_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 4\n",
+    "exit": 255
+  },
+  "success/logical_truth_table.php": {
+    "stdout": "0001|0111|01\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_scalar_boundaries.php": {
+    "stdout": "100000\n100000\n100000\n100000\n100000\n100000\n100000\n100000\n100000\n100000\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n011111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_result_type.php": {
+    "stdout": "1111111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_precedence.php": {
+    "stdout": "11111111111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_grouping.php": {
+    "stdout": "11111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_if.php": {
+    "stdout": "outer|inner|else\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_skip_rhs.php": {
+    "stdout": "11111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_skip_nan.php": {
+    "stdout": "1111|else|then\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/logical_selected_rhs.php": {
+    "stdout": "11111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/logical_rhs_undefined.php": {
+    "stdout": "001\n",
+    "stderr": "Warning: Undefined variable $and_required in {file} on line 2\nWarning: Undefined variable $or_required in {file} on line 3\nWarning: Undefined variable $not_required in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/logical_warning_order.php": {
+    "stdout": "00\n",
+    "stderr": "Warning: Undefined variable $first in {file} on line 2\nWarning: Undefined variable $second in {file} on line 2\nWarning: Undefined variable $third in {file} on line 2\nWarning: Undefined variable $fourth in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/logical_and_divzero.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/logical_or_divzero.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/logical_not_divzero.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/logical_left_error.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/logical_nan_not.php": {
+    "stdout": "11|else\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\nWarning: unexpected NAN value was coerced to bool in {file} on line 4\nWarning: unexpected NAN value was coerced to bool in {file} on line 5\n"
+    }
+  },
+  "runtime/logical_nan_and.php": {
+    "stdout": "111|then\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\nWarning: unexpected NAN value was coerced to bool in {file} on line 4\nWarning: unexpected NAN value was coerced to bool in {file} on line 5\nWarning: unexpected NAN value was coerced to bool in {file} on line 5\nWarning: unexpected NAN value was coerced to bool in {file} on line 6\n"
+    }
+  },
+  "runtime/logical_nan_or.php": {
+    "stdout": "1111\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\nWarning: unexpected NAN value was coerced to bool in {file} on line 5\nWarning: unexpected NAN value was coerced to bool in {file} on line 6\n"
+    }
+  },
+  "runtime/logical_nan_multiline.php": {
+    "stdout": "0\n1\n1\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 4\nWarning: unexpected NAN value was coerced to bool in {file} on line 9\nWarning: unexpected NAN value was coerced to bool in {file} on line 13\n"
+    }
+  },
+  "runtime/logical_nan_before_error.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 4\nFatal error: Uncaught DivisionByZeroError: Division by zero in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n"
+    }
+  },
+  "parser/logical_skip_and_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/logical_skip_or_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/logical_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 4\n",
+    "exit": 255
+  },
+  "parser/logical_missing_not.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "success/comparison_same_types.php": {
+    "stdout": "011100\n010011\n100101\n010011\n100101\n011100\n100101\n011100\n100101\n100101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_type_matrix.php": {
+    "stdout": "100101\n100101\n011100\n011100\n011100\n100101\n100101\n011100\n100101\n011100\n010011\n010011\n100101\n010011\n100101\n010011\n100101\n011100\n100101\n011100\n010011\n010011\n100101\n010011\n100101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_numeric_strings.php": {
+    "stdout": "010011\n100101\n100101\n100101\n100101\n100101\n100101\n100101\n011100\n100101\n100101\n011100\n100101\n100101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_non_numeric_strings.php": {
+    "stdout": "011100\n010011\n010011\n010011\n011100\n011100\n011100\n010011\n011100\n010011\n011100\n010011\n011100\n011100\n010011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_string_boundaries.php": {
+    "stdout": "011100\n010011\n100101\n011100\n010011\n010011\n010011\n011100\n011100\n011100\n011100\n100101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_integer_edges.php": {
+    "stdout": "011100\n011100\n100101\n010011\n100101\n100101\n011100\n010011\n011100\n100101\n011100\n011100\n100101\n011100\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_null_bool.php": {
+    "stdout": "100101\n011100\n011100\n011100\n010011\n100101\n100101\n011100\n100101\n100101\n100101\n100101\n010011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_inf_nan.php": {
+    "stdout": "010011\n100101\n011100\n100101\n100101\n100101\n010000\n010000\n010000\n010000\n010000\n010000\n010000\n010000\n010000\n100101\n100101\n100101\n100101\n010011\n011100\n010011\n011100\n010011\n011100\n010011\n011100\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_precedence.php": {
+    "stdout": "11111111111111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_result_type.php": {
+    "stdout": "111111111111111111111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/comparison_short_circuit.php": {
+    "stdout": "yes|11|then\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_first.php": {
+    "stdout": "first\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_middle.php": {
+    "stdout": "middle\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_last.php": {
+    "stdout": "last\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/else_if_first.php": {
+    "stdout": "first\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/else_if_middle.php": {
+    "stdout": "middle\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/else_if_last.php": {
+    "stdout": "last\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_none.php": {
+    "stdout": "else|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_nested.php": {
+    "stdout": "nested|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_skip_effects.php": {
+    "stdout": "first|kept|middle\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/elseif_empty_selected.php": {
+    "stdout": "done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/comparison_undefined.php": {
+    "stdout": "1111\n",
+    "stderr": "Warning: Undefined variable $equal in {file} on line 2\nWarning: Undefined variable $less in {file} on line 3\nWarning: Undefined variable $greater in {file} on line 4\nWarning: Undefined variable $left in {file} on line 5\nWarning: Undefined variable $right in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/comparison_eager_rhs.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/comparison_left_error.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/elseif_condition_warning.php": {
+    "stdout": "selected\n",
+    "stderr": "Warning: Undefined variable $first in {file} on line 3\nWarning: Undefined variable $second in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/elseif_condition_error.php": {
+    "stdout": "before|",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 4\nFatal error: Uncaught DivisionByZeroError: Division by zero in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/else_if_condition_error.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/elseif_selected_error.php": {
+    "stdout": "selected|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/elseif_skipped_definition.php": {
+    "stdout": "done\n",
+    "stderr": "Warning: Undefined variable $skipped in {file} on line 3\nWarning: Undefined variable $other in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/elseif_nan_condition.php": {
+    "stdout": "selected\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 4\n"
+    }
+  },
+  "runtime/else_if_nan_condition.php": {
+    "stdout": "selected\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 5\n"
+    }
+  },
+  "parser/comparison_ordering_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"<\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/comparison_ordering_mixed_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \">=\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/comparison_loose_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"!=\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/comparison_equality_mixed_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"==\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/comparison_loose_strict_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"!==\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/elseif_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/else_if_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/elseif_skipped_condition_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \")\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/comparison_variable_order.php": {
+    "stdout": "00111\n",
+    "stderr": "Warning: Undefined variable $left in {file} on line 2\nWarning: Undefined variable $right in {file} on line 2\nWarning: Undefined variable $b in {file} on line 3\nWarning: Undefined variable $a in {file} on line 3\nWarning: Undefined variable $d in {file} on line 4\nWarning: Undefined variable $c in {file} on line 4\nWarning: Undefined variable $early in {file} on line 5\nWarning: Undefined variable $late in {file} on line 5\nWarning: Undefined variable $multi in {file} on line 7\nWarning: Undefined variable $last in {file} on line 7\n",
+    "exit": 0
+  },
+  "runtime/comparison_deferred_warning.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "success/array_basic.php": {
+    "stdout": "1:two:1::5\nPHP94\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_keys.php": {
+    "stdout": "float|leading|plus|space|negative-zero|zero|empty\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_integer_keys.php": {
+    "stdout": "1234\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_negative_append.php": {
+    "stdout": "1e1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_nested_copy.php": {
+    "stdout": "19111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_self_copy.php": {
+    "stdout": "111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_union.php": {
+    "stdout": "1113\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_comparisons.php": {
+    "stdout": "10010:0\n11111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_partial_order.php": {
+    "stdout": "000001:1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/aggregate_truth.php": {
+    "stdout": "1111111111\narray-object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/object_properties.php": {
+    "stdout": "PHPGO567\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/object_identity.php": {
+    "stdout": "101111211\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/object_array_copy.php": {
+    "stdout": "992345\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/object_ordering.php": {
+    "stdout": "10:0\n11111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/spaceship_scalar.php": {
+    "stdout": "-1,0,1\n1,-1,-1,0,0\n1111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/spaceship_precedence.php": {
+    "stdout": "111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/spaceship_nan.php": {
+    "stdout": "1:1:1:0:-1\n1111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/not_equal_alias.php": {
+    "stdout": "0100011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_unbraced_chain.php": {
+    "stdout": "ABCDE\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/if_dangling_else.php": {
+    "stdout": "inner-outer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/assignment_types.php": {
+    "stdout": "17711111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/assignment_precedence.php": {
+    "stdout": "100235:4:7:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/assignment_conditions.php": {
+    "stdout": "225\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/assignment_skip.php": {
+    "stdout": "ok011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/assignment_operand_order.php": {
+    "stdout": "4:2\n1:2\nbb\n222\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_value_order.php": {
+    "stdout": "112:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/array_missing_key.php": {
+    "stdout": "done\n",
+    "stderr": "Warning: Undefined array key \"missing\" in {file} on line 3\nWarning: Undefined array key 4 in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/array_null_key.php": {
+    "stdout": "2\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Deprecated: Using null as an array offset is deprecated, use an empty string instead in {file} on line 3\nDeprecated: Using null as an array offset is deprecated, use an empty string instead in {file} on line 4\nDeprecated: Using null as an array offset is deprecated, use an empty string instead in {file} on line 5\n"
+    }
+  },
+  "runtime/array_float_key.php": {
+    "stdout": "ab\n",
+    "stderr": "Deprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 3\nDeprecated: Implicit conversion from float -1.5 to int loses precision in {file} on line 4\nDeprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/array_infinite_key.php": {
+    "stdout": "1\n",
+    "stderr": "Deprecated: Implicit conversion from float INF to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float INF is not representable as an int, cast occurred in {file} on line 3\n"
+    }
+  },
+  "runtime/array_nan_key.php": {
+    "stdout": "2\n",
+    "stderr": "Deprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float NAN is not representable as an int, cast occurred in {file} on line 3\nDeprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n"
+    }
+  },
+  "runtime/array_false_write.php": {
+    "stdout": "1\n",
+    "stderr": "Deprecated: Automatic conversion of false to array is deprecated in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/array_illegal_key.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot access offset of type array on array in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/array_object_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot access offset of type stdClass on array in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/array_append_overflow.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught Error: Cannot add element to the array as the next element is already occupied in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/array_scalar_write.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot use a scalar value as an array in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/array_scalar_read.php": {
+    "stdout": "ok\n",
+    "stderr": "Warning: Trying to access array offset on null in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/array_echo.php": {
+    "stdout": "Array:value=Array\n",
+    "stderr": "Warning: Array to string conversion in {file} on line 3\nWarning: Array to string conversion in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/object_missing_property.php": {
+    "stdout": "ok\n",
+    "stderr": "Warning: Undefined property: stdClass::$missing in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/object_scalar_write.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Attempt to assign property \"x\" on null in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/object_as_array.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot use object of type stdClass as array in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/object_echo.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Object of class stdClass could not be converted to string in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/object_numeric_compare.php": {
+    "stdout": "11-1\n",
+    "stderr": "Notice: Object of class stdClass could not be converted to int in {file} on line 3\nNotice: Object of class stdClass could not be converted to float in {file} on line 4\nNotice: Object of class stdClass could not be converted to int in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/object_recursive_compare.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught Error: Nesting level too deep - recursive dependency? in {file}:5\nStack trace:\n#0 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Nesting level too deep - recursive dependency? in {file} on line 5\n"
+    }
+  },
+  "runtime/assignment_rhs_warning.php": {
+    "stdout": "1\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/assignment_rhs_failure.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/if_unbraced_nan.php": {
+    "stdout": "nan\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\n"
+    }
+  },
+  "parser/spaceship_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"<=>\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/not_equal_chain.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"==\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/assignment_skipped_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \")\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/array_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\", expecting \"]\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/object_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/if_unbraced_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/array_append_read.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use [] for reading in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use [] for reading in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/object_new_dereference.php": {
+    "stdout": "done",
+    "stderr": "Warning: Undefined property: stdClass::$missing in {file} on line 2\n",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": ""
+    },
+    "stderr_by_version": {
+      "8.3": "Parse error: syntax error, unexpected token \"->\", expecting \",\" or \";\" in {file} on line 2\n"
+    },
+    "exit_by_version": {
+      "8.3": 255
+    }
+  },
+  "parser/array_literal_invalid_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Illegal offset type in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Illegal offset type in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/class_counter.php": {
+    "stdout": "3:6:2:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_forward_declaration.php": {
+    "stdout": "7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_default_properties.php": {
+    "stdout": "1:14:11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_default_arguments.php": {
+    "stdout": "10:16:10\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_parameter_copy.php": {
+    "stdout": "12999\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_local_scope.php": {
+    "stdout": "9:10:100:200\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_returns.php": {
+    "stdout": "yes:11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_method_chaining.php": {
+    "stdout": "4:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_recursion.php": {
+    "stdout": "720\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_visibility_internal.php": {
+    "stdout": "7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_comparison.php": {
+    "stdout": "1010000:1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_conditional_declaration.php": {
+    "stdout": "8\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_argument_order.php": {
+    "stdout": "122344\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_short_circuit_output.php": {
+    "stdout": "ok-called1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_factory.php": {
+    "stdout": "341\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/class_scope_warning.php": {
+    "stdout": "1:7\n",
+    "stderr": "Warning: Undefined variable $global in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/class_method_failure.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {file}(7): Divider->divide(0)\n#1 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_nested_failure.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {file}(4): Nested->inner()\n#1 {file}(7): Nested->outer()\n#2 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_constructor_failure.php": {
+    "stdout": "construct",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {file}(5): Broken->__construct()\n#1 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_argument_count.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: Too few arguments to function Required::run(), 0 passed in {file} on line 6 and exactly 1 expected in {file}:3\nStack trace:\n#0 {file}(6): Required->run()\n#1 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_private_property.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot access private property PrivateProperty::$x in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/class_private_method.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to private method PrivateMethod::hidden() from global scope in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/class_missing_method.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined method MissingMethod::missing() in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/class_dynamic_property.php": {
+    "stdout": "2\n",
+    "stderr": "Deprecated: Creation of dynamic property Dynamic::$x is deprecated in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/class_unselected_declaration.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Class \"Hidden\" not found in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_this_outside.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Using $this when not in object context in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/class_method_nan.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\n"
+    }
+  },
+  "parser/class_unselected_method_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/class_this_assignment.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot re-assign $this in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot re-assign $this in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/class_invalid_default.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Constant expression contains invalid operations in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Constant expression contains invalid operations in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/class_append_read.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use [] for reading in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use [] for reading in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/class_constructor_return.php": {
+    "stdout": "2:7:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_without_constructor_arguments.php": {
+    "stdout": "3:5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/class_private_constructor.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to private PrivateConstructor::__construct() from global scope in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/class_trace_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:3\nStack trace:\n#0 {file}(6): TraceArguments->inner('a\\nb\\tc\\\\d', 1.0, Array, Object(TraceArguments), false, NULL)\n#1 {file}(10): TraceArguments->outer(9)\n#2 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "success/compound_arithmetic.php": {
+    "stdout": "12:12\\n7:21:3:1\n1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_scalar_types.php": {
+    "stdout": "111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_concat.php": {
+    "stdout": "1:10\n125:1\nv=3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_precedence_chain.php": {
+    "stdout": "7:6:7\n1:2:1\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_rhs_mutation.php": {
+    "stdout": "10:10\n1:3:1\n2:2:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_target_once.php": {
+    "stdout": "TKR:13:3\nTK13:14:5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_array_copy.php": {
+    "stdout": "11\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/compound_integer_edges.php": {
+    "stdout": "11111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/modulo_sign_precedence.php": {
+    "stdout": "1:-1:1:-1\n5:1:r=3\n1111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/increment_values.php": {
+    "stdout": "2:4:4:2:2\n1111111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/increment_integer_edges.php": {
+    "stdout": "11111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/increment_precedence.php": {
+    "stdout": "-2:3:2:2\n1:1:0\n6:6:5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/arithmetic_skip_effects.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/compound_leading_numeric.php": {
+    "stdout": "15\n",
+    "stderr": "Warning: A non-numeric value encountered in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/compound_division_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_modulo_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Modulo by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/modulo_float_zero.php": {
+    "stdout": "",
+    "stderr": "Deprecated: Implicit conversion from float 0.5 to int loses precision in {file} on line 2\nFatal error: Uncaught DivisionByZeroError: Modulo by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/modulo_negative_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Modulo by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/modulo_float_conversion.php": {
+    "stdout": "1\n1\n",
+    "stderr": "Deprecated: Implicit conversion from float 7.9 to int loses precision in {file} on line 2\nDeprecated: Implicit conversion from float -3.2 to int loses precision in {file} on line 2\nDeprecated: Implicit conversion from float-string \"7.9\" to int loses precision in {file} on line 3\nWarning: A non-numeric value encountered in {file} on line 3\nDeprecated: Implicit conversion from float-string \"3.2tail\" to int loses precision in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/modulo_nan.php": {
+    "stdout": "0\n",
+    "stderr": "Deprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float NAN is not representable as an int, cast occurred in {file} on line 3\nDeprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n"
+    }
+  },
+  "runtime/modulo_infinity.php": {
+    "stdout": "0\n",
+    "stderr": "Deprecated: Implicit conversion from float INF to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float INF is not representable as an int, cast occurred in {file} on line 3\n"
+    }
+  },
+  "runtime/modulo_large_float.php": {
+    "stdout": "-2\n",
+    "stderr": "Deprecated: Implicit conversion from float 9.223372036854776E+18 to int loses precision in {file} on line 2\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float 9.223372036854776E+18 is not representable as an int, cast occurred in {file} on line 2\n"
+    }
+  },
+  "success/modulo_large_string.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/compound_nonnumeric.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string + int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/modulo_nonnumeric.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string % int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_rhs_error_first.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_missing_values.php": {
+    "stdout": "2:3::1\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\nWarning: Undefined array key \"x\" in {file} on line 3\nWarning: Undefined array key \"y\" in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/compound_array_type_error.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: array - int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_illegal_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot access offset of type array on array in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_scalar_offset.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot use a scalar value as an array in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/increment_array.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot increment array in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/decrement_object.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot decrement stdClass in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/increment_bool_null.php": {
+    "stdout": "11111\n",
+    "stderr": "Warning: Increment on type bool has no effect, this will change in the next major version of PHP in {file} on line 2\nWarning: Decrement on type bool has no effect, this will change in the next major version of PHP in {file} on line 3\nWarning: Decrement on type null has no effect, this will change in the next major version of PHP in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/increment_strings.php": {
+    "stdout": "AA:b0:1:!a:hello:-1\n",
+    "stderr": "Deprecated: Increment on non-alphanumeric string is deprecated in {file} on line 3\nDeprecated: Increment on non-alphanumeric string is deprecated in {file} on line 3\nDeprecated: Decrement on non-numeric string has no effect and is deprecated in {file} on line 4\nDeprecated: Decrement on empty string is deprecated as non-numeric in {file} on line 4\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Deprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 2\nDeprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 2\nDeprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 3\nDeprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 3\nDeprecated: Decrement on non-numeric string has no effect and is deprecated in {file} on line 4\nDeprecated: Decrement on empty string is deprecated as non-numeric in {file} on line 4\n"
+    }
+  },
+  "runtime/compound_nan_string.php": {
+    "stdout": "n=NAN\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to string in {file} on line 3\n"
+    }
+  },
+  "success/increment_nan_infinity.php": {
+    "stdout": "111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/while_counts.php": {
+    "stdout": "0:0:123:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/while_control.php": {
+    "stdout": "5:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/while_nested_levels.php": {
+    "stdout": "112131:4\nstop\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/while_skipped_work.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/for_counts_omissions.php": {
+    "stdout": "0:0:012:end\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/for_multiple_expressions.php": {
+    "stdout": "ICBUCBUC:2\n2:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/for_continue_update.php": {
+    "stdout": "0UU2U:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/for_nested_levels.php": {
+    "stdout": "00U10U20U:3:0\ndone\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/for_skip_update.php": {
+    "stdout": "done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/do_counts.php": {
+    "stdout": "0:123:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/do_continue_condition.php": {
+    "stdout": "3:3:3\ndone\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/loops_mixed_levels.php": {
+    "stdout": "123:3\ndone\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/loops_assignment_conditions.php": {
+    "stdout": "321:0:-1\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/while_condition_warning.php": {
+    "stdout": "done",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/for_condition_error.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/for_update_error.php": {
+    "stdout": "body",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/do_condition_error.php": {
+    "stdout": "body",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/loops_nan_conditions.php": {
+    "stdout": "wfd:2\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 3\nWarning: unexpected NAN value was coerced to bool in {file} on line 4\nWarning: unexpected NAN value was coerced to bool in {file} on line 5\n"
+    }
+  },
+  "success/for_unused_nan_condition.php": {
+    "stdout": "01\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "parser/loop_break_outside.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' not in the 'loop' or 'switch' context in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' not in the 'loop' or 'switch' context in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_break_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator accepts only positive integers in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator accepts only positive integers in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_break_too_deep.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot 'break' 2 levels in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot 'break' 2 levels in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_break_dynamic.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_continue_outside.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_continue_zero.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' operator accepts only positive integers in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' operator accepts only positive integers in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_continue_too_deep.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot 'continue' 2 levels in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot 'continue' 2 levels in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_continue_dynamic.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' operator with non-integer operand is no longer supported in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' operator with non-integer operand is no longer supported in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_level_negative.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_level_float.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' operator accepts only positive integers in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' operator accepts only positive integers in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_level_string.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator accepts only positive integers in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator accepts only positive integers in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_level_expression.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_function_boundary.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' not in the 'loop' or 'switch' context in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' not in the 'loop' or 'switch' context in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_method_boundary.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/loop_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/loop_after_break_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/compound_skipped_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \")\" in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/function_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/function_forward_case.php": {
+    "stdout": "5:6\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_null_return.php": {
+    "stdout": "11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_local_scopes.php": {
+    "stdout": "5:6:100\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_recursion.php": {
+    "stdout": "1:720:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_conditional_declarations.php": {
+    "stdout": "ok:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_arguments_order.php": {
+    "stdout": ":abab!\n1:2:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_extra_arguments.php": {
+    "stdout": "side7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_default_array_copy.php": {
+    "stdout": "11\n11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_array_return_copy.php": {
+    "stdout": "111:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_object_sharing.php": {
+    "stdout": "4:2:12:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_recursive_array_loop.php": {
+    "stdout": "111\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_loop_return.php": {
+    "stdout": "7:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_method_interop.php": {
+    "stdout": "13:9\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_skip_calls.php": {
+    "stdout": "done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_array_keys_order.php": {
+    "stdout": "11\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/function_undefined.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined function missingFunction() in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_conditional_before.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined function later() in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_unselected_declaration.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined function absent() in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/function_argument_count.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: Too few arguments to function combine(), 1 passed in {file} on line 3 and exactly 2 expected in {file}:2\nStack trace:\n#0 {file}(3): combine(1)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_argument_count_optional.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: Too few arguments to function combine(), 0 passed in {file} on line 3 and at least 1 expected in {file}:2\nStack trace:\n#0 {file}(3): combine()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_scope_warning.php": {
+    "stdout": "2:2:10\n",
+    "stderr": "Warning: Undefined variable $globalValue in {file} on line 3\nWarning: Undefined variable $globalValue in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/function_nested_trace.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {file}(3): inner(4)\n#1 {file}(4): outer(3)\n#2 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_method_trace.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Modulo by zero in {file}:2\nStack trace:\n#0 {file}(3): fail(7)\n#1 {file}(4): C->call(7)\n#2 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/function_private_scope.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot access private property C::$x in {file}:3\nStack trace:\n#0 {file}(2): readPrivate(Object(C))\n#1 {file}(4): C->call()\n#2 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/function_missing_array_key.php": {
+    "stdout": "1\n",
+    "stderr": "Warning: Undefined array key \"missing\" in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/function_nan_loop.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 2\n"
+    }
+  },
+  "parser/function_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot redeclare function SAME() (previously declared in {file}:3) in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare function SAME() (previously declared in {file}:3) in {file} on line 4\nStack trace:\n#0 {main}\n",
+      "8.3": "Fatal error: Cannot redeclare SAME() (previously declared in {file}:3) in {file} on line 4\n"
+    }
+  },
+  "runtime/function_duplicate_conditional.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Cannot redeclare function same() (previously declared in {file}:2) in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare function same() (previously declared in {file}:2) in {file} on line 4\nStack trace:\n#0 {main}\n",
+      "8.3": "Fatal error: Cannot redeclare same() (previously declared in {file}:2) in {file} on line 4\n"
+    }
+  },
+  "runtime/function_duplicate_nested.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot redeclare function inner() (previously declared in {file}:2) in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare function inner() (previously declared in {file}:2) in {file} on line 2\nStack trace:\n#0 {file}(3): outer()\n#1 {main}\n",
+      "8.3": "Fatal error: Cannot redeclare inner() (previously declared in {file}:2) in {file} on line 2\n"
+    }
+  },
+  "parser/function_invalid_default.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Constant expression contains invalid operations in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Constant expression contains invalid operations in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/compound_warning_order.php": {
+    "stdout": "0:0:0\n",
+    "stderr": "Warning: Undefined variable $right in {file} on line 2\nWarning: Undefined variable $left in {file} on line 2\nWarning: Undefined array key \"x\" in {file} on line 3\nWarning: Undefined variable $missing in {file} on line 3\nWarning: Undefined variable $missingObject in {file} on line 4\nWarning: Undefined property: stdClass::$x in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/increment_dynamic_property.php": {
+    "stdout": "1:1:2\n",
+    "stderr": "Deprecated: Creation of dynamic property C::$n is deprecated in {file} on line 3\nWarning: Undefined property: C::$n in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/increment_property_scalar.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Attempt to increment/decrement property \"n\" on false in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_property_rhs_warning.php": {
+    "stdout": "",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\nFatal error: Uncaught Error: Attempt to assign property \"n\" on null in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/increment_append_nested.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/compound_false_array.php": {
+    "stdout": "2\n",
+    "stderr": "Deprecated: Automatic conversion of false to array is deprecated in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/compound_array_float_key.php": {
+    "stdout": "9\n",
+    "stderr": "Deprecated: Implicit conversion from float 0.5 to int loses precision in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/modulo_object.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: stdClass % int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/modulo_conversion_before_error.php": {
+    "stdout": "",
+    "stderr": "Deprecated: Implicit conversion from float 2.5 to int loses precision in {file} on line 2\nFatal error: Uncaught TypeError: Unsupported operand types: float % string in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_empty_numeric_string.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string * int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/compound_whitespace_numeric.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Unsupported operand types: string - int in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/increment_string_boundaries.php": {
+    "stdout": "1111\n",
+    "stderr": "Deprecated: Increment on non-alphanumeric string is deprecated in {file} on line 4\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Deprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 4\nDeprecated: Increment on non-numeric string is deprecated, use str_increment() instead in {file} on line 5\n"
+    }
+  },
+  "success/loop_condition_types.php": {
+    "stdout": "000000011111011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/loops_function_evaluation_order.php": {
+    "stdout": "ICBUCBUC:DQ:W\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/loop_break_skips_nan.php": {
+    "stdout": "done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/function_optional_before_required.php": {
+    "stdout": "7\n",
+    "stderr": "Deprecated: f(): Optional parameter $a declared before required parameter $b is implicitly treated as a required parameter in {file} on line 2\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.3": "Deprecated: Optional parameter $a declared before required parameter $b is implicitly treated as a required parameter in {file} on line 2\n"
+    }
+  },
+  "runtime/function_skipped_parameter_warning.php": {
+    "stdout": "done\n",
+    "stderr": "Deprecated: skipped(): Optional parameter $a declared before required parameter $b is implicitly treated as a required parameter in {file} on line 2\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.3": "Deprecated: Optional parameter $a declared before required parameter $b is implicitly treated as a required parameter in {file} on line 2\n"
+    }
+  },
+  "success/function_return_assignment_chain.php": {
+    "stdout": "4:3\n1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_later_after_return.php": {
+    "stdout": "7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/function_argument_warning.php": {
+    "stdout": "1\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 3\n",
+    "exit": 0
+  },
+  "parser/loop_level_unary_plus.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'break' operator with non-integer operand is no longer supported in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/foreach_keys_order.php": {
+    "stdout": "4:e;x:b;-2:c;04:d;5:f;\n5:f\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_empty_final.php": {
+    "stdout": "keep:9\n7:7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_expression_once.php": {
+    "stdout": "S345:5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_snapshot_mutation.php": {
+    "stdout": "0:10;1:20;2:30;\n6:99:2:-1\n10;99;30;40;40;40;:0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_nested_copy.php": {
+    "stdout": "11,2,13,:1:13:13\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_objects_shared.php": {
+    "stdout": "3:3:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_control.php": {
+    "stdout": "13:3:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_mixed_levels.php": {
+    "stdout": "011121:3\n2:7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_inner_loop_levels.php": {
+    "stdout": "123:3:0\n4:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_function_return.php": {
+    "stdout": "2:6:1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_target_order.php": {
+    "stdout": "7:1:2:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_skipped_work.php": {
+    "stdout": "1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/foreach_scalars.php": {
+    "stdout": "......done\n",
+    "stderr": "Warning: foreach() argument must be of type array|object, null given in {file} on line 3\nWarning: foreach() argument must be of type array|object, false given in {file} on line 3\nWarning: foreach() argument must be of type array|object, true given in {file} on line 3\nWarning: foreach() argument must be of type array|object, int given in {file} on line 3\nWarning: foreach() argument must be of type array|object, float given in {file} on line 3\nWarning: foreach() argument must be of type array|object, string given in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/foreach_undefined.php": {
+    "stdout": "done\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\nWarning: foreach() argument must be of type array|object, null given in {file} on line 2\n",
+    "exit": 0
+  },
+  "parser/foreach_level_too_deep.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot 'break' 2 levels in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot 'break' 2 levels in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/foreach_function_boundary.php": {
+    "stdout": "",
+    "stderr": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: 'continue' not in the 'loop' or 'switch' context in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/foreach_this_target.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot re-assign $this in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot re-assign $this in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/foreach_unselected_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \";\" in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/isset_values.php": {
+    "stdout": "0:1:01:0\n01101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_short_circuit_order.php": {
+    "stdout": ":10\n:341\n:560\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_key_changes_container.php": {
+    "stdout": "1:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/empty_expressions.php": {
+    "stdout": "110101110100\n011:0\nF1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_empty_properties.php": {
+    "stdout": "001101:11\n01\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_empty_string_offsets.php": {
+    "stdout": "10;11;10;01;01;10;01;01;01;01;\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_empty_scalar_offsets.php": {
+    "stdout": "0101010101\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/isset_illegal_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot access offset of type array in isset or empty in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/empty_illegal_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot access offset of type stdClass in isset or empty in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/isset_object_as_array.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot use object of type stdClass as array in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/isset_key_warning.php": {
+    "stdout": "0\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: Undefined variable $missing in {file} on line 2\nDeprecated: Using null as an array offset is deprecated, use an empty string instead in {file} on line 2\n"
+    }
+  },
+  "runtime/isset_float_key.php": {
+    "stdout": "10\n",
+    "stderr": "Deprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 2\nDeprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 2\n",
+    "exit": 0
+  },
+  "parser/isset_expression.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use isset() on the result of an expression (you can use \"null !== expression\" instead) in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use isset() on the result of an expression (you can use \"null !== expression\" instead) in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/isset_append.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use [] for reading in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use [] for reading in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/unset_variables_order.php": {
+    "stdout": "001\n0:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_array_order_append.php": {
+    "stdout": "2:a;6:d;x:e;\n-2:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_max_key_append.php": {
+    "stdout": "9223372036854775807:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_nested_copy.php": {
+    "stdout": "2:1:1:0\n1:2;2:3;\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_object_sharing.php": {
+    "stdout": "00:7:7\n1:0:7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_property_targets_once.php": {
+    "stdout": "TK:0:2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_foreach_snapshot.php": {
+    "stdout": "123:0:2:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_function_scope.php": {
+    "stdout": "1:0:0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/unset_missing_properties.php": {
+    "stdout": "011\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/unset_undefined_array.php": {
+    "stdout": "done\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/unset_false_array.php": {
+    "stdout": "1\n",
+    "stderr": "Deprecated: Automatic conversion of false to array is deprecated in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/unset_float_key.php": {
+    "stdout": "0\n",
+    "stderr": "Deprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 2\n",
+    "exit": 0
+  },
+  "success/unset_null_key.php": {
+    "stdout": "0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/unset_illegal_key.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Cannot unset offset of type array on array in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/unset_scalar_offset.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot unset offset in a non-array variable in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/unset_string_offset.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot unset string offsets in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/unset_private_property.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot access private property C::$x in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/unset_append.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use [] for unsetting in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use [] for unsetting in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/unset_this.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot unset $this in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot unset $this in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/cast_scalar_matrix.php": {
+    "stdout": "0:0:0:;0:0:0:;1:1:1:1;0:0:0:0;1:3:3:3;1:-2:-2:-2;1:2:2.75:2.75;0:0:-0:-0;0:0:0:;0:0:0:0;1:12:12.5:12.5tail;1:0:0:bad;\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/cast_array_numeric.php": {
+    "stdout": "0:0:0;1:1:1;1:1:1;\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/cast_precedence.php": {
+    "stdout": "14:5:5:2\n2:-2:1\n2:3.9:double\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/cast_numeric_string_edges.php": {
+    "stdout": "9223372036854775807:-9223372036854775808:0\n-25:12:0:0\n0:0:100\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/cast_object_numeric.php": {
+    "stdout": "1:1:1\n",
+    "stderr": "Warning: Object of class stdClass could not be converted to int in {file} on line 2\nWarning: Object of class stdClass could not be converted to float in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/cast_array_string.php": {
+    "stdout": "Array\n",
+    "stderr": "Warning: Array to string conversion in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/cast_object_string.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Object of class stdClass could not be converted to string in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/cast_nan_infinity.php": {
+    "stdout": "0:0:1:NAN\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float NAN is not representable as an int, cast occurred in {file} on line 3\nWarning: The float INF is not representable as an int, cast occurred in {file} on line 3\nWarning: unexpected NAN value was coerced to bool in {file} on line 3\nWarning: unexpected NAN value was coerced to string in {file} on line 3\n"
+    }
+  },
+  "runtime/cast_large_float.php": {
+    "stdout": "-9223372036854775808\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float 9.223372036854776E+18 is not representable as an int, cast occurred in {file} on line 2\n"
+    }
+  },
+  "runtime/empty_nan.php": {
+    "stdout": "0\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to bool in {file} on line 2\n"
+    }
+  },
+  "success/builtin_strlen_bytes.php": {
+    "stdout": "0:3:9:3\n3:1:0:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/builtin_type_matrix.php": {
+    "stdout": "NULL:0000100;boolean:0001000;integer:1000000;double:0100000;string:0010000;array:0000010;object:0000001;\n1:integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/builtin_numeric_strings.php": {
+    "stdout": "11111110000000000010\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/builtin_count_modes.php": {
+    "stdout": "0:4:4:8\n8:4:8:8\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/builtin_method_user_interop.php": {
+    "stdout": "2:method:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/builtin_skip_effects.php": {
+    "stdout": "ok\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/builtin_strlen_null.php": {
+    "stdout": "0\n",
+    "stderr": "Deprecated: strlen(): Passing null to parameter #1 ($string) of type string is deprecated in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/builtin_strlen_nan.php": {
+    "stdout": "3\n",
+    "stderr": "",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: unexpected NAN value was coerced to string in {file} on line 2\n"
+    }
+  },
+  "runtime/builtin_strlen_array.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, array given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_strlen_object.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, stdClass given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_null.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_bool.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, false given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_int.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, int given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_float.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, float given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_string.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, string given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_object.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, stdClass given in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_mode.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ValueError: count(): Argument #2 ($mode) must be either COUNT_NORMAL or COUNT_RECURSIVE in {file}:2\nStack trace:\n#0 {file}(2): count(Array, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_mode_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #2 ($mode) must be of type int, string given in {file}:2\nStack trace:\n#0 {file}(2): count(Array, 'bad')\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_mode_before_value.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ValueError: count(): Argument #2 ($mode) must be either COUNT_NORMAL or COUNT_RECURSIVE in {file}:2\nStack trace:\n#0 {file}(2): count(NULL, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_mode_conversion.php": {
+    "stdout": "1:2:2\n",
+    "stderr": "Deprecated: count(): Passing null to parameter #2 ($mode) of type int is deprecated in {file} on line 2\nDeprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 2\nDeprecated: Implicit conversion from float-string \"1.5\" to int loses precision in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/builtin_count_mode_nan.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #2 ($mode) must be of type int, float given in {file}:2\nStack trace:\n#0 {file}(2): count(Array, NAN)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_strlen_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: strlen() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): strlen()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_strlen_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: strlen() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): strlen(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_gettype_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: gettype() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): gettype()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_gettype_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: gettype() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): gettype(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_int_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_int() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_int()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_int_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_int() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_int(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_float_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_float() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_float()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_float_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_float() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_float(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_string_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_string() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_string()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_string_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_string() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_string(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_bool_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_bool() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_bool()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_bool_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_bool() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_bool(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_null_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_null() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_null()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_null_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_null() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_null(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_array_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_array() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_array()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_array_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_array() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_array(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_object_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_object() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_object()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_object_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_object() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_object(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_numeric_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_numeric() expects exactly 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): is_numeric()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_is_numeric_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: is_numeric() expects exactly 1 argument, 2 given in {file}:2\nStack trace:\n#0 {file}(2): is_numeric(1, 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_no_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: count() expects at least 1 argument, 0 given in {file}:2\nStack trace:\n#0 {file}(2): count()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_extra_arguments.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: count() expects at most 2 arguments, 3 given in {file}:2\nStack trace:\n#0 {file}(2): count(Array, 0, 1)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_nested_error_trace.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ValueError: count(): Argument #2 ($mode) must be either COUNT_NORMAL or COUNT_RECURSIVE in {file}:2\nStack trace:\n#0 {file}(2): count(Array, 2)\n#1 {file}(2): f(Array)\n#2 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_argument_eager_error.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught DivisionByZeroError: Division by zero in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/builtin_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot redeclare function STRLEN() in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Cannot redeclare STRLEN() in {file} on line 2\n",
+      "8.5": "Fatal error: Cannot redeclare function STRLEN() in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/builtin_duplicate_conditional.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot redeclare function STRLEN() in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Cannot redeclare STRLEN() in {file} on line 2\n",
+      "8.5": "Fatal error: Cannot redeclare function STRLEN() in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/builtin_duplicate_unselected.php": {
+    "stdout": "3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/v1_recursive_array_processing.php": {
+    "stdout": "6.5:7:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/v1_report.php": {
+    "stdout": "a:tea:12:3\nc:水:3:3\n2:2:1:0:integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_unset_loop_variables.php": {
+    "stdout": "0:1;1:2;00:2\n3:0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_array_property_targets.php": {
+    "stdout": "4:s:10:20\n0:7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_method_return.php": {
+    "stdout": "2:2:3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_receiver_once.php": {
+    "stdout": "TK1:2\nTK0:4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/isset_this_and_scope.php": {
+    "stdout": "01:1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/isset_this_property_outside.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Using $this when not in object context in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/unset_this_property_outside.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Using $this when not in object context in {file}:2\nStack trace:\n#0 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/empty_expression_warning.php": {
+    "stdout": "1\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/isset_string_float_key.php": {
+    "stdout": "11\n",
+    "stderr": "Deprecated: Implicit conversion from float 0.5 to int loses precision in {file} on line 2\nDeprecated: Implicit conversion from float 1.5 to int loses precision in {file} on line 2\n",
+    "exit": 0
+  },
+  "runtime/isset_nan_key.php": {
+    "stdout": "1\n",
+    "stderr": "Deprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float NAN is not representable as an int, cast occurred in {file} on line 3\nDeprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n"
+    }
+  },
+  "runtime/unset_nan_key.php": {
+    "stdout": "0\n",
+    "stderr": "Deprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.5": "Warning: The float NAN is not representable as an int, cast occurred in {file} on line 3\nDeprecated: Implicit conversion from float NAN to int loses precision in {file} on line 3\n"
+    }
+  },
+  "runtime/foreach_multiline_diagnostic.php": {
+    "stdout": "ok\n",
+    "stderr": "Warning: foreach() argument must be of type array|object, int given in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/builtin_multiline_diagnostic.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/builtin_method_trace.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ValueError: count(): Argument #2 ($mode) must be either COUNT_NORMAL or COUNT_RECURSIVE in {file}:2\nStack trace:\n#0 {file}(2): count(Array, 2)\n#1 {file}(3): C->size(Array)\n#2 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_optimized_function_trace.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, array given in {file}:2\nStack trace:\n#0 {file}(3): bad(Array)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_explicit_normal_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in {file}:2\nStack trace:\n#0 {file}(2): count(NULL, 0)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/builtin_count_mode_infinity.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: count(): Argument #2 ($mode) must be of type int, float given in {file}:2\nStack trace:\n#0 {file}(2): count(Array, INF)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/constant_count_defaults.php": {
+    "stdout": "0:1:2:0\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

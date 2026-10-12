@@ -1,0 +1,56 @@
+ユーザー提供ログによる公式PHP比較（診断修正前）
+make compare-allの集計・差分抜粋。全文ログではありません。
+ユーザー環境: /Users/kouji/dev/php
+Goテスト、Pythonテスト、ビルド成功。make compare-allは不一致により終了1。
+
+PHP 8.3.35 / Go target 8.3: 210 matched, 3 different, 0 errors; 213 fixtures
+PHP 8.4.26 / Go target 8.4: 211 matched, 2 different, 0 errors; 213 fixtures
+PHP 8.5.11 / Go target 8.5: 206 matched, 7 different, 0 errors; 213 fixtures
+
+正常系110件と既存122件は全3版でMATCH。
+差異はstderrのみ。stdoutと終了コードの差異はありません。
+下記の{file}はfixtureの絶対パス。PHP行はユーザーログの出力を抜粋してこのプレースホルダへ置き換えています。
+
+runtime/array_scalar_read.php
+  PHP 8.3: 'Warning: Trying to access array offset on null in {file} on line 3\n'
+  Go（修正前）: 'Warning: Trying to access array offset on value of type null in {file} on line 3\n'
+  PHP 8.4: 'Warning: Trying to access array offset on null in {file} on line 3\n'
+  Go（修正前）: 'Warning: Trying to access array offset on value of type null in {file} on line 3\n'
+  PHP 8.5: 'Warning: Trying to access array offset on null in {file} on line 3\n'
+  Go（修正前）: 'Warning: Trying to access array offset on value of type null in {file} on line 3\n'
+
+parser/array_unselected_syntax.php
+  PHP 8.3: 'Parse error: syntax error, unexpected token ";", expecting "]" in {file} on line 3\n'
+  Go（修正前）: 'Parse error: syntax error, unexpected token ";" in {file} on line 3\n'
+  PHP 8.4: 'Parse error: syntax error, unexpected token ";", expecting "]" in {file} on line 3\n'
+  Go（修正前）: 'Parse error: syntax error, unexpected token ";" in {file} on line 3\n'
+  PHP 8.5: 'Parse error: syntax error, unexpected token ";", expecting "]" in {file} on line 3\n'
+  Go（修正前）: 'Parse error: syntax error, unexpected token ";" in {file} on line 3\n'
+
+parser/array_append_read.php
+  PHP 8.5: 'Fatal error: Cannot use [] for reading in {file} on line 3\nStack trace:\n#0 {main}\n'
+  Go（修正前）: 'Fatal error: Cannot use [] for reading in {file} on line 3\n'
+
+runtime/object_new_dereference.php
+  PHP 8.3: 'Parse error: syntax error, unexpected token "->", expecting "," or ";" in {file} on line 2\n'
+  Go（修正前）: 'Parse error: syntax error, unexpected token "->" in {file} on line 2\n'
+
+parser/array_literal_invalid_key.php
+  PHP 8.5: 'Fatal error: Illegal offset type in {file} on line 3\nStack trace:\n#0 {main}\n'
+  Go（修正前）: 'Fatal error: Illegal offset type in {file} on line 3\n'
+
+parser/class_this_assignment.php
+  PHP 8.5: 'Fatal error: Cannot re-assign $this in {file} on line 3\nStack trace:\n#0 {main}\n'
+  Go（修正前）: 'Fatal error: Cannot re-assign $this in {file} on line 3\n'
+
+parser/class_invalid_default.php
+  PHP 8.5: 'Fatal error: Constant expression contains invalid operations in {file} on line 3\nStack trace:\n#0 {main}\n'
+  Go（修正前）: 'Fatal error: Constant expression contains invalid operations in {file} on line 3\n'
+
+parser/class_append_read.php
+  PHP 8.5: 'Fatal error: Cannot use [] for reading in {file} on line 3\nStack trace:\n#0 {main}\n'
+  Go（修正前）: 'Fatal error: Cannot use [] for reading in {file} on line 3\n'
+
+分類: 全版共通2件と8.3のnew構文の期待トークン1件は、Go側の診断不具合。
+8.5のコンパイルエラー5件は、PHP 8.5のスタックトレース追加への対応漏れ。
+このログは修正前の実装に対する結果です。修正後の全件一致を示すものではありません。

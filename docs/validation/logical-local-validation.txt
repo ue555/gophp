@@ -1,0 +1,8 @@
+Logical operators: local CLI validation (not a live official PHP comparison).
+make test vet: passed (Go tests, Python tests, go vet).
+Existing 57 PHP fixtures: SHA-256 unchanged from before this change.
+Go target 8.3: 81/81 expectations matched; existing 57/57, new 24/24; all 46 success fixtures exited 0.
+Go target 8.4: 81/81 expectations matched; existing 57/57, new 24/24; all 46 success fixtures exited 0.
+Go target 8.5: 81/81 expectations matched; existing 57/57, new 24/24; all 46 success fixtures exited 0.
+Total: 243/243 CLI runs matched stdout, stderr and exit code.
+New logical expectations are based on official documentation/source; live PHP comparison remains unexecuted.

@@ -1,0 +1,33 @@
+go test ./...
+ok  	example.com/gophp/cmd/gophp	(cached)
+ok  	example.com/gophp/internal/php	0.203s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.876s
+
+OK
+go vet ./...
+go build -o bin/gophp ./cmd/gophp
+
+Saved-expectation checks only; NOT official PHP comparison.
+Commands: bin/gophp --php-version=8.3|8.4|8.5 FILE (5 second timeout each).
+stdout, stderr and exit status checked exactly, without trimming.
+
+Go target 8.3: 466 matched, 0 different, 0 errors; 466 fixtures; 208 success fixtures exited 0
+Go target 8.4: 466 matched, 0 different, 0 errors; 466 fixtures; 208 success fixtures exited 0
+Go target 8.5: 466 matched, 0 different, 0 errors; 466 fixtures; 208 success fixtures exited 0
+
+All 337 original PHP fixture sources have identical SHA-256 hashes.
+All 337 original saved expectations remain identical (including version overrides).
+New fixtures: 129; total: 466.
+
+Built CLI argument and example smoke checks:
+PASS help: exit 0
+PASS missing argument: exit 2
+PASS extra argument: exit 2
+PASS invalid version: exit 2
+PASS unsupported PHP flag: exit 2
+PASS missing file: exit 1
+PASS example with option terminator: exit 0
+examples/report.php is byte-identical to success/v1_report.php.

@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -eq 0 ]; then
+  echo 'Usage: php-ref 8.3|8.4|8.5 [PHP arguments...]' >&2
+  exit 2
+fi
+case "$1" in
+  8.3) container=php-version-83 ;;
+  8.4) container=php-version-84 ;;
+  8.5) container=php-version-85 ;;
+  *) echo 'Expected PHP version: 8.3, 8.4, or 8.5' >&2; exit 2 ;;
+esac
+shift
+
+# Preserve absolute fixture paths and diagnostic paths across host and container.
+case "$PWD" in
+  /Users/kouji/dev/php|/Users/kouji/dev/php/*|/Users/kouji/docker/php-version|/Users/kouji/docker/php-version/*) ;;
+  *) echo 'Run from /Users/kouji/dev/php or /Users/kouji/docker/php-version (or a subdirectory).' >&2; exit 2 ;;
+esac
+
+exec podman exec -i --workdir "$PWD" \
+  --env LC_ALL=C --env LANG=C --env TZ=UTC \
+  "$container" php "$@"
