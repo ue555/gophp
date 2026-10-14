@@ -28,8 +28,6 @@ type phpArray struct {
 type phpObject struct {
 	properties *phpArray
 	class      *classDecl
-	closure    *phpClosure
-	exception  *exceptionData
 }
 
 func (o *phpObject) className() string {
@@ -242,11 +240,10 @@ func (e *evaluator) readProperty(node propertyExpr) (value, error) {
 		e.warn(node.line, fmt.Sprintf("Attempt to read property \"%s\" on %s", node.name, base.typeName()))
 		return value{}, nil
 	}
-	k, err := e.propertyKey(base.o, node.name, node.line)
-	if err != nil {
+	if err := e.propertyAccess(base.o, node.name, node.line); err != nil {
 		return value{}, err
 	}
-	if v, ok := base.o.properties.get(k); ok {
+	if v, ok := base.o.properties.get(arrayKey{text: node.name, isString: true}); ok {
 		return v, nil
 	}
 	e.warn(node.line, "Undefined property: "+base.o.className()+"::$"+node.name)
@@ -279,18 +276,16 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 		if e.variables == nil {
 			e.variables = make(map[string]value)
 		}
-		if _, exists := e.readVariable(node.token.text); rw && !exists {
+		if _, exists := e.variables[node.token.text]; rw && !exists {
 			e.warn(node.token.line, "Undefined variable $"+node.token.text)
 		}
-		return e.variableSlot(node.token.text), nil
-	case staticPropertyExpr:
-		return e.staticPropertyLocation(node)
+		return location{func() value { return e.variables[node.token.text] }, func(v value) error { e.variables[node.token.text] = v; return nil }}, nil
 	case propertyExpr:
 		var base value
 		var err error
 		if v, ok := node.base.(variable); ok && v.token.text != "this" {
-			base, _ = e.readVariable(v.token.text)
-			if _, exists := e.readVariable(v.token.text); rw && !exists {
+			base = e.variables[v.token.text]
+			if _, exists := e.variables[v.token.text]; rw && !exists {
 				e.warn(v.token.line, "Undefined variable $"+v.token.text)
 			}
 		} else {
@@ -317,10 +312,10 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			}
 			return location{}, &runtimeError{node.line, "Error", fmt.Sprintf("Attempt to %s property \"%s\" on %s", action, node.name, name)}
 		}
-		k, err := e.propertyKey(base.o, node.name, node.line)
-		if err != nil {
+		if err := e.propertyAccess(base.o, node.name, node.line); err != nil {
 			return location{}, err
 		}
+		k := arrayKey{text: node.name, isString: true}
 		if rw && base.o.properties.find(k) < 0 {
 			if base.o.dynamicProperty(node.name) {
 				e.diagnostic("Deprecated", node.line, "Creation of dynamic property "+base.o.className()+"::$"+node.name+" is deprecated")
@@ -416,8 +411,6 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 func (e *evaluator) prepareTarget(target expr) (expr, error) {
 	switch node := target.(type) {
 	case variable:
-		return node, nil
-	case staticPropertyExpr:
 		return node, nil
 	case offsetExpr:
 		base, err := e.prepareTarget(node.base)

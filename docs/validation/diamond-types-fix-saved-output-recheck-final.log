@@ -1,8 +1,0 @@
-8.3 interface_diamond_arity.php saved-PHP-output-exact-match= True exit= 255
-8.3 type_strict_arg.php saved-PHP-output-exact-match= True exit= 255
-8.4 interface_diamond_arity.php saved-PHP-output-exact-match= True exit= 255
-8.4 type_strict_arg.php saved-PHP-output-exact-match= True exit= 255
-8.5 interface_diamond_arity.php saved-PHP-output-exact-match= True exit= 255
-8.5 type_strict_arg.php saved-PHP-output-exact-match= True exit= 255
-checks= 6
-saved-output recheck exit=0

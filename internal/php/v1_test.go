@@ -21,20 +21,6 @@ func TestV1UnsupportedForms(t *testing.T) {
 		t.Run(source, func(t *testing.T) {
 			var out, diagnostics bytes.Buffer
 			code := Run("<?php\necho 'unreachable';\nif (false) { "+source+" }", "input.php", &out, &diagnostics)
-			if source == "echo count_normal;" || source == "echo PHP_VERSION;" {
-				// Constant identifiers are now valid syntax; missing constants only
-				// fail when evaluated. Retain both original cases and check both paths.
-				if code != 0 || out.String() != "unreachable" || diagnostics.Len() != 0 {
-					t.Fatalf("skipped constant: exit=%d stdout=%q stderr=%q", code, &out, &diagnostics)
-				}
-				out.Reset()
-				diagnostics.Reset()
-				code = Run("<?php "+source, "input.php", &out, &diagnostics)
-				if code != 255 || out.Len() != 0 || !strings.Contains(diagnostics.String(), "Undefined constant") {
-					t.Fatalf("missing constant: exit=%d stdout=%q stderr=%q", code, &out, &diagnostics)
-				}
-				return
-			}
 			if code != 255 || out.Len() != 0 || !strings.Contains(diagnostics.String(), "Parse error:") {
 				t.Fatalf("exit=%d stdout=%q stderr=%q", code, &out, &diagnostics)
 			}

@@ -31,22 +31,14 @@ func (p *parser) languageArguments(name string) ([]expr, error) {
 
 func issetTarget(x expr) bool {
 	switch x.(type) {
-	case variable, offsetExpr, propertyExpr, staticPropertyExpr:
+	case variable, offsetExpr, propertyExpr:
 		return true
-	case nullsafeExpr:
-		return !x.(nullsafeExpr).method
 	}
 	return false
 }
 
 func validateUnset(x expr) *runtimeError {
-	if hasNullsafe(x) {
-		return &runtimeError{expressionLine(x), "", "Can't use nullsafe operator in write context"}
-	}
 	switch n := x.(type) {
-	case staticPropertyExpr:
-		// PHP rejects an executed unset, not an unreachable branch containing it.
-		return nil
 	case variable:
 		if n.token.text == "this" {
 			return &runtimeError{n.token.line, "", "Cannot unset $this"}
@@ -55,10 +47,8 @@ func validateUnset(x expr) *runtimeError {
 		if n.key == nil {
 			return &runtimeError{n.line, "", "Cannot use [] for unsetting"}
 		}
-		if _, staticBase := n.base.(staticPropertyExpr); !staticBase {
-			if err := validateUnset(n.base); err != nil {
-				return err
-			}
+		if err := validateUnset(n.base); err != nil {
+			return err
 		}
 		return validateExpression(n.key, false)
 	case propertyExpr:
@@ -91,30 +81,12 @@ func (e *evaluator) quietRead(x expr) (value, error) {
 }
 
 func (e *evaluator) quietAccess(x expr, final bool) (value, error) {
-	if hasNullsafe(x) {
-		v, _, err := e.quietNullsafeChain(x, final, false)
-		return v, err
-	}
 	switch n := x.(type) {
-	case staticPropertyExpr:
-		class, err := e.resolveClassName(n.className, n.line)
-		if err != nil {
-			return value{}, err
-		}
-		if class.staticProperties[n.name] == nil {
-			return value{}, nil
-		}
-		loc, err := e.staticPropertyLocation(n)
-		if err != nil {
-			return value{}, err
-		}
-		return loc.get(), nil
 	case variable:
 		if n.token.text == "this" && !final {
 			return e.eval(n)
 		}
-		v, _ := e.readVariable(n.token.text)
-		return v, nil
+		return e.variables[n.token.text], nil
 	case propertyExpr:
 		base, err := e.quietAccess(n.base, false)
 		if err != nil {
@@ -123,11 +95,10 @@ func (e *evaluator) quietAccess(x expr, final bool) (value, error) {
 		if base.kind != objectKind {
 			return value{}, nil
 		}
-		k, err := e.propertyKey(base.o, n.name, n.line)
-		if err != nil {
+		if e.propertyAccess(base.o, n.name, n.line) != nil {
 			return value{}, nil
 		}
-		v, _ := base.o.properties.get(k)
+		v, _ := base.o.properties.get(arrayKey{text: n.name, isString: true})
 		return v, nil
 	case offsetExpr:
 		var base, key value
@@ -231,11 +202,8 @@ func (a *phpArray) without(k arrayKey) *phpArray {
 }
 
 func (e *evaluator) unset(x expr) error {
-	if n, ok := x.(staticPropertyExpr); ok {
-		return &fatalDiagnostic{n.line, "Attempt to unset static property"}
-	}
 	if v, ok := x.(variable); ok {
-		e.deleteVariable(v.token.text)
+		delete(e.variables, v.token.text)
 		return nil
 	}
 	prepared, err := e.prepareTarget(x)
@@ -251,13 +219,11 @@ func (e *evaluator) unset(x expr) error {
 func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 	noop := location{func() value { return value{} }, func(value) error { return nil }}
 	switch n := x.(type) {
-	case staticPropertyExpr:
-		return e.staticPropertyLocation(n)
 	case variable:
-		if _, exists := e.readVariable(n.token.text); !exists {
+		if _, exists := e.variables[n.token.text]; !exists {
 			e.warn(n.token.line, "Undefined variable $"+n.token.text)
 		}
-		return e.variableSlot(n.token.text), nil
+		return location{func() value { return e.variables[n.token.text] }, func(v value) error { e.variables[n.token.text] = v; return nil }}, nil
 	case propertyExpr:
 		var base value
 		var err error
@@ -280,10 +246,10 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 		if base.kind != objectKind {
 			return noop, nil
 		}
-		k, err := e.propertyKey(base.o, n.name, n.line)
-		if err != nil {
+		if err := e.propertyAccess(base.o, n.name, n.line); err != nil {
 			return noop, err
 		}
+		k := arrayKey{text: n.name, isString: true}
 		if remove {
 			base.o.properties = base.o.properties.without(k)
 		}

@@ -1,5 +1,0 @@
-cwd: /Users/kouji/dev/php
-command: make vet
-exit: 0
-
-go vet ./...

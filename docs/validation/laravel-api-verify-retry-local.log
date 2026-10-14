@@ -1,6 +1,0 @@
-command: podman run --rm -v /Users/kouji/dev/php/research/laravel-api:/app -v /Users/kouji/dev/php/.cache/laravel-api-5uimeb3r:/probe -e DB_DATABASE=/probe/database.sqlite -e DB_CONNECTION=sqlite -e APP_ENV=testing -e LOG_CHANNEL=stderr -e APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= localhost/gophp-dependency-research:8.3.35 php artisan package:discover --no-interaction
-exit: 125
-Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM
-Error: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:60028: connect: operation not permitted
-FAIL PHP 8.3.35: command failed
-verify.py exit: 1
