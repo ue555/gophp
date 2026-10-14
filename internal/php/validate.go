@@ -6,6 +6,31 @@ func validateStatements(statements []statement) *runtimeError { return validateB
 
 func validateBlock(statements []statement, depth int) *runtimeError {
 	for _, s := range statements {
+		if s.constant != nil {
+			if !constantInitializer(s.constant.initial) {
+				return &runtimeError{s.constant.line, "", "Constant expression contains invalid operations"}
+			}
+			if err := validateExpression(s.constant.initial, false); err != nil {
+				return err
+			}
+		}
+		if s.kind == "switch" {
+			defaults := 0
+			for _, c := range s.cases {
+				if c.condition == nil {
+					defaults++
+				}
+				if defaults > 1 {
+					return &runtimeError{c.line, "", "Switch statements may only contain one default clause"}
+				}
+				if err := validateExpression(c.condition, false); err != nil {
+					return err
+				}
+				if err := validateBlock(c.body, depth+1); err != nil {
+					return err
+				}
+			}
+		}
 		if s.kind == "unset" {
 			for _, x := range s.expressions {
 				if err := validateUnset(x); err != nil {
@@ -25,6 +50,14 @@ func validateBlock(statements []statement, depth int) *runtimeError {
 			}
 		}
 		if s.class != nil {
+			for _, constant := range s.class.constantDecls {
+				if !constantInitializer(constant.initial) {
+					return &runtimeError{constant.line, "", "Constant expression contains invalid operations"}
+				}
+				if err := validateExpression(constant.initial, false); err != nil {
+					return err
+				}
+			}
 			for _, property := range s.class.properties {
 				if !constantInitializer(property.initial) {
 					return &runtimeError{property.line, "", "Constant expression contains invalid operations"}
@@ -64,12 +97,95 @@ func validateBlock(statements []statement, depth int) *runtimeError {
 		if err := validateBlock(s.elseBranch, depth); err != nil {
 			return err
 		}
+		for _, clause := range s.catches {
+			if err := validateBlock(clause.body, depth); err != nil {
+				return err
+			}
+		}
+		if err := validateBlock(s.finally, depth); err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
 func validateExpression(x expr, write bool) *runtimeError {
+	if write && hasNullsafe(x) {
+		return &runtimeError{expressionLine(x), "", "Can't use nullsafe operator in write context"}
+	}
 	switch node := x.(type) {
+	case unpackArgument:
+		return validateExpression(node.operand, false)
+	case namedArgument:
+		return validateExpression(node.operand, false)
+	case throwExpr:
+		return validateExpression(node.operand, false)
+	case dynamicCall:
+		if err := validateExpression(node.callee, false); err != nil {
+			return err
+		}
+		for _, arg := range node.args {
+			if err := validateExpression(arg, false); err != nil {
+				return err
+			}
+		}
+	case closureExpr:
+		return validateCallable(node.method)
+	case instanceofExpr:
+		if err := validateExpression(node.operand, false); err != nil {
+			return err
+		}
+		return validateExpression(node.classExpr, false)
+	case includeExpr:
+		return validateExpression(node.path, false)
+	case interpolatedString:
+		for _, part := range node.parts {
+			if err := validateExpression(part, false); err != nil {
+				return err
+			}
+		}
+	case ternaryExpr:
+		for _, branch := range []expr{node.condition, node.yes, node.no} {
+			if err := validateExpression(branch, false); err != nil {
+				return err
+			}
+		}
+	case coalesceAssignment:
+		// ??= reads before writing; append dimensions are never valid here.
+		if err := validateExpression(node.target, false); err != nil {
+			return err
+		}
+		return validateExpression(assignment{node.target, node.source, node.line}, false)
+	case nullsafeExpr:
+		if err := validateExpression(node.base, false); err != nil {
+			return err
+		}
+		for _, arg := range node.args {
+			if err := validateExpression(arg, false); err != nil {
+				return err
+			}
+		}
+	case matchExpr:
+		if err := validateExpression(node.subject, false); err != nil {
+			return err
+		}
+		defaults := 0
+		for _, arm := range node.arms {
+			if len(arm.conditions) == 0 {
+				defaults++
+			}
+			if defaults > 1 {
+				return &runtimeError{arm.line, "", "Match expressions may only contain one default arm"}
+			}
+			for _, condition := range arm.conditions {
+				if err := validateExpression(condition, false); err != nil {
+					return err
+				}
+			}
+			if err := validateExpression(arm.result, false); err != nil {
+				return err
+			}
+		}
 	case castExpr:
 		return validateExpression(node.operand, false)
 	case languageExpr:
@@ -119,6 +235,9 @@ func validateExpression(x expr, write bool) *runtimeError {
 			}
 		}
 	case newObject:
+		if err := validateExpression(node.classExpr, false); err != nil {
+			return err
+		}
 		for _, arg := range node.args {
 			if err := validateExpression(arg, false); err != nil {
 				return err
@@ -155,12 +274,16 @@ func validateExpression(x expr, write bool) *runtimeError {
 
 func constantInitializer(x expr) bool {
 	switch node := x.(type) {
-	case nil, literal:
+	case nil, literal, constantExpr:
+		return true
+	case classConstantExpr:
 		return true
 	case unary:
 		return constantInitializer(node.operand)
 	case binary:
 		return constantInitializer(node.left) && constantInitializer(node.right)
+	case ternaryExpr:
+		return constantInitializer(node.condition) && constantInitializer(node.yes) && constantInitializer(node.no)
 	case arrayLiteral:
 		for _, entry := range node.elements {
 			if !constantInitializer(entry.key) || !constantInitializer(entry.value) {

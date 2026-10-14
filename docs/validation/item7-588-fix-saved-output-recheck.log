@@ -1,0 +1,25 @@
+8.3 class_final_constant: MATCH
+8.3 class_relative_outside: MATCH
+8.3 class_static_unset: MATCH
+8.3 interface_arity: MATCH
+8.3 interface_missing_implementation: MATCH
+8.3 trait_method_collision: MATCH
+8.3 trait_separate_use_collision: MATCH
+8.3 trait_parent_property_version: MATCH
+8.4 class_final_constant: MATCH
+8.4 class_relative_outside: MATCH
+8.4 class_static_unset: MATCH
+8.4 interface_arity: MATCH
+8.4 interface_missing_implementation: MATCH
+8.4 trait_method_collision: MATCH
+8.4 trait_separate_use_collision: MATCH
+8.4 trait_parent_property_version: MATCH
+8.5 class_final_constant: MATCH
+8.5 class_relative_outside: MATCH
+8.5 class_static_unset: MATCH
+8.5 interface_arity: MATCH
+8.5 interface_missing_implementation: MATCH
+8.5 trait_method_collision: MATCH
+8.5 trait_separate_use_collision: MATCH
+8.5 trait_parent_property_version: MATCH
+saved official DIFF blocks=23; local recheck failures=0; fresh official PHP: not run

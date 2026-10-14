@@ -133,6 +133,8 @@ func TestFixtures(t *testing.T) {
 }
 
 func TestRejectUnsupported(t *testing.T) {
+	// Keep the original inputs: newly supported forms now assert their result.
+	newlySupported := map[string]string{"echo 1 & 2;": "0", "echo 1 << 2;": "4", "echo true & false;": "0", "echo true | false;": "1", "echo \"$name\";": "", "echo \"{$name}\";": "", "function f(): int {}": "", "function f(...$x) {}": ""}
 	cases := []string{
 		"$a = &$b;", "$a = [...$b];", "$o = new class {};", "foreach ([] as &$x) {}", "function f(&$x) {}", "class A extends B {}",
 		"function f(...$x) {}", "function f(): int {}", "echo 2 ** 3;",
@@ -150,6 +152,16 @@ func TestRejectUnsupported(t *testing.T) {
 		t.Run(source, func(t *testing.T) {
 			var stdout, stderr bytes.Buffer
 			code := Run("<?php\necho 'must not execute';\n"+source, "input.php", &stdout, &stderr)
+			if want, supported := newlySupported[source]; supported {
+				wantStderr := ""
+				if strings.Contains(source, "$name") {
+					wantStderr = "Warning: Undefined variable $name in input.php on line 3\n"
+				}
+				if code != 0 || stdout.String() != "must not execute"+want || stderr.String() != wantStderr {
+					t.Fatalf("supported form: exit=%d stdout=%q stderr=%q", code, &stdout, &stderr)
+				}
+				return
+			}
 			if code != 255 || stdout.Len() != 0 || stderr.Len() == 0 {
 				t.Fatalf("must reject before evaluation: exit=%d stdout=%q stderr=%q", code, &stdout, &stderr)
 			}

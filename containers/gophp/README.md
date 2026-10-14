@@ -67,7 +67,7 @@ python3 -B containers/gophp/check.py --all
 
 通常のチェックは7fixtureを3設定で実行し、さらにヘルプ・引数不足の終了コードを検査します。
 日本語の出力、警告、構文／致命エラー、版によって異なる診断・構文を確認します。
-`--all` は全466fixtureを3設定で実行します。これは保存済み期待値との照合です。
+`--all` は`tests/fixtures/expected.json`に登録された全fixture（現在588件）を3設定で実行します。これは保存済み期待値との照合であり、[ホストの公式PHP全件比較](../../docs/validation/item7-588-user-comparison-after-fix.log)とは別です。
 エラーを含めてstdout・stderrをバイト単位で比較し、終了コードも検査します。
 終了コードはチェック成功0、不一致1、コンテナ接続失敗等の検証エラー2です。
 
