@@ -6,6 +6,9 @@ import (
 )
 
 func builtinName(name string) bool {
+	if constantBuiltin(name) {
+		return true
+	}
 	switch strings.ToLower(name) {
 	case "strlen", "count", "gettype", "is_int", "is_float", "is_string", "is_bool", "is_null", "is_array", "is_object", "is_numeric":
 		return true
@@ -22,11 +25,26 @@ func builtinRedeclaration(name string, version Version) string {
 }
 
 func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
+	if constantBuiltin(node.name) {
+		return e.callConstantBuiltin(node)
+	}
 	name := strings.ToLower(node.name)
-	args, err := e.evalArguments(node.args)
+	evaluated, err := e.evalArguments(node.args)
 	if err != nil {
 		return value{}, err
 	}
+	params := []parameter{{name: "value"}}
+	if name == "strlen" {
+		params[0].name = "string"
+	}
+	if name == "count" {
+		params = append(params, parameter{name: "mode"})
+	}
+	bound, present, _, err := bindCallArguments(evaluated, params, node.line)
+	if err != nil {
+		return value{}, err
+	}
+	args := argumentValues(evaluated)
 	// Zend compiles single-argument calls to these functions to dedicated
 	// opcodes. Arity failures and count($a, $mode) retain an internal call frame.
 	framed := len(args) != 1
@@ -35,14 +53,14 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 	}
 	defer func() {
 		if err != nil && framed && e.failureFrames == nil {
-			e.captureFailure(callFrame{method: name, line: node.line, args: args})
+			e.captureFailure(callFrame{method: name, line: node.line, filename: e.filename, args: args})
 		}
 	}()
 	max := 1
 	if name == "count" {
 		max = 2
 	}
-	if len(args) < 1 || len(args) > max {
+	if len(args) < 1 || len(args) > max || !present[0] {
 		limit, count := "exactly", 1
 		if name == "count" {
 			limit = "at least"
@@ -56,7 +74,7 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 		}
 		return value{}, &runtimeError{node.line, "ArgumentCountError", fmt.Sprintf("%s() expects %s %d argument%s, %d given", name, limit, count, plural, len(args))}
 	}
-	v := args[0]
+	v := bound[0]
 	switch name {
 	case "strlen":
 		if v.kind == arrayKind || v.kind == objectKind {
@@ -69,8 +87,8 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 		return integer(int64(len(s))), err
 	case "count":
 		mode := int64(0)
-		if len(args) == 2 {
-			mode, err = e.countMode(args[1], node.line)
+		if present[1] {
+			mode, err = e.countMode(bound[1], node.line)
 			if err != nil {
 				return value{}, err
 			}

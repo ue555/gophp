@@ -66,8 +66,8 @@ func TestFunctionRecursionLimit(t *testing.T) {
 
 func TestUnsupportedFunctionAndLoopSyntax(t *testing.T) {
 	for _, source := range []string{
-		"function f(&$x) {}", "function f(...$args) {}", "function f(int $x) {}",
-		"function f(): int {}", "function f() {} f(x: 1);", "$f = function () {};",
+		"function f(&$x) {}", "function f(...$args, $tail) {}", "function f(int|float $x) {}",
+		"function f(): int|float {}", "$f = function () use (&$x) {};",
 		"function &f() {}", "while (false): endwhile;", "for (;;): endfor;",
 	} {
 		var out, err bytes.Buffer

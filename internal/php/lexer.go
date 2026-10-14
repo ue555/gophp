@@ -7,9 +7,10 @@ import (
 )
 
 type token struct {
-	kind string
-	text string
-	line int
+	kind  string
+	text  string
+	line  int
+	parts []stringPart
 }
 
 type syntaxError struct {
@@ -118,6 +119,12 @@ func (l *lexer) next() (token, error) {
 		return t, nil
 	}
 	c := rest[0]
+	if strings.HasPrefix(rest, "<<<") {
+		return l.heredoc()
+	}
+	if c == '"' {
+		return l.doubleQuoted()
+	}
 	if c == '\'' || c == '"' {
 		t.kind = "string"
 		value, err := l.quoted(c)
@@ -183,19 +190,19 @@ func (l *lexer) next() (token, error) {
 		return t, nil
 	}
 	// Longest matches first, including !== before the unary ! token.
-	for _, op := range []string{"===", "!==", "<=>", "++", "--", "+=", "-=", "*=", "/=", "%=", ".=", "&&", "||", "==", "!=", "<>", "<=", ">=", "=>", "->"} {
+	for _, op := range []string{"??=", "?->", "<<=", ">>=", "===", "!==", "<=>", "...", "??", "<<", ">>", "&=", "|=", "^=", "::", "++", "--", "+=", "-=", "*=", "/=", "%=", ".=", "&&", "||", "==", "!=", "<>", "<=", ">=", "=>", "->"} {
 		if strings.HasPrefix(rest, op) {
 			l.pos += len(op)
 			t.kind, t.text = op, op
 			return t, nil
 		}
 	}
-	for _, op := range []string{"**", "<<", ">>"} {
+	for _, op := range []string{"**"} {
 		if strings.HasPrefix(rest, op) {
 			return t, syntax(t.line, "unsupported operator %q", op)
 		}
 	}
-	if strings.ContainsRune("=;,+-*/%.(){}[]!<>&", rune(c)) {
+	if strings.ContainsRune("=;,+-*/%.(){}[]!<>&|^~?:\\", rune(c)) {
 		l.take()
 		t.kind, t.text = string(c), string(c)
 		return t, nil

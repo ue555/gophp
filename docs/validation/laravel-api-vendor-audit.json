@@ -1,0 +1,4568 @@
+{
+    "packages": {
+        "api-platform/documentation": "v5.0.3",
+        "api-platform/hal": "v5.0.3",
+        "api-platform/hydra": "v5.0.3",
+        "api-platform/json-api": "v5.0.3",
+        "api-platform/json-schema": "v5.0.3",
+        "api-platform/jsonld": "v5.0.3",
+        "api-platform/laravel": "v5.0.1",
+        "api-platform/metadata": "v5.0.3",
+        "api-platform/openapi": "v5.0.3",
+        "api-platform/serializer": "v5.0.3",
+        "api-platform/state": "v5.0.3",
+        "brick/math": "0.14.8",
+        "carbonphp/carbon-doctrine-types": "3.2.1",
+        "dflydev/dot-access-data": "v3.0.3",
+        "doctrine/inflector": "2.1.0",
+        "doctrine/lexer": "3.0.3",
+        "dragonmantank/cron-expression": "v3.6.0",
+        "egulias/email-validator": "4.0.4",
+        "fruitcake/php-cors": "v1.4.0",
+        "graham-campbell/result-type": "v1.2.0",
+        "guzzlehttp/guzzle": "7.15.5",
+        "guzzlehttp/promises": "2.5.3",
+        "guzzlehttp/psr7": "2.13.1",
+        "guzzlehttp/uri-template": "v1.0.11",
+        "laravel/framework": "v12.69.3",
+        "laravel/prompts": "v0.3.25",
+        "laravel/serializable-closure": "v2.1.0",
+        "league/commonmark": "2.10.3",
+        "league/config": "v1.2.0",
+        "league/flysystem": "3.36.0",
+        "league/flysystem-local": "3.35.3",
+        "league/mime-type-detection": "1.17.0",
+        "league/uri": "7.8.1",
+        "league/uri-interfaces": "7.8.1",
+        "monolog/monolog": "3.12.1",
+        "nesbot/carbon": "3.14.2",
+        "nette/schema": "v1.3.6",
+        "nette/utils": "v4.1.5",
+        "nunomaduro/termwind": "v2.4.0",
+        "phpoption/phpoption": "1.10.0",
+        "psr/cache": "3.0.0",
+        "psr/clock": "1.0.0",
+        "psr/container": "2.0.2",
+        "psr/event-dispatcher": "1.0.0",
+        "psr/http-client": "1.0.3",
+        "psr/http-factory": "1.1.0",
+        "psr/http-message": "2.0",
+        "psr/link": "2.0.1",
+        "psr/log": "3.0.2",
+        "psr/simple-cache": "3.0.0",
+        "ralouphie/getallheaders": "3.0.3",
+        "ramsey/collection": "2.1.1",
+        "ramsey/uuid": "4.9.4",
+        "symfony/clock": "v7.4.8",
+        "symfony/console": "v7.4.20",
+        "symfony/css-selector": "v7.4.18",
+        "symfony/deprecation-contracts": "v3.7.1",
+        "symfony/error-handler": "v7.4.20",
+        "symfony/event-dispatcher": "v7.4.17",
+        "symfony/event-dispatcher-contracts": "v3.7.1",
+        "symfony/filesystem": "v7.4.18",
+        "symfony/finder": "v7.4.20",
+        "symfony/http-foundation": "v7.4.20",
+        "symfony/http-kernel": "v7.4.20",
+        "symfony/mailer": "v7.4.19",
+        "symfony/mime": "v7.4.19",
+        "symfony/polyfill-ctype": "v1.37.0",
+        "symfony/polyfill-intl-grapheme": "v1.43.0",
+        "symfony/polyfill-intl-idn": "v1.43.0",
+        "symfony/polyfill-intl-normalizer": "v1.43.0",
+        "symfony/polyfill-mbstring": "v1.43.0",
+        "symfony/polyfill-php80": "v1.43.0",
+        "symfony/polyfill-php83": "v1.43.0",
+        "symfony/polyfill-php84": "v1.43.0",
+        "symfony/polyfill-php85": "v1.43.0",
+        "symfony/polyfill-uuid": "v1.43.0",
+        "symfony/process": "v7.4.19",
+        "symfony/property-access": "v7.4.16",
+        "symfony/property-info": "v7.4.20",
+        "symfony/routing": "v7.4.20",
+        "symfony/serializer": "v7.4.20",
+        "symfony/service-contracts": "v3.7.3",
+        "symfony/string": "v7.4.19",
+        "symfony/translation": "v7.4.17",
+        "symfony/translation-contracts": "v3.7.1",
+        "symfony/type-info": "v7.4.20",
+        "symfony/uid": "v7.4.20",
+        "symfony/validator": "v7.4.20",
+        "symfony/var-dumper": "v7.4.18",
+        "symfony/web-link": "v7.4.8",
+        "tijsverkoyen/css-to-inline-styles": "v2.4.0",
+        "vlucas/phpdotenv": "v5.7.0",
+        "voku/portable-ascii": "2.1.1",
+        "willdurand/negotiation": "3.1.0"
+    },
+    "syntax_candidates": {
+        "api-platform/documentation": {
+            "readonly": {
+                "count": 5,
+                "examples": [
+                    "vendor/api-platform/documentation/Documentation.php:25",
+                    "vendor/api-platform/documentation/Documentation.php:25",
+                    "vendor/api-platform/documentation/Documentation.php:25"
+                ]
+            },
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/documentation/DocumentationInterface.php:19"
+                ]
+            }
+        },
+        "api-platform/hal": {
+            "throw": {
+                "count": 5,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/CollectionNormalizer.php:92",
+                    "vendor/api-platform/hal/Serializer/ItemNormalizer.php:151",
+                    "vendor/api-platform/hal/Serializer/ItemNormalizer.php:329"
+                ]
+            },
+            "readonly": {
+                "count": 6,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/EntrypointNormalizer.php:34",
+                    "vendor/api-platform/hal/Serializer/EntrypointNormalizer.php:34",
+                    "vendor/api-platform/hal/Serializer/EntrypointNormalizer.php:34"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/EntrypointNormalizer.php:55"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/EntrypointNormalizer.php:58"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/ItemNormalizer.php:199"
+                ]
+            },
+            "nullsafe": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hal/Serializer/ItemNormalizer.php:200"
+                ]
+            }
+        },
+        "api-platform/hydra": {
+            "attribute": {
+                "count": 13,
+                "examples": [
+                    "vendor/api-platform/hydra/PartialCollectionView.php:20",
+                    "vendor/api-platform/hydra/PartialCollectionView.php:24",
+                    "vendor/api-platform/hydra/PartialCollectionView.php:26"
+                ]
+            },
+            "readonly": {
+                "count": 36,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/PartialCollectionViewNormalizer.php:40",
+                    "vendor/api-platform/hydra/Serializer/PartialCollectionViewNormalizer.php:45",
+                    "vendor/api-platform/hydra/Serializer/PartialCollectionViewNormalizer.php:45"
+                ]
+            },
+            "throw": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/PartialCollectionViewNormalizer.php:62",
+                    "vendor/api-platform/hydra/Serializer/CollectionFiltersNormalizer.php:86"
+                ]
+            },
+            "nullsafe": {
+                "count": 4,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/PartialCollectionViewNormalizer.php:96",
+                    "vendor/api-platform/hydra/State/Util/SearchHelperTrait.php:58",
+                    "vendor/api-platform/hydra/State/JsonStreamerProcessor.php:80"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/EntrypointNormalizer.php:59"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/EntrypointNormalizer.php:61"
+                ]
+            },
+            "arrow_function": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/hydra/Serializer/DocumentationNormalizer.php:153",
+                    "vendor/api-platform/hydra/Serializer/DocumentationNormalizer.php:377"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/hydra/State/Util/SearchHelperTrait.php:23",
+                    "vendor/api-platform/hydra/State/Util/PaginationHelperTrait.php:22"
+                ]
+            }
+        },
+        "api-platform/json-api": {
+            "readonly": {
+                "count": 24,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemDenormalizer.php:55",
+                    "vendor/api-platform/json-api/Serializer/EntrypointNormalizer.php:35",
+                    "vendor/api-platform/json-api/Serializer/EntrypointNormalizer.php:35"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:32"
+                ]
+            },
+            "throw": {
+                "count": 10,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:63",
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:67",
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:111"
+                ]
+            },
+            "try": {
+                "count": 4,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:114",
+                    "vendor/api-platform/json-api/Serializer/EntrypointNormalizer.php:55",
+                    "vendor/api-platform/json-api/State/JsonApiProvider.php:189"
+                ]
+            },
+            "catch": {
+                "count": 4,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizerTrait.php:125",
+                    "vendor/api-platform/json-api/Serializer/EntrypointNormalizer.php:58",
+                    "vendor/api-platform/json-api/State/JsonApiProvider.php:191"
+                ]
+            },
+            "arrow_function": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizer.php:429",
+                    "vendor/api-platform/json-api/Serializer/ItemNormalizer.php:431",
+                    "vendor/api-platform/json-api/Serializer/ConstraintViolationListNormalizer.php:96"
+                ]
+            },
+            "nullsafe": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/json-api/Serializer/ConstraintViolationListNormalizer.php:96",
+                    "vendor/api-platform/json-api/Util/ResourceLinkageResolver.php:61"
+                ]
+            }
+        },
+        "api-platform/json-schema": {
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/json-schema/SchemaUriPrefixTrait.php:19",
+                    "vendor/api-platform/json-schema/ResourceMetadataTrait.php:26"
+                ]
+            },
+            "match": {
+                "count": 5,
+                "examples": [
+                    "vendor/api-platform/json-schema/SchemaUriPrefixTrait.php:23",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:101",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:253"
+                ]
+            },
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/json-schema/DefinitionNameFactoryInterface.php:23",
+                    "vendor/api-platform/json-schema/SchemaFactoryAwareInterface.php:16",
+                    "vendor/api-platform/json-schema/SchemaFactoryInterface.php:23"
+                ]
+            },
+            "readonly": {
+                "count": 7,
+                "examples": [
+                    "vendor/api-platform/json-schema/SchemaFactory.php:51",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:51",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:51"
+                ]
+            },
+            "nullsafe": {
+                "count": 7,
+                "examples": [
+                    "vendor/api-platform/json-schema/SchemaFactory.php:94",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:99",
+                    "vendor/api-platform/json-schema/SchemaFactory.php:130"
+                ]
+            },
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/json-schema/Command/JsonSchemaGenerateCommand.php:33"
+                ]
+            },
+            "throw": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/json-schema/Command/JsonSchemaGenerateCommand.php:80"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/json-schema/ResourceMetadataTrait.php:47",
+                    "vendor/api-platform/json-schema/Metadata/Property/Factory/SchemaPropertyMetadataFactory.php:55"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/json-schema/ResourceMetadataTrait.php:49",
+                    "vendor/api-platform/json-schema/Metadata/Property/Factory/SchemaPropertyMetadataFactory.php:57"
+                ]
+            },
+            "arrow_function": {
+                "count": 5,
+                "examples": [
+                    "vendor/api-platform/json-schema/Metadata/Property/Factory/SchemaPropertyMetadataFactory.php:76",
+                    "vendor/api-platform/json-schema/Metadata/Property/Factory/SchemaPropertyMetadataFactory.php:208",
+                    "vendor/api-platform/json-schema/Metadata/Property/Factory/SchemaPropertyMetadataFactory.php:218"
+                ]
+            }
+        },
+        "api-platform/jsonld": {
+            "readonly": {
+                "count": 26,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/ErrorNormalizer.php:24",
+                    "vendor/api-platform/jsonld/Serializer/ErrorNormalizer.php:24",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizer.php:53"
+                ]
+            },
+            "trait": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/JsonLdContextTrait.php:29",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:27",
+                    "vendor/api-platform/jsonld/Serializer/HydraPrefixTrait.php:18"
+                ]
+            },
+            "throw": {
+                "count": 6,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:61",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:70",
+                    "vendor/api-platform/jsonld/Action/ContextAction.php:73"
+                ]
+            },
+            "try": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:64",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizer.php:170",
+                    "vendor/api-platform/jsonld/Action/ContextAction.php:91"
+                ]
+            },
+            "catch": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:66",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizer.php:182",
+                    "vendor/api-platform/jsonld/Action/ContextAction.php:93"
+                ]
+            },
+            "nullsafe": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizerTrait.php:69",
+                    "vendor/api-platform/jsonld/Serializer/ItemNormalizer.php:175"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/jsonld/Action/ContextAction.php:62"
+                ]
+            },
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/jsonld/ContextBuilderInterface.php:24",
+                    "vendor/api-platform/jsonld/OperationContextBuilderInterface.php:28",
+                    "vendor/api-platform/jsonld/AnonymousContextBuilderInterface.php:23"
+                ]
+            }
+        },
+        "api-platform/laravel": {
+            "trait": {
+                "count": 7,
+                "examples": [
+                    "vendor/api-platform/laravel/Test/ApiTestAssertionsTrait.php:20",
+                    "vendor/api-platform/laravel/Test/Constraint/ArraySubsetTrait.php:32",
+                    "vendor/api-platform/laravel/State/ValidationErrorTrait.php:21"
+                ]
+            },
+            "throw": {
+                "count": 46,
+                "examples": [
+                    "vendor/api-platform/laravel/Test/ApiTestAssertionsTrait.php:59",
+                    "vendor/api-platform/laravel/State/AccessCheckerProvider.php:59",
+                    "vendor/api-platform/laravel/State/DenormalizationViolationFactory.php:72"
+                ]
+            },
+            "readonly": {
+                "count": 126,
+                "examples": [
+                    "vendor/api-platform/laravel/Test/Constraint/ArraySubsetTrait.php:37",
+                    "vendor/api-platform/laravel/JsonApi/State/JsonApiProvider.php:27",
+                    "vendor/api-platform/laravel/State/AccessCheckerProvider.php:36"
+                ]
+            },
+            "arrow_function": {
+                "count": 16,
+                "examples": [
+                    "vendor/api-platform/laravel/State/DenormalizationViolationFactory.php:88",
+                    "vendor/api-platform/laravel/State/DenormalizationViolationFactory.php:89",
+                    "vendor/api-platform/laravel/Controller/DocumentationController.php:91"
+                ]
+            },
+            "try": {
+                "count": 23,
+                "examples": [
+                    "vendor/api-platform/laravel/State/ValidateProvider.php:65",
+                    "vendor/api-platform/laravel/Eloquent/Serializer/Mapping/Loader/AttributeLoader.php:29",
+                    "vendor/api-platform/laravel/Eloquent/Serializer/EloquentNameConverter.php:30"
+                ]
+            },
+            "catch": {
+                "count": 22,
+                "examples": [
+                    "vendor/api-platform/laravel/State/ValidateProvider.php:68",
+                    "vendor/api-platform/laravel/Eloquent/Serializer/Mapping/Loader/AttributeLoader.php:31",
+                    "vendor/api-platform/laravel/Eloquent/Serializer/EloquentNameConverter.php:32"
+                ]
+            },
+            "nullsafe": {
+                "count": 16,
+                "examples": [
+                    "vendor/api-platform/laravel/State/SwaggerUiProcessor.php:67",
+                    "vendor/api-platform/laravel/State/SwaggerUiProcessor.php:68",
+                    "vendor/api-platform/laravel/State/SwaggerUiProcessor.php:90"
+                ]
+            },
+            "match": {
+                "count": 9,
+                "examples": [
+                    "vendor/api-platform/laravel/Eloquent/Serializer/Mapping/Loader/RelationMetadataLoader.php:72",
+                    "vendor/api-platform/laravel/Eloquent/Metadata/Factory/Property/EloquentPropertyMetadataFactory.php:82",
+                    "vendor/api-platform/laravel/Eloquent/Metadata/Factory/Property/EloquentPropertyMetadataFactory.php:109"
+                ]
+            },
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/laravel/Eloquent/Extension/QueryExtensionInterface.php:20",
+                    "vendor/api-platform/laravel/Eloquent/State/LinksHandlerInterface.php:23",
+                    "vendor/api-platform/laravel/Eloquent/Filter/FilterInterface.php:20"
+                ]
+            },
+            "attribute": {
+                "count": 29,
+                "examples": [
+                    "vendor/api-platform/laravel/ApiResource/Error.php:30",
+                    "vendor/api-platform/laravel/ApiResource/Error.php:87",
+                    "vendor/api-platform/laravel/ApiResource/Error.php:88"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/laravel/Console/Maker/Utils/StateTypeEnum.php:16"
+                ]
+            }
+        },
+        "api-platform/metadata": {
+            "interface": {
+                "count": 38,
+                "examples": [
+                    "vendor/api-platform/metadata/Operation/PathSegmentNameGeneratorInterface.php:21",
+                    "vendor/api-platform/metadata/Operation/Factory/OperationMetadataFactoryInterface.php:21",
+                    "vendor/api-platform/metadata/FilterInterface.php:21"
+                ]
+            },
+            "readonly": {
+                "count": 100,
+                "examples": [
+                    "vendor/api-platform/metadata/Operation/UnderscorePathSegmentNameGenerator.php:26",
+                    "vendor/api-platform/metadata/Operation/DashPathSegmentNameGenerator.php:26",
+                    "vendor/api-platform/metadata/Operation/Factory/OperationMetadataFactory.php:25"
+                ]
+            },
+            "try": {
+                "count": 36,
+                "examples": [
+                    "vendor/api-platform/metadata/Operation/Factory/CacheOperationMetadataFactory.php:44",
+                    "vendor/api-platform/metadata/Util/ReflectionClassRecursiveIterator.php:65",
+                    "vendor/api-platform/metadata/Util/CloneTrait.php:31"
+                ]
+            },
+            "catch": {
+                "count": 36,
+                "examples": [
+                    "vendor/api-platform/metadata/Operation/Factory/CacheOperationMetadataFactory.php:46",
+                    "vendor/api-platform/metadata/Util/ReflectionClassRecursiveIterator.php:67",
+                    "vendor/api-platform/metadata/Util/CloneTrait.php:33"
+                ]
+            },
+            "trait": {
+                "count": 15,
+                "examples": [
+                    "vendor/api-platform/metadata/BackwardCompatibleFilterDescriptionTrait.php:25",
+                    "vendor/api-platform/metadata/CascadeFromResource.php:21",
+                    "vendor/api-platform/metadata/Util/AttributeFilterExtractorTrait.php:26"
+                ]
+            },
+            "attribute": {
+                "count": 27,
+                "examples": [
+                    "vendor/api-platform/metadata/ApiResource.php:31",
+                    "vendor/api-platform/metadata/Get.php:20",
+                    "vendor/api-platform/metadata/Link.php:19"
+                ]
+            },
+            "throw": {
+                "count": 70,
+                "examples": [
+                    "vendor/api-platform/metadata/Util/IriHelper.php:42",
+                    "vendor/api-platform/metadata/Util/ContainerParameterResolver.php:74",
+                    "vendor/api-platform/metadata/Util/ContainerParameterResolver.php:91"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/metadata/Util/AttributeFilterExtractorTrait.php:38",
+                    "vendor/api-platform/metadata/Operations.php:57",
+                    "vendor/api-platform/metadata/Parameters.php:62"
+                ]
+            },
+            "require_once": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/metadata/Util/ReflectionClassRecursiveIterator.php:66"
+                ]
+            },
+            "arrow_function": {
+                "count": 10,
+                "examples": [
+                    "vendor/api-platform/metadata/Util/CamelCaseToSnakeCaseNameConverter.php:57",
+                    "vendor/api-platform/metadata/Property/Factory/SerializerPropertyMetadataFactory.php:69",
+                    "vendor/api-platform/metadata/Property/Factory/CachedPropertyNameCollectionFactory.php:43"
+                ]
+            },
+            "nullsafe": {
+                "count": 23,
+                "examples": [
+                    "vendor/api-platform/metadata/Property/Factory/ClassLevelAttributePropertyNameCollectionFactory.php:33",
+                    "vendor/api-platform/metadata/Property/Factory/ClassLevelAttributePropertyNameCollectionFactory.php:45",
+                    "vendor/api-platform/metadata/Property/Factory/SerializerPropertyMetadataFactory.php:92"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/metadata/Extractor/XmlPropertyExtractor.php:130",
+                    "vendor/api-platform/metadata/Extractor/YamlPropertyExtractor.php:125",
+                    "vendor/api-platform/metadata/Extractor/YamlResourceExtractor.php:239"
+                ]
+            },
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/metadata/Extractor/PhpFileResourceExtractor.php:56"
+                ]
+            }
+        },
+        "api-platform/openapi": {
+            "readonly": {
+                "count": 21,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/ApiGatewayNormalizer.php:35",
+                    "vendor/api-platform/openapi/Serializer/SerializerContextBuilder.php:24",
+                    "vendor/api-platform/openapi/Serializer/LegacyOpenApiNormalizer.php:30"
+                ]
+            },
+            "throw": {
+                "count": 6,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/ApiGatewayNormalizer.php:49",
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1020",
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1065"
+                ]
+            },
+            "arrow_function": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/LegacyOpenApiNormalizer.php:115",
+                    "vendor/api-platform/openapi/Serializer/LegacyOpenApiNormalizer.php:123",
+                    "vendor/api-platform/openapi/Factory/TypeFactoryTrait.php:127"
+                ]
+            },
+            "trait": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/NormalizeOperationNameTrait.php:21",
+                    "vendor/api-platform/openapi/Model/ExtensionTrait.php:16",
+                    "vendor/api-platform/openapi/Factory/TypeFactoryTrait.php:27"
+                ]
+            },
+            "nullsafe": {
+                "count": 15,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/OpenApiNormalizer.php:99",
+                    "vendor/api-platform/openapi/Serializer/OpenApiNormalizer.php:100",
+                    "vendor/api-platform/openapi/Serializer/OpenApiNormalizer.php:101"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/openapi/Serializer/OpenApiNormalizer.php:116"
+                ]
+            },
+            "attribute": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/openapi/Model/Reference.php:52",
+                    "vendor/api-platform/openapi/Command/OpenApiCommand.php:30",
+                    "vendor/api-platform/openapi/OpenApi.php:89"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1170",
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1183"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1175",
+                    "vendor/api-platform/openapi/Factory/OpenApiFactory.php:1197"
+                ]
+            },
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/openapi/Factory/OpenApiFactoryInterface.php:21"
+                ]
+            }
+        },
+        "api-platform/serializer": {
+            "readonly": {
+                "count": 27,
+                "examples": [
+                    "vendor/api-platform/serializer/Mapping/Loader/PropertyMetadataLoader.php:39",
+                    "vendor/api-platform/serializer/Mapping/Loader/PropertyMetadataLoader.php:40",
+                    "vendor/api-platform/serializer/Mapping/Factory/ClassMetadataFactory.php:24"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/api-platform/serializer/Mapping/Loader/PropertyMetadataLoader.php:133"
+                ]
+            },
+            "nullsafe": {
+                "count": 6,
+                "examples": [
+                    "vendor/api-platform/serializer/Mapping/Loader/PropertyMetadataLoader.php:152",
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:64",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:311"
+                ]
+            },
+            "trait": {
+                "count": 5,
+                "examples": [
+                    "vendor/api-platform/serializer/OperationContextTrait.php:21",
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:29",
+                    "vendor/api-platform/serializer/ContextTrait.php:21"
+                ]
+            },
+            "throw": {
+                "count": 52,
+                "examples": [
+                    "vendor/api-platform/serializer/SerializerFilterContextBuilder.php:41",
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:39",
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:72"
+                ]
+            },
+            "try": {
+                "count": 15,
+                "examples": [
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:59",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:257",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:318"
+                ]
+            },
+            "catch": {
+                "count": 17,
+                "examples": [
+                    "vendor/api-platform/serializer/ItemNormalizerTrait.php:63",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:259",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:320"
+                ]
+            },
+            "arrow_function": {
+                "count": 4,
+                "examples": [
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:86",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:716",
+                    "vendor/api-platform/serializer/AbstractItemNormalizer.php:1230"
+                ]
+            },
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/serializer/TagCollectorInterface.php:21",
+                    "vendor/api-platform/serializer/OperationResourceClassResolverInterface.php:27",
+                    "vendor/api-platform/serializer/Filter/FilterInterface.php:24"
+                ]
+            }
+        },
+        "api-platform/state": {
+            "interface": {
+                "count": 11,
+                "examples": [
+                    "vendor/api-platform/state/Pagination/PaginatorInterface.php:26",
+                    "vendor/api-platform/state/Pagination/HasNextPagePaginatorInterface.php:16",
+                    "vendor/api-platform/state/Pagination/PartialPaginatorInterface.php:25"
+                ]
+            },
+            "readonly": {
+                "count": 70,
+                "examples": [
+                    "vendor/api-platform/state/Pagination/PaginationOptions.php:21",
+                    "vendor/api-platform/state/Pagination/PaginationOptions.php:21",
+                    "vendor/api-platform/state/Pagination/PaginationOptions.php:21"
+                ]
+            },
+            "throw": {
+                "count": 37,
+                "examples": [
+                    "vendor/api-platform/state/Pagination/Pagination.php:64",
+                    "vendor/api-platform/state/Pagination/Pagination.php:99",
+                    "vendor/api-platform/state/Pagination/Pagination.php:140"
+                ]
+            },
+            "nullsafe": {
+                "count": 52,
+                "examples": [
+                    "vendor/api-platform/state/Pagination/Pagination.php:114",
+                    "vendor/api-platform/state/Pagination/Pagination.php:115",
+                    "vendor/api-platform/state/Pagination/Pagination.php:132"
+                ]
+            },
+            "yield": {
+                "count": 2,
+                "examples": [
+                    "vendor/api-platform/state/Pagination/MappedObjectPaginator.php:59",
+                    "vendor/api-platform/state/Pagination/MappedObjectPartialPaginator.php:48"
+                ]
+            },
+            "trait": {
+                "count": 8,
+                "examples": [
+                    "vendor/api-platform/state/Util/StateOptionsTrait.php:25",
+                    "vendor/api-platform/state/Util/HttpResponseStatusTrait.php:24",
+                    "vendor/api-platform/state/Util/ParameterParserTrait.php:27"
+                ]
+            },
+            "arrow_function": {
+                "count": 4,
+                "examples": [
+                    "vendor/api-platform/state/Util/ParameterParserTrait.php:97",
+                    "vendor/api-platform/state/Util/ParameterParserTrait.php:119",
+                    "vendor/api-platform/state/Util/RequestParser.php:47"
+                ]
+            },
+            "try": {
+                "count": 12,
+                "examples": [
+                    "vendor/api-platform/state/Util/HttpResponseHeadersTrait.php:117",
+                    "vendor/api-platform/state/Provider/ParameterProvider.php:142",
+                    "vendor/api-platform/state/Provider/ReadProvider.php:83"
+                ]
+            },
+            "catch": {
+                "count": 12,
+                "examples": [
+                    "vendor/api-platform/state/Util/HttpResponseHeadersTrait.php:136",
+                    "vendor/api-platform/state/Provider/ParameterProvider.php:144",
+                    "vendor/api-platform/state/Provider/ReadProvider.php:85"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/api-platform/state/ErrorProvider.php:65",
+                    "vendor/api-platform/state/Provider/SecurityParameterProvider.php:105",
+                    "vendor/api-platform/state/Parameter/ValueCaster.php:33"
+                ]
+            },
+            "attribute": {
+                "count": 27,
+                "examples": [
+                    "vendor/api-platform/state/ApiResource/Error.php:29",
+                    "vendor/api-platform/state/ApiResource/Error.php:115",
+                    "vendor/api-platform/state/ApiResource/Error.php:116"
+                ]
+            }
+        },
+        "brick/math": {
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/brick/math/src/RoundingMode.php:11"
+                ]
+            },
+            "readonly": {
+                "count": 8,
+                "examples": [
+                    "vendor/brick/math/src/Internal/Calculator/GmpCalculator.php:34",
+                    "vendor/brick/math/src/Internal/Calculator/BcMathCalculator.php:24",
+                    "vendor/brick/math/src/Internal/Calculator/NativeCalculator.php:29"
+                ]
+            },
+            "attribute": {
+                "count": 69,
+                "examples": [
+                    "vendor/brick/math/src/Internal/Calculator/GmpCalculator.php:36",
+                    "vendor/brick/math/src/Internal/Calculator/GmpCalculator.php:42",
+                    "vendor/brick/math/src/Internal/Calculator/GmpCalculator.php:48"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/brick/math/src/Internal/Calculator/NativeCalculator.php:48",
+                    "vendor/brick/math/src/Internal/Calculator.php:605",
+                    "vendor/brick/math/src/Internal/Calculator.php:611"
+                ]
+            },
+            "throw": {
+                "count": 58,
+                "examples": [
+                    "vendor/brick/math/src/Internal/Calculator.php:439",
+                    "vendor/brick/math/src/BigInteger.php:92",
+                    "vendor/brick/math/src/BigInteger.php:96"
+                ]
+            }
+        },
+        "carbonphp/carbon-doctrine-types": {
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php:22"
+                ]
+            },
+            "throw": {
+                "count": 2,
+                "examples": [
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php:75",
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php:104"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php:97"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php:99"
+                ]
+            },
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonDoctrineType.php:10"
+                ]
+            }
+        },
+        "dflydev/dot-access-data": {
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/dflydev/dot-access-data/src/DataInterface.php:19"
+                ]
+            },
+            "throw": {
+                "count": 4,
+                "examples": [
+                    "vendor/dflydev/dot-access-data/src/Data.php:88",
+                    "vendor/dflydev/dot-access-data/src/Data.php:132",
+                    "vendor/dflydev/dot-access-data/src/Data.php:175"
+                ]
+            },
+            "attribute": {
+                "count": 4,
+                "examples": [
+                    "vendor/dflydev/dot-access-data/src/Data.php:209",
+                    "vendor/dflydev/dot-access-data/src/Data.php:220",
+                    "vendor/dflydev/dot-access-data/src/Data.php:234"
+                ]
+            }
+        },
+        "doctrine/inflector": {
+            "throw": {
+                "count": 3,
+                "examples": [
+                    "vendor/doctrine/inflector/src/InflectorFactory.php:54",
+                    "vendor/doctrine/inflector/src/Inflector.php:237",
+                    "vendor/doctrine/inflector/src/Inflector.php:472"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/doctrine/inflector/src/WordInflector.php:7",
+                    "vendor/doctrine/inflector/src/LanguageInflectorFactory.php:9"
+                ]
+            },
+            "yield_from": {
+                "count": 16,
+                "examples": [
+                    "vendor/doctrine/inflector/src/Rules/Esperanto/Uninflected.php:14",
+                    "vendor/doctrine/inflector/src/Rules/Esperanto/Uninflected.php:20",
+                    "vendor/doctrine/inflector/src/Rules/Turkish/Uninflected.php:14"
+                ]
+            },
+            "yield": {
+                "count": 486,
+                "examples": [
+                    "vendor/doctrine/inflector/src/Rules/Esperanto/Uninflected.php:26",
+                    "vendor/doctrine/inflector/src/Rules/Esperanto/Inflectible.php:17",
+                    "vendor/doctrine/inflector/src/Rules/Esperanto/Inflectible.php:23"
+                ]
+            }
+        },
+        "dragonmantank/cron-expression": {
+            "throw": {
+                "count": 19,
+                "examples": [
+                    "vendor/dragonmantank/cron-expression/src/Cron/FieldFactory.php:48",
+                    "vendor/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php:110",
+                    "vendor/dragonmantank/cron-expression/src/Cron/AbstractField.php:153"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/dragonmantank/cron-expression/src/Cron/FieldFactoryInterface.php:5",
+                    "vendor/dragonmantank/cron-expression/src/Cron/FieldInterface.php:12"
+                ]
+            },
+            "try": {
+                "count": 4,
+                "examples": [
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:89",
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:165",
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:349"
+                ]
+            },
+            "catch": {
+                "count": 4,
+                "examples": [
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:91",
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:167",
+                    "vendor/dragonmantank/cron-expression/src/Cron/CronExpression.php:351"
+                ]
+            }
+        },
+        "egulias/email-validator": {
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/egulias/email-validator/src/Result/Result.php:5",
+                    "vendor/egulias/email-validator/src/Result/Reason/Reason.php:5",
+                    "vendor/egulias/email-validator/src/Parser/CommentStrategy/CommentStrategy.php:9"
+                ]
+            },
+            "try": {
+                "count": 6,
+                "examples": [
+                    "vendor/egulias/email-validator/src/Parser/DomainPart.php:235",
+                    "vendor/egulias/email-validator/src/Parser/Comment.php:95",
+                    "vendor/egulias/email-validator/src/Parser/DoubleQuote.php:82"
+                ]
+            },
+            "catch": {
+                "count": 6,
+                "examples": [
+                    "vendor/egulias/email-validator/src/Parser/DomainPart.php:237",
+                    "vendor/egulias/email-validator/src/Parser/Comment.php:98",
+                    "vendor/egulias/email-validator/src/Parser/DoubleQuote.php:84"
+                ]
+            },
+            "throw": {
+                "count": 5,
+                "examples": [
+                    "vendor/egulias/email-validator/src/EmailLexer.php:187",
+                    "vendor/egulias/email-validator/src/Validation/DNSCheckValidation.php:65",
+                    "vendor/egulias/email-validator/src/Validation/DNSGetRecordWrapper.php:18"
+                ]
+            },
+            "readonly": {
+                "count": 4,
+                "examples": [
+                    "vendor/egulias/email-validator/src/Validation/MultipleValidationWithAnd.php:39",
+                    "vendor/egulias/email-validator/src/Validation/MultipleValidationWithAnd.php:39",
+                    "vendor/egulias/email-validator/src/Validation/DNSRecords.php:11"
+                ]
+            }
+        },
+        "guzzlehttp/guzzle": {
+            "throw": {
+                "count": 220,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/functions.php:153",
+                    "vendor/guzzlehttp/guzzle/src/functions.php:232",
+                    "vendor/guzzlehttp/guzzle/src/functions.php:237"
+                ]
+            },
+            "try": {
+                "count": 39,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:288",
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:316",
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:354"
+                ]
+            },
+            "catch": {
+                "count": 35,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:290",
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:318",
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:356"
+                ]
+            },
+            "interface": {
+                "count": 6,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php:7",
+                    "vendor/guzzlehttp/guzzle/src/ClientInterface.php:14",
+                    "vendor/guzzlehttp/guzzle/src/MessageFormatterInterface.php:8"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/ClientTrait.php:13"
+                ]
+            },
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/functions_include.php:5"
+                ]
+            },
+            "yield": {
+                "count": 2,
+                "examples": [
+                    "vendor/guzzlehttp/guzzle/src/Pool.php:70",
+                    "vendor/guzzlehttp/guzzle/src/Pool.php:72"
+                ]
+            }
+        },
+        "guzzlehttp/promises": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/guzzlehttp/promises/src/PromiseInterface.php:16",
+                    "vendor/guzzlehttp/promises/src/PromisorInterface.php:10",
+                    "vendor/guzzlehttp/promises/src/TaskQueueInterface.php:7"
+                ]
+            },
+            "throw": {
+                "count": 12,
+                "examples": [
+                    "vendor/guzzlehttp/promises/src/Promise.php:79",
+                    "vendor/guzzlehttp/promises/src/Promise.php:130",
+                    "vendor/guzzlehttp/promises/src/Promise.php:136"
+                ]
+            },
+            "try": {
+                "count": 13,
+                "examples": [
+                    "vendor/guzzlehttp/promises/src/Promise.php:99",
+                    "vendor/guzzlehttp/promises/src/Promise.php:199",
+                    "vendor/guzzlehttp/promises/src/Promise.php:248"
+                ]
+            },
+            "catch": {
+                "count": 13,
+                "examples": [
+                    "vendor/guzzlehttp/promises/src/Promise.php:101",
+                    "vendor/guzzlehttp/promises/src/Promise.php:217",
+                    "vendor/guzzlehttp/promises/src/Promise.php:252"
+                ]
+            }
+        },
+        "guzzlehttp/psr7": {
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:15"
+                ]
+            },
+            "throw": {
+                "count": 113,
+                "examples": [
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:47",
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:68",
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:100"
+                ]
+            },
+            "try": {
+                "count": 12,
+                "examples": [
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:95",
+                    "vendor/guzzlehttp/psr7/src/PumpStream.php:62",
+                    "vendor/guzzlehttp/psr7/src/Stream.php:79"
+                ]
+            },
+            "catch": {
+                "count": 14,
+                "examples": [
+                    "vendor/guzzlehttp/psr7/src/FnStream.php:98",
+                    "vendor/guzzlehttp/psr7/src/PumpStream.php:64",
+                    "vendor/guzzlehttp/psr7/src/Stream.php:85"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/guzzlehttp/psr7/src/MessageTrait.php:13",
+                    "vendor/guzzlehttp/psr7/src/StreamDecoratorTrait.php:14"
+                ]
+            }
+        },
+        "guzzlehttp/uri-template": {
+            "throw": {
+                "count": 3,
+                "examples": [
+                    "vendor/guzzlehttp/uri-template/src/UriTemplate.php:47",
+                    "vendor/guzzlehttp/uri-template/src/UriTemplate.php:359",
+                    "vendor/guzzlehttp/uri-template/src/UriTemplate.php:370"
+                ]
+            }
+        },
+        "laravel/framework": {
+            "arrow_function": {
+                "count": 834,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:34",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:1598",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php:225"
+                ]
+            },
+            "throw": {
+                "count": 684,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:83",
+                    "vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:61",
+                    "vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:114"
+                ]
+            },
+            "attribute": {
+                "count": 312,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:104",
+                    "vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:141",
+                    "vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:219"
+                ]
+            },
+            "yield": {
+                "count": 56,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:498",
+                    "vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php:268",
+                    "vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php:342"
+                ]
+            },
+            "try": {
+                "count": 276,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:663",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:690",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:793"
+                ]
+            },
+            "match": {
+                "count": 145,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:737",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:1088",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php:246"
+                ]
+            },
+            "catch": {
+                "count": 228,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:795",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:833",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php:187"
+                ]
+            },
+            "nullsafe": {
+                "count": 73,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:877",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:1077",
+                    "vendor/laravel/framework/src/Illuminate/Database/Connection.php:1088"
+                ]
+            },
+            "interface": {
+                "count": 169,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectorInterface.php:5",
+                    "vendor/laravel/framework/src/Illuminate/Database/Migrations/MigrationRepositoryInterface.php:5",
+                    "vendor/laravel/framework/src/Illuminate/Database/ConnectionInterface.php:7"
+                ]
+            },
+            "enum": {
+                "count": 3,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Migrations/MigrationResult.php:5",
+                    "vendor/laravel/framework/src/Illuminate/Queue/WorkerStopReason.php:5",
+                    "vendor/laravel/framework/src/Illuminate/Console/View/TaskResult.php:5"
+                ]
+            },
+            "trait": {
+                "count": 179,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/DetectsLostConnections.php:9",
+                    "vendor/laravel/framework/src/Illuminate/Database/Eloquent/MassPrunable.php:8",
+                    "vendor/laravel/framework/src/Illuminate/Database/Eloquent/SoftDeletes.php:15"
+                ]
+            },
+            "yield_from": {
+                "count": 11,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:3725",
+                    "vendor/laravel/framework/src/Illuminate/Http/Resources/JsonApi/Concerns/ResolvesJsonApiElements.php:216",
+                    "vendor/laravel/framework/src/Illuminate/Collections/LazyCollection.php:341"
+                ]
+            },
+            "readonly": {
+                "count": 2,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Auth/SessionGuard.php:41",
+                    "vendor/laravel/framework/src/Illuminate/Session/SymfonySessionDecorator.php:18"
+                ]
+            },
+            "require": {
+                "count": 23,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Foundation/Configuration/ApplicationBuilder.php:132",
+                    "vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php:49",
+                    "vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php:42"
+                ]
+            },
+            "require_once": {
+                "count": 6,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php:24",
+                    "vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php:37",
+                    "vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php:50"
+                ]
+            },
+            "include": {
+                "count": 2,
+                "examples": [
+                    "vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php:936",
+                    "vendor/laravel/framework/src/Illuminate/Console/View/Components/Component.php:67"
+                ]
+            }
+        },
+        "laravel/prompts": {
+            "arrow_function": {
+                "count": 72,
+                "examples": [
+                    "vendor/laravel/prompts/src/SuggestPrompt.php:50",
+                    "vendor/laravel/prompts/src/SuggestPrompt.php:64",
+                    "vendor/laravel/prompts/src/SearchPrompt.php:42"
+                ]
+            },
+            "match": {
+                "count": 39,
+                "examples": [
+                    "vendor/laravel/prompts/src/SuggestPrompt.php:50",
+                    "vendor/laravel/prompts/src/SearchPrompt.php:46",
+                    "vendor/laravel/prompts/src/Progress.php:38"
+                ]
+            },
+            "throw": {
+                "count": 26,
+                "examples": [
+                    "vendor/laravel/prompts/src/SearchPrompt.php:39",
+                    "vendor/laravel/prompts/src/Progress.php:43",
+                    "vendor/laravel/prompts/src/Progress.php:47"
+                ]
+            },
+            "try": {
+                "count": 9,
+                "examples": [
+                    "vendor/laravel/prompts/src/Progress.php:67",
+                    "vendor/laravel/prompts/src/Prompt.php:104",
+                    "vendor/laravel/prompts/src/Prompt.php:119"
+                ]
+            },
+            "catch": {
+                "count": 6,
+                "examples": [
+                    "vendor/laravel/prompts/src/Progress.php:79",
+                    "vendor/laravel/prompts/src/Prompt.php:121",
+                    "vendor/laravel/prompts/src/Task.php:170"
+                ]
+            },
+            "readonly": {
+                "count": 14,
+                "examples": [
+                    "vendor/laravel/prompts/src/Elements/KeyValueList.php:10",
+                    "vendor/laravel/prompts/src/Elements/Link.php:7",
+                    "vendor/laravel/prompts/src/Elements/Link.php:10"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/laravel/prompts/src/Elements/ElementContract.php:5",
+                    "vendor/laravel/prompts/src/Themes/Contracts/Scrolling.php:5"
+                ]
+            },
+            "trait": {
+                "count": 17,
+                "examples": [
+                    "vendor/laravel/prompts/src/Themes/Default/Concerns/DrawsScrollbars.php:7",
+                    "vendor/laravel/prompts/src/Themes/Default/Concerns/DrawsBoxes.php:7",
+                    "vendor/laravel/prompts/src/Themes/Default/Concerns/InteractsWithStrings.php:5"
+                ]
+            }
+        },
+        "laravel/serializable-closure": {
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/laravel/serializable-closure/src/Contracts/Signer.php:5",
+                    "vendor/laravel/serializable-closure/src/Contracts/Serializable.php:5"
+                ]
+            },
+            "throw": {
+                "count": 4,
+                "examples": [
+                    "vendor/laravel/serializable-closure/src/Serializers/Signed.php:66",
+                    "vendor/laravel/serializable-closure/src/Serializers/Signed.php:86",
+                    "vendor/laravel/serializable-closure/src/Serializers/Signed.php:90"
+                ]
+            },
+            "include": {
+                "count": 1,
+                "examples": [
+                    "vendor/laravel/serializable-closure/src/Serializers/Native.php:196"
+                ]
+            },
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/laravel/serializable-closure/src/Support/ClosureStream.php:5"
+                ]
+            }
+        },
+        "league/commonmark": {
+            "throw": {
+                "count": 30,
+                "examples": [
+                    "vendor/league/commonmark/src/Renderer/HtmlRenderer.php:88",
+                    "vendor/league/commonmark/src/Extension/Embed/Bridge/OscaroteroEmbedAdapter.php:29",
+                    "vendor/league/commonmark/src/Extension/FrontMatter/Data/SymfonyYamlFrontMatterParser.php:29"
+                ]
+            },
+            "interface": {
+                "count": 43,
+                "examples": [
+                    "vendor/league/commonmark/src/Renderer/ChildNodeRendererInterface.php:21",
+                    "vendor/league/commonmark/src/Renderer/NodeRendererInterface.php:19",
+                    "vendor/league/commonmark/src/Renderer/DocumentRendererInterface.php:22"
+                ]
+            },
+            "arrow_function": {
+                "count": 4,
+                "examples": [
+                    "vendor/league/commonmark/src/Extension/Embed/Bridge/OscaroteroEmbedAdapter.php:43",
+                    "vendor/league/commonmark/src/Util/RegexHelper.php:175",
+                    "vendor/league/commonmark/src/Parser/Inline/InlineParserMatch.php:60"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/league/commonmark/src/Extension/FrontMatter/Data/SymfonyYamlFrontMatterParser.php:32",
+                    "vendor/league/commonmark/src/Extension/DefaultAttributes/ApplyDefaultAttributesProcessor.php:136"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/league/commonmark/src/Extension/FrontMatter/Data/SymfonyYamlFrontMatterParser.php:35",
+                    "vendor/league/commonmark/src/Extension/DefaultAttributes/ApplyDefaultAttributesProcessor.php:138"
+                ]
+            },
+            "yield": {
+                "count": 7,
+                "examples": [
+                    "vendor/league/commonmark/src/Extension/TableOfContents/TableOfContentsGenerator.php:145",
+                    "vendor/league/commonmark/src/Util/SpecReader.php:49",
+                    "vendor/league/commonmark/src/Input/MarkdownInput.php:67"
+                ]
+            },
+            "attribute": {
+                "count": 5,
+                "examples": [
+                    "vendor/league/commonmark/src/Util/ArrayCollection.php:74",
+                    "vendor/league/commonmark/src/Util/ArrayCollection.php:111",
+                    "vendor/league/commonmark/src/Util/ArrayCollection.php:125"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/commonmark/src/Parser/Cursor.php:552"
+                ]
+            }
+        },
+        "league/config": {
+            "interface": {
+                "count": 7,
+                "examples": [
+                    "vendor/league/config/src/MutableConfigurationInterface.php:21",
+                    "vendor/league/config/src/ConfigurationBuilderInterface.php:19",
+                    "vendor/league/config/src/ConfigurationAwareInterface.php:19"
+                ]
+            },
+            "try": {
+                "count": 5,
+                "examples": [
+                    "vendor/league/config/src/Configuration.php:98",
+                    "vendor/league/config/src/Configuration.php:116",
+                    "vendor/league/config/src/Configuration.php:136"
+                ]
+            },
+            "catch": {
+                "count": 5,
+                "examples": [
+                    "vendor/league/config/src/Configuration.php:100",
+                    "vendor/league/config/src/Configuration.php:120",
+                    "vendor/league/config/src/Configuration.php:140"
+                ]
+            },
+            "throw": {
+                "count": 5,
+                "examples": [
+                    "vendor/league/config/src/Configuration.php:101",
+                    "vendor/league/config/src/Configuration.php:121",
+                    "vendor/league/config/src/Configuration.php:176"
+                ]
+            }
+        },
+        "league/flysystem": {
+            "interface": {
+                "count": 12,
+                "examples": [
+                    "vendor/league/flysystem/src/FilesystemWriter.php:7",
+                    "vendor/league/flysystem/src/FilesystemException.php:9",
+                    "vendor/league/flysystem/src/FilesystemOperator.php:7"
+                ]
+            },
+            "throw": {
+                "count": 41,
+                "examples": [
+                    "vendor/league/flysystem/src/PortableVisibilityGuard.php:13",
+                    "vendor/league/flysystem/src/InvalidVisibilityProvided.php:18",
+                    "vendor/league/flysystem/src/Filesystem.php:117"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/league/flysystem/src/DirectoryListing.php:34",
+                    "vendor/league/flysystem/src/DirectoryListing.php:53",
+                    "vendor/league/flysystem/src/Filesystem.php:114"
+                ]
+            },
+            "try": {
+                "count": 24,
+                "examples": [
+                    "vendor/league/flysystem/src/Filesystem.php:112",
+                    "vendor/league/flysystem/src/Filesystem.php:128",
+                    "vendor/league/flysystem/src/Filesystem.php:147"
+                ]
+            },
+            "catch": {
+                "count": 21,
+                "examples": [
+                    "vendor/league/flysystem/src/Filesystem.php:116",
+                    "vendor/league/flysystem/src/Filesystem.php:232",
+                    "vendor/league/flysystem/src/MountManager.php:65"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem/src/Filesystem.php:243"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/league/flysystem/src/CalculateChecksumFromStream.php:10",
+                    "vendor/league/flysystem/src/ProxyArrayAccessToProperties.php:12"
+                ]
+            },
+            "attribute": {
+                "count": 3,
+                "examples": [
+                    "vendor/league/flysystem/src/ProxyArrayAccessToProperties.php:36",
+                    "vendor/league/flysystem/src/ProxyArrayAccessToProperties.php:48",
+                    "vendor/league/flysystem/src/ProxyArrayAccessToProperties.php:57"
+                ]
+            },
+            "nullsafe": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem/src/UnableToMoveFile.php:42"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem/src/UrlGeneration/ShardedPrefixPublicUrlGenerator.php:30"
+                ]
+            }
+        },
+        "league/flysystem-local": {
+            "throw": {
+                "count": 19,
+                "examples": [
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:128",
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:147",
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:164"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:183"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:215"
+                ]
+            },
+            "yield": {
+                "count": 2,
+                "examples": [
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:229",
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:474"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/flysystem-local/LocalFilesystemAdapter.php:235"
+                ]
+            }
+        },
+        "league/mime-type-detection": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/league/mime-type-detection/src/MimeTypeDetector.php:7",
+                    "vendor/league/mime-type-detection/src/ExtensionToMimeTypeMap.php:7",
+                    "vendor/league/mime-type-detection/src/ExtensionLookup.php:6"
+                ]
+            }
+        },
+        "league/uri": {
+            "readonly": {
+                "count": 37,
+                "examples": [
+                    "vendor/league/uri/UriTemplate.php:49",
+                    "vendor/league/uri/UriTemplate.php:50",
+                    "vendor/league/uri/Http.php:37"
+                ]
+            },
+            "arrow_function": {
+                "count": 17,
+                "examples": [
+                    "vendor/league/uri/UriTemplate.php:69",
+                    "vendor/league/uri/Urn.php:193",
+                    "vendor/league/uri/Uri.php:446"
+                ]
+            },
+            "throw": {
+                "count": 59,
+                "examples": [
+                    "vendor/league/uri/UriTemplate.php:140",
+                    "vendor/league/uri/UriTemplate.php:151",
+                    "vendor/league/uri/UriTemplate.php:164"
+                ]
+            },
+            "match": {
+                "count": 77,
+                "examples": [
+                    "vendor/league/uri/UriTemplate.php:183",
+                    "vendor/league/uri/UriTemplate.php:242",
+                    "vendor/league/uri/UriTemplate.php:255"
+                ]
+            },
+            "attribute": {
+                "count": 36,
+                "examples": [
+                    "vendor/league/uri/UriTemplate.php:287",
+                    "vendor/league/uri/Builder.php:47",
+                    "vendor/league/uri/Builder.php:84"
+                ]
+            },
+            "enum": {
+                "count": 3,
+                "examples": [
+                    "vendor/league/uri/UriScheme.php:25",
+                    "vendor/league/uri/SchemeType.php:16",
+                    "vendor/league/uri/UriTemplate/Operator.php:35"
+                ]
+            },
+            "try": {
+                "count": 10,
+                "examples": [
+                    "vendor/league/uri/Builder.php:235",
+                    "vendor/league/uri/Builder.php:249",
+                    "vendor/league/uri/Http.php:95"
+                ]
+            },
+            "catch": {
+                "count": 10,
+                "examples": [
+                    "vendor/league/uri/Builder.php:239",
+                    "vendor/league/uri/Builder.php:253",
+                    "vendor/league/uri/Http.php:97"
+                ]
+            },
+            "nullsafe": {
+                "count": 7,
+                "examples": [
+                    "vendor/league/uri/Uri.php:275",
+                    "vendor/league/uri/Uri.php:942",
+                    "vendor/league/uri/Uri.php:1005"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/uri/UriTemplate/VariableBag.php:65"
+                ]
+            }
+        },
+        "league/uri-interfaces": {
+            "enum": {
+                "count": 8,
+                "examples": [
+                    "vendor/league/uri-interfaces/UrnComparisonMode.php:16",
+                    "vendor/league/uri-interfaces/HostFormat.php:16",
+                    "vendor/league/uri-interfaces/UriComparisonMode.php:16"
+                ]
+            },
+            "throw": {
+                "count": 48,
+                "examples": [
+                    "vendor/league/uri-interfaces/FeatureDetection.php:37",
+                    "vendor/league/uri-interfaces/FeatureDetection.php:46",
+                    "vendor/league/uri-interfaces/FeatureDetection.php:54"
+                ]
+            },
+            "arrow_function": {
+                "count": 17,
+                "examples": [
+                    "vendor/league/uri-interfaces/Encoder.php:110",
+                    "vendor/league/uri-interfaces/Encoder.php:215",
+                    "vendor/league/uri-interfaces/Encoder.php:249"
+                ]
+            },
+            "attribute": {
+                "count": 9,
+                "examples": [
+                    "vendor/league/uri-interfaces/Encoder.php:118",
+                    "vendor/league/uri-interfaces/Encoder.php:134",
+                    "vendor/league/uri-interfaces/Encoder.php:148"
+                ]
+            },
+            "match": {
+                "count": 37,
+                "examples": [
+                    "vendor/league/uri-interfaces/Encoder.php:433",
+                    "vendor/league/uri-interfaces/KeyValuePair/Converter.php:88",
+                    "vendor/league/uri-interfaces/KeyValuePair/Converter.php:121"
+                ]
+            },
+            "try": {
+                "count": 11,
+                "examples": [
+                    "vendor/league/uri-interfaces/Encoder.php:442",
+                    "vendor/league/uri-interfaces/UriString.php:682",
+                    "vendor/league/uri-interfaces/StringCoercionMode.php:147"
+                ]
+            },
+            "catch": {
+                "count": 9,
+                "examples": [
+                    "vendor/league/uri-interfaces/Encoder.php:444",
+                    "vendor/league/uri-interfaces/UriString.php:684",
+                    "vendor/league/uri-interfaces/HostRecord.php:233"
+                ]
+            },
+            "interface": {
+                "count": 19,
+                "examples": [
+                    "vendor/league/uri-interfaces/Contracts/UriInterface.php:36",
+                    "vendor/league/uri-interfaces/Contracts/Conditionable.php:16",
+                    "vendor/league/uri-interfaces/Contracts/UriComponentInterface.php:23"
+                ]
+            },
+            "readonly": {
+                "count": 14,
+                "examples": [
+                    "vendor/league/uri-interfaces/KeyValuePair/Converter.php:41",
+                    "vendor/league/uri-interfaces/KeyValuePair/Converter.php:42",
+                    "vendor/league/uri-interfaces/KeyValuePair/Converter.php:43"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/league/uri-interfaces/QueryString.php:224",
+                    "vendor/league/uri-interfaces/QueryString.php:231",
+                    "vendor/league/uri-interfaces/QueryString.php:239"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/league/uri-interfaces/QueryString.php:261"
+                ]
+            }
+        },
+        "monolog/monolog": {
+            "readonly": {
+                "count": 15,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/SendGridHandler.php:50",
+                    "vendor/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php:32",
+                    "vendor/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php:33"
+                ]
+            },
+            "throw": {
+                "count": 125,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/SendGridHandler.php:53",
+                    "vendor/monolog/monolog/src/Monolog/Handler/InsightOpsHandler.php:47",
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:201"
+                ]
+            },
+            "attribute": {
+                "count": 9,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:83",
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:112",
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:123"
+                ]
+            },
+            "arrow_function": {
+                "count": 12,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:145",
+                    "vendor/monolog/monolog/src/Monolog/Handler/TestHandler.php:151",
+                    "vendor/monolog/monolog/src/Monolog/Handler/GroupHandler.php:93"
+                ]
+            },
+            "trait": {
+                "count": 3,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/WebRequestRecognizerTrait.php:14",
+                    "vendor/monolog/monolog/src/Monolog/Handler/FormattableHandlerTrait.php:22",
+                    "vendor/monolog/monolog/src/Monolog/Handler/ProcessableHandlerTrait.php:23"
+                ]
+            },
+            "match": {
+                "count": 17,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/RollbarHandler.php:63",
+                    "vendor/monolog/monolog/src/Monolog/Handler/FrankenPhpHandler.php:60",
+                    "vendor/monolog/monolog/src/Monolog/Handler/BrowserConsoleHandler.php:193"
+                ]
+            },
+            "interface": {
+                "count": 8,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/FingersCrossed/ActivationStrategyInterface.php:21",
+                    "vendor/monolog/monolog/src/Monolog/Handler/ProcessableHandlerInterface.php:22",
+                    "vendor/monolog/monolog/src/Monolog/Handler/FormattableHandlerInterface.php:21"
+                ]
+            },
+            "try": {
+                "count": 20,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/ElasticsearchHandler.php:162",
+                    "vendor/monolog/monolog/src/Monolog/Handler/Handler.php:40",
+                    "vendor/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php:253"
+                ]
+            },
+            "catch": {
+                "count": 17,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Handler/ElasticsearchHandler.php:187",
+                    "vendor/monolog/monolog/src/Monolog/Handler/Handler.php:42",
+                    "vendor/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php:264"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/monolog/monolog/src/Monolog/Level.php:32"
+                ]
+            }
+        },
+        "nesbot/carbon": {
+            "arrow_function": {
+                "count": 110,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/WrapperClock.php:57",
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:826",
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:844"
+                ]
+            },
+            "throw": {
+                "count": 91,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/WrapperClock.php:122",
+                    "vendor/nesbot/carbon/src/Carbon/PHPStan/MacroExtension.php:85",
+                    "vendor/nesbot/carbon/src/Carbon/PHPStan/MacroExtension.php:122"
+                ]
+            },
+            "try": {
+                "count": 51,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/PHPStan/MacroExtension.php:109",
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:645",
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:767"
+                ]
+            },
+            "catch": {
+                "count": 45,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/PHPStan/MacroExtension.php:112",
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:862",
+                    "vendor/nesbot/carbon/src/Carbon/CarbonTimeZone.php:114"
+                ]
+            },
+            "nullsafe": {
+                "count": 12,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Factory.php:618",
+                    "vendor/nesbot/carbon/src/Carbon/Month.php:72",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/LocalFactory.php:65"
+                ]
+            },
+            "enum": {
+                "count": 4,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Month.php:18",
+                    "vendor/nesbot/carbon/src/Carbon/Unit.php:16",
+                    "vendor/nesbot/carbon/src/Carbon/OverflowMode.php:16"
+                ]
+            },
+            "trait": {
+                "count": 29,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Rounding.php:31",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/StaticOptions.php:21",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/ToStringFormat.php:24"
+                ]
+            },
+            "match": {
+                "count": 53,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Week.php:90",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Comparison.php:765",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Comparison.php:797"
+                ]
+            },
+            "attribute": {
+                "count": 14,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Timestamp.php:29",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Serialization.php:120",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Creator.php:644"
+                ]
+            },
+            "yield": {
+                "count": 4,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Mixin.php:206",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2721",
+                    "vendor/nesbot/carbon/src/Carbon/CarbonPeriod.php:338"
+                ]
+            },
+            "yield_from": {
+                "count": 2,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2713",
+                    "vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2714"
+                ]
+            },
+            "interface": {
+                "count": 11,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Constants/TranslationOptions.php:16",
+                    "vendor/nesbot/carbon/src/Carbon/Constants/UnitValue.php:16",
+                    "vendor/nesbot/carbon/src/Carbon/Constants/DiffOptions.php:16"
+                ]
+            },
+            "require": {
+                "count": 707,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Translator.php:27",
+                    "vendor/nesbot/carbon/src/Carbon/MessageFormatter/MessageFormatterMapper.php:23",
+                    "vendor/nesbot/carbon/src/Carbon/Lang/ksf.php:12"
+                ]
+            },
+            "include": {
+                "count": 1,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/AbstractTranslator.php:423"
+                ]
+            },
+            "readonly": {
+                "count": 1,
+                "examples": [
+                    "vendor/nesbot/carbon/src/Carbon/Callback.php:30"
+                ]
+            }
+        },
+        "nette/schema": {
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/DynamicParameter.php:11",
+                    "vendor/nette/schema/src/Schema/Schema.php:14"
+                ]
+            },
+            "readonly": {
+                "count": 1,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/ValidationException.php:21"
+                ]
+            },
+            "throw": {
+                "count": 6,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/Elements/Structure.php:47",
+                    "vendor/nette/schema/src/Schema/Elements/AnyOf.php:31",
+                    "vendor/nette/schema/src/Schema/Processor.php:91"
+                ]
+            },
+            "try": {
+                "count": 3,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/Elements/Structure.php:225",
+                    "vendor/nette/schema/src/Schema/Helpers.php:201",
+                    "vendor/nette/schema/src/Schema/Helpers.php:224"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/Elements/Base.php:19"
+                ]
+            },
+            "arrow_function": {
+                "count": 5,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/Context.php:57",
+                    "vendor/nette/schema/src/Schema/Helpers.php:69",
+                    "vendor/nette/schema/src/Schema/Helpers.php:207"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/nette/schema/src/Schema/Helpers.php:203",
+                    "vendor/nette/schema/src/Schema/Helpers.php:226"
+                ]
+            }
+        },
+        "nette/utils": {
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/nette/utils/src/StaticClass.php:14",
+                    "vendor/nette/utils/src/SmartObject.php:20"
+                ]
+            },
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/nette/utils/src/Translator.php:14",
+                    "vendor/nette/utils/src/compatibility.php:14",
+                    "vendor/nette/utils/src/compatibility.php:25"
+                ]
+            },
+            "throw": {
+                "count": 119,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/DateTime.php:113",
+                    "vendor/nette/utils/src/Utils/DateTime.php:127",
+                    "vendor/nette/utils/src/Utils/DateTime.php:204"
+                ]
+            },
+            "arrow_function": {
+                "count": 23,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Finder.php:56",
+                    "vendor/nette/utils/src/Utils/Finder.php:206",
+                    "vendor/nette/utils/src/Utils/Finder.php:248"
+                ]
+            },
+            "yield_from": {
+                "count": 4,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Finder.php:352",
+                    "vendor/nette/utils/src/Utils/Finder.php:357",
+                    "vendor/nette/utils/src/Utils/Finder.php:408"
+                ]
+            },
+            "yield": {
+                "count": 11,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Finder.php:359",
+                    "vendor/nette/utils/src/Utils/Finder.php:418",
+                    "vendor/nette/utils/src/Utils/Finder.php:437"
+                ]
+            },
+            "try": {
+                "count": 8,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Finder.php:378",
+                    "vendor/nette/utils/src/Utils/FileSystem.php:246",
+                    "vendor/nette/utils/src/Utils/ObjectHelpers.php:218"
+                ]
+            },
+            "catch": {
+                "count": 7,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Finder.php:380",
+                    "vendor/nette/utils/src/Utils/FileSystem.php:259",
+                    "vendor/nette/utils/src/Utils/ObjectHelpers.php:223"
+                ]
+            },
+            "readonly": {
+                "count": 6,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Type.php:17",
+                    "vendor/nette/utils/src/Utils/FileInfo.php:22",
+                    "vendor/nette/utils/src/Utils/Iterables.php:198"
+                ]
+            },
+            "match": {
+                "count": 11,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Type.php:172",
+                    "vendor/nette/utils/src/Utils/FileSystem.php:359",
+                    "vendor/nette/utils/src/Utils/Strings.php:257"
+                ]
+            },
+            "attribute": {
+                "count": 8,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Type.php:239",
+                    "vendor/nette/utils/src/Utils/Arrays.php:261",
+                    "vendor/nette/utils/src/Utils/Reflection.php:29"
+                ]
+            },
+            "nullsafe": {
+                "count": 2,
+                "examples": [
+                    "vendor/nette/utils/src/Utils/Strings.php:204",
+                    "vendor/nette/utils/src/Utils/Callback.php:126"
+                ]
+            }
+        },
+        "nunomaduro/termwind": {
+            "require_once": {
+                "count": 1,
+                "examples": [
+                    "vendor/nunomaduro/termwind/playground.php:3"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/Question.php:80"
+                ]
+            },
+            "throw": {
+                "count": 9,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/Termwind.php:124",
+                    "vendor/nunomaduro/termwind/src/Termwind.php:163",
+                    "vendor/nunomaduro/termwind/src/Termwind.php:210"
+                ]
+            },
+            "match": {
+                "count": 8,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/Termwind.php:127",
+                    "vendor/nunomaduro/termwind/src/Termwind.php:166",
+                    "vendor/nunomaduro/termwind/src/Html/TableRenderer.php:72"
+                ]
+            },
+            "arrow_function": {
+                "count": 21,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/Termwind.php:293",
+                    "vendor/nunomaduro/termwind/src/Html/PreRenderer.php:32",
+                    "vendor/nunomaduro/termwind/src/Html/PreRenderer.php:38"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/Html/TableRenderer.php:201",
+                    "vendor/nunomaduro/termwind/src/Html/TableRenderer.php:206",
+                    "vendor/nunomaduro/termwind/src/ValueObjects/Node.php:35"
+                ]
+            },
+            "nullsafe": {
+                "count": 1,
+                "examples": [
+                    "vendor/nunomaduro/termwind/src/ValueObjects/Styles.php:948"
+                ]
+            }
+        },
+        "phpoption/phpoption": {
+            "throw": {
+                "count": 5,
+                "examples": [
+                    "vendor/phpoption/phpoption/src/PhpOption/LazyOption.php:60",
+                    "vendor/phpoption/phpoption/src/PhpOption/LazyOption.php:171",
+                    "vendor/phpoption/phpoption/src/PhpOption/Some.php:120"
+                ]
+            }
+        },
+        "psr/cache": {
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/psr/cache/src/CacheItemPoolInterface.php:14",
+                    "vendor/psr/cache/src/CacheItemInterface.php:24",
+                    "vendor/psr/cache/src/InvalidArgumentException.php:11"
+                ]
+            }
+        },
+        "psr/clock": {
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/psr/clock/src/ClockInterface.php:7"
+                ]
+            }
+        },
+        "psr/container": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/psr/container/src/NotFoundExceptionInterface.php:8",
+                    "vendor/psr/container/src/ContainerInterface.php:10",
+                    "vendor/psr/container/src/ContainerExceptionInterface.php:10"
+                ]
+            }
+        },
+        "psr/event-dispatcher": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/psr/event-dispatcher/src/ListenerProviderInterface.php:9",
+                    "vendor/psr/event-dispatcher/src/EventDispatcherInterface.php:9",
+                    "vendor/psr/event-dispatcher/src/StoppableEventInterface.php:13"
+                ]
+            }
+        },
+        "psr/http-client": {
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/psr/http-client/src/NetworkExceptionInterface.php:14",
+                    "vendor/psr/http-client/src/RequestExceptionInterface.php:14",
+                    "vendor/psr/http-client/src/ClientInterface.php:8"
+                ]
+            }
+        },
+        "psr/http-factory": {
+            "interface": {
+                "count": 6,
+                "examples": [
+                    "vendor/psr/http-factory/src/ResponseFactoryInterface.php:5",
+                    "vendor/psr/http-factory/src/StreamFactoryInterface.php:5",
+                    "vendor/psr/http-factory/src/UploadedFileFactoryInterface.php:5"
+                ]
+            }
+        },
+        "psr/http-message": {
+            "interface": {
+                "count": 7,
+                "examples": [
+                    "vendor/psr/http-message/src/ServerRequestInterface.php:43",
+                    "vendor/psr/http-message/src/UriInterface.php:25",
+                    "vendor/psr/http-message/src/StreamInterface.php:12"
+                ]
+            }
+        },
+        "psr/link": {
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/psr/link/src/LinkInterface.php:10",
+                    "vendor/psr/link/src/LinkProviderInterface.php:10",
+                    "vendor/psr/link/src/EvolvableLinkInterface.php:10"
+                ]
+            }
+        },
+        "psr/log": {
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/psr/log/src/LoggerAwareInterface.php:8",
+                    "vendor/psr/log/src/LoggerInterface.php:20"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/psr/log/src/LoggerAwareTrait.php:8",
+                    "vendor/psr/log/src/LoggerTrait.php:13"
+                ]
+            }
+        },
+        "psr/simple-cache": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/psr/simple-cache/src/CacheInterface.php:5",
+                    "vendor/psr/simple-cache/src/InvalidArgumentException.php:11",
+                    "vendor/psr/simple-cache/src/CacheException.php:8"
+                ]
+            }
+        },
+        "ramsey/collection": {
+            "readonly": {
+                "count": 7,
+                "examples": [
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:41",
+                    "vendor/ramsey/collection/src/Queue.php:44",
+                    "vendor/ramsey/collection/src/Set.php:50"
+                ]
+            },
+            "throw": {
+                "count": 21,
+                "examples": [
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:52",
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:102",
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:140"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:73",
+                    "vendor/ramsey/collection/src/Queue.php:94"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/ramsey/collection/src/DoubleEndedQueue.php:75",
+                    "vendor/ramsey/collection/src/Queue.php:96"
+                ]
+            },
+            "interface": {
+                "count": 7,
+                "examples": [
+                    "vendor/ramsey/collection/src/QueueInterface.php:100",
+                    "vendor/ramsey/collection/src/DoubleEndedQueueInterface.php:166",
+                    "vendor/ramsey/collection/src/Map/TypedMapInterface.php:25"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/ramsey/collection/src/AbstractCollection.php:202"
+                ]
+            },
+            "match": {
+                "count": 2,
+                "examples": [
+                    "vendor/ramsey/collection/src/AbstractCollection.php:358",
+                    "vendor/ramsey/collection/src/Tool/TypeTrait.php:41"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/ramsey/collection/src/Sort.php:20"
+                ]
+            },
+            "trait": {
+                "count": 3,
+                "examples": [
+                    "vendor/ramsey/collection/src/Tool/ValueToStringTrait.php:31",
+                    "vendor/ramsey/collection/src/Tool/TypeTrait.php:31",
+                    "vendor/ramsey/collection/src/Tool/ValueExtractorTrait.php:30"
+                ]
+            }
+        },
+        "ramsey/uuid": {
+            "interface": {
+                "count": 22,
+                "examples": [
+                    "vendor/ramsey/uuid/src/Validator/ValidatorInterface.php:22",
+                    "vendor/ramsey/uuid/src/Converter/TimeConverterInterface.php:25",
+                    "vendor/ramsey/uuid/src/Converter/NumberConverterInterface.php:22"
+                ]
+            },
+            "trait": {
+                "count": 7,
+                "examples": [
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:36",
+                    "vendor/ramsey/uuid/src/Rfc4122/MaxTrait.php:22",
+                    "vendor/ramsey/uuid/src/Rfc4122/VersionTrait.php:24"
+                ]
+            },
+            "throw": {
+                "count": 67,
+                "examples": [
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:120",
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:133",
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:287"
+                ]
+            },
+            "try": {
+                "count": 13,
+                "examples": [
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:125",
+                    "vendor/ramsey/uuid/src/Provider/Node/RandomNodeProvider.php:40",
+                    "vendor/ramsey/uuid/src/Provider/Node/FallbackNodeProvider.php:38"
+                ]
+            },
+            "catch": {
+                "count": 13,
+                "examples": [
+                    "vendor/ramsey/uuid/src/DeprecatedUuidMethodsTrait.php:132",
+                    "vendor/ramsey/uuid/src/Provider/Node/RandomNodeProvider.php:42",
+                    "vendor/ramsey/uuid/src/Provider/Node/FallbackNodeProvider.php:40"
+                ]
+            },
+            "match": {
+                "count": 6,
+                "examples": [
+                    "vendor/ramsey/uuid/src/Provider/Dce/SystemDceSecurityProvider.php:106",
+                    "vendor/ramsey/uuid/src/Provider/Dce/SystemDceSecurityProvider.php:121",
+                    "vendor/ramsey/uuid/src/Rfc4122/VersionTrait.php:70"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/ramsey/uuid/src/Provider/Node/NodeProviderCollection.php:56"
+                ]
+            },
+            "nullsafe": {
+                "count": 2,
+                "examples": [
+                    "vendor/ramsey/uuid/src/UuidFactory.php:291",
+                    "vendor/ramsey/uuid/src/UuidFactory.php:352"
+                ]
+            }
+        },
+        "symfony/clock": {
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/clock/Test/ClockSensitiveTrait.php:33",
+                    "vendor/symfony/clock/ClockAwareTrait.php:22"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/clock/Test/ClockSensitiveTrait.php:37"
+                ]
+            },
+            "attribute": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/clock/Test/ClockSensitiveTrait.php:54",
+                    "vendor/symfony/clock/Test/ClockSensitiveTrait.php:55",
+                    "vendor/symfony/clock/Test/ClockSensitiveTrait.php:72"
+                ]
+            },
+            "readonly": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/clock/ClockAwareTrait.php:24",
+                    "vendor/symfony/clock/Clock.php:26"
+                ]
+            },
+            "try": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/clock/MockClock.php:34",
+                    "vendor/symfony/clock/MockClock.php:90",
+                    "vendor/symfony/clock/Clock.php:77"
+                ]
+            },
+            "catch": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/clock/MockClock.php:36",
+                    "vendor/symfony/clock/MockClock.php:92",
+                    "vendor/symfony/clock/Clock.php:79"
+                ]
+            },
+            "throw": {
+                "count": 13,
+                "examples": [
+                    "vendor/symfony/clock/MockClock.php:37",
+                    "vendor/symfony/clock/MockClock.php:74",
+                    "vendor/symfony/clock/MockClock.php:93"
+                ]
+            },
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/clock/ClockInterface.php:19"
+                ]
+            }
+        },
+        "symfony/console": {
+            "match": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/console/DataCollector/CommandDataCollector.php:45",
+                    "vendor/symfony/console/Application.php:985",
+                    "vendor/symfony/console/Application.php:994"
+                ]
+            },
+            "arrow_function": {
+                "count": 45,
+                "examples": [
+                    "vendor/symfony/console/DataCollector/CommandDataCollector.php:212",
+                    "vendor/symfony/console/DataCollector/CommandDataCollector.php:220",
+                    "vendor/symfony/console/Application.php:753"
+                ]
+            },
+            "throw": {
+                "count": 166,
+                "examples": [
+                    "vendor/symfony/console/Application.php:121",
+                    "vendor/symfony/console/Application.php:198",
+                    "vendor/symfony/console/Application.php:201"
+                ]
+            },
+            "try": {
+                "count": 21,
+                "examples": [
+                    "vendor/symfony/console/Application.php:192",
+                    "vendor/symfony/console/Application.php:267",
+                    "vendor/symfony/console/Application.php:295"
+                ]
+            },
+            "catch": {
+                "count": 19,
+                "examples": [
+                    "vendor/symfony/console/Application.php:196",
+                    "vendor/symfony/console/Application.php:270",
+                    "vendor/symfony/console/Application.php:299"
+                ]
+            },
+            "nullsafe": {
+                "count": 26,
+                "examples": [
+                    "vendor/symfony/console/Application.php:642",
+                    "vendor/symfony/console/Attribute/Interact.php:27",
+                    "vendor/symfony/console/Attribute/Reflection/ReflectionMember.php:33"
+                ]
+            },
+            "attribute": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/console/Attribute/Argument.php:23",
+                    "vendor/symfony/console/Attribute/Ask.php:22",
+                    "vendor/symfony/console/Attribute/AsCommand.php:19"
+                ]
+            },
+            "interface": {
+                "count": 16,
+                "examples": [
+                    "vendor/symfony/console/Attribute/InteractiveAttributeInterface.php:17",
+                    "vendor/symfony/console/Input/StreamableInputInterface.php:20",
+                    "vendor/symfony/console/Input/InputAwareInterface.php:20"
+                ]
+            },
+            "yield": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/console/Attribute/MapInput.php:134",
+                    "vendor/symfony/console/Attribute/MapInput.php:148",
+                    "vendor/symfony/console/Attribute/MapInput.php:166"
+                ]
+            },
+            "yield_from": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/console/Attribute/MapInput.php:136",
+                    "vendor/symfony/console/Attribute/MapInput.php:150",
+                    "vendor/symfony/console/Attribute/MapInput.php:164"
+                ]
+            },
+            "readonly": {
+                "count": 30,
+                "examples": [
+                    "vendor/symfony/console/Attribute/Reflection/ReflectionMember.php:20",
+                    "vendor/symfony/console/Completion/Suggestion.php:22",
+                    "vendor/symfony/console/Completion/Suggestion.php:23"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/console/Output/AnsiColorMode.php:20"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/console/Tester/TesterTrait.php:24",
+                    "vendor/symfony/console/Command/LockableTrait.php:26"
+                ]
+            }
+        },
+        "symfony/css-selector": {
+            "interface": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/css-selector/XPath/TranslatorInterface.php:26",
+                    "vendor/symfony/css-selector/XPath/Extension/ExtensionInterface.php:24",
+                    "vendor/symfony/css-selector/Parser/Handler/HandlerInterface.php:27"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/css-selector/XPath/Extension/FunctionExtension.php:50",
+                    "vendor/symfony/css-selector/Parser/Parser.php:311"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/css-selector/XPath/Extension/FunctionExtension.php:52"
+                ]
+            },
+            "throw": {
+                "count": 39,
+                "examples": [
+                    "vendor/symfony/css-selector/XPath/Extension/FunctionExtension.php:53",
+                    "vendor/symfony/css-selector/XPath/Extension/FunctionExtension.php:119",
+                    "vendor/symfony/css-selector/XPath/Extension/FunctionExtension.php:133"
+                ]
+            },
+            "arrow_function": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/css-selector/Parser/Parser.php:63",
+                    "vendor/symfony/css-selector/Node/SpecificityAdjustmentNode.php:43",
+                    "vendor/symfony/css-selector/Node/MatchingNode.php:39"
+                ]
+            },
+            "readonly": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/css-selector/Node/SpecificityAdjustmentNode.php:30",
+                    "vendor/symfony/css-selector/Node/SpecificityAdjustmentNode.php:31",
+                    "vendor/symfony/css-selector/Node/MatchingNode.php:30"
+                ]
+            }
+        },
+        "symfony/error-handler": {
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorEnhancer/ErrorEnhancerInterface.php:14",
+                    "vendor/symfony/error-handler/ErrorRenderer/ErrorRendererInterface.php:21"
+                ]
+            },
+            "try": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:117",
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:168",
+                    "vendor/symfony/error-handler/ErrorRenderer/SerializerErrorRenderer.php:58"
+                ]
+            },
+            "catch": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:123",
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:170",
+                    "vendor/symfony/error-handler/ErrorRenderer/SerializerErrorRenderer.php:66"
+                ]
+            },
+            "arrow_function": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:148",
+                    "vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php:262",
+                    "vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php:268"
+                ]
+            },
+            "require_once": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorEnhancer/ClassNotFoundErrorEnhancer.php:169"
+                ]
+            },
+            "throw": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/error-handler/Resources/bin/extract-tentative-return-types.php:14",
+                    "vendor/symfony/error-handler/ErrorRenderer/SerializerErrorRenderer.php:77",
+                    "vendor/symfony/error-handler/DebugClassLoader.php:357"
+                ]
+            },
+            "include": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php:338",
+                    "vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php:343",
+                    "vendor/symfony/error-handler/DebugClassLoader.php:319"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/error-handler/DebugClassLoader.php:895"
+                ]
+            },
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/error-handler/Command/ErrorDumpCommand.php:32"
+                ]
+            },
+            "readonly": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/error-handler/Command/ErrorDumpCommand.php:39",
+                    "vendor/symfony/error-handler/Command/ErrorDumpCommand.php:40",
+                    "vendor/symfony/error-handler/Command/ErrorDumpCommand.php:41"
+                ]
+            },
+            "nullsafe": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/error-handler/Command/ErrorDumpCommand.php:80"
+                ]
+            }
+        },
+        "symfony/event-dispatcher": {
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/EventDispatcherInterface.php:23",
+                    "vendor/symfony/event-dispatcher/EventSubscriberInterface.php:25"
+                ]
+            },
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/Attribute/AsEventListener.php:19"
+                ]
+            },
+            "throw": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php:33",
+                    "vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php:38",
+                    "vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php:43"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php:94"
+                ]
+            },
+            "readonly": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:49"
+                ]
+            },
+            "nullsafe": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:110",
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:176",
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:304"
+                ]
+            },
+            "try": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:124",
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:126",
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:128"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:175"
+                ]
+            }
+        },
+        "symfony/event-dispatcher-contracts": {
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/event-dispatcher-contracts/EventDispatcherInterface.php:19"
+                ]
+            }
+        },
+        "symfony/filesystem": {
+            "throw": {
+                "count": 41,
+                "examples": [
+                    "vendor/symfony/filesystem/Filesystem.php:41",
+                    "vendor/symfony/filesystem/Filesystem.php:54",
+                    "vendor/symfony/filesystem/Filesystem.php:59"
+                ]
+            },
+            "try": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/filesystem/Filesystem.php:170",
+                    "vendor/symfony/filesystem/Filesystem.php:627",
+                    "vendor/symfony/filesystem/Filesystem.php:675"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/filesystem/Filesystem.php:172"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/filesystem/Filesystem.php:454"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/filesystem/Exception/IOExceptionInterface.php:19",
+                    "vendor/symfony/filesystem/Exception/ExceptionInterface.php:19"
+                ]
+            }
+        },
+        "symfony/finder": {
+            "try": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/finder/SplFileInfo.php:69",
+                    "vendor/symfony/finder/Comparator/DateComparator.php:32",
+                    "vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php:83"
+                ]
+            },
+            "throw": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/finder/SplFileInfo.php:75",
+                    "vendor/symfony/finder/Comparator/NumberComparator.php:45",
+                    "vendor/symfony/finder/Comparator/NumberComparator.php:50"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/finder/Comparator/Comparator.php:53"
+                ]
+            },
+            "catch": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/finder/Comparator/DateComparator.php:35",
+                    "vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php:87",
+                    "vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php:110"
+                ]
+            },
+            "arrow_function": {
+                "count": 13,
+                "examples": [
+                    "vendor/symfony/finder/Finder.php:681",
+                    "vendor/symfony/finder/Iterator/VcsIgnoredFilterIterator.php:129",
+                    "vendor/symfony/finder/Iterator/SortableIterator.php:51"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/finder/Finder.php:695",
+                    "vendor/symfony/finder/Iterator/SortableIterator.php:103",
+                    "vendor/symfony/finder/Iterator/SortableIterator.php:112"
+                ]
+            },
+            "yield_from": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/finder/Iterator/LazyIterator.php:30",
+                    "vendor/symfony/finder/Iterator/SortableIterator.php:90"
+                ]
+            }
+        },
+        "symfony/http-foundation": {
+            "throw": {
+                "count": 146,
+                "examples": [
+                    "vendor/symfony/http-foundation/StreamedResponse.php:122",
+                    "vendor/symfony/http-foundation/StreamedResponse.php:138",
+                    "vendor/symfony/http-foundation/BinaryFileResponse.php:85"
+                ]
+            },
+            "interface": {
+                "count": 13,
+                "examples": [
+                    "vendor/symfony/http-foundation/RequestMatcherInterface.php:19",
+                    "vendor/symfony/http-foundation/RateLimiter/RequestRateLimiterInterface.php:25",
+                    "vendor/symfony/http-foundation/RateLimiter/PeekableRequestRateLimiterInterface.php:32"
+                ]
+            },
+            "try": {
+                "count": 25,
+                "examples": [
+                    "vendor/symfony/http-foundation/BinaryFileResponse.php:315",
+                    "vendor/symfony/http-foundation/InputBag.php:101",
+                    "vendor/symfony/http-foundation/File/File.php:90"
+                ]
+            },
+            "catch": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/http-foundation/InputBag.php:103",
+                    "vendor/symfony/http-foundation/Response.php:727",
+                    "vendor/symfony/http-foundation/JsonResponse.php:127"
+                ]
+            },
+            "arrow_function": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/http-foundation/Test/Constraint/ResponseCookieValueSame.php:66",
+                    "vendor/symfony/http-foundation/Test/Constraint/ResponseHasCookie.php:60",
+                    "vendor/symfony/http-foundation/AcceptHeader.php:91"
+                ]
+            },
+            "readonly": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/http-foundation/Test/Constraint/ResponseStatusCodeSame.php:21",
+                    "vendor/symfony/http-foundation/Test/Constraint/ResponseIsSuccessful.php:22",
+                    "vendor/symfony/http-foundation/Test/Constraint/ResponseIsUnprocessable.php:22"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/http-foundation/AcceptHeader.php:285",
+                    "vendor/symfony/http-foundation/UriSigner.php:124",
+                    "vendor/symfony/http-foundation/Session/Storage/Handler/PdoSessionHandler.php:324"
+                ]
+            },
+            "yield": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/http-foundation/ServerEvent.php:131",
+                    "vendor/symfony/http-foundation/ServerEvent.php:135",
+                    "vendor/symfony/http-foundation/ServerEvent.php:138"
+                ]
+            },
+            "attribute": {
+                "count": 63,
+                "examples": [
+                    "vendor/symfony/http-foundation/Exception/ExpiredSignedUriException.php:19",
+                    "vendor/symfony/http-foundation/Exception/SignedUriException.php:19",
+                    "vendor/symfony/http-foundation/UriSigner.php:36"
+                ]
+            },
+            "nullsafe": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/http-foundation/UriSigner.php:170",
+                    "vendor/symfony/http-foundation/Session/Storage/NativeSessionStorageFactory.php:39",
+                    "vendor/symfony/http-foundation/Session/Storage/PhpBridgeSessionStorageFactory.php:35"
+                ]
+            }
+        },
+        "symfony/http-kernel": {
+            "nullsafe": {
+                "count": 29,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/DumpDataCollector.php:75",
+                    "vendor/symfony/http-kernel/DataCollector/DumpDataCollector.php:98",
+                    "vendor/symfony/http-kernel/DataCollector/DumpDataCollector.php:144"
+                ]
+            },
+            "throw": {
+                "count": 132,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/DumpDataCollector.php:178",
+                    "vendor/symfony/http-kernel/DataCollector/DumpDataCollector.php:198",
+                    "vendor/symfony/http-kernel/Attribute/WithLogLevel.php:30"
+                ]
+            },
+            "interface": {
+                "count": 23,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/LateDataCollectorInterface.php:19",
+                    "vendor/symfony/http-kernel/DataCollector/DataCollectorInterface.php:23",
+                    "vendor/symfony/http-kernel/ControllerMetadata/ArgumentMetadataFactoryInterface.php:19"
+                ]
+            },
+            "readonly": {
+                "count": 26,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/TimeDataCollector.php:28",
+                    "vendor/symfony/http-kernel/DataCollector/TimeDataCollector.php:29",
+                    "vendor/symfony/http-kernel/Attribute/IsSignatureValid.php:31"
+                ]
+            },
+            "arrow_function": {
+                "count": 13,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/RequestDataCollector.php:138",
+                    "vendor/symfony/http-kernel/DataCollector/LoggerDataCollector.php:103",
+                    "vendor/symfony/http-kernel/CacheWarmer/CacheWarmerAggregate.php:114"
+                ]
+            },
+            "try": {
+                "count": 55,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/RequestDataCollector.php:439",
+                    "vendor/symfony/http-kernel/DataCollector/DataCollector.php:69",
+                    "vendor/symfony/http-kernel/DataCollector/DataCollector.php:97"
+                ]
+            },
+            "catch": {
+                "count": 46,
+                "examples": [
+                    "vendor/symfony/http-kernel/DataCollector/RequestDataCollector.php:448",
+                    "vendor/symfony/http-kernel/DataCollector/DataCollector.php:76",
+                    "vendor/symfony/http-kernel/DataCollector/DataCollector.php:101"
+                ]
+            },
+            "attribute": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/http-kernel/Attribute/IsSignatureValid.php:27",
+                    "vendor/symfony/http-kernel/Attribute/AsController.php:21",
+                    "vendor/symfony/http-kernel/Attribute/AsTargetedValueResolver.php:17"
+                ]
+            },
+            "match": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/http-kernel/ControllerMetadata/ArgumentMetadataFactory.php:51",
+                    "vendor/symfony/http-kernel/Controller/ArgumentResolver/QueryParameterValueResolver.php:84",
+                    "vendor/symfony/http-kernel/Controller/ArgumentResolver/QueryParameterValueResolver.php:91"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/http-kernel/Controller/ArgumentResolver/TraceableValueResolver.php:37"
+                ]
+            },
+            "include": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/http-kernel/Kernel.php:423",
+                    "vendor/symfony/http-kernel/Kernel.php:446",
+                    "vendor/symfony/http-kernel/EventListener/RouterListener.php:190"
+                ]
+            },
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/http-kernel/Kernel.php:535"
+                ]
+            }
+        },
+        "symfony/mailer": {
+            "interface": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/mailer/MailerInterface.php:24",
+                    "vendor/symfony/mailer/Transport/TransportInterface.php:27",
+                    "vendor/symfony/mailer/Transport/Smtp/Auth/AuthenticatorInterface.php:22"
+                ]
+            },
+            "try": {
+                "count": 20,
+                "examples": [
+                    "vendor/symfony/mailer/Mailer.php:61",
+                    "vendor/symfony/mailer/Transport/AbstractHttpTransport.php:70",
+                    "vendor/symfony/mailer/Transport/RoundRobinTransport.php:55"
+                ]
+            },
+            "catch": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/mailer/Mailer.php:63",
+                    "vendor/symfony/mailer/Transport/AbstractHttpTransport.php:73",
+                    "vendor/symfony/mailer/Transport/RoundRobinTransport.php:57"
+                ]
+            },
+            "throw": {
+                "count": 63,
+                "examples": [
+                    "vendor/symfony/mailer/Mailer.php:66",
+                    "vendor/symfony/mailer/Mailer.php:69",
+                    "vendor/symfony/mailer/Transport/AbstractHttpTransport.php:37"
+                ]
+            },
+            "arrow_function": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/mailer/Transport/AbstractApiTransport.php:51",
+                    "vendor/symfony/mailer/Transport/AbstractTransport.php:115"
+                ]
+            },
+            "attribute": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/mailer/Transport/Dsn.php:25",
+                    "vendor/symfony/mailer/Transport/Dsn.php:31",
+                    "vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:93"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/mailer/Transport/Smtp/Stream/AbstractStream.php:130"
+                ]
+            },
+            "yield": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/mailer/Transport/Smtp/Stream/AbstractStream.php:147",
+                    "vendor/symfony/mailer/Transport/Smtp/Stream/AbstractStream.php:153",
+                    "vendor/symfony/mailer/Transport/Smtp/Stream/AbstractStream.php:159"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/mailer/Test/IncompleteDsnTestTrait.php:18"
+                ]
+            },
+            "nullsafe": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/mailer/EventListener/MessageLoggerListener.php:41"
+                ]
+            },
+            "readonly": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/mailer/EventListener/SmimeEncryptedMessageListener.php:27",
+                    "vendor/symfony/mailer/EventListener/SmimeEncryptedMessageListener.php:28"
+                ]
+            }
+        },
+        "symfony/mime": {
+            "throw": {
+                "count": 70,
+                "examples": [
+                    "vendor/symfony/mime/Email.php:124",
+                    "vendor/symfony/mime/Email.php:273",
+                    "vendor/symfony/mime/Email.php:304"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/mime/CharacterStream.php:75",
+                    "vendor/symfony/mime/Encoder/QpEncoder.php:186",
+                    "vendor/symfony/mime/Encoder/QpContentEncoder.php:49"
+                ]
+            },
+            "yield": {
+                "count": 19,
+                "examples": [
+                    "vendor/symfony/mime/Crypto/SMime.php:68",
+                    "vendor/symfony/mime/Encoder/EightBitContentEncoder.php:22",
+                    "vendor/symfony/mime/Encoder/QpContentEncoder.php:26"
+                ]
+            },
+            "interface": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/mime/BodyRendererInterface.php:17",
+                    "vendor/symfony/mime/MimeTypeGuesserInterface.php:19",
+                    "vendor/symfony/mime/MimeTypesInterface.php:17"
+                ]
+            },
+            "readonly": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/mime/Test/Constraint/EmailSubjectContains.php:20"
+                ]
+            },
+            "try": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/mime/FileinfoMimeTypeGuesser.php:55",
+                    "vendor/symfony/mime/Part/DataPart.php:152",
+                    "vendor/symfony/mime/Part/TextPart.php:265"
+                ]
+            },
+            "catch": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/mime/FileinfoMimeTypeGuesser.php:57",
+                    "vendor/symfony/mime/Part/DataPart.php:156",
+                    "vendor/symfony/mime/Part/TextPart.php:269"
+                ]
+            },
+            "yield_from": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/mime/Part/TextPart.php:159",
+                    "vendor/symfony/mime/Part/TextPart.php:164",
+                    "vendor/symfony/mime/Part/AbstractMultipartPart.php:71"
+                ]
+            },
+            "nullsafe": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/mime/Message.php:127",
+                    "vendor/symfony/mime/Message.php:127",
+                    "vendor/symfony/mime/Message.php:127"
+                ]
+            }
+        },
+        "symfony/polyfill-ctype": {
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-ctype/bootstrap.php:15"
+                ]
+            }
+        },
+        "symfony/polyfill-intl-grapheme": {
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-grapheme/bootstrap80.php:42",
+                    "vendor/symfony/polyfill-intl-grapheme/bootstrap.php:15"
+                ]
+            },
+            "throw": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-grapheme/Grapheme.php:84",
+                    "vendor/symfony/polyfill-intl-grapheme/Grapheme.php:219",
+                    "vendor/symfony/polyfill-intl-grapheme/Grapheme.php:252"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-grapheme/Grapheme.php:288"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-grapheme/Grapheme.php:290"
+                ]
+            }
+        },
+        "symfony/polyfill-intl-idn": {
+            "throw": {
+                "count": 11,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:164",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:229",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:649"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:193",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:406"
+                ]
+            },
+            "catch": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:195",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:408"
+                ]
+            },
+            "require": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:261",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:969",
+                    "vendor/symfony/polyfill-intl-idn/Idn.php:970"
+                ]
+            }
+        },
+        "symfony/polyfill-intl-normalizer": {
+            "throw": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-normalizer/Normalizer.php:51",
+                    "vendor/symfony/polyfill-intl-normalizer/Normalizer.php:133"
+                ]
+            },
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-intl-normalizer/Normalizer.php:365",
+                    "vendor/symfony/polyfill-intl-normalizer/bootstrap.php:15"
+                ]
+            }
+        },
+        "symfony/polyfill-mbstring": {
+            "throw": {
+                "count": 16,
+                "examples": [
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:129",
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:214",
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:485"
+                ]
+            },
+            "require": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:1383",
+                    "vendor/symfony/polyfill-mbstring/bootstrap.php:13",
+                    "vendor/symfony/polyfill-mbstring/bootstrap.php:16"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:1607"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-mbstring/Mbstring.php:1609"
+                ]
+            }
+        },
+        "symfony/polyfill-php80": {
+            "attribute": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php:12"
+                ]
+            },
+            "interface": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php:13"
+                ]
+            },
+            "throw": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php80/Php80.php:63"
+                ]
+            }
+        },
+        "symfony/polyfill-php83": {
+            "attribute": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-php83/bootstrap81.php:39",
+                    "vendor/symfony/polyfill-php83/Resources/stubs/Override.php:13"
+                ]
+            },
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-php83/bootstrap.php:35",
+                    "vendor/symfony/polyfill-php83/bootstrap.php:45"
+                ]
+            },
+            "throw": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/polyfill-php83/Php83.php:27",
+                    "vendor/symfony/polyfill-php83/Php83.php:38",
+                    "vendor/symfony/polyfill-php83/Php83.php:43"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php83/Php83.php:59"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php83/Php83.php:63"
+                ]
+            }
+        },
+        "symfony/polyfill-php84": {
+            "require": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/stubs/RoundingMode.php:43",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Deprecated.php:33",
+                    "vendor/symfony/polyfill-php84/bootstrap.php:53"
+                ]
+            },
+            "throw": {
+                "count": 30,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:45",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:54",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:86"
+                ]
+            },
+            "try": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:51",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:92",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:132"
+                ]
+            },
+            "catch": {
+                "count": 11,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:53",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:94",
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Pdo/Mysql.php:134"
+                ]
+            },
+            "attribute": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/stubs/Deprecated.php:13",
+                    "vendor/symfony/polyfill-php84/Resources/Deprecated.php:13"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/RoundingMode.php:13"
+                ]
+            },
+            "readonly": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-php84/Resources/Deprecated.php:16",
+                    "vendor/symfony/polyfill-php84/Resources/Deprecated.php:17"
+                ]
+            }
+        },
+        "symfony/polyfill-php85": {
+            "attribute": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-php85/Resources/stubs/DelayedTargetValidation.php:14",
+                    "vendor/symfony/polyfill-php85/Resources/stubs/NoDiscard.php:13"
+                ]
+            },
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php85/bootstrap.php:39"
+                ]
+            },
+            "throw": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/polyfill-php85/Php85.php:118",
+                    "vendor/symfony/polyfill-php85/Php85.php:121",
+                    "vendor/symfony/polyfill-php85/Php85.php:124"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php85/Php85.php:156"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/polyfill-php85/Php85.php:158"
+                ]
+            }
+        },
+        "symfony/polyfill-uuid": {
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-uuid/bootstrap80.php:15",
+                    "vendor/symfony/polyfill-uuid/bootstrap.php:19"
+                ]
+            },
+            "attribute": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/polyfill-uuid/bootstrap85.php:12",
+                    "vendor/symfony/polyfill-uuid/bootstrap85.php:15"
+                ]
+            },
+            "throw": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/polyfill-uuid/Uuid.php:68",
+                    "vendor/symfony/polyfill-uuid/Uuid.php:96",
+                    "vendor/symfony/polyfill-uuid/Uuid.php:137"
+                ]
+            }
+        },
+        "symfony/process": {
+            "throw": {
+                "count": 55,
+                "examples": [
+                    "vendor/symfony/process/Pipes/UnixPipes.php:36",
+                    "vendor/symfony/process/Pipes/UnixPipes.php:41",
+                    "vendor/symfony/process/Pipes/WindowsPipes.php:62"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/process/Pipes/PipesInterface.php:21",
+                    "vendor/symfony/process/Exception/ExceptionInterface.php:19"
+                ]
+            },
+            "yield": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/process/InputStream.php:76",
+                    "vendor/symfony/process/InputStream.php:84",
+                    "vendor/symfony/process/Process.php:690"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/process/InputStream.php:82"
+                ]
+            },
+            "readonly": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/process/Messenger/RunProcessContext.php:21",
+                    "vendor/symfony/process/Messenger/RunProcessContext.php:22",
+                    "vendor/symfony/process/Messenger/RunProcessContext.php:23"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/process/Messenger/RunProcessMessageHandler.php:25",
+                    "vendor/symfony/process/Exception/ProcessTimedOutException.php:54",
+                    "vendor/symfony/process/Process.php:1336"
+                ]
+            },
+            "try": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/process/Messenger/RunProcessMessageHandler.php:30",
+                    "vendor/symfony/process/Process.php:386"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/process/Messenger/RunProcessMessageHandler.php:32"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/process/Process.php:1332"
+                ]
+            }
+        },
+        "symfony/property-access": {
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/property-access/PropertyPathInterface.php:21",
+                    "vendor/symfony/property-access/PropertyPathIteratorInterface.php:19",
+                    "vendor/symfony/property-access/PropertyAccessorInterface.php:19"
+                ]
+            },
+            "throw": {
+                "count": 34,
+                "examples": [
+                    "vendor/symfony/property-access/PropertyPath.php:85",
+                    "vendor/symfony/property-access/PropertyPath.php:124",
+                    "vendor/symfony/property-access/PropertyPath.php:173"
+                ]
+            },
+            "try": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/property-access/PropertyAccessor.php:119",
+                    "vendor/symfony/property-access/PropertyAccessor.php:139",
+                    "vendor/symfony/property-access/PropertyAccessor.php:213"
+                ]
+            },
+            "catch": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/property-access/PropertyAccessor.php:123",
+                    "vendor/symfony/property-access/PropertyAccessor.php:182",
+                    "vendor/symfony/property-access/PropertyAccessor.php:226"
+                ]
+            },
+            "readonly": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/property-access/Exception/InvalidTypeException.php:22",
+                    "vendor/symfony/property-access/Exception/InvalidTypeException.php:23",
+                    "vendor/symfony/property-access/Exception/InvalidTypeException.php:24"
+                ]
+            }
+        },
+        "symfony/property-info": {
+            "interface": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/property-info/PropertyInfoExtractorInterface.php:21",
+                    "vendor/symfony/property-info/PropertyWriteInfoExtractorInterface.php:19",
+                    "vendor/symfony/property-info/PropertyAccessExtractorInterface.php:19"
+                ]
+            },
+            "throw": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/property-info/Type.php:88",
+                    "vendor/symfony/property-info/Type.php:104",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:74"
+                ]
+            },
+            "arrow_function": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/property-info/Util/PhpDocTypeHelper.php:328",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:306",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:314"
+                ]
+            },
+            "match": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/property-info/Util/PhpDocTypeHelper.php:398",
+                    "vendor/symfony/property-info/Util/PhpDocTypeHelper.php:440",
+                    "vendor/symfony/property-info/Util/PhpStanTypeHelper.php:183"
+                ]
+            },
+            "readonly": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:30",
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:31",
+                    "vendor/symfony/property-info/PropertyReadInfo.php:29"
+                ]
+            },
+            "try": {
+                "count": 36,
+                "examples": [
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:62",
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:118",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:229"
+                ]
+            },
+            "catch": {
+                "count": 38,
+                "examples": [
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:64",
+                    "vendor/symfony/property-info/PropertyInfoCacheExtractor.php:120",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:231"
+                ]
+            },
+            "nullsafe": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:462",
+                    "vendor/symfony/property-info/Extractor/PhpStanExtractor.php:512",
+                    "vendor/symfony/property-info/Extractor/PhpDocExtractor.php:294"
+                ]
+            }
+        },
+        "symfony/routing": {
+            "throw": {
+                "count": 99,
+                "examples": [
+                    "vendor/symfony/routing/CompiledRoute.php:63",
+                    "vendor/symfony/routing/Attribute/Route.php:239",
+                    "vendor/symfony/routing/RouteCompiler.php:78"
+                ]
+            },
+            "readonly": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:20",
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:21",
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:22"
+                ]
+            },
+            "attribute": {
+                "count": 32,
+                "examples": [
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:27",
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:33",
+                    "vendor/symfony/routing/Attribute/DeprecatedAlias.php:39"
+                ]
+            },
+            "interface": {
+                "count": 11,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/RequestMatcherInterface.php:24",
+                    "vendor/symfony/routing/Matcher/RedirectableUrlMatcherInterface.php:19",
+                    "vendor/symfony/routing/Matcher/UrlMatcherInterface.php:24"
+                ]
+            },
+            "arrow_function": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/ExpressionLanguageProvider.php:37",
+                    "vendor/symfony/routing/Matcher/ExpressionLanguageProvider.php:38",
+                    "vendor/symfony/routing/Matcher/Dumper/CompiledUrlMatcherDumper.php:354"
+                ]
+            },
+            "match": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/UrlMatcher.php:70",
+                    "vendor/symfony/routing/Matcher/UrlMatcherInterface.php:38",
+                    "vendor/symfony/routing/Matcher/Dumper/CompiledUrlMatcherTrait.php:35"
+                ]
+            },
+            "try": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/UrlMatcher.php:92",
+                    "vendor/symfony/routing/Matcher/TraceableUrlMatcher.php:36",
+                    "vendor/symfony/routing/Matcher/Dumper/CompiledUrlMatcherDumper.php:90"
+                ]
+            },
+            "catch": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/TraceableUrlMatcher.php:38",
+                    "vendor/symfony/routing/Matcher/Dumper/CompiledUrlMatcherDumper.php:95",
+                    "vendor/symfony/routing/Matcher/RedirectableUrlMatcher.php:26"
+                ]
+            },
+            "nullsafe": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/TraceableUrlMatcher.php:163",
+                    "vendor/symfony/routing/Generator/UrlGenerator.php:182",
+                    "vendor/symfony/routing/Generator/UrlGenerator.php:240"
+                ]
+            },
+            "trait": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/routing/Matcher/Dumper/CompiledUrlMatcherTrait.php:27",
+                    "vendor/symfony/routing/Loader/Configurator/Traits/HostTrait.php:19",
+                    "vendor/symfony/routing/Loader/Configurator/Traits/PrefixTrait.php:22"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/routing/Requirement/Requirement.php:17"
+                ]
+            },
+            "include": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/routing/Loader/PhpFileLoader.php:50",
+                    "vendor/symfony/routing/Loader/PhpFileLoader.php:59"
+                ]
+            },
+            "yield": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/routing/Loader/AttributeClassLoader.php:395"
+                ]
+            },
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/routing/Router.php:301",
+                    "vendor/symfony/routing/Router.php:304"
+                ]
+            }
+        },
+        "symfony/serializer": {
+            "arrow_function": {
+                "count": 16,
+                "examples": [
+                    "vendor/symfony/serializer/DataCollector/SerializerDataCollector.php:72",
+                    "vendor/symfony/serializer/Encoder/XmlEncoder.php:384",
+                    "vendor/symfony/serializer/NameConverter/SnakeCaseToCamelCaseNameConverter.php:50"
+                ]
+            },
+            "throw": {
+                "count": 191,
+                "examples": [
+                    "vendor/symfony/serializer/Serializer.php:99",
+                    "vendor/symfony/serializer/Serializer.php:117",
+                    "vendor/symfony/serializer/Serializer.php:127"
+                ]
+            },
+            "readonly": {
+                "count": 45,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/ClassDiscriminatorFromClassMetadata.php:24",
+                    "vendor/symfony/serializer/Mapping/Loader/LoaderChain.php:37",
+                    "vendor/symfony/serializer/Mapping/ClassDiscriminatorMapping.php:23"
+                ]
+            },
+            "interface": {
+                "count": 23,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/ClassMetadataInterface.php:25",
+                    "vendor/symfony/serializer/Mapping/Loader/LoaderInterface.php:21",
+                    "vendor/symfony/serializer/Mapping/ClassDiscriminatorResolverInterface.php:19"
+                ]
+            },
+            "match": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:101",
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:136",
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:232"
+                ]
+            },
+            "try": {
+                "count": 41,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:226",
+                    "vendor/symfony/serializer/Mapping/Loader/YamlFileLoader.php:91",
+                    "vendor/symfony/serializer/Mapping/Loader/XmlFileLoader.php:70"
+                ]
+            },
+            "yield": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:227"
+                ]
+            },
+            "catch": {
+                "count": 48,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Loader/AttributeLoader.php:228",
+                    "vendor/symfony/serializer/Mapping/Loader/YamlFileLoader.php:93",
+                    "vendor/symfony/serializer/Mapping/Loader/XmlFileLoader.php:72"
+                ]
+            },
+            "trait": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Loader/AccessorCollisionResolverTrait.php:21",
+                    "vendor/symfony/serializer/Mapping/Factory/ClassResolverTrait.php:23",
+                    "vendor/symfony/serializer/Context/ContextBuilderTrait.php:17"
+                ]
+            },
+            "require": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/serializer/Mapping/Factory/CompiledClassMetadataFactory.php:40"
+                ]
+            },
+            "attribute": {
+                "count": 27,
+                "examples": [
+                    "vendor/symfony/serializer/Attribute/SerializedName.php:19",
+                    "vendor/symfony/serializer/Attribute/SerializedName.php:33",
+                    "vendor/symfony/serializer/Attribute/Ignore.php:17"
+                ]
+            },
+            "nullsafe": {
+                "count": 28,
+                "examples": [
+                    "vendor/symfony/serializer/Encoder/JsonDecode.php:112",
+                    "vendor/symfony/serializer/Command/DebugCommand.php:100",
+                    "vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php:178"
+                ]
+            }
+        },
+        "symfony/service-contracts": {
+            "interface": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/service-contracts/ServiceSubscriberInterface.php:31",
+                    "vendor/symfony/service-contracts/ServiceCollectionInterface.php:24",
+                    "vendor/symfony/service-contracts/ContainerProviderInterface.php:19"
+                ]
+            },
+            "attribute": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/service-contracts/Attribute/SubscribedService.php:27",
+                    "vendor/symfony/service-contracts/Attribute/Required.php:22",
+                    "vendor/symfony/service-contracts/ServiceSubscriberTrait.php:72"
+                ]
+            },
+            "arrow_function": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php:35",
+                    "vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php:36",
+                    "vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php:37"
+                ]
+            },
+            "trait": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/service-contracts/ServiceSubscriberTrait.php:33",
+                    "vendor/symfony/service-contracts/ServiceMethodsSubscriberTrait.php:27",
+                    "vendor/symfony/service-contracts/ServiceLocatorTrait.php:27"
+                ]
+            },
+            "throw": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/service-contracts/ServiceSubscriberTrait.php:49",
+                    "vendor/symfony/service-contracts/ServiceSubscriberTrait.php:53",
+                    "vendor/symfony/service-contracts/ServiceMethodsSubscriberTrait.php:51"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/service-contracts/ServiceLocatorTrait.php:60"
+                ]
+            }
+        },
+        "symfony/string": {
+            "throw": {
+                "count": 66,
+                "examples": [
+                    "vendor/symfony/string/CodePointString.php:30",
+                    "vendor/symfony/string/CodePointString.php:42",
+                    "vendor/symfony/string/CodePointString.php:51"
+                ]
+            },
+            "try": {
+                "count": 20,
+                "examples": [
+                    "vendor/symfony/string/CodePointString.php:129",
+                    "vendor/symfony/string/CodePointString.php:150",
+                    "vendor/symfony/string/AbstractString.php:463"
+                ]
+            },
+            "catch": {
+                "count": 12,
+                "examples": [
+                    "vendor/symfony/string/CodePointString.php:131",
+                    "vendor/symfony/string/CodePointString.php:152",
+                    "vendor/symfony/string/AbstractString.php:522"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/string/AbstractString.php:404",
+                    "vendor/symfony/string/AbstractUnicodeString.php:244",
+                    "vendor/symfony/string/ByteString.php:246"
+                ]
+            },
+            "arrow_function": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/string/AbstractString.php:461",
+                    "vendor/symfony/string/AbstractUnicodeString.php:252",
+                    "vendor/symfony/string/AbstractUnicodeString.php:336"
+                ]
+            },
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/string/Inflector/InflectorInterface.php:14",
+                    "vendor/symfony/string/Exception/ExceptionInterface.php:14",
+                    "vendor/symfony/string/Slugger/SluggerInterface.php:21"
+                ]
+            },
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/string/AbstractUnicodeString.php:617",
+                    "vendor/symfony/string/AbstractUnicodeString.php:634"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/string/TruncateMode.php:14"
+                ]
+            }
+        },
+        "symfony/translation": {
+            "interface": {
+                "count": 16,
+                "examples": [
+                    "vendor/symfony/translation/Reader/TranslationReaderInterface.php:21",
+                    "vendor/symfony/translation/MetadataAwareInterface.php:19",
+                    "vendor/symfony/translation/MessageCatalogueInterface.php:21"
+                ]
+            },
+            "throw": {
+                "count": 72,
+                "examples": [
+                    "vendor/symfony/translation/PseudoLocalizationTranslator.php:75",
+                    "vendor/symfony/translation/PseudoLocalizationTranslator.php:122",
+                    "vendor/symfony/translation/PseudoLocalizationTranslator.php:131"
+                ]
+            },
+            "try": {
+                "count": 15,
+                "examples": [
+                    "vendor/symfony/translation/LocaleSwitcher.php:38",
+                    "vendor/symfony/translation/LocaleSwitcher.php:72",
+                    "vendor/symfony/translation/Util/XliffUtils.php:66"
+                ]
+            },
+            "catch": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/translation/LocaleSwitcher.php:42",
+                    "vendor/symfony/translation/Translator.php:273",
+                    "vendor/symfony/translation/Extractor/Visitor/AbstractVisitor.php:129"
+                ]
+            },
+            "nullsafe": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/translation/LocaleSwitcher.php:46",
+                    "vendor/symfony/translation/Extractor/Visitor/AbstractVisitor.php:90",
+                    "vendor/symfony/translation/Extractor/Visitor/AbstractVisitor.php:92"
+                ]
+            },
+            "attribute": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/translation/Test/AbstractProviderFactoryTestCase.php:42",
+                    "vendor/symfony/translation/Test/AbstractProviderFactoryTestCase.php:53",
+                    "vendor/symfony/translation/Test/AbstractProviderFactoryTestCase.php:65"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/translation/Test/IncompleteDsnTestTrait.php:18",
+                    "vendor/symfony/translation/Command/TranslationTrait.php:21"
+                ]
+            },
+            "arrow_function": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/translation/Resources/bin/translation-status.php:90",
+                    "vendor/symfony/translation/Resources/bin/translation-status.php:91",
+                    "vendor/symfony/translation/Command/XliffLintCommand.php:242"
+                ]
+            },
+            "include": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/translation/Translator.php:301"
+                ]
+            },
+            "readonly": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/translation/Extractor/PhpAstExtractor.php:35",
+                    "vendor/symfony/translation/Extractor/Visitor/ConstraintVisitor.php:25"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/translation/Loader/JsonFileLoader.php:42",
+                    "vendor/symfony/translation/Command/XliffLintCommand.php:161",
+                    "vendor/symfony/translation/Catalogue/AbstractOperation.php:157"
+                ]
+            },
+            "require": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/translation/Loader/PhpFileLoader.php:30",
+                    "vendor/symfony/translation/Loader/PhpFileLoader.php:33"
+                ]
+            },
+            "yield": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/translation/Command/XliffLintCommand.php:223",
+                    "vendor/symfony/translation/Command/XliffLintCommand.php:233"
+                ]
+            }
+        },
+        "symfony/translation-contracts": {
+            "interface": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/translation-contracts/TranslatableInterface.php:17",
+                    "vendor/symfony/translation-contracts/TranslatorInterface.php:17",
+                    "vendor/symfony/translation-contracts/LocaleAwareInterface.php:14"
+                ]
+            },
+            "attribute": {
+                "count": 11,
+                "examples": [
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:59",
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:70",
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:83"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:128",
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:129",
+                    "vendor/symfony/translation-contracts/Test/TranslatorTest.php:132"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/translation-contracts/TranslatorTrait.php:21"
+                ]
+            },
+            "throw": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/translation-contracts/TranslatorTrait.php:123",
+                    "vendor/symfony/translation-contracts/TranslatorTrait.php:126"
+                ]
+            },
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/translation-contracts/TranslatorTrait.php:143"
+                ]
+            }
+        },
+        "symfony/type-info": {
+            "arrow_function": {
+                "count": 15,
+                "examples": [
+                    "vendor/symfony/type-info/Type.php:48",
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:204",
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:296"
+                ]
+            },
+            "yield": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/type-info/Type.php:93",
+                    "vendor/symfony/type-info/Type.php:97",
+                    "vendor/symfony/type-info/Type.php:105"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:33"
+                ]
+            },
+            "throw": {
+                "count": 52,
+                "examples": [
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:329",
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:99",
+                    "vendor/symfony/type-info/TypeContext/TypeContextFactory.php:169"
+                ]
+            },
+            "match": {
+                "count": 16,
+                "examples": [
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:385",
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:404",
+                    "vendor/symfony/type-info/TypeFactoryTrait.php:415"
+                ]
+            },
+            "readonly": {
+                "count": 40,
+                "examples": [
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:39",
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:40",
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:41"
+                ]
+            },
+            "try": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:108",
+                    "vendor/symfony/type-info/TypeContext/TypeContextFactory.php:257",
+                    "vendor/symfony/type-info/TypeContext/TypeContextFactory.php:304"
+                ]
+            },
+            "catch": {
+                "count": 8,
+                "examples": [
+                    "vendor/symfony/type-info/TypeContext/TypeContext.php:111",
+                    "vendor/symfony/type-info/TypeContext/TypeContextFactory.php:261",
+                    "vendor/symfony/type-info/TypeContext/TypeContextFactory.php:359"
+                ]
+            },
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/type-info/Type/CompositeTypeInterface.php:23",
+                    "vendor/symfony/type-info/Type/WrappingTypeInterface.php:23",
+                    "vendor/symfony/type-info/TypeResolver/TypeResolverInterface.php:24"
+                ]
+            },
+            "enum": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/type-info/TypeIdentifier.php:20"
+                ]
+            },
+            "nullsafe": {
+                "count": 6,
+                "examples": [
+                    "vendor/symfony/type-info/TypeResolver/StringTypeResolver.php:139",
+                    "vendor/symfony/type-info/TypeResolver/StringTypeResolver.php:140",
+                    "vendor/symfony/type-info/TypeResolver/StringTypeResolver.php:378"
+                ]
+            }
+        },
+        "symfony/uid": {
+            "throw": {
+                "count": 23,
+                "examples": [
+                    "vendor/symfony/uid/BinaryUtil.php:167",
+                    "vendor/symfony/uid/BinaryUtil.php:176",
+                    "vendor/symfony/uid/AbstractUid.php:44"
+                ]
+            },
+            "match": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/uid/Ulid.php:70",
+                    "vendor/symfony/uid/Uuid.php:74",
+                    "vendor/symfony/uid/Factory/MockUuidFactory.php:36"
+                ]
+            },
+            "interface": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/uid/HashableInterface.php:18",
+                    "vendor/symfony/uid/HashableInterface.php:28",
+                    "vendor/symfony/uid/HashableInterface.php:36"
+                ]
+            },
+            "attribute": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:27",
+                    "vendor/symfony/uid/Command/GenerateUlidCommand.php:25",
+                    "vendor/symfony/uid/Command/InspectUuidCommand.php:27"
+                ]
+            },
+            "try": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:116",
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:125",
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:138"
+                ]
+            },
+            "catch": {
+                "count": 9,
+                "examples": [
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:118",
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:127",
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:140"
+                ]
+            },
+            "arrow_function": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/uid/Command/GenerateUuidCommand.php:133"
+                ]
+            }
+        },
+        "symfony/validator": {
+            "arrow_function": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/validator/DataCollector/ValidatorDataCollector.php:55",
+                    "vendor/symfony/validator/DataCollector/ValidatorDataCollector.php:86",
+                    "vendor/symfony/validator/Mapping/ClassMetadata.php:382"
+                ]
+            },
+            "try": {
+                "count": 24,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/GenericMetadata.php:82",
+                    "vendor/symfony/validator/Mapping/ClassMetadata.php:109",
+                    "vendor/symfony/validator/Mapping/MemberMetadata.php:76"
+                ]
+            },
+            "catch": {
+                "count": 27,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/GenericMetadata.php:86",
+                    "vendor/symfony/validator/Mapping/ClassMetadata.php:113",
+                    "vendor/symfony/validator/Mapping/MemberMetadata.php:80"
+                ]
+            },
+            "throw": {
+                "count": 295,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/GenericMetadata.php:141",
+                    "vendor/symfony/validator/Mapping/GetterMetadata.php:56",
+                    "vendor/symfony/validator/Mapping/GetterMetadata.php:59"
+                ]
+            },
+            "interface": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/ClassMetadataInterface.php:36",
+                    "vendor/symfony/validator/Mapping/Loader/LoaderInterface.php:21",
+                    "vendor/symfony/validator/Mapping/PropertyMetadataInterface.php:30"
+                ]
+            },
+            "trait": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/Loader/AutoMappingTrait.php:22",
+                    "vendor/symfony/validator/Constraints/ZeroComparisonConstraintTrait.php:23"
+                ]
+            },
+            "yield": {
+                "count": 4,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/Loader/AttributeLoader.php:127",
+                    "vendor/symfony/validator/Mapping/Loader/AttributeLoader.php:130",
+                    "vendor/symfony/validator/Mapping/Loader/AttributeLoader.php:133"
+                ]
+            },
+            "nullsafe": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/validator/Mapping/Factory/LazyLoadingMetadataFactory.php:88",
+                    "vendor/symfony/validator/Mapping/Factory/LazyLoadingMetadataFactory.php:89",
+                    "vendor/symfony/validator/Validator/TraceableValidator.php:60"
+                ]
+            },
+            "readonly": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/validator/Validator/TraceableValidator.php:32",
+                    "vendor/symfony/validator/Constraints/NoSuspiciousCharactersValidator.php:55",
+                    "vendor/symfony/validator/Constraints/PasswordStrengthValidator.php:25"
+                ]
+            },
+            "attribute": {
+                "count": 149,
+                "examples": [
+                    "vendor/symfony/validator/Attribute/ExtendsValidationFor.php:22",
+                    "vendor/symfony/validator/Attribute/HasNamedArguments.php:19",
+                    "vendor/symfony/validator/Constraints/Expression.php:29"
+                ]
+            },
+            "match": {
+                "count": 14,
+                "examples": [
+                    "vendor/symfony/validator/Constraints/ImageValidator.php:302",
+                    "vendor/symfony/validator/Constraints/FileValidator.php:153",
+                    "vendor/symfony/validator/Constraints/TypeValidator.php:74"
+                ]
+            }
+        },
+        "symfony/var-dumper": {
+            "interface": {
+                "count": 5,
+                "examples": [
+                    "vendor/symfony/var-dumper/Cloner/ClonerInterface.php:17",
+                    "vendor/symfony/var-dumper/Cloner/DumperInterface.php:19",
+                    "vendor/symfony/var-dumper/Command/Descriptor/DumpDescriptorInterface.php:20"
+                ]
+            },
+            "throw": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:303",
+                    "vendor/symfony/var-dumper/Cloner/Data.php:118",
+                    "vendor/symfony/var-dumper/Cloner/Data.php:152"
+                ]
+            },
+            "try": {
+                "count": 21,
+                "examples": [
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:317",
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:375",
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:401"
+                ]
+            },
+            "catch": {
+                "count": 18,
+                "examples": [
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:383",
+                    "vendor/symfony/var-dumper/Cloner/AbstractCloner.php:407",
+                    "vendor/symfony/var-dumper/Caster/ReflectionCaster.php:90"
+                ]
+            },
+            "yield_from": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/var-dumper/Cloner/Data.php:121"
+                ]
+            },
+            "trait": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/var-dumper/Test/VarDumperTestTrait.php:21"
+                ]
+            },
+            "attribute": {
+                "count": 2,
+                "examples": [
+                    "vendor/symfony/var-dumper/Test/VarDumperTestTrait.php:43",
+                    "vendor/symfony/var-dumper/Command/ServerDumpCommand.php:38"
+                ]
+            },
+            "arrow_function": {
+                "count": 7,
+                "examples": [
+                    "vendor/symfony/var-dumper/Caster/SocketCaster.php:57",
+                    "vendor/symfony/var-dumper/Caster/ExceptionCaster.php:304",
+                    "vendor/symfony/var-dumper/Caster/ClassStub.php:59"
+                ]
+            },
+            "match": {
+                "count": 10,
+                "examples": [
+                    "vendor/symfony/var-dumper/Caster/SymfonyCaster.php:84",
+                    "vendor/symfony/var-dumper/Caster/FFICaster.php:46",
+                    "vendor/symfony/var-dumper/Caster/FFICaster.php:78"
+                ]
+            },
+            "nullsafe": {
+                "count": 3,
+                "examples": [
+                    "vendor/symfony/var-dumper/Server/DumpServer.php:59",
+                    "vendor/symfony/var-dumper/Server/DumpServer.php:65",
+                    "vendor/symfony/var-dumper/Server/DumpServer.php:71"
+                ]
+            },
+            "yield": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/var-dumper/Server/DumpServer.php:104"
+                ]
+            },
+            "require_once": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/var-dumper/VarDumper.php:29"
+                ]
+            }
+        },
+        "symfony/web-link": {
+            "match": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/web-link/HttpHeaderParser.php:54"
+                ]
+            },
+            "readonly": {
+                "count": 1,
+                "examples": [
+                    "vendor/symfony/web-link/EventListener/AddLinkHeaderListener.php:33"
+                ]
+            }
+        },
+        "tijsverkoyen/css-to-inline-styles": {
+            "throw": {
+                "count": 3,
+                "examples": [
+                    "vendor/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php:121",
+                    "vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php:136",
+                    "vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php:142"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php:183"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php:185"
+                ]
+            }
+        },
+        "vlucas/phpdotenv": {
+            "throw": {
+                "count": 13,
+                "examples": [
+                    "vendor/vlucas/phpdotenv/src/Validator.php:182",
+                    "vendor/vlucas/phpdotenv/src/Repository/RepositoryBuilder.php:144",
+                    "vendor/vlucas/phpdotenv/src/Repository/RepositoryBuilder.php:177"
+                ]
+            },
+            "interface": {
+                "count": 8,
+                "examples": [
+                    "vendor/vlucas/phpdotenv/src/Repository/RepositoryInterface.php:7",
+                    "vendor/vlucas/phpdotenv/src/Repository/Adapter/ReaderInterface.php:7",
+                    "vendor/vlucas/phpdotenv/src/Repository/Adapter/WriterInterface.php:7"
+                ]
+            },
+            "yield": {
+                "count": 2,
+                "examples": [
+                    "vendor/vlucas/phpdotenv/src/Repository/RepositoryBuilder.php:108",
+                    "vendor/vlucas/phpdotenv/src/Parser/Lexer.php:55"
+                ]
+            },
+            "try": {
+                "count": 1,
+                "examples": [
+                    "vendor/vlucas/phpdotenv/src/Dotenv.php:236"
+                ]
+            },
+            "catch": {
+                "count": 1,
+                "examples": [
+                    "vendor/vlucas/phpdotenv/src/Dotenv.php:238"
+                ]
+            }
+        },
+        "voku/portable-ascii": {
+            "include": {
+                "count": 2,
+                "examples": [
+                    "vendor/voku/portable-ascii/src/voku/helper/ASCII.php:1600",
+                    "vendor/voku/portable-ascii/src/voku/helper/ASCII.php:1612"
+                ]
+            }
+        },
+        "willdurand/negotiation": {
+            "include": {
+                "count": 1,
+                "examples": [
+                    "vendor/willdurand/negotiation/tests/bootstrap.php:3"
+                ]
+            },
+            "try": {
+                "count": 5,
+                "examples": [
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/NegotiatorTest.php:29",
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/NegotiatorTest.php:112",
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/LanguageNegotiatorTest.php:26"
+                ]
+            },
+            "catch": {
+                "count": 5,
+                "examples": [
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/NegotiatorTest.php:31",
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/NegotiatorTest.php:114",
+                    "vendor/willdurand/negotiation/tests/Negotiation/Tests/LanguageNegotiatorTest.php:35"
+                ]
+            },
+            "match": {
+                "count": 3,
+                "examples": [
+                    "vendor/willdurand/negotiation/src/Negotiation/Negotiator.php:18",
+                    "vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php:114",
+                    "vendor/willdurand/negotiation/src/Negotiation/LanguageNegotiator.php:18"
+                ]
+            },
+            "interface": {
+                "count": 2,
+                "examples": [
+                    "vendor/willdurand/negotiation/src/Negotiation/AcceptHeader.php:5",
+                    "vendor/willdurand/negotiation/src/Negotiation/Exception/Exception.php:5"
+                ]
+            },
+            "throw": {
+                "count": 7,
+                "examples": [
+                    "vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php:19",
+                    "vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php:23",
+                    "vendor/willdurand/negotiation/src/Negotiation/AbstractNegotiator.php:37"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+ARG PHP_VERSION=8.3.35
+FROM composer:2 AS composer
+FROM php:${PHP_VERSION}-cli-bookworm
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libicu-dev libonig-dev libsqlite3-dev unzip git \
+    && docker-php-ext-install -j$(nproc) intl mbstring pdo_sqlite \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app

@@ -1,6 +1,7 @@
 package php
 
 import (
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -33,9 +34,10 @@ type increment struct {
 	post   bool
 }
 type functionCall struct {
-	name string
-	args []expr
-	line int
+	name     string
+	args     []expr
+	line     int
+	fallback string
 }
 type languageExpr struct {
 	name string
@@ -63,6 +65,7 @@ type propertyExpr struct {
 }
 type newObject struct {
 	name               string
+	classExpr          expr
 	line               int
 	arguments, grouped bool
 	args               []expr
@@ -72,6 +75,59 @@ type methodCall struct {
 	name     string
 	args     []expr
 	line     int
+}
+type includeExpr struct {
+	kind string
+	path expr
+	line int
+}
+type instanceofExpr struct {
+	operand   expr
+	className string
+	classExpr expr
+	line      int
+}
+type dynamicCall struct {
+	callee expr
+	args   []expr
+	line   int
+}
+type unpackArgument struct {
+	operand expr
+	line    int
+}
+type namedArgument struct {
+	name    string
+	operand expr
+	line    int
+}
+type throwExpr struct {
+	operand expr
+	line    int
+}
+type closureExpr struct {
+	method   *methodDecl
+	captures []string
+	auto     bool
+	static   bool
+	line     int
+}
+type classNameExpr struct {
+	name string
+	line int
+}
+type classConstantExpr struct {
+	className, name string
+	line            int
+}
+type staticPropertyExpr struct {
+	className, name string
+	line            int
+}
+type staticCallExpr struct {
+	className, name string
+	args            []expr
+	line            int
 }
 
 func (literal) expression()            {}
@@ -89,12 +145,29 @@ func (offsetExpr) expression()         {}
 func (propertyExpr) expression()       {}
 func (newObject) expression()          {}
 func (methodCall) expression()         {}
+func (includeExpr) expression()        {}
+func (instanceofExpr) expression()     {}
+func (dynamicCall) expression()        {}
+func (unpackArgument) expression()     {}
+func (namedArgument) expression()      {}
+func (throwExpr) expression()          {}
+func (closureExpr) expression()        {}
+func (classNameExpr) expression()      {}
+func (classConstantExpr) expression()  {}
+func (staticPropertyExpr) expression() {}
+func (staticCallExpr) expression()     {}
 
 // Boolean conversion opcodes in Zend use the line left by compiling their
 // operand. For this expression subset, that is the last operand's token line.
 func expressionLine(expression expr) int {
 	switch node := expression.(type) {
 	case literal:
+		return node.line
+	case unpackArgument:
+		return node.line
+	case namedArgument:
+		return node.line
+	case throwExpr:
 		return node.line
 	case variable:
 		return node.token.line
@@ -124,6 +197,34 @@ func expressionLine(expression expr) int {
 		return node.line
 	case methodCall:
 		return node.line
+	case includeExpr:
+		return node.line
+	case instanceofExpr:
+		return node.line
+	case dynamicCall:
+		return node.line
+	case closureExpr:
+		return node.line
+	case ternaryExpr:
+		return expressionLine(node.no)
+	case coalesceAssignment:
+		return expressionLine(node.source)
+	case nullsafeExpr:
+		return node.line
+	case matchExpr:
+		return node.line
+	case constantExpr:
+		return node.line
+	case classNameExpr:
+		return node.line
+	case classConstantExpr:
+		return node.line
+	case staticPropertyExpr:
+		return node.line
+	case staticCallExpr:
+		return node.line
+	case interpolatedString:
+		return node.line
 	}
 	panic("invalid AST expression")
 }
@@ -141,12 +242,29 @@ type statement struct {
 	initial, update        []expr
 	keyTarget, valueTarget expr
 	line                   int
+	cases                  []switchCase
+	constant               *constantDecl
+	names                  []string
+	catches                []catchClause
+	finally                []statement
+}
+
+type catchClause struct {
+	types []string
+	name  string
+	body  []statement
 }
 
 type parser struct {
-	tokens  []token
-	pos     int
-	version Version
+	tokens              []token
+	pos                 int
+	version             Version
+	filename, namespace string
+	strictTypes         bool
+	seenStrictTypes     bool
+	classDepth          int
+	imports             map[string]map[string]string
+	declaredNames       map[string]map[string]bool
 }
 
 func (p *parser) current() token { return p.tokens[p.pos] }
@@ -200,7 +318,7 @@ func parse(tokens []token) ([]statement, error) {
 
 func parseWithVersion(tokens []token, version Version) ([]statement, error) {
 	p := parser{tokens: tokens, version: version}
-	return p.statements("eof")
+	return p.program()
 }
 
 func (p *parser) statements(end string) ([]statement, error) {
@@ -222,6 +340,61 @@ func (p *parser) statements(end string) ([]statement, error) {
 }
 
 func (p *parser) statement() (statement, error) {
+	if t := p.current(); p.acceptKeyword("try") {
+		body, err := p.block()
+		if err != nil {
+			return statement{}, err
+		}
+		s := statement{kind: "try", line: t.line, thenBranch: body}
+		for p.acceptKeyword("catch") {
+			if err := p.expect("("); err != nil {
+				return s, err
+			}
+			clause := catchClause{}
+			for {
+				typeToken, err := p.readName()
+				if err != nil {
+					return s, err
+				}
+				resolved, _ := p.resolveName(typeToken.text, "class")
+				clause.types = append(clause.types, resolved)
+				if !p.accept("|") {
+					break
+				}
+			}
+			if p.current().kind == "variable" {
+				clause.name = p.advance().text
+			}
+			if err := p.expect(")"); err != nil {
+				return s, err
+			}
+			clause.body, err = p.block()
+			if err != nil {
+				return s, err
+			}
+			s.catches = append(s.catches, clause)
+		}
+		hasFinally := p.acceptKeyword("finally")
+		if hasFinally {
+			s.finally, err = p.block()
+			if err != nil {
+				return s, err
+			}
+		}
+		if len(s.catches) == 0 && !hasFinally {
+			return s, syntax(t.line, "try must have a catch or finally block")
+		}
+		return s, nil
+	}
+	if p.keyword("namespace") && p.tokens[p.pos+1].kind != "\\" {
+		return statement{}, &fatalDiagnostic{p.current().line, "Namespace declarations cannot be nested"}
+	}
+	if p.keyword("use") || p.keyword("const") {
+		return statement{}, unexpected(p.current())
+	}
+	if t := p.current(); p.acceptKeyword("switch") {
+		return p.switchStatement(t.line)
+	}
 	if t := p.current(); p.acceptKeyword("unset") {
 		args, err := p.languageArguments("unset")
 		if err != nil {
@@ -243,11 +416,39 @@ func (p *parser) statement() (statement, error) {
 		}
 	}
 	if p.acceptKeyword("class") {
-		decl, err := p.classDeclaration()
+		decl, err := p.classDeclaration("class")
+		return statement{kind: "class", class: decl}, err
+	}
+	if p.acceptKeyword("interface") {
+		decl, err := p.classDeclaration("interface")
+		return statement{kind: "class", class: decl}, err
+	}
+	if p.acceptKeyword("trait") {
+		decl, err := p.classDeclaration("trait")
+		return statement{kind: "class", class: decl}, err
+	}
+	if p.acceptKeyword("final") {
+		if !p.acceptKeyword("class") {
+			return statement{}, unexpected(p.current())
+		}
+		decl, err := p.classDeclaration("class")
+		if decl != nil {
+			decl.final = true
+		}
+		return statement{kind: "class", class: decl}, err
+	}
+	if p.acceptKeyword("abstract") {
+		if !p.acceptKeyword("class") {
+			return statement{}, unexpected(p.current())
+		}
+		decl, err := p.classDeclaration("class")
+		if decl != nil {
+			decl.abstract = true
+		}
 		return statement{kind: "class", class: decl}, err
 	}
 	if p.acceptKeyword("return") {
-		s := statement{kind: "return"}
+		s := statement{kind: "return", line: p.tokens[p.pos-1].line}
 		if p.accept(";") {
 			return s, nil
 		}
@@ -256,6 +457,44 @@ func (p *parser) statement() (statement, error) {
 			return s, err
 		}
 		s.expressions = []expr{x}
+		return s, p.expect(";")
+	}
+	if p.acceptKeyword("global") {
+		s := statement{kind: "global"}
+		for {
+			t := p.current()
+			if err := p.expect("variable"); err != nil {
+				return s, err
+			}
+			s.names = append(s.names, t.text)
+			if !p.accept(",") {
+				break
+			}
+		}
+		return s, p.expect(";")
+	}
+	if p.keyword("static") && p.tokens[p.pos+1].kind == "variable" {
+		p.advance()
+		s := statement{kind: "static", line: p.tokens[p.pos-1].line}
+		for {
+			name := p.current()
+			if err := p.expect("variable"); err != nil {
+				return s, err
+			}
+			s.names = append(s.names, name.text)
+			var initial expr
+			if p.accept("=") {
+				var err error
+				initial, err = p.expression(0, ",", ";")
+				if err != nil {
+					return s, err
+				}
+			}
+			s.expressions = append(s.expressions, initial)
+			if !p.accept(",") {
+				break
+			}
+		}
 		return s, p.expect(";")
 	}
 	if p.accept(";") {
@@ -351,21 +590,40 @@ func (p *parser) block() ([]statement, error) {
 
 const (
 	assignmentPrecedence = iota + 1
+	ternaryPrecedence
+	coalescePrecedence
 	orPrecedence
 	andPrecedence
+	bitOrPrecedence
+	bitXorPrecedence
+	bitAndPrecedence
 	comparisonPrecedence
 	orderingPrecedence
 	concatPrecedence
+	shiftPrecedence
 	addPrecedence
 	multiplyPrecedence
 	notPrecedence
+	instanceofPrecedence
 	unaryPrecedence
 )
 
 func precedence(kind string) int {
 	switch kind {
-	case "=", "+=", "-=", "*=", "/=", "%=", ".=":
+	case "=", "+=", "-=", "*=", "/=", "%=", ".=", "??=", "&=", "|=", "^=", "<<=", ">>=":
 		return assignmentPrecedence
+	case "?":
+		return ternaryPrecedence
+	case "??":
+		return coalescePrecedence
+	case "|":
+		return bitOrPrecedence
+	case "^":
+		return bitXorPrecedence
+	case "&":
+		return bitAndPrecedence
+	case "<<", ">>":
+		return shiftPrecedence
 	case "||":
 		return orPrecedence
 	case "&&":
@@ -393,6 +651,12 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		left = literal{parseNumber(t.text), t.line}
 	case "string":
 		left = literal{value{kind: stringKind, s: t.text}, t.line}
+	case "interpolated":
+		var err error
+		left, err = p.interpolated(t)
+		if err != nil {
+			return nil, err
+		}
 	case "variable":
 		left = variable{t}
 	case "[":
@@ -401,8 +665,38 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		if err != nil {
 			return nil, err
 		}
-	case "name":
-		if t.text == "COUNT_NORMAL" || t.text == "COUNT_RECURSIVE" {
+	case "name", "\\":
+		var nameErr error
+		t, nameErr = p.nameAfter(t)
+		if nameErr != nil {
+			return nil, nameErr
+		}
+		if p.accept("::") {
+			name := t.text
+			if !equalName(name, "self") && !equalName(name, "parent") && !equalName(name, "static") {
+				name, _ = p.resolveName(name, "class")
+			}
+			member := p.current()
+			if p.acceptKeyword("class") {
+				left = classNameExpr{name, member.line}
+			} else if p.accept("variable") {
+				left = staticPropertyExpr{name, member.text, member.line}
+			} else if p.accept("name") {
+				if p.accept("(") {
+					args, err := p.arguments()
+					if err != nil {
+						return nil, err
+					}
+					left = staticCallExpr{name, member.text, args, member.line}
+				} else {
+					left = classConstantExpr{name, member.text, member.line}
+				}
+			} else {
+				return nil, unexpected(member, "name", "variable")
+			}
+			break
+		}
+		if (t.text == "COUNT_NORMAL" || t.text == "COUNT_RECURSIVE") && p.namespace == "" && p.imports["const"][t.text] == "" {
 			n := int64(0)
 			if t.text == "COUNT_RECURSIVE" {
 				n = 1
@@ -411,6 +705,38 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			break
 		}
 		switch strings.ToLower(t.text) {
+		case "throw":
+			operand, err := p.expression(assignmentPrecedence, end...)
+			if err != nil {
+				return nil, err
+			}
+			left = throwExpr{operand: operand, line: t.line}
+		case "__namespace__":
+			left = literal{value{kind: stringKind, s: p.namespace}, t.line}
+		case "__file__":
+			filename := p.filename
+			if canonical, err := filepath.EvalSymlinks(filename); err == nil {
+				filename = canonical
+			}
+			left = literal{value{kind: stringKind, s: filename}, t.line}
+		case "__dir__":
+			filename := p.filename
+			if canonical, err := filepath.EvalSymlinks(filename); err == nil {
+				filename = canonical
+			}
+			left = literal{value{kind: stringKind, s: filepath.Dir(filename)}, t.line}
+		case "include", "require", "include_once", "require_once":
+			path, err := p.expression(assignmentPrecedence, end...)
+			if err != nil {
+				return nil, err
+			}
+			left = includeExpr{kind: strings.ToLower(t.text), path: path, line: t.line}
+		case "match":
+			var err error
+			left, err = p.matchExpression(t.line)
+			if err != nil {
+				return nil, err
+			}
 		case "isset", "empty":
 			args, err := p.languageArguments(strings.ToLower(t.text))
 			if err != nil {
@@ -434,8 +760,19 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			}
 		case "new":
 			name := p.current()
-			if err := p.expect("name"); err != nil {
-				return nil, err
+			var classExpr expr
+			if name.kind == "variable" {
+				p.advance()
+				classExpr = variable{name}
+			} else {
+				var err error
+				name, err = p.readName()
+				if err != nil {
+					return nil, err
+				}
+				if (equalName(name.text, "self") || equalName(name.text, "parent") || equalName(name.text, "static")) && p.classDepth == 0 {
+					return nil, &fatalDiagnostic{name.line, "Cannot use " + strings.ToLower(name.text) + " when no class scope is active"}
+				}
 			}
 			arguments := p.accept("(")
 			var args []expr
@@ -446,17 +783,55 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 					return nil, err
 				}
 			}
-			left = newObject{name: name.text, line: name.line, arguments: arguments, args: args}
+			resolved := name.text
+			if !equalName(resolved, "self") && !equalName(resolved, "parent") && !equalName(resolved, "static") {
+				resolved, _ = p.resolveName(name.text, "class")
+			}
+			left = newObject{name: resolved, classExpr: classExpr, line: name.line, arguments: arguments, args: args}
+		case "function":
+			var err error
+			left, err = p.anonymousFunction(t.line, false)
+			if err != nil {
+				return nil, err
+			}
+		case "fn":
+			var err error
+			left, err = p.arrowFunction(t.line, false, end...)
+			if err != nil {
+				return nil, err
+			}
+		case "static":
+			if p.acceptKeyword("fn") {
+				var err error
+				left, err = p.arrowFunction(t.line, true, end...)
+				if err != nil {
+					return nil, err
+				}
+				break
+			}
+			if !p.acceptKeyword("function") {
+				return nil, syntax(t.line, "unsupported keyword, constant, or function %q", t.text)
+			}
+			var err error
+			left, err = p.anonymousFunction(t.line, true)
+			if err != nil {
+				return nil, err
+			}
 		default:
 			if p.accept("(") && !reservedName(t.text) {
 				args, err := p.arguments()
 				if err != nil {
 					return nil, err
 				}
-				left = functionCall{t.text, args, t.line}
+				name, fallback := p.resolveName(t.text, "function")
+				left = functionCall{name: name, args: args, line: t.line, fallback: fallback}
 				break
 			}
-			return nil, syntax(t.line, "unsupported keyword, constant, or function %q", t.text)
+			if reservedName(t.text) {
+				return nil, syntax(t.line, "unsupported keyword, constant, or function %q", t.text)
+			}
+			name, fallback := p.resolveName(t.text, "const")
+			left = constantExpr{name, fallback, t.line}
 		}
 	case "++", "--":
 		target, err := p.expression(unaryPrecedence+1, end...)
@@ -467,7 +842,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			return nil, syntax(t.line, "invalid increment/decrement target")
 		}
 		left = increment{target, t, false}
-	case "+", "-", "!":
+	case "+", "-", "!", "~":
 		prec := unaryPrecedence
 		if t.kind == "!" {
 			prec = notPrecedence
@@ -508,6 +883,10 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			node.grouped = true
 			left = node
 		}
+		if node, ok := left.(ternaryExpr); ok {
+			node.grouped = true
+			left = node
+		}
 	default:
 		if t.kind == "eof" {
 			return nil, syntax(t.line, "syntax error, unexpected end of file")
@@ -517,6 +896,39 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 	compared := 0
 	for {
 		op := p.current()
+		if op.kind == "name" && strings.EqualFold(op.text, "instanceof") {
+			if instanceofPrecedence < min {
+				return left, nil
+			}
+			p.advance()
+			if p.current().kind == "variable" {
+				name := p.advance()
+				left = instanceofExpr{operand: left, classExpr: variable{name}, line: op.line}
+				continue
+			}
+			name, err := p.readName()
+			if err != nil {
+				return nil, err
+			}
+			resolved, _ := p.resolveName(name.text, "class")
+			if equalName(name.text, "self") || equalName(name.text, "parent") || equalName(name.text, "static") {
+				if p.classDepth == 0 {
+					return nil, &fatalDiagnostic{name.line, "Cannot use " + strings.ToLower(name.text) + " when no class scope is active"}
+				}
+				resolved = name.text
+			}
+			left = instanceofExpr{operand: left, className: resolved, line: op.line}
+			continue
+		}
+		if property, ok := left.(nullsafeExpr); ok && !property.method && p.accept("(") {
+			args, err := p.arguments()
+			if err != nil {
+				return nil, err
+			}
+			property.method, property.args = true, args
+			left = property
+			continue
+		}
 		if property, ok := left.(propertyExpr); ok && p.accept("(") {
 			args, err := p.arguments()
 			if err != nil {
@@ -525,7 +937,15 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			left = methodCall{property.base, property.name, args, property.line}
 			continue
 		}
-		if node, ok := left.(newObject); ok && !node.grouped && (op.kind == "[" || op.kind == "->") && (!node.arguments || p.version == PHP83) {
+		if p.accept("(") {
+			args, err := p.arguments()
+			if err != nil {
+				return nil, err
+			}
+			left = dynamicCall{callee: left, args: args, line: op.line}
+			continue
+		}
+		if node, ok := left.(newObject); ok && !node.grouped && (op.kind == "[" || op.kind == "->" || op.kind == "?->") && (!node.arguments || p.version == PHP83) {
 			// The new expression is complete in this target's grammar. Report
 			// the enclosing expression's terminators (e.g. comma/semicolon for echo).
 			return nil, unexpected(op, end...)
@@ -546,12 +966,16 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			left = offsetExpr{left, key, line}
 			continue
 		}
-		if p.accept("->") {
+		if p.accept("->") || p.accept("?->") {
 			name := p.current()
 			if err := p.expect("name"); err != nil {
 				return nil, err
 			}
-			left = propertyExpr{left, name.text, name.line}
+			if op.kind == "?->" {
+				left = nullsafeExpr{base: left, name: name.text, line: name.line}
+			} else {
+				left = propertyExpr{left, name.text, name.line}
+			}
 			continue
 		}
 		if (op.kind == "++" || op.kind == "--") && min <= unaryPrecedence {
@@ -568,7 +992,9 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			if err != nil {
 				return nil, err
 			}
-			if op.kind == "=" {
+			if op.kind == "??=" {
+				left = coalesceAssignment{left, right, op.line}
+			} else if op.kind == "=" {
 				left = assignment{left, right, op.line}
 			} else {
 				left = compoundAssignment{left, right, op}
@@ -582,6 +1008,39 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		if prec == assignmentPrecedence {
 			return nil, syntax(op.line, "invalid assignment target")
 		}
+		if op.kind == "?" {
+			p.advance()
+			var yes expr
+			var err error
+			if p.current().kind != ":" {
+				yes, err = p.expression(0, ":")
+				if err != nil {
+					return nil, err
+				}
+			}
+			if previous, ok := left.(ternaryExpr); ok && !previous.grouped && (previous.yes != nil || yes != nil) {
+				form := "a ? b : c ? d : e"
+				alternatives := "(a ? b : c) ? d : e` or `a ? b : (c ? d : e)"
+				if previous.yes == nil {
+					form = "a ?: b ? c : d"
+					alternatives = "(a ?: b) ? c : d` or `a ?: (b ? c : d)"
+				}
+				if yes == nil {
+					form = "a ? b : c ?: d"
+					alternatives = "(a ? b : c) ?: d` or `a ? b : (c ?: d)"
+				}
+				return nil, &fatalDiagnostic{op.line, "Unparenthesized `" + form + "` is not supported. Use either `" + alternatives + "`"}
+			}
+			if err = p.expect(":"); err != nil {
+				return nil, err
+			}
+			no, err := p.expression(ternaryPrecedence+1, end...)
+			if err != nil {
+				return nil, err
+			}
+			left = ternaryExpr{condition: left, yes: yes, no: no, line: op.line}
+			continue
+		}
 		if prec == comparisonPrecedence || prec == orderingPrecedence {
 			// Equal-precedence comparisons are non-associative in PHP.
 			// A parenthesized expression is parsed by a separate call, so
@@ -592,7 +1051,11 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			compared |= 1 << prec
 		}
 		p.advance()
-		right, err := p.expression(prec+1, end...)
+		rightPrec := prec + 1
+		if op.kind == "??" {
+			rightPrec = prec
+		}
+		right, err := p.expression(rightPrec, end...)
 		if err != nil {
 			return nil, err
 		}
@@ -603,10 +1066,36 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 // The opening parenthesis has already been consumed.
 func (p *parser) arguments() ([]expr, error) {
 	var args []expr
+	seenUnpack, seenNamed := false, false
 	for p.current().kind != ")" {
+		start := p.current()
+		unpack := p.accept("...")
+		named := !unpack && start.kind == "name" && p.tokens[p.pos+1].kind == ":"
+		if unpack && seenNamed {
+			return nil, &fatalDiagnostic{start.line, "Cannot use argument unpacking after named arguments"}
+		}
+		if !unpack && !named {
+			if seenUnpack {
+				return nil, &fatalDiagnostic{start.line, "Cannot use positional argument after argument unpacking"}
+			}
+			if seenNamed {
+				return nil, &fatalDiagnostic{start.line, "Cannot use positional argument after named argument"}
+			}
+		}
+		if named {
+			p.advance()
+			p.advance()
+			seenNamed = true
+		}
 		x, err := p.expression(0)
 		if err != nil {
 			return nil, err
+		}
+		if unpack {
+			x = unpackArgument{operand: x, line: start.line}
+			seenUnpack = true
+		} else if named {
+			x = namedArgument{name: start.text, operand: x, line: start.line}
 		}
 		args = append(args, x)
 		if !p.accept(",") {
@@ -617,8 +1106,15 @@ func (p *parser) arguments() ([]expr, error) {
 }
 
 func writable(e expr) bool {
+	// Keep nullsafe paths in the write AST so compile validation produces a
+	// fatal diagnostic even in an unselected branch.
+	if hasNullsafe(e) {
+		return true
+	}
 	switch node := e.(type) {
 	case variable:
+		return true
+	case staticPropertyExpr:
 		return true
 	case offsetExpr:
 		return writable(node.base)
