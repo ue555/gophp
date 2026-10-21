@@ -1,0 +1,6 @@
+integer
+positive
+filemtime(): stat failed for /gophp-nonexistent-filemtime
+false
+filemtime(): Argument #1 ($filename) must be of type string, array given
+filemtime(): Filename contains null byte

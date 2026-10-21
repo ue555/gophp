@@ -6,6 +6,30 @@ import (
 )
 
 func builtinName(name string) bool {
+	if strings.EqualFold(name, "hash_hmac") || strings.EqualFold(name, "hash_equals") {
+		return true
+	}
+	if opensslBuiltin(name) {
+		return true
+	}
+	if strings.EqualFold(name, "random_int") {
+		return true
+	}
+	if strings.EqualFold(name, "filemtime") {
+		return true
+	}
+	if strings.EqualFold(name, "substr_replace") {
+		return true
+	}
+	if strings.EqualFold(name, "token_get_all") || strings.EqualFold(name, "token_name") {
+		return true
+	}
+	if strings.EqualFold(name, "preg_last_error") || strings.EqualFold(name, "preg_last_error_msg") {
+		return true
+	}
+	if strings.EqualFold(name, "substr_count") {
+		return true
+	}
 	if manifestFilesystemBuiltin(name) || strings.EqualFold(name, "var_export") {
 		return true
 	}
@@ -57,7 +81,7 @@ func builtinName(name string) bool {
 	if strings.EqualFold(name, "str_pad") {
 		return true
 	}
-	if strings.EqualFold(name, "ksort") {
+	if strings.EqualFold(name, "ksort") || strings.EqualFold(name, "krsort") {
 		return true
 	}
 	if strings.EqualFold(name, "array_keys") {
@@ -207,7 +231,7 @@ func builtinName(name string) bool {
 	switch strings.ToLower(name) {
 	case "spl_autoload_register", "spl_autoload_unregister":
 		return true
-	case "hash", "sha1", "str_split", "strpbrk", "strval", "str_getcsv", "assert", "rawurldecode", "rawurlencode", "htmlspecialchars", "random_bytes", "gmdate", "date", "headers_sent", "headers_list", "header", "header_remove", "http_response_code", "mb_split", "serialize", "unserialize", "clearstatcache", "compact", "glob", "get_declared_classes", "get_declared_interfaces", "get_class_methods", "get_parent_class", "class_parents", "class_uses", "sort", "asort", "arsort", "usort", "uasort", "uksort", "array_diff", "array_intersect", "array_intersect_assoc", "array_udiff_assoc", "array_pad", "array_search", "array_reduce", "array_any", "array_all", "array_fill_keys", "array_merge_recursive", "array_replace_recursive", "array_change_key_case", "array_sum", "array_column", "range", "ucfirst", "lcfirst", "ucwords", "abs", "ceil", "floor", "round", "version_compare", "error_log", "is_subclass_of", "preg_replace_callback":
+	case "hash", "sha1", "str_split", "strpbrk", "strval", "str_getcsv", "assert", "rawurldecode", "rawurlencode", "htmlspecialchars", "random_bytes", "gmdate", "date", "headers_sent", "headers_list", "header", "header_remove", "http_response_code", "mb_split", "serialize", "unserialize", "clearstatcache", "compact", "glob", "get_declared_classes", "get_declared_interfaces", "get_class_methods", "get_parent_class", "class_parents", "class_uses", "sort", "rsort", "asort", "arsort", "usort", "uasort", "uksort", "array_diff", "array_intersect", "array_intersect_assoc", "array_udiff_assoc", "array_pad", "array_search", "array_reduce", "array_any", "array_all", "array_fill_keys", "array_merge_recursive", "array_replace_recursive", "array_change_key_case", "array_sum", "array_column", "range", "ucfirst", "lcfirst", "ucwords", "abs", "ceil", "floor", "round", "version_compare", "error_log", "is_subclass_of", "preg_replace_callback":
 		return true
 	case "is_callable", "call_user_func", "call_user_func_array", "exit", "die":
 		return true
@@ -238,6 +262,41 @@ func builtinRedeclaration(name string, version Version) string {
 }
 
 func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
+	if strings.EqualFold(node.name, "token_get_all") || strings.EqualFold(node.name, "token_name") {
+		return e.callTokenizer(node)
+	}
+	if strings.EqualFold(node.name, "preg_last_error") || strings.EqualFold(node.name, "preg_last_error_msg") {
+		args, err := e.evalArguments(node.args)
+		if err != nil {
+			return value{}, err
+		}
+		if len(args) != 0 {
+			return value{}, &runtimeError{node.line, "ArgumentCountError", node.name + "() expects exactly 0 arguments, " + fmt.Sprint(len(args)) + " given"}
+		}
+		if strings.EqualFold(node.name, "preg_last_error") {
+			return integer(e.pregLastError), nil
+		}
+		return value{kind: stringKind, s: pregErrorMessage(e.pregLastError)}, nil
+	}
+
+	if strings.EqualFold(node.name, "substr_count") {
+		return e.callSubstrCount(node)
+	}
+	if strings.EqualFold(node.name, "hash_hmac") || strings.EqualFold(node.name, "hash_equals") {
+		return e.callHMAC(node)
+	}
+	if opensslBuiltin(node.name) {
+		return e.callOpenSSL(node)
+	}
+	if strings.EqualFold(node.name, "random_int") {
+		return e.callRandomInt(node)
+	}
+	if strings.EqualFold(node.name, "filemtime") {
+		return e.callFilemtime(node)
+	}
+	if strings.EqualFold(node.name, "substr_replace") {
+		return e.callSubstrReplace(node)
+	}
 	if manifestFilesystemBuiltin(node.name) {
 		return e.callManifestFilesystem(node)
 	}
@@ -368,7 +427,7 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 	if strings.EqualFold(node.name, "get_declared_classes") || strings.EqualFold(node.name, "get_declared_interfaces") {
 		return e.callGetDeclaredTypes(node)
 	}
-	if strings.EqualFold(node.name, "sort") {
+	if strings.EqualFold(node.name, "rsort") || strings.EqualFold(node.name, "sort") {
 		return e.callSort(node)
 	}
 	if strings.EqualFold(node.name, "asort") || strings.EqualFold(node.name, "arsort") {
@@ -521,7 +580,7 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 	if strings.EqualFold(node.name, "str_pad") {
 		return e.callStrPad(node)
 	}
-	if strings.EqualFold(node.name, "ksort") {
+	if strings.EqualFold(node.name, "ksort") || strings.EqualFold(node.name, "krsort") {
 		return e.callKsort(node)
 	}
 	if strings.EqualFold(node.name, "array_keys") {

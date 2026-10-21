@@ -1,0 +1,14 @@
+target: preg-tcp-regression
+command: go test ./cmd/gophp -run TestPregStateAcrossTCPRequests -v
+cwd: /Users/kouji/dev/php
+=== RUN   TestPregStateAcrossTCPRequests
+=== RUN   TestPregStateAcrossTCPRequests/8.3
+=== RUN   TestPregStateAcrossTCPRequests/8.4
+=== RUN   TestPregStateAcrossTCPRequests/8.5
+--- PASS: TestPregStateAcrossTCPRequests (0.14s)
+    --- PASS: TestPregStateAcrossTCPRequests/8.3 (0.04s)
+    --- PASS: TestPregStateAcrossTCPRequests/8.4 (0.04s)
+    --- PASS: TestPregStateAcrossTCPRequests/8.5 (0.05s)
+PASS
+ok  	example.com/gophp/cmd/gophp	0.410s
+exit_code: 0

@@ -357,11 +357,13 @@ func (e *evaluator) initConstants() {
 			"JSON_PARTIAL_OUTPUT_ON_ERROR": integer(512), "JSON_THROW_ON_ERROR": integer(4194304),
 			"JSON_ERROR_NONE": integer(0), "JSON_ERROR_DEPTH": integer(1), "JSON_ERROR_STATE_MISMATCH": integer(2),
 			"JSON_ERROR_CTRL_CHAR": integer(3), "JSON_ERROR_SYNTAX": integer(4), "JSON_ERROR_UTF8": integer(5),
+			"PREG_NO_ERROR": integer(0), "PREG_INTERNAL_ERROR": integer(1), "PREG_BACKTRACK_LIMIT_ERROR": integer(2), "PREG_RECURSION_LIMIT_ERROR": integer(3), "PREG_BAD_UTF8_ERROR": integer(4), "PREG_BAD_UTF8_OFFSET_ERROR": integer(5), "PREG_JIT_STACKLIMIT_ERROR": integer(6),
 			"PREG_PATTERN_ORDER": integer(1), "PREG_SET_ORDER": integer(2),
 			"PREG_OFFSET_CAPTURE": integer(256), "PREG_UNMATCHED_AS_NULL": integer(512),
 			"PREG_SPLIT_NO_EMPTY": integer(1), "PREG_SPLIT_DELIM_CAPTURE": integer(2), "PREG_SPLIT_OFFSET_CAPTURE": integer(4),
 			"STR_PAD_LEFT": integer(0), "STR_PAD_RIGHT": integer(1), "STR_PAD_BOTH": integer(2),
-			"SORT_REGULAR": integer(0), "SORT_NUMERIC": integer(1), "SORT_STRING": integer(2), "SORT_NATURAL": integer(6), "SORT_FLAG_CASE": integer(8),
+			"SORT_REGULAR": integer(0), "SORT_NUMERIC": integer(1), "SORT_STRING": integer(2), "SORT_LOCALE_STRING": integer(5), "SORT_NATURAL": integer(6), "SORT_FLAG_CASE": integer(8),
+			"OPENSSL_RAW_DATA": integer(1), "OPENSSL_ZERO_PADDING": integer(2), "OPENSSL_DONT_ZERO_PAD_KEY": integer(4),
 			"LOCK_SH": integer(1), "LOCK_EX": integer(2), "LOCK_UN": integer(3), "LOCK_NB": integer(4), "FILE_APPEND": integer(8),
 			"SEEK_SET": integer(0), "SEEK_CUR": integer(1), "SEEK_END": integer(2),
 			"GLOB_ONLYDIR": integer(8192), "GLOB_NOSORT": integer(4), "GLOB_MARK": integer(2),
@@ -370,6 +372,15 @@ func (e *evaluator) initConstants() {
 			"EXTR_OVERWRITE": integer(0), "EXTR_SKIP": integer(1), "EXTR_PREFIX_SAME": integer(2), "EXTR_REFS": integer(256),
 			"FILTER_DEFAULT": integer(516), "FILTER_CALLBACK": integer(1024), "FILTER_VALIDATE_INT": integer(257), "FILTER_VALIDATE_BOOL": integer(258), "FILTER_VALIDATE_BOOLEAN": integer(258), "FILTER_VALIDATE_URL": integer(273), "FILTER_VALIDATE_IP": integer(275), "FILTER_FLAG_IPV4": integer(1048576), "FILTER_FLAG_IPV6": integer(2097152), "FILTER_REQUIRE_ARRAY": integer(16777216), "FILTER_REQUIRE_SCALAR": integer(33554432), "FILTER_NULL_ON_FAILURE": integer(134217728),
 		}
+		for name, id := range phpTokenConstants(e.version) {
+			e.constants[name] = integer(int64(id))
+		}
+		version, major, minor, jit := pcreLibraryInfo()
+		e.constants["PCRE_VERSION"] = value{kind: stringKind, s: version}
+		e.constants["PCRE_VERSION_MAJOR"] = integer(major)
+		e.constants["PCRE_VERSION_MINOR"] = integer(minor)
+		e.constants["PCRE_JIT_SUPPORT"] = boolean(jit)
+
 		// The comparison targets pin patch versions. Keep this runtime identity
 		// in one place so version checks in Composer and vendor code use the
 		// same target as diagnostic compatibility rules.

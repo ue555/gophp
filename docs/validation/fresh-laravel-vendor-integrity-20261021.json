@@ -1,0 +1,6 @@
+{
+  "command": "compare original vendor package bytes with independent composer install --no-scripts (exclude generated vendor/composer metadata)",
+  "files": 8561,
+  "differences": [],
+  "exit_code": 0
+}

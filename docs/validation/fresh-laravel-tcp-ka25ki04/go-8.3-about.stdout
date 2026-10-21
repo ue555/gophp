@@ -1,0 +1,2 @@
+{"environment":{"application_name":"Fresh Laravel Probe","laravel_version":"12.70.0","php_version":"8.3.35","composer_version":"-","environment":"local","debug_mode":true,"url":"localhost","maintenance_mode":false,"timezone":"UTC","locale":"en"},"cache":{"config":false,"events":false,"routes":false,"views":false},"drivers":{"broadcasting":"log","cache":"database","database":"sqlite","logs":["single"],"mail":"log","queue":"database","session":"database"},"storage":{"\/users\/kouji\/dev\/php\/.cache\/fresh-laravel\/run-368f_opp\/go-8.3\/app\/public\/storage":false}}
+

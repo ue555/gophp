@@ -1,0 +1,14 @@
+target: go84-cookie-decode-reset
+command: python3 research/fresh-laravel/verify.py --version 8.4 --runtime go --binary .cache/fresh-laravel/gophp --sequential 1
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-62q3est7
+RUN go-8.4-autoload
+RUN go-8.4-environment
+RUN go-8.4-list
+RUN go-8.4-about
+RUN go-8.4-routes
+RUN go-8.4-migrate
+RUN go-8.4-migrate-again
+PASS go-8.4 CLI/migration/HTTP/Blade cold/warm 12 requests
+RUN go-8.4-blade-tokens
+exit_code: 0

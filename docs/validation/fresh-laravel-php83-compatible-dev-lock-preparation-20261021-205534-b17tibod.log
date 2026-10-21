@@ -1,0 +1,38 @@
+target: php83-compatible-dev-lock-preparation
+command: podman run --rm -v /Users/kouji/dev/php/research/fresh-laravel/app:/app localhost/gophp-dependency-research:8.3.35 composer update --with laravel/framework:12.70.0 --no-scripts --no-interaction --prefer-dist
+cwd: /Users/kouji/dev/php
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 0 installs, 6 updates, 0 removals
+  - Downgrading symfony/clock (v8.1.9 => v7.4.21)
+  - Downgrading symfony/css-selector (v8.1.6 => v7.4.18)
+  - Downgrading symfony/event-dispatcher (v8.1.5 => v7.4.17)
+  - Downgrading symfony/string (v8.1.9 => v7.4.21)
+  - Downgrading symfony/translation (v8.1.5 => v7.4.17)
+  - Downgrading symfony/yaml (v8.1.9 => v7.4.21)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 0 installs, 6 updates, 0 removals
+  - Downloading symfony/string (v7.4.21)
+  - Downloading symfony/css-selector (v7.4.18)
+  - Downloading symfony/event-dispatcher (v7.4.17)
+  - Downloading symfony/translation (v7.4.17)
+  - Downloading symfony/clock (v7.4.21)
+  - Downloading symfony/yaml (v7.4.21)
+ 0/6 [>---------------------------]   0%
+ 5/6 [=======================>----]  83%
+ 6/6 [============================] 100%
+  - Downgrading symfony/string (v8.1.9 => v7.4.21): Extracting archive
+  - Downgrading symfony/css-selector (v8.1.6 => v7.4.18): Extracting archive
+  - Downgrading symfony/event-dispatcher (v8.1.5 => v7.4.17): Extracting archive
+  - Downgrading symfony/translation (v8.1.5 => v7.4.17): Extracting archive
+  - Downgrading symfony/clock (v8.1.9 => v7.4.21): Extracting archive
+  - Downgrading symfony/yaml (v8.1.9 => v7.4.21): Extracting archive
+ 0/6 [>---------------------------]   0%
+ 5/6 [=======================>----]  83%
+ 6/6 [============================] 100%
+Generating optimized autoload files
+82 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+exit_code: 0

@@ -1,0 +1,22 @@
+target: manual-commands
+command: python3 research/fresh-laravel/manual-smoke.py
+cwd: /Users/kouji/dev/php
+command: ['/Users/kouji/dev/php/bin/gophp', '--php-version=8.4', 'artisan', 'key:generate', '--no-ansi'] cwd: /Users/kouji/dev/php/.cache/fresh-laravel/manual-smoke-q5u3ruzi/app
+
+   INFO  Application key set successfully.  
+
+  exit_code: 0
+command: ['/Users/kouji/dev/php/bin/gophp', '--php-version=8.4', 'artisan', 'package:discover', '--no-ansi'] cwd: /Users/kouji/dev/php/.cache/fresh-laravel/manual-smoke-q5u3ruzi/app
+
+   INFO  Discovering packages.  
+
+  laravel/pail .......................................................... DONE
+  laravel/sail .......................................................... DONE
+  laravel/tinker ........................................................ DONE
+  nesbot/carbon ......................................................... DONE
+  nunomaduro/collision .................................................. DONE
+  nunomaduro/termwind ................................................... DONE
+
+  exit_code: 0
+PASS generated 32-byte key in disposable .env; package discovery passed
+exit_code: 0

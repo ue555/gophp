@@ -1,0 +1,6 @@
+target: final-task-api-three
+command: python3 research/task-api/verify.py --interpreter bin/gophp
+cwd: /Users/kouji/dev/php
+logs: /Users/kouji/dev/php/docs/validation/task-api-20261021-213736-trqw46y4
+result: 0 log: /Users/kouji/dev/php/docs/validation/task-api-20261021-213736-trqw46y4/run.log
+exit_code: 0

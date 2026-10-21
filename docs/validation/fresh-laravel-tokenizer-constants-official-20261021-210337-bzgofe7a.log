@@ -1,0 +1,8 @@
+target: tokenizer-constants-official
+command: python3 -
+cwd: /Users/kouji/dev/php
+command: ['./containers/php-version/bin/php83', '-n', '-r', "echo json_encode(get_defined_constants(true)['tokenizer']);"] target: 8.3.35 exit_code: 0
+command: ['./containers/php-version/bin/php84', '-n', '-r', "echo json_encode(get_defined_constants(true)['tokenizer']);"] target: 8.4.26 exit_code: 0
+command: ['./containers/php-version/bin/php85', '-n', '-r', "echo json_encode(get_defined_constants(true)['tokenizer']);"] target: 8.5.11 exit_code: 0
+token counts: {'83': 148, '84': 152, '85': 154}
+exit_code: 0

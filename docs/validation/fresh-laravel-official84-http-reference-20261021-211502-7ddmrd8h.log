@@ -1,0 +1,13 @@
+target: official84-http-reference
+command: python3 research/fresh-laravel/verify.py --version 8.4 --runtime official --binary .cache/fresh-laravel/gophp --sequential 1
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-r3ge6dx2
+RUN official-8.4-autoload
+RUN official-8.4-environment
+RUN official-8.4-list
+RUN official-8.4-about
+RUN official-8.4-routes
+RUN official-8.4-migrate
+RUN official-8.4-migrate-again
+PASS official-8.4 CLI/migration/HTTP/Blade cold/warm 12 requests
+exit_code: 0

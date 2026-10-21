@@ -1,0 +1,7 @@
+{
+  "success/krsort_flags_references.php": {
+    "stdout": "true\n[\"x2\",\"x10\",\"a\",\"A\",10,2,\"02\",-1]\ntrue\n[10,2,\"02\",\"x10\",\"x2\",\"A\",\"a\",-1]\ntrue\n[\"x2\",\"x10\",\"a\",\"A\",2,10,\"02\",-1]\ntrue\n[\"x10\",\"x2\",\"a\",\"A\",10,2,\"02\",-1]\ntrue\n[\"x2\",\"x10\",\"A\",\"a\",2,10,\"02\",-1]\ntrue\n[\"x2\",\"x10\",\"a\",\"A\",2,10,\"02\",-1]\ntrue\n1:{\"c\":3,\"b\":2,\"a\":1}\n[{\"c\":3,\"b\":2,\"a\":1}]\nkrsort(): Argument #2 ($flags) must be of type int, array given\n{\"c\":3,\"b\":2,\"a\":1}\n[\"x10\",\"x2\",\"x1\",\"x02\",\"x000\",\"x0\"]\nkrsort(): Argument #1 ($array) must be of type array, int given\n17\nkrsort(): Argument #1 ($array) could not be passed by reference\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

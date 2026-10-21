@@ -1,0 +1,14 @@
+"abXef"
+"abcdX"
+"abXf"
+"Xabc"
+"abcX"
+"aXbc"
+"\u65e5Zbc"
+{"a":"aXc","4":"deY","5":""}
+"aXc"
+["aX","dX"]
+TypeError: substr_replace(): Argument #3 ($offset) cannot be an array when working on a single string
+TypeError: substr_replace(): Argument #4 ($length) cannot be an array when working on a single string
+TypeError: substr_replace(): Argument #3 ($offset) cannot be an array when working on a single string
+TypeError: substr_replace(): Argument #3 ($offset) must be of type array|int, stdClass given

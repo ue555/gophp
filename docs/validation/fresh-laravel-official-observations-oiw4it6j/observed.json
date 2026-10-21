@@ -1,0 +1,7 @@
+{
+  "success/json_encode_error_reset.php": {
+    "stdout": "4\n{\"ok\":1}:0\n4\n7\n0\n8\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

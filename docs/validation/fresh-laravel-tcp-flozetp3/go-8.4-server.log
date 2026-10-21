@@ -1,0 +1,17 @@
+Fatal error: Uncaught Error: Interface "Serializable" not found in /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php:21
+Stack trace:
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php(576): include()
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php(427): {closure:/Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php:575}('/Users/kouji/de...')
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(909): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(885): Illuminate\Foundation\Exceptions\Handler->renderExceptionWithSymfony(Object(Error), true)
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(860): Illuminate\Foundation\Exceptions\Handler->renderExceptionContent(Object(Error))
+#5 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(839): Illuminate\Foundation\Exceptions\Handler->convertExceptionToResponse(Object(Error))
+#6 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(738): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Error))
+#7 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(626): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Error))
+#8 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(55): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Error))
+#9 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(574): NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler->render(Object(Illuminate\Http\Request), Object(Error))
+#10 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(148): Illuminate\Foundation\Http\Kernel->renderException(Object(Illuminate\Http\Request), Object(Error))
+#11 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#12 /Users/kouji/dev/php/.cache/fresh-laravel/run-p9hq2jpg/go-8.4/app/public/index.php(20): Illuminate\Foundation\Application->handleRequest(Object(Illuminate\Http\Request))
+#13 {main}
+  thrown in /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/error-handler/ErrorRenderer/HtmlErrorRenderer.php on line 21

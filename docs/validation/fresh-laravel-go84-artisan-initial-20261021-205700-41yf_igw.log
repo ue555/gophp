@@ -1,0 +1,17 @@
+target: go84-artisan-initial
+command: .cache/fresh-laravel/gophp --php-version=8.4 research/fresh-laravel/app/artisan list --no-ansi
+cwd: /Users/kouji/dev/php
+Fatal error: Uncaught Error: Interface "Serializable" not found in /Users/kouji/dev/php/research/fresh-laravel/app/vendor/filp/whoops/src/Whoops/Exception/FrameCollection.php:21
+Stack trace:
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php(576): include()
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php(427): {closure:/Users/kouji/dev/php/research/fresh-laravel/app/vendor/composer/ClassLoader.php:575}('/Users/kouji/de...')
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/filp/whoops/src/Whoops/Run.php(211): Composer\Autoload\ClassLoader->loadClass('Whoops\\Exceptio...')
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/nunomaduro/collision/src/Provider.php(43): Whoops\Run->register()
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(69): NunoMaduro\Collision\Provider->register()
+#5 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(653): NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(Error))
+#6 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(202): Illuminate\Foundation\Console\Kernel->renderException(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(Error))
+#7 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#8 /Users/kouji/dev/php/research/fresh-laravel/app/artisan(16): Illuminate\Foundation\Application->handleCommand(Object(Symfony\Component\Console\Input\ArgvInput))
+#9 {main}
+  thrown in /Users/kouji/dev/php/research/fresh-laravel/app/vendor/filp/whoops/src/Whoops/Exception/FrameCollection.php on line 21
+exit_code: 255

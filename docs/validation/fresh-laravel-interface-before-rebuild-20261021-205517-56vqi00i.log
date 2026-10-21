@@ -1,0 +1,5 @@
+target: interface-before-rebuild
+command: bin/gophp tests/fixtures/success/interface_chain_redeclare.php
+cwd: /Users/kouji/dev/php
+Fatal error: Declaration of ChainRoot::dispatch(object $event) must be compatible with ChainMiddle::dispatch(object $event, ?string $name): object in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php on line 2
+exit_code: 255

@@ -668,6 +668,9 @@ func (p *parser) ifStatement() (statement, error) {
 	if err := p.expect(")"); err != nil {
 		return s, err
 	}
+	if p.accept(":") {
+		return p.alternativeIf(s)
+	}
 	s.thenBranch, err = p.body()
 	if err != nil {
 		return s, err
@@ -688,6 +691,65 @@ func (p *parser) ifStatement() (statement, error) {
 		}
 	}
 	return s, err
+}
+
+func (p *parser) alternativeStatements(ends ...string) ([]statement, error) {
+	var body []statement
+	for {
+		for _, end := range ends {
+			if p.keyword(end) {
+				return body, nil
+			}
+		}
+		if p.current().kind == "eof" {
+			return nil, unexpected(p.current())
+		}
+		s, err := p.statement()
+		if err != nil {
+			return nil, err
+		}
+		body = append(body, s)
+	}
+}
+func (p *parser) alternativeIf(s statement) (statement, error) {
+	var err error
+	s.thenBranch, err = p.alternativeStatements("elseif", "else", "endif")
+	if err != nil {
+		return s, err
+	}
+	if p.acceptKeyword("elseif") {
+		next := statement{kind: "if"}
+		if err = p.expect("("); err != nil {
+			return s, err
+		}
+		next.condition, err = p.expression(0, ")")
+		if err != nil {
+			return s, err
+		}
+		next.conditionLine = expressionLine(next.condition)
+		if err = p.expect(")"); err != nil {
+			return s, err
+		}
+		if err = p.expect(":"); err != nil {
+			return s, err
+		}
+		next, err = p.alternativeIf(next)
+		s.elseBranch = []statement{next}
+		return s, err
+	}
+	if p.acceptKeyword("else") {
+		if err = p.expect(":"); err != nil {
+			return s, err
+		}
+		s.elseBranch, err = p.alternativeStatements("endif")
+		if err != nil {
+			return s, err
+		}
+	}
+	if !p.acceptKeyword("endif") {
+		return s, unexpected(p.current(), "endif")
+	}
+	return s, p.expect(";")
 }
 
 func (p *parser) body() ([]statement, error) {

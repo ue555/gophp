@@ -46,6 +46,12 @@ func (e *evaluator) callDateFormat(node functionCall) (value, error) {
 			continue
 		}
 		switch c {
+		case 'T':
+			zone, _ := t.Zone()
+			if name == "gmdate" {
+				zone = "GMT"
+			}
+			out.WriteString(zone)
 		case 'D':
 			out.WriteString(t.Format("Mon"))
 		case 'd':

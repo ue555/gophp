@@ -1,0 +1,12 @@
+{
+  "success/json_unicode_escape.php": {
+    "stdout": "{\"\\u65e5\\u672c\":\"\\ud83d\\ude00\\/\"}\n{\"日本\":\"😀\\/\"}\n\"日本😀/\"\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_exception_inherited.php": {
+    "stdout": "view:7:2:template.php:42:cause\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

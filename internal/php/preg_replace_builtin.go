@@ -1,9 +1,7 @@
 package php
 
 import (
-	"regexp"
 	"strings"
-	"unicode/utf8"
 )
 
 func (e *evaluator) callPregReplace(node functionCall) (value, error) {
@@ -34,123 +32,43 @@ func (e *evaluator) callPregReplace(node functionCall) (value, error) {
 	if err != nil {
 		return value{}, err
 	}
-	if len(pattern) < 2 {
-		return value{}, &runtimeError{node.line, "Error", "gophp: invalid regular expression"}
-	}
-	end := strings.LastIndexByte(pattern, pattern[0])
-	if end <= 0 {
-		return value{}, &runtimeError{node.line, "Error", "gophp: invalid regular expression"}
-	}
-	body := pattern[1:end]
-	// A one-character negative lookbehind before an escaped r/n sequence is
-	// supported without changing the preceding character in the result.
-	newlineEscape := strings.Contains(body, "(?<!") && strings.HasSuffix(body, "[rn]")
-	camelBoundary := pattern == "/(.)(?=[A-Z])/u" && strings.HasPrefix(replacement, "$1")
-	tableBoundary := pattern == `~(?<=\w)([A-Z])~u` && replacement == "_$1"
-	if camelBoundary || tableBoundary {
-		// The lookahead is zero-width. Preserve every uppercase boundary,
-		// including adjacent capitals, without consuming the next character.
-	} else if newlineEscape {
-		body = `(^|[^\\])\\[rn]`
-		replacement = "${1}" + replacement
-	}
-	var re *regexp.Regexp
-	if camelBoundary || tableBoundary {
-		re = nil
-	} else if newlineEscape {
-		re, err = regexp.Compile(body)
-	} else {
-		re, err = compileBasicPCRE(pattern)
-	}
-	usePCRE2 := err != nil && !newlineEscape
-	if err != nil && !usePCRE2 {
-		return value{}, &runtimeError{node.line, "Error", "gophp: unsupported regular expression: " + err.Error()}
-	}
+	e.pregLastError = 0
 	count := int64(0)
 	convert := func(v value) (value, error) {
 		subject, err := e.toText(v, node.line)
 		if err != nil {
 			return value{}, err
 		}
-		if limit == 0 {
-			return value{kind: stringKind, s: subject}, nil
+		matches, _, err := pcre2Matches(pattern, subject, 0, int(limit))
+		if err != nil {
+			return value{}, err
 		}
-		if camelBoundary {
-			var out strings.Builder
-			for i, r := range subject {
-				if i > 0 && r >= 'A' && r <= 'Z' && utf8.RuneCountInString(subject[:i]) > 0 {
-					out.WriteString(replacement[2:])
-					count++
-				}
-				out.WriteRune(r)
-			}
-			return value{kind: stringKind, s: out.String()}, nil
+		var out strings.Builder
+		last := 0
+		for _, match := range matches {
+			out.WriteString(subject[last:match[0]])
+			out.WriteString(expandPCREReplacement(replacement, subject, match))
+			last = match[1]
+			count++
 		}
-		if tableBoundary {
-			var out strings.Builder
-			previous := rune(0)
-			for _, r := range subject {
-				if previous != 0 && r >= 'A' && r <= 'Z' && (previous >= 'a' && previous <= 'z' || previous >= 'A' && previous <= 'Z' || previous >= '0' && previous <= '9' || previous == '_') {
-					out.WriteByte('_')
-					count++
-				}
-				out.WriteRune(r)
-				previous = r
-			}
-			return value{kind: stringKind, s: out.String()}, nil
-		}
-		if usePCRE2 {
-			matches, _, err := pcre2MatchAll(pattern, subject)
-			if err != nil {
-				return value{}, err
-			}
-			if limit >= 0 && int64(len(matches)) > limit {
-				matches = matches[:limit]
-			}
-			var out strings.Builder
-			last := 0
-			for _, match := range matches {
-				if match[0] < last {
-					continue
-				}
-				out.WriteString(subject[last:match[0]])
-				out.WriteString(expandPCREReplacement(replacement, subject, match))
-				last = match[1]
-				count++
-			}
-			out.WriteString(subject[last:])
-			return value{kind: stringKind, s: out.String()}, nil
-		}
-		if limit >= 0 {
-			matches := re.FindAllStringSubmatchIndex(subject, int(limit))
-			var out strings.Builder
-			last := 0
-			for _, match := range matches {
-				out.WriteString(subject[last:match[0]])
-				out.Write(re.ExpandString(nil, replacement, subject, match))
-				last = match[1]
-				count++
-			}
-			out.WriteString(subject[last:])
-			return value{kind: stringKind, s: out.String()}, nil
-		}
-		count += int64(len(re.FindAllStringIndex(subject, -1)))
-		return value{kind: stringKind, s: re.ReplaceAllString(subject, replacement)}, nil
+		out.WriteString(subject[last:])
+		return value{kind: stringKind, s: out.String()}, nil
 	}
+
 	var result value
 	if args[2].value.kind == arrayKind {
 		result = arrayValue()
 		for _, entry := range args[2].value.a.entries {
 			item, err := convert(dereference(entry.value))
 			if err != nil {
-				return value{}, err
+				return e.pregFailure("preg_replace", node.line, err)
 			}
 			result.a = result.a.with(entry.key, item)
 		}
 	} else {
 		result, err = convert(args[2].value)
 		if err != nil {
-			return value{}, err
+			return e.pregFailure("preg_replace", node.line, err)
 		}
 	}
 	if len(node.args) >= 5 {

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "research/fresh-laravel/verify.py",
+    "--app",
+    ".cache/fresh-laravel/rebuild-2hr1ykcd/app",
+    "--binary",
+    "bin/gophp"
+  ],
+  "exit_code": 1
+}

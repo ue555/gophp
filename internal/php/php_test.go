@@ -162,7 +162,6 @@ func TestRejectUnsupported(t *testing.T) {
 		"echo 1 ?>trailing HTML", "echo 1; ?><?php echo 2;",
 		"echo 1e;", "echo 1e+;", "echo 0b10;", "echo 0o10;", "echo `ls`;",
 		"echo $argc;",
-		"if (true): echo 1; endif;",
 		"echo 1 << 2;", "echo true and false;", "echo true or false;",
 		"echo true xor false;", "echo true & false;", "echo true | false;",
 	}

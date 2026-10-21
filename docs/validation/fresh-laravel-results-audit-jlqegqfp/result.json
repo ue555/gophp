@@ -1,0 +1,40 @@
+{
+  "command": {
+    "http": "docs/validation/fresh-laravel-tcp-ljc9yvoj",
+    "fixtures": "docs/validation/fresh-laravel-fixture-matrix-dlxuo0h8",
+    "task": "docs/validation/task-api-20261021-213736-trqw46y4",
+    "legacy_log": "docs/validation/fresh-laravel-final-fixed-laravel-three-20261021-213737-xfse7cts.log"
+  },
+  "exit_code": 0,
+  "fixtures": 1193,
+  "unchanged_baseline_expectations": 1173,
+  "binary_sha256": "04444cd35f905a4bb9d10558af4010c5513fc1c86a0ea570e24b1664d3623fa8",
+  "versions": [
+    "8.3.35",
+    "8.4.26",
+    "8.5.11"
+  ],
+  "fresh_http_requests_per_runtime": 111,
+  "new_fixtures": [
+    "runtime/interface_chain_incompatible.php",
+    "success/alternative_if_html.php",
+    "success/crypto_cookie_primitives.php",
+    "success/date_interval_inherited.php",
+    "success/error_exception_inherited.php",
+    "success/filemtime_stat.php",
+    "success/gmdate_cookie_expires.php",
+    "success/interface_chain_redeclare.php",
+    "success/json_encode_error_reset.php",
+    "success/json_nested_markup.php",
+    "success/json_unicode_escape.php",
+    "success/krsort_flags_references.php",
+    "success/preg_state_transitions.php",
+    "success/preg_warning_and_failure_state.php",
+    "success/random_int_bounds.php",
+    "success/rsort_flags_references.php",
+    "success/substr_count_bounds.php",
+    "success/substr_replace_forms.php",
+    "success/tokenizer_structure.php",
+    "success/tokenizer_versions_context.php"
+  ]
+}

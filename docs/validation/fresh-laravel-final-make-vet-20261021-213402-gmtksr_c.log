@@ -1,0 +1,5 @@
+target: final-make-vet
+command: make vet
+cwd: /Users/kouji/dev/php
+go vet ./...
+exit_code: 0

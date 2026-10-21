@@ -1,0 +1,6 @@
+target: task-api-three-regression
+command: python3 research/task-api/verify.py --interpreter bin/gophp
+cwd: /Users/kouji/dev/php
+logs: /Users/kouji/dev/php/docs/validation/task-api-20261021-213053-55bljmz3
+result: 0 log: /Users/kouji/dev/php/docs/validation/task-api-20261021-213053-55bljmz3/run.log
+exit_code: 0

@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php84",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/gmdate_cookie_expires.php"
+    ],
+    "version": "8.4.26",
+    "fixture": "success/gmdate_cookie_expires.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php83",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/gmdate_cookie_expires.php"
+    ],
+    "version": "8.3.35",
+    "fixture": "success/gmdate_cookie_expires.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php85",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/gmdate_cookie_expires.php"
+    ],
+    "version": "8.5.11",
+    "fixture": "success/gmdate_cookie_expires.php",
+    "exit_code": 0
+  }
+]

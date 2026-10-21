@@ -1,0 +1,6 @@
+{
+  "command": [
+    "research/fresh-laravel/compare-fixtures.py"
+  ],
+  "exit_code": 0
+}

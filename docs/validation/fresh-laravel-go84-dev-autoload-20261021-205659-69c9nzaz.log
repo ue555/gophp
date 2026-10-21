@@ -1,0 +1,5 @@
+target: go84-dev-autoload
+command: .cache/fresh-laravel/gophp --php-version=8.4 .cache/fresh-laravel/autoload.php
+cwd: /Users/kouji/dev/php
+autoload OK
+exit_code: 0

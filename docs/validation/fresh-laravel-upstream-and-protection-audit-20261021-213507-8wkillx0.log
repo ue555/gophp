@@ -1,0 +1,6 @@
+target: upstream-and-protection-audit
+command: python3 research/fresh-laravel/audit.py
+cwd: /Users/kouji/dev/php
+unchanged skeleton: 54 protected: 13349 artifact exclusions: OK
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-audit-1oz5423u
+exit_code: 0

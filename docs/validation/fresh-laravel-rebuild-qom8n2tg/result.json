@@ -1,0 +1,6 @@
+{
+  "command": [
+    "research/fresh-laravel/rebuild.py"
+  ],
+  "exit_code": 0
+}

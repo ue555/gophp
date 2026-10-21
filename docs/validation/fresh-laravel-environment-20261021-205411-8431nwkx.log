@@ -1,0 +1,7 @@
+target: environment
+command: podman ps --format '{{.Names}} {{.Ports}}'
+cwd: /Users/kouji/dev/php
+php-version-83 
+php-version-84 
+php-version-85 
+exit_code: 0

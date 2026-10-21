@@ -1,0 +1,31 @@
+target: paired84-cookie-session-entrypoint
+command: python3 research/fresh-laravel/verify.py --version 8.4 --binary .cache/fresh-laravel/gophp --sequential 1
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-flozetp3
+RUN official-8.4-autoload
+RUN official-8.4-environment
+RUN official-8.4-list
+RUN official-8.4-about
+RUN official-8.4-routes
+RUN official-8.4-migrate
+RUN official-8.4-migrate-again
+PASS official-8.4 CLI/migration/HTTP/Blade cold/warm 12 requests
+RUN official-8.4-blade-tokens
+RUN go-8.4-autoload
+RUN go-8.4-environment
+RUN go-8.4-list
+RUN go-8.4-about
+RUN go-8.4-routes
+RUN go-8.4-migrate
+RUN go-8.4-migrate-again
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 173, in main
+    for runtime in ['official','go'] if args.runtime=='both' else [args.runtime]:results[runtime]=run.runtime(runtime,v,temp)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 105, in runtime
+    accept(request('/',cookie));check(cache=={str(f.relative_to(app)):sha(f) for f in (app/'storage/framework/views').glob('*.php')},'warm request changed compiled views')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 73, in accept
+    check(record['status']==200,f'HTTP {record["path"]}: {record["status"]}; raw body saved')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 14, in check
+    if not ok:raise RuntimeError(msg)
+RuntimeError: HTTP /: 500; raw body saved
+exit_code: 1

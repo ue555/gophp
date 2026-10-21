@@ -1,0 +1,6 @@
+target: final-protection-after-tests
+command: python3 research/fresh-laravel/audit.py
+cwd: /Users/kouji/dev/php
+unchanged skeleton: 54 protected: 13349 artifact exclusions: OK
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-audit-n6igouml
+exit_code: 0

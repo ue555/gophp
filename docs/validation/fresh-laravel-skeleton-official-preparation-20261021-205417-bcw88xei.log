@@ -1,0 +1,9 @@
+target: skeleton-official-preparation
+command: podman run --rm -v /Users/kouji/dev/php/research/fresh-laravel:/app localhost/gophp-dependency-research:8.4.26 composer create-project laravel/laravel app '^12.0' --no-install --no-scripts --no-interaction
+cwd: /Users/kouji/dev/php
+Creating a "laravel/laravel" project at "./app"
+Installing laravel/laravel (v12.12.2)
+  - Downloading laravel/laravel (v12.12.2)
+  - Installing laravel/laravel (v12.12.2): Extracting archive
+Created project in /app/app
+exit_code: 0

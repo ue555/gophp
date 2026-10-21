@@ -1,0 +1,16 @@
+8b5f48702995c1598c573db1e21866a9b825d4a794d169d7060a03605796360b
+0caf649feee4953d87bf903ac1176c45e028df16
+[true,false,false]
+hash_equals(): Argument #1 ($known_string) must be of type string, int given
+hash_hmac(): Argument #1 ($algo) must be a valid cryptographic hashing algorithm
+aes-128-cbc:zNxzfIP/IBCfVJWsqLXY9g==:
+日本 cookie
+aes-256-cbc:8yyfduhtOU3UfgxaQ1HLEQ==:
+日本 cookie
+aes-128-gcm:+3OD7YARwSd0GA+4lA==:92b9d948afcdbd8e05a945ca793941a3
+日本 cookie
+aes-256-gcm:PBNdkq5UgWeUO4oR/g==:62a82ca6365bca21a9c7be4c8ebfb814
+日本 cookie
+false
+false
+1:16:x

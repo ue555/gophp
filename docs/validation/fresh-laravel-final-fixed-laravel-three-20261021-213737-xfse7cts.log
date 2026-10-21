@@ -1,0 +1,415 @@
+target: final-fixed-laravel-three
+command: python3 research/laravel-api/verify-gophp.py --interpreter bin/gophp --stress-requests 100
+cwd: /Users/kouji/dev/php
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.3 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 17.74ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 5.58ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.3 --serve=127.0.0.1:51524 public/index.php
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe?round=0: 200 {'ok': True}
+HTTP POST /api/books-manual: 201 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP POST /api/books-manual: 422 {'message': 'The title field is required.', 'errors': {'title': ['The title field is required.']}}
+HTTP POST /api/books: 201 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:37:41+00:00', 'updatedAt': '2026-10-21T12:37:41+00:00'}
+HTTP GET /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:37:41+00:00', 'updatedAt': '2026-10-21T12:37:41+00:00'}
+HTTP PATCH /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Gamma', 'createdAt': '2026-10-21T12:37:41+00:00', 'updatedAt': '2026-10-21T12:37:42+00:00'}
+HTTP GET /api/docs.jsonopenapi: 200 {'openapi': '3.2.0', 'info': {'title': 'API Platform', 'description': 'My awesome API', 'contact': {'name': '', 'url': '', 'email': ''}, 'license': {'name': '', 'url': ''}, 'version': '1.0.0'}, 'servers': [{'url': '/', 'description': ''}], 'paths': {'/api/books': {'get': {'operationId': 'api_apibooks_get_collection', 'tags': ['Book'], 'responses': {'200': {'description': 'Book collection', 'content': {'application/ld+json': {'schema': {'type': 'object', 'description': 'Book.jsonld collection.', 'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchema'}, {'type': 'object', 'required': ['member'], 'properties': {'member': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.jsonld'}}}}]}}, 'application/json': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book'}}}, 'text/html': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.html'}}}}}}, 'summary': 'Retrieves the collection of Book resources.', 'description': 'Retrieves the collection of Book resources.', 'parameters': [{'name': 'page', 'in': 'query', 'description': 'The collection page number', 'required': False, 'deprecated': False, 'schema': {'type': 'integer', 'default': 1}, 'style': 'form', 'explode': True}]}, 'post': {'operationId': 'api_apibooks_post', 'tags': ['Book'], 'responses': {'201': {'description': 'Book resource created', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}}, 'summary': 'Creates a Book resource.', 'description': 'Creates a Book resource.', 'parameters': [], 'requestBody': {'description': 'The new Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book'}}}, 'required': True}}}, '/api/books/{id}': {'get': {'operationId': 'api_apibooks_id_get', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Retrieves a Book resource.', 'description': 'Retrieves a Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'delete': {'operationId': 'api_apibooks_id_delete', 'tags': ['Book'], 'responses': {'204': {'description': 'Book resource deleted'}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Removes the Book resource.', 'description': 'Removes the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'patch': {'operationId': 'api_apibooks_id_patch', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource updated', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Updates the Book resource.', 'description': 'Updates the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}], 'requestBody': {'description': 'The updated Book resource', 'content': {'application/merge-patch+json': {'schema': {'$ref': '#/components/schemas/Book.jsonMergePatch'}}}, 'required': True}}}}, 'components': {'schemas': {'Book': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.html': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonMergePatch': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonld': {'allOf': [{'$ref': '#/components/schemas/HydraItemBaseSchema'}, {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}]}, 'HydraCollectionBaseSchema': {'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchemaNoPagination'}, {'type': 'object', 'properties': {'view': {'type': 'object', 'properties': {'@id': {'type': 'string', 'format': 'iri-reference'}, '@type': {'type': 'string'}, 'first': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'last': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'previous': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'next': {'type': ['string', 'null'], 'format': 'iri-reference'}}, 'example': {'@id': 'string', '@type': 'string', 'first': 'string', 'last': 'string', 'previous': 'string', 'next': 'string'}}}}]}, 'HydraCollectionBaseSchemaNoPagination': {'type': 'object', 'properties': {'totalItems': {'type': 'integer', 'minimum': 0}, 'search': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'template': {'type': 'string'}, 'variableRepresentation': {'type': 'string'}, 'mapping': {'type': 'array', 'items': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'variable': {'type': 'string'}, 'property': {'type': ['string', 'null']}, 'required': {'type': 'boolean'}}}}}}}}, 'HydraItemBaseSchema': {'type': 'object', 'properties': {'@context': {'oneOf': [{'type': 'string'}, {'type': 'object', 'properties': {'@vocab': {'type': 'string'}, 'hydra': {'type': 'string', 'enum': ['http://www.w3.org/ns/hydra/core#']}}, 'required': ['@vocab', 'hydra'], 'additionalProperties': True}]}, '@id': {'type': 'string'}, '@type': {'type': 'string'}}, 'required': ['@id', '@type']}}, 'responses': {}, 'parameters': {}, 'examples': {}, 'requestBodies': {}, 'headers': {}, 'securitySchemes': {}}, 'security': [], 'tags': [{'name': 'Book', 'description': "Resource 'Book' operations."}], 'webhooks': {}}
+HTTP DELETE /api/books/2: 204 ''
+HTTP GET /api/books/2: 404 {'message': 'Not Found'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=1: 200 {'ok': True}
+HTTP GET /api/probe?round=2: 200 {'ok': True}
+HTTP GET /api/probe?round=3: 200 {'ok': True}
+HTTP GET /api/probe?round=4: 200 {'ok': True}
+HTTP GET /api/probe?round=5: 200 {'ok': True}
+HTTP GET /api/probe?round=6: 200 {'ok': True}
+HTTP GET /api/probe?round=7: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=9: 200 {'ok': True}
+HTTP GET /api/probe?round=10: 200 {'ok': True}
+HTTP GET /api/probe?round=11: 200 {'ok': True}
+HTTP GET /api/probe?round=12: 200 {'ok': True}
+HTTP GET /api/probe?round=13: 200 {'ok': True}
+HTTP GET /api/probe?round=14: 200 {'ok': True}
+HTTP GET /api/probe?round=15: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=17: 200 {'ok': True}
+HTTP GET /api/probe?round=18: 200 {'ok': True}
+HTTP GET /api/probe?round=19: 200 {'ok': True}
+HTTP GET /api/probe?round=20: 200 {'ok': True}
+HTTP GET /api/probe?round=21: 200 {'ok': True}
+HTTP GET /api/probe?round=22: 200 {'ok': True}
+HTTP GET /api/probe?round=23: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=25: 200 {'ok': True}
+HTTP GET /api/probe?round=26: 200 {'ok': True}
+HTTP GET /api/probe?round=27: 200 {'ok': True}
+HTTP GET /api/probe?round=28: 200 {'ok': True}
+HTTP GET /api/probe?round=29: 200 {'ok': True}
+HTTP GET /api/probe?round=30: 200 {'ok': True}
+HTTP GET /api/probe?round=31: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=33: 200 {'ok': True}
+HTTP GET /api/probe?round=34: 200 {'ok': True}
+HTTP GET /api/probe?round=35: 200 {'ok': True}
+HTTP GET /api/probe?round=36: 200 {'ok': True}
+HTTP GET /api/probe?round=37: 200 {'ok': True}
+HTTP GET /api/probe?round=38: 200 {'ok': True}
+HTTP GET /api/probe?round=39: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=41: 200 {'ok': True}
+HTTP GET /api/probe?round=42: 200 {'ok': True}
+HTTP GET /api/probe?round=43: 200 {'ok': True}
+HTTP GET /api/probe?round=44: 200 {'ok': True}
+HTTP GET /api/probe?round=45: 200 {'ok': True}
+HTTP GET /api/probe?round=46: 200 {'ok': True}
+HTTP GET /api/probe?round=47: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=49: 200 {'ok': True}
+HTTP GET /api/probe?round=50: 200 {'ok': True}
+HTTP GET /api/probe?round=51: 200 {'ok': True}
+HTTP GET /api/probe?round=52: 200 {'ok': True}
+HTTP GET /api/probe?round=53: 200 {'ok': True}
+HTTP GET /api/probe?round=54: 200 {'ok': True}
+HTTP GET /api/probe?round=55: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=57: 200 {'ok': True}
+HTTP GET /api/probe?round=58: 200 {'ok': True}
+HTTP GET /api/probe?round=59: 200 {'ok': True}
+HTTP GET /api/probe?round=60: 200 {'ok': True}
+HTTP GET /api/probe?round=61: 200 {'ok': True}
+HTTP GET /api/probe?round=62: 200 {'ok': True}
+HTTP GET /api/probe?round=63: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=65: 200 {'ok': True}
+HTTP GET /api/probe?round=66: 200 {'ok': True}
+HTTP GET /api/probe?round=67: 200 {'ok': True}
+HTTP GET /api/probe?round=68: 200 {'ok': True}
+HTTP GET /api/probe?round=69: 200 {'ok': True}
+HTTP GET /api/probe?round=70: 200 {'ok': True}
+HTTP GET /api/probe?round=71: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=73: 200 {'ok': True}
+HTTP GET /api/probe?round=74: 200 {'ok': True}
+HTTP GET /api/probe?round=75: 200 {'ok': True}
+HTTP GET /api/probe?round=76: 200 {'ok': True}
+HTTP GET /api/probe?round=77: 200 {'ok': True}
+HTTP GET /api/probe?round=78: 200 {'ok': True}
+HTTP GET /api/probe?round=79: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=81: 200 {'ok': True}
+HTTP GET /api/probe?round=82: 200 {'ok': True}
+HTTP GET /api/probe?round=83: 200 {'ok': True}
+HTTP GET /api/probe?round=84: 200 {'ok': True}
+HTTP GET /api/probe?round=85: 200 {'ok': True}
+HTTP GET /api/probe?round=86: 200 {'ok': True}
+HTTP GET /api/probe?round=87: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=89: 200 {'ok': True}
+HTTP GET /api/probe?round=90: 200 {'ok': True}
+HTTP GET /api/probe?round=91: 200 {'ok': True}
+HTTP GET /api/probe?round=92: 200 {'ok': True}
+HTTP GET /api/probe?round=93: 200 {'ok': True}
+HTTP GET /api/probe?round=94: 200 {'ok': True}
+HTTP GET /api/probe?round=95: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=97: 200 {'ok': True}
+HTTP GET /api/probe?round=98: 200 {'ok': True}
+HTTP GET /api/probe?round=99: 200 {'ok': True}
+HTTP GET /api/probe?parallel=6: 200 {'ok': True}
+HTTP GET /api/probe?parallel=3: 200 {'ok': True}
+HTTP GET /api/probe?parallel=4: 200 {'ok': True}
+HTTP GET /api/probe?parallel=7: 200 {'ok': True}
+HTTP GET /api/probe?parallel=1: 200 {'ok': True}
+HTTP GET /api/probe?parallel=2: 200 {'ok': True}
+HTTP GET /api/probe?parallel=0: 200 {'ok': True}
+HTTP GET /api/probe?parallel=5: 200 {'ok': True}
+PASS sustained_requests=100 parallel_requests=8
+PASS Go PHP 8.3: CLI, HTTP, SQLite, validation, API Platform CRUD, OpenAPI
+server_exit_code: -15
+server_log_begin Go PHP 8.3
+server_log_end Go PHP 8.3
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 16.59ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 6.08ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 --serve=127.0.0.1:52235 public/index.php
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe?round=0: 200 {'ok': True}
+HTTP POST /api/books-manual: 201 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP POST /api/books-manual: 422 {'message': 'The title field is required.', 'errors': {'title': ['The title field is required.']}}
+HTTP POST /api/books: 201 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:38:23+00:00', 'updatedAt': '2026-10-21T12:38:23+00:00'}
+HTTP GET /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:38:23+00:00', 'updatedAt': '2026-10-21T12:38:23+00:00'}
+HTTP PATCH /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Gamma', 'createdAt': '2026-10-21T12:38:23+00:00', 'updatedAt': '2026-10-21T12:38:24+00:00'}
+HTTP GET /api/docs.jsonopenapi: 200 {'openapi': '3.2.0', 'info': {'title': 'API Platform', 'description': 'My awesome API', 'contact': {'name': '', 'url': '', 'email': ''}, 'license': {'name': '', 'url': ''}, 'version': '1.0.0'}, 'servers': [{'url': '/', 'description': ''}], 'paths': {'/api/books': {'get': {'operationId': 'api_apibooks_get_collection', 'tags': ['Book'], 'responses': {'200': {'description': 'Book collection', 'content': {'application/ld+json': {'schema': {'type': 'object', 'description': 'Book.jsonld collection.', 'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchema'}, {'type': 'object', 'required': ['member'], 'properties': {'member': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.jsonld'}}}}]}}, 'application/json': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book'}}}, 'text/html': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.html'}}}}}}, 'summary': 'Retrieves the collection of Book resources.', 'description': 'Retrieves the collection of Book resources.', 'parameters': [{'name': 'page', 'in': 'query', 'description': 'The collection page number', 'required': False, 'deprecated': False, 'schema': {'type': 'integer', 'default': 1}, 'style': 'form', 'explode': True}]}, 'post': {'operationId': 'api_apibooks_post', 'tags': ['Book'], 'responses': {'201': {'description': 'Book resource created', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}}, 'summary': 'Creates a Book resource.', 'description': 'Creates a Book resource.', 'parameters': [], 'requestBody': {'description': 'The new Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book'}}}, 'required': True}}}, '/api/books/{id}': {'get': {'operationId': 'api_apibooks_id_get', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Retrieves a Book resource.', 'description': 'Retrieves a Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'delete': {'operationId': 'api_apibooks_id_delete', 'tags': ['Book'], 'responses': {'204': {'description': 'Book resource deleted'}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Removes the Book resource.', 'description': 'Removes the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'patch': {'operationId': 'api_apibooks_id_patch', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource updated', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Updates the Book resource.', 'description': 'Updates the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}], 'requestBody': {'description': 'The updated Book resource', 'content': {'application/merge-patch+json': {'schema': {'$ref': '#/components/schemas/Book.jsonMergePatch'}}}, 'required': True}}}}, 'components': {'schemas': {'Book': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.html': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonMergePatch': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonld': {'allOf': [{'$ref': '#/components/schemas/HydraItemBaseSchema'}, {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}]}, 'HydraCollectionBaseSchema': {'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchemaNoPagination'}, {'type': 'object', 'properties': {'view': {'type': 'object', 'properties': {'@id': {'type': 'string', 'format': 'iri-reference'}, '@type': {'type': 'string'}, 'first': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'last': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'previous': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'next': {'type': ['string', 'null'], 'format': 'iri-reference'}}, 'example': {'@id': 'string', '@type': 'string', 'first': 'string', 'last': 'string', 'previous': 'string', 'next': 'string'}}}}]}, 'HydraCollectionBaseSchemaNoPagination': {'type': 'object', 'properties': {'totalItems': {'type': 'integer', 'minimum': 0}, 'search': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'template': {'type': 'string'}, 'variableRepresentation': {'type': 'string'}, 'mapping': {'type': 'array', 'items': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'variable': {'type': 'string'}, 'property': {'type': ['string', 'null']}, 'required': {'type': 'boolean'}}}}}}}}, 'HydraItemBaseSchema': {'type': 'object', 'properties': {'@context': {'oneOf': [{'type': 'string'}, {'type': 'object', 'properties': {'@vocab': {'type': 'string'}, 'hydra': {'type': 'string', 'enum': ['http://www.w3.org/ns/hydra/core#']}}, 'required': ['@vocab', 'hydra'], 'additionalProperties': True}]}, '@id': {'type': 'string'}, '@type': {'type': 'string'}}, 'required': ['@id', '@type']}}, 'responses': {}, 'parameters': {}, 'examples': {}, 'requestBodies': {}, 'headers': {}, 'securitySchemes': {}}, 'security': [], 'tags': [{'name': 'Book', 'description': "Resource 'Book' operations."}], 'webhooks': {}}
+HTTP DELETE /api/books/2: 204 ''
+HTTP GET /api/books/2: 404 {'message': 'Not Found'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=1: 200 {'ok': True}
+HTTP GET /api/probe?round=2: 200 {'ok': True}
+HTTP GET /api/probe?round=3: 200 {'ok': True}
+HTTP GET /api/probe?round=4: 200 {'ok': True}
+HTTP GET /api/probe?round=5: 200 {'ok': True}
+HTTP GET /api/probe?round=6: 200 {'ok': True}
+HTTP GET /api/probe?round=7: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=9: 200 {'ok': True}
+HTTP GET /api/probe?round=10: 200 {'ok': True}
+HTTP GET /api/probe?round=11: 200 {'ok': True}
+HTTP GET /api/probe?round=12: 200 {'ok': True}
+HTTP GET /api/probe?round=13: 200 {'ok': True}
+HTTP GET /api/probe?round=14: 200 {'ok': True}
+HTTP GET /api/probe?round=15: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=17: 200 {'ok': True}
+HTTP GET /api/probe?round=18: 200 {'ok': True}
+HTTP GET /api/probe?round=19: 200 {'ok': True}
+HTTP GET /api/probe?round=20: 200 {'ok': True}
+HTTP GET /api/probe?round=21: 200 {'ok': True}
+HTTP GET /api/probe?round=22: 200 {'ok': True}
+HTTP GET /api/probe?round=23: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=25: 200 {'ok': True}
+HTTP GET /api/probe?round=26: 200 {'ok': True}
+HTTP GET /api/probe?round=27: 200 {'ok': True}
+HTTP GET /api/probe?round=28: 200 {'ok': True}
+HTTP GET /api/probe?round=29: 200 {'ok': True}
+HTTP GET /api/probe?round=30: 200 {'ok': True}
+HTTP GET /api/probe?round=31: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=33: 200 {'ok': True}
+HTTP GET /api/probe?round=34: 200 {'ok': True}
+HTTP GET /api/probe?round=35: 200 {'ok': True}
+HTTP GET /api/probe?round=36: 200 {'ok': True}
+HTTP GET /api/probe?round=37: 200 {'ok': True}
+HTTP GET /api/probe?round=38: 200 {'ok': True}
+HTTP GET /api/probe?round=39: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=41: 200 {'ok': True}
+HTTP GET /api/probe?round=42: 200 {'ok': True}
+HTTP GET /api/probe?round=43: 200 {'ok': True}
+HTTP GET /api/probe?round=44: 200 {'ok': True}
+HTTP GET /api/probe?round=45: 200 {'ok': True}
+HTTP GET /api/probe?round=46: 200 {'ok': True}
+HTTP GET /api/probe?round=47: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=49: 200 {'ok': True}
+HTTP GET /api/probe?round=50: 200 {'ok': True}
+HTTP GET /api/probe?round=51: 200 {'ok': True}
+HTTP GET /api/probe?round=52: 200 {'ok': True}
+HTTP GET /api/probe?round=53: 200 {'ok': True}
+HTTP GET /api/probe?round=54: 200 {'ok': True}
+HTTP GET /api/probe?round=55: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=57: 200 {'ok': True}
+HTTP GET /api/probe?round=58: 200 {'ok': True}
+HTTP GET /api/probe?round=59: 200 {'ok': True}
+HTTP GET /api/probe?round=60: 200 {'ok': True}
+HTTP GET /api/probe?round=61: 200 {'ok': True}
+HTTP GET /api/probe?round=62: 200 {'ok': True}
+HTTP GET /api/probe?round=63: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=65: 200 {'ok': True}
+HTTP GET /api/probe?round=66: 200 {'ok': True}
+HTTP GET /api/probe?round=67: 200 {'ok': True}
+HTTP GET /api/probe?round=68: 200 {'ok': True}
+HTTP GET /api/probe?round=69: 200 {'ok': True}
+HTTP GET /api/probe?round=70: 200 {'ok': True}
+HTTP GET /api/probe?round=71: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=73: 200 {'ok': True}
+HTTP GET /api/probe?round=74: 200 {'ok': True}
+HTTP GET /api/probe?round=75: 200 {'ok': True}
+HTTP GET /api/probe?round=76: 200 {'ok': True}
+HTTP GET /api/probe?round=77: 200 {'ok': True}
+HTTP GET /api/probe?round=78: 200 {'ok': True}
+HTTP GET /api/probe?round=79: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=81: 200 {'ok': True}
+HTTP GET /api/probe?round=82: 200 {'ok': True}
+HTTP GET /api/probe?round=83: 200 {'ok': True}
+HTTP GET /api/probe?round=84: 200 {'ok': True}
+HTTP GET /api/probe?round=85: 200 {'ok': True}
+HTTP GET /api/probe?round=86: 200 {'ok': True}
+HTTP GET /api/probe?round=87: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=89: 200 {'ok': True}
+HTTP GET /api/probe?round=90: 200 {'ok': True}
+HTTP GET /api/probe?round=91: 200 {'ok': True}
+HTTP GET /api/probe?round=92: 200 {'ok': True}
+HTTP GET /api/probe?round=93: 200 {'ok': True}
+HTTP GET /api/probe?round=94: 200 {'ok': True}
+HTTP GET /api/probe?round=95: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=97: 200 {'ok': True}
+HTTP GET /api/probe?round=98: 200 {'ok': True}
+HTTP GET /api/probe?round=99: 200 {'ok': True}
+HTTP GET /api/probe?parallel=0: 200 {'ok': True}
+HTTP GET /api/probe?parallel=4: 200 {'ok': True}
+HTTP GET /api/probe?parallel=6: 200 {'ok': True}
+HTTP GET /api/probe?parallel=5: 200 {'ok': True}
+HTTP GET /api/probe?parallel=3: 200 {'ok': True}
+HTTP GET /api/probe?parallel=2: 200 {'ok': True}
+HTTP GET /api/probe?parallel=7: 200 {'ok': True}
+HTTP GET /api/probe?parallel=1: 200 {'ok': True}
+PASS sustained_requests=100 parallel_requests=8
+PASS Go PHP 8.4: CLI, HTTP, SQLite, validation, API Platform CRUD, OpenAPI
+server_exit_code: -15
+server_log_begin Go PHP 8.4
+server_log_end Go PHP 8.4
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.5 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 16.26ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 5.60ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.5 --serve=127.0.0.1:52769 public/index.php
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe: 200 {'ok': True}
+HTTP GET /api/probe?round=0: 200 {'ok': True}
+HTTP POST /api/books-manual: 201 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP POST /api/books-manual: 422 {'message': 'The title field is required.', 'errors': {'title': ['The title field is required.']}}
+HTTP POST /api/books: 201 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:39:04+00:00', 'updatedAt': '2026-10-21T12:39:04+00:00'}
+HTTP GET /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Beta', 'createdAt': '2026-10-21T12:39:04+00:00', 'updatedAt': '2026-10-21T12:39:04+00:00'}
+HTTP PATCH /api/books/2: 200 {'@context': '/api/contexts/Book', '@id': '/api/books/2', '@type': 'Book', 'id': 2, 'title': 'Gamma', 'createdAt': '2026-10-21T12:39:04+00:00', 'updatedAt': '2026-10-21T12:39:05+00:00'}
+HTTP GET /api/docs.jsonopenapi: 200 {'openapi': '3.2.0', 'info': {'title': 'API Platform', 'description': 'My awesome API', 'contact': {'name': '', 'url': '', 'email': ''}, 'license': {'name': '', 'url': ''}, 'version': '1.0.0'}, 'servers': [{'url': '/', 'description': ''}], 'paths': {'/api/books': {'get': {'operationId': 'api_apibooks_get_collection', 'tags': ['Book'], 'responses': {'200': {'description': 'Book collection', 'content': {'application/ld+json': {'schema': {'type': 'object', 'description': 'Book.jsonld collection.', 'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchema'}, {'type': 'object', 'required': ['member'], 'properties': {'member': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.jsonld'}}}}]}}, 'application/json': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book'}}}, 'text/html': {'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/Book.html'}}}}}}, 'summary': 'Retrieves the collection of Book resources.', 'description': 'Retrieves the collection of Book resources.', 'parameters': [{'name': 'page', 'in': 'query', 'description': 'The collection page number', 'required': False, 'deprecated': False, 'schema': {'type': 'integer', 'default': 1}, 'style': 'form', 'explode': True}]}, 'post': {'operationId': 'api_apibooks_post', 'tags': ['Book'], 'responses': {'201': {'description': 'Book resource created', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}}, 'summary': 'Creates a Book resource.', 'description': 'Creates a Book resource.', 'parameters': [], 'requestBody': {'description': 'The new Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book'}}}, 'required': True}}}, '/api/books/{id}': {'get': {'operationId': 'api_apibooks_id_get', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Retrieves a Book resource.', 'description': 'Retrieves a Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'delete': {'operationId': 'api_apibooks_id_delete', 'tags': ['Book'], 'responses': {'204': {'description': 'Book resource deleted'}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Removes the Book resource.', 'description': 'Removes the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}]}, 'patch': {'operationId': 'api_apibooks_id_patch', 'tags': ['Book'], 'responses': {'200': {'description': 'Book resource updated', 'content': {'application/ld+json': {'schema': {'$ref': '#/components/schemas/Book.jsonld'}}, 'application/json': {'schema': {'$ref': '#/components/schemas/Book'}}, 'text/html': {'schema': {'$ref': '#/components/schemas/Book.html'}}}, 'links': {}}, '400': {'description': 'Invalid input', 'links': {}}, '422': {'description': 'Validation Error', 'links': {}}, '404': {'description': 'Not found', 'links': {}}}, 'summary': 'Updates the Book resource.', 'description': 'Updates the Book resource.', 'parameters': [{'name': 'id', 'in': 'path', 'description': 'Book identifier', 'required': True, 'deprecated': False, 'schema': {'type': 'string'}, 'style': 'simple', 'explode': False}], 'requestBody': {'description': 'The updated Book resource', 'content': {'application/merge-patch+json': {'schema': {'$ref': '#/components/schemas/Book.jsonMergePatch'}}}, 'required': True}}}}, 'components': {'schemas': {'Book': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.html': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonMergePatch': {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}, 'Book.jsonld': {'allOf': [{'$ref': '#/components/schemas/HydraItemBaseSchema'}, {'type': 'object', 'properties': {'id': {'readOnly': True, 'type': 'integer'}, 'title': {'type': 'string'}, 'createdAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}, 'updatedAt': {'readOnly': True, 'type': ['string', 'null'], 'format': 'date-time'}}}]}, 'HydraCollectionBaseSchema': {'allOf': [{'$ref': '#/components/schemas/HydraCollectionBaseSchemaNoPagination'}, {'type': 'object', 'properties': {'view': {'type': 'object', 'properties': {'@id': {'type': 'string', 'format': 'iri-reference'}, '@type': {'type': 'string'}, 'first': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'last': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'previous': {'type': ['string', 'null'], 'format': 'iri-reference'}, 'next': {'type': ['string', 'null'], 'format': 'iri-reference'}}, 'example': {'@id': 'string', '@type': 'string', 'first': 'string', 'last': 'string', 'previous': 'string', 'next': 'string'}}}}]}, 'HydraCollectionBaseSchemaNoPagination': {'type': 'object', 'properties': {'totalItems': {'type': 'integer', 'minimum': 0}, 'search': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'template': {'type': 'string'}, 'variableRepresentation': {'type': 'string'}, 'mapping': {'type': 'array', 'items': {'type': 'object', 'properties': {'@type': {'type': 'string'}, 'variable': {'type': 'string'}, 'property': {'type': ['string', 'null']}, 'required': {'type': 'boolean'}}}}}}}}, 'HydraItemBaseSchema': {'type': 'object', 'properties': {'@context': {'oneOf': [{'type': 'string'}, {'type': 'object', 'properties': {'@vocab': {'type': 'string'}, 'hydra': {'type': 'string', 'enum': ['http://www.w3.org/ns/hydra/core#']}}, 'required': ['@vocab', 'hydra'], 'additionalProperties': True}]}, '@id': {'type': 'string'}, '@type': {'type': 'string'}}, 'required': ['@id', '@type']}}, 'responses': {}, 'parameters': {}, 'examples': {}, 'requestBodies': {}, 'headers': {}, 'securitySchemes': {}}, 'security': [], 'tags': [{'name': 'Book', 'description': "Resource 'Book' operations."}], 'webhooks': {}}
+HTTP DELETE /api/books/2: 204 ''
+HTTP GET /api/books/2: 404 {'message': 'Not Found'}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=1: 200 {'ok': True}
+HTTP GET /api/probe?round=2: 200 {'ok': True}
+HTTP GET /api/probe?round=3: 200 {'ok': True}
+HTTP GET /api/probe?round=4: 200 {'ok': True}
+HTTP GET /api/probe?round=5: 200 {'ok': True}
+HTTP GET /api/probe?round=6: 200 {'ok': True}
+HTTP GET /api/probe?round=7: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=9: 200 {'ok': True}
+HTTP GET /api/probe?round=10: 200 {'ok': True}
+HTTP GET /api/probe?round=11: 200 {'ok': True}
+HTTP GET /api/probe?round=12: 200 {'ok': True}
+HTTP GET /api/probe?round=13: 200 {'ok': True}
+HTTP GET /api/probe?round=14: 200 {'ok': True}
+HTTP GET /api/probe?round=15: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=17: 200 {'ok': True}
+HTTP GET /api/probe?round=18: 200 {'ok': True}
+HTTP GET /api/probe?round=19: 200 {'ok': True}
+HTTP GET /api/probe?round=20: 200 {'ok': True}
+HTTP GET /api/probe?round=21: 200 {'ok': True}
+HTTP GET /api/probe?round=22: 200 {'ok': True}
+HTTP GET /api/probe?round=23: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=25: 200 {'ok': True}
+HTTP GET /api/probe?round=26: 200 {'ok': True}
+HTTP GET /api/probe?round=27: 200 {'ok': True}
+HTTP GET /api/probe?round=28: 200 {'ok': True}
+HTTP GET /api/probe?round=29: 200 {'ok': True}
+HTTP GET /api/probe?round=30: 200 {'ok': True}
+HTTP GET /api/probe?round=31: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=33: 200 {'ok': True}
+HTTP GET /api/probe?round=34: 200 {'ok': True}
+HTTP GET /api/probe?round=35: 200 {'ok': True}
+HTTP GET /api/probe?round=36: 200 {'ok': True}
+HTTP GET /api/probe?round=37: 200 {'ok': True}
+HTTP GET /api/probe?round=38: 200 {'ok': True}
+HTTP GET /api/probe?round=39: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=41: 200 {'ok': True}
+HTTP GET /api/probe?round=42: 200 {'ok': True}
+HTTP GET /api/probe?round=43: 200 {'ok': True}
+HTTP GET /api/probe?round=44: 200 {'ok': True}
+HTTP GET /api/probe?round=45: 200 {'ok': True}
+HTTP GET /api/probe?round=46: 200 {'ok': True}
+HTTP GET /api/probe?round=47: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=49: 200 {'ok': True}
+HTTP GET /api/probe?round=50: 200 {'ok': True}
+HTTP GET /api/probe?round=51: 200 {'ok': True}
+HTTP GET /api/probe?round=52: 200 {'ok': True}
+HTTP GET /api/probe?round=53: 200 {'ok': True}
+HTTP GET /api/probe?round=54: 200 {'ok': True}
+HTTP GET /api/probe?round=55: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=57: 200 {'ok': True}
+HTTP GET /api/probe?round=58: 200 {'ok': True}
+HTTP GET /api/probe?round=59: 200 {'ok': True}
+HTTP GET /api/probe?round=60: 200 {'ok': True}
+HTTP GET /api/probe?round=61: 200 {'ok': True}
+HTTP GET /api/probe?round=62: 200 {'ok': True}
+HTTP GET /api/probe?round=63: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=65: 200 {'ok': True}
+HTTP GET /api/probe?round=66: 200 {'ok': True}
+HTTP GET /api/probe?round=67: 200 {'ok': True}
+HTTP GET /api/probe?round=68: 200 {'ok': True}
+HTTP GET /api/probe?round=69: 200 {'ok': True}
+HTTP GET /api/probe?round=70: 200 {'ok': True}
+HTTP GET /api/probe?round=71: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=73: 200 {'ok': True}
+HTTP GET /api/probe?round=74: 200 {'ok': True}
+HTTP GET /api/probe?round=75: 200 {'ok': True}
+HTTP GET /api/probe?round=76: 200 {'ok': True}
+HTTP GET /api/probe?round=77: 200 {'ok': True}
+HTTP GET /api/probe?round=78: 200 {'ok': True}
+HTTP GET /api/probe?round=79: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=81: 200 {'ok': True}
+HTTP GET /api/probe?round=82: 200 {'ok': True}
+HTTP GET /api/probe?round=83: 200 {'ok': True}
+HTTP GET /api/probe?round=84: 200 {'ok': True}
+HTTP GET /api/probe?round=85: 200 {'ok': True}
+HTTP GET /api/probe?round=86: 200 {'ok': True}
+HTTP GET /api/probe?round=87: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=89: 200 {'ok': True}
+HTTP GET /api/probe?round=90: 200 {'ok': True}
+HTTP GET /api/probe?round=91: 200 {'ok': True}
+HTTP GET /api/probe?round=92: 200 {'ok': True}
+HTTP GET /api/probe?round=93: 200 {'ok': True}
+HTTP GET /api/probe?round=94: 200 {'ok': True}
+HTTP GET /api/probe?round=95: 200 {'ok': True}
+HTTP GET /api/books-manual/1: 200 {'id': 1, 'title': 'Alpha'}
+HTTP GET /api/probe?round=97: 200 {'ok': True}
+HTTP GET /api/probe?round=98: 200 {'ok': True}
+HTTP GET /api/probe?round=99: 200 {'ok': True}
+HTTP GET /api/probe?parallel=0: 200 {'ok': True}
+HTTP GET /api/probe?parallel=5: 200 {'ok': True}
+HTTP GET /api/probe?parallel=7: 200 {'ok': True}
+HTTP GET /api/probe?parallel=3: 200 {'ok': True}
+HTTP GET /api/probe?parallel=4: 200 {'ok': True}
+HTTP GET /api/probe?parallel=2: 200 {'ok': True}
+HTTP GET /api/probe?parallel=1: 200 {'ok': True}
+HTTP GET /api/probe?parallel=6: 200 {'ok': True}
+PASS sustained_requests=100 parallel_requests=8
+PASS Go PHP 8.5: CLI, HTTP, SQLite, validation, API Platform CRUD, OpenAPI
+server_exit_code: -15
+server_log_begin Go PHP 8.5
+server_log_end Go PHP 8.5
+exit_code: 0

@@ -1,0 +1,7 @@
+{
+  "success/date_interval_inherited.php": {
+    "stdout": "[1,2,10,4,5,6,0,0,false]\n2025-03-11 04:05:06\n2024-01-01 00:00:00\n2024-01-01 00:00:00:2024-01-01 02:00:00\n2024-01-01 00:00:00\nDateMalformedIntervalStringException:Unknown or bad format (bad)\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

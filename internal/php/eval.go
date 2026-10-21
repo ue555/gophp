@@ -55,6 +55,7 @@ type evaluator struct {
 	shutdownFunctions     []shutdownCall
 	lastError             value
 	jsonLastError         int64
+	pregLastError         int64
 	responseHeaders       []string
 	responseStatus        int64
 	requestBody           string

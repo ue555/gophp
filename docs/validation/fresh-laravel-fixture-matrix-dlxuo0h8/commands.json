@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "/Users/kouji/dev/php/skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/containers/php-version/bin/php83",
+      "--php-version",
+      "8.3.35",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.3",
+      "{file}"
+    ],
+    "version": "8.3.35",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "/Users/kouji/dev/php/skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/containers/php-version/bin/php84",
+      "--php-version",
+      "8.4.26",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.4",
+      "{file}"
+    ],
+    "version": "8.4.26",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "/Users/kouji/dev/php/skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/containers/php-version/bin/php85",
+      "--php-version",
+      "8.5.11",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.5",
+      "{file}"
+    ],
+    "version": "8.5.11",
+    "exit_code": 0
+  }
+]

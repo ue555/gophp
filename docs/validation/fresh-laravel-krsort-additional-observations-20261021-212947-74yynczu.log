@@ -1,0 +1,8 @@
+target: krsort-additional-observations
+command: python3 research/fresh-laravel/observe.py tests/fixtures/success/krsort_flags_references.php
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-official-observations-pgise845
+8.4.26 success/krsort_flags_references.php exit 0
+8.3.35 success/krsort_flags_references.php exit 0
+8.5.11 success/krsort_flags_references.php exit 0
+exit_code: 0

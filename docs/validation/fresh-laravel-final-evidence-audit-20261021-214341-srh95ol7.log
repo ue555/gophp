@@ -1,0 +1,11 @@
+target: final-evidence-audit
+command: python3 research/fresh-laravel/audit-results.py --http docs/validation/fresh-laravel-tcp-ljc9yvoj --fixtures docs/validation/fresh-laravel-fixture-matrix-dlxuo0h8 --task docs/validation/task-api-20261021-213736-trqw46y4 --legacy-log docs/validation/fresh-laravel-final-fixed-laravel-three-20261021-213737-xfse7cts.log
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-results-audit-teaclxtj
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/audit-results.py", line 79, in <module>
+    main()
+  File "/Users/kouji/dev/php/research/fresh-laravel/audit-results.py", line 42, in main
+    assert digest(ROOT / name) == entry['sha256'], 'source changed since verification: ' + name
+AssertionError: source changed since verification: tests/fixtures/support/include_path/first/link.inc
+exit_code: 1

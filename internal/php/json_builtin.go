@@ -3,12 +3,24 @@ package php
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"strings"
+	"unicode/utf16"
 )
 
 type orderedJSONObject []struct {
 	key   string
 	value any
+}
+
+func marshalJSONUnescaped(v any) ([]byte, error) {
+	var b bytes.Buffer
+	encoder := json.NewEncoder(&b)
+	encoder.SetEscapeHTML(false)
+	if err := encoder.Encode(v); err != nil {
+		return nil, err
+	}
+	return bytes.TrimSuffix(b.Bytes(), []byte{'\n'}), nil
 }
 
 func (entries orderedJSONObject) MarshalJSON() ([]byte, error) {
@@ -18,11 +30,11 @@ func (entries orderedJSONObject) MarshalJSON() ([]byte, error) {
 		if index > 0 {
 			out.WriteByte(',')
 		}
-		key, err := json.Marshal(entry.key)
+		key, err := marshalJSONUnescaped(entry.key)
 		if err != nil {
 			return nil, err
 		}
-		item, err := json.Marshal(entry.value)
+		item, err := marshalJSONUnescaped(entry.value)
 		if err != nil {
 			return nil, err
 		}
@@ -159,6 +171,17 @@ func (e *evaluator) callJSONEncode(node functionCall) (value, error) {
 		if flags&4194304 != 0 {
 			return value{}, err
 		}
+		e.jsonLastError = 8
+		if r, ok := err.(*runtimeError); ok {
+			switch r.message {
+			case "Recursion detected":
+				e.jsonLastError = 6
+			case "Maximum stack depth exceeded":
+				e.jsonLastError = 1
+			case "Non-backed enums have no default serialization":
+				e.jsonLastError = 11
+			}
+		}
 		return boolean(false), nil
 	}
 	var b bytes.Buffer
@@ -171,9 +194,27 @@ func (e *evaluator) callJSONEncode(node functionCall) (value, error) {
 		if flags&4194304 != 0 {
 			return value{}, &runtimeError{node.line, "JsonException", err.Error()}
 		}
+		e.jsonLastError = 7
 		return boolean(false), nil
 	}
+	if flags&4194304 == 0 {
+		e.jsonLastError = 0
+	}
 	out := strings.TrimSuffix(b.String(), "\n")
+	if flags&256 == 0 {
+		var escaped strings.Builder
+		for _, r := range out {
+			if r <= 127 {
+				escaped.WriteRune(r)
+			} else if r <= 0xffff {
+				fmt.Fprintf(&escaped, "\\u%04x", r)
+			} else {
+				a, b := utf16.EncodeRune(r)
+				fmt.Fprintf(&escaped, "\\u%04x\\u%04x", a, b)
+			}
+		}
+		out = escaped.String()
+	}
 	if flags&64 == 0 {
 		out = strings.ReplaceAll(out, "/", "\\/")
 	}

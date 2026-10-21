@@ -1,0 +1,5 @@
+target: go-regression-preg-warning
+command: go test ./internal/php
+cwd: /Users/kouji/dev/php
+ok  	example.com/gophp/internal/php	2.825s
+exit_code: 0

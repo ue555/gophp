@@ -1,0 +1,5 @@
+target: go-regression-crypto
+command: go test ./internal/php
+cwd: /Users/kouji/dev/php
+ok  	example.com/gophp/internal/php	1.921s
+exit_code: 0

@@ -1,0 +1,26 @@
+target: go-regression-cookie-state
+command: go test ./...
+cwd: /Users/kouji/dev/php
+ok  	example.com/gophp/cmd/gophp	70.202s
+--- FAIL: TestFixtures (1.43s)
+    --- FAIL: TestFixtures/success/json_encode_error_reset.php (0.00s)
+        --- FAIL: TestFixtures/success/json_encode_error_reset.php/default (0.00s)
+            php_test.go:118: exit: got 255, want 0
+            php_test.go:121: stdout: got "4\n{\"ok\":1}:0\n4\n7\n0\n", want "4\n{\"ok\":1}:0\n4\n7\n0\n6\n"
+            php_test.go:138: stderr: got "Fatal error: Uncaught Error: gophp: cyclic array references are not supported in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php:7\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php on line 7\n", want ""
+        --- FAIL: TestFixtures/success/json_encode_error_reset.php/8.3 (0.00s)
+            php_test.go:118: exit: got 255, want 0
+            php_test.go:121: stdout: got "4\n{\"ok\":1}:0\n4\n7\n0\n", want "4\n{\"ok\":1}:0\n4\n7\n0\n6\n"
+            php_test.go:138: stderr: got "Fatal error: Uncaught Error: gophp: cyclic array references are not supported in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php:7\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php on line 7\n", want ""
+        --- FAIL: TestFixtures/success/json_encode_error_reset.php/8.4 (0.00s)
+            php_test.go:118: exit: got 255, want 0
+            php_test.go:121: stdout: got "4\n{\"ok\":1}:0\n4\n7\n0\n", want "4\n{\"ok\":1}:0\n4\n7\n0\n6\n"
+            php_test.go:138: stderr: got "Fatal error: Uncaught Error: gophp: cyclic array references are not supported in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php:7\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php on line 7\n", want ""
+        --- FAIL: TestFixtures/success/json_encode_error_reset.php/8.5 (0.00s)
+            php_test.go:118: exit: got 255, want 0
+            php_test.go:121: stdout: got "4\n{\"ok\":1}:0\n4\n7\n0\n", want "4\n{\"ok\":1}:0\n4\n7\n0\n6\n"
+            php_test.go:138: stderr: got "Fatal error: Uncaught Error: gophp: cyclic array references are not supported in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php:7\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/json_encode_error_reset.php on line 7\n", want ""
+FAIL
+FAIL	example.com/gophp/internal/php	1.778s
+FAIL
+exit_code: 1

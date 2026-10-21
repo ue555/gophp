@@ -1,0 +1,8 @@
+target: random-int-observations
+command: python3 research/fresh-laravel/observe.py tests/fixtures/success/random_int_bounds.php
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-official-observations-0pzd6pg9
+8.4.26 success/random_int_bounds.php exit 0
+8.3.35 success/random_int_bounds.php exit 0
+8.5.11 success/random_int_bounds.php exit 0
+exit_code: 0

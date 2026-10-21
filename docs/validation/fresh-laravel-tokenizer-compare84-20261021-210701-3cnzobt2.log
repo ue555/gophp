@@ -1,0 +1,8 @@
+target: tokenizer-compare84
+command: python3 skills/php-go-interpreter/scripts/compare_php.py --php ./containers/php-version/bin/php84 --php-version 8.4.26 --fixtures tests/fixtures/success/tokenizer_structure.php --interpreter ./.cache/fresh-laravel/gophp --php-version=8.4 '{file}'
+cwd: /Users/kouji/dev/php
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/tokenizer_structure.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0

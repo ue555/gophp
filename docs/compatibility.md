@@ -1,12 +1,14 @@
 # PHP互換性と検証状況
 
+現行**1193件**（正常764・実行時295・構文134）は公式PHP 8.3.35・8.4.26・8.5.11の各版で一致・差異0・エラー0・終了0。未改変Laravel 12.70.0の開発用autoload、.env、Artisan、標準migration、実TCP、標準welcomeのBlade冷／温キャッシュ、Cookie再送とセッション分離まで3組で一致した。[Issue #1の今回の結果と版別生ログ](validation/fresh-laravel-issue-1-results.md)、[再現手順](../research/fresh-laravel/README.md)。PHP全仕様やLaravel全機能の完成ではない。
+
 リリース用の独立再構築・変更後の全検証・CI成果物は[v0.3.0の記録](task-api-release.md)を参照。以下の実装時ログとは実行を分けている。
 
-現行**1173件**について、公式PHP 8.3.35・8.4.26・8.5.11との[全fixture比較](validation/task-api-fixtures-all-3versions-20261021-124313-mipuzcdk.log)は各1173一致・0差異・0エラー・終了0。新規[タスク管理API](../research/task-api/README.md)はLaravelルート・入力検証・Eloquent・SQLiteを用い、公式PHP／Goの3組で各191要求（連続100 GET・8並列GETを含む）の実TCP比較が差異なし。既存固定Laravel/API PlatformアプリもGo3設定で実TCP回帰検証に成功した。[実装範囲・ログ・残る一般機能の制限](validation/task-api-results.md)。
+タスクAPI実装時の**1173件**について、公式PHP 8.3.35・8.4.26・8.5.11との[全fixture比較](validation/task-api-fixtures-all-3versions-20261021-124313-mipuzcdk.log)は各1173一致・0差異・0エラー・終了0。[タスク管理API](../research/task-api/README.md)はLaravelルート・入力検証・Eloquent・SQLiteを用い、公式PHP／Goの3組で各191要求（連続100 GET・8並列GETを含む）の実TCP比較が差異なし。既存固定Laravel/API PlatformアプリもGo3設定で実TCP回帰検証に成功した。[当時の実装範囲・ログ・一般機能の制限](validation/task-api-results.md)。今回の変更後も両アプリを再検証した結果は上記Issue #1の記録を参照。
 
 タスクAPIで必要になったmanifest生成のfilesystem関数・スカラー／配列の`var_export`、Carbon日時JSON化のDateTime書式を補完した。通常オブジェクトの`var_export`、`umask(mask)`による変更、filesystem stream context、DateTime全仕様は未対応・未網羅。上記一致をPHP全機能の互換と扱わない。
 
-以下の機能別記録にある古い件数や「比較待ち」は作業当時の履歴であり、現行1173件の比較状況は上記を基準とする。既存固定アプリの2000回連続／8並列要求の以前の成功記録は[従来の完成記録](full-stack-development.md)に維持する。
+以下の機能別記録にある古い件数や「比較待ち」は作業当時の履歴であり、現行1193件の比較状況は上記を基準とする。既存固定アプリの2000回連続／8並列要求の以前の成功記録は[従来の完成記録](full-stack-development.md)に維持する。
 
 `IteratorAggregate::getIterator()`を経由した`yield from`の24段有限連鎖をGoの3設定で確認した。[対応範囲・循環時の制限](full-stack-development.md)。初回1169件比較では別のGenerator委譲境界に差異が出て修正し、現行fixtureの範囲では後続の公式3版比較で一致した。循環時の診断など未収録の境界は未確認。
 

@@ -1,0 +1,59 @@
+target: fresh-three-version-rebuilt-final
+command: python3 research/fresh-laravel/verify.py --app .cache/fresh-laravel/rebuild-2hr1ykcd/app --binary bin/gophp
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-ka25ki04
+RUN official-8.3-autoload
+RUN official-8.3-environment
+RUN official-8.3-list
+RUN official-8.3-about
+RUN official-8.3-routes
+RUN official-8.3-migrate
+RUN official-8.3-migrate-again
+PASS official-8.3 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.3-blade-tokens
+RUN go-8.3-autoload
+RUN go-8.3-environment
+RUN go-8.3-list
+RUN go-8.3-about
+RUN go-8.3-routes
+RUN go-8.3-migrate
+RUN go-8.3-migrate-again
+PASS go-8.3 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN go-8.3-blade-tokens
+MATCH 8.3 CLI/DB/HTTP/Blade token streams
+RUN official-8.4-autoload
+RUN official-8.4-environment
+RUN official-8.4-list
+RUN official-8.4-about
+RUN official-8.4-routes
+RUN official-8.4-migrate
+RUN official-8.4-migrate-again
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 178, in main
+    for runtime in ['official','go'] if args.runtime=='both' else [args.runtime]:results[runtime]=run.runtime(runtime,v,temp)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 98, in runtime
+    accept(request('/up'));first=request('/');accept(first)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 66, in request
+    try:r=urlopen(Request(f'http://127.0.0.1:{port}'+path,headers={'Accept':'text/html','Cookie':cookie}),timeout=60)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 214, in urlopen
+    return opener.open(url, data, timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 517, in open
+    response = self._open(req, data)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 534, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 494, in _call_chain
+    result = func(*args)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 1375, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py", line 1350, in do_open
+    r = h.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 54] Connection reset by peer
+exit_code: 1

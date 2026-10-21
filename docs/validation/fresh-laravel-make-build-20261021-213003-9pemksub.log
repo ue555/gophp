@@ -1,0 +1,5 @@
+target: make-build
+command: make build
+cwd: /Users/kouji/dev/php
+go build -o bin/gophp ./cmd/gophp
+exit_code: 0

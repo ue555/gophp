@@ -1,0 +1,24 @@
+{
+  "runtime/interface_chain_incompatible.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/interface_chain_redeclare.php": {
+    "stdout": "bool(true)\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/substr_count_bounds.php": {
+    "stdout": "int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) cannot be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.4": "int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) must not be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n",
+      "8.5": "int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) must not be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n"
+    }
+  }
+}

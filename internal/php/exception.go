@@ -41,7 +41,14 @@ func (e *evaluator) initializeException(object value, expressions []expr, line i
 }
 
 func (e *evaluator) initializeExceptionArguments(object value, args []callArgument, line int) error {
-	if equalName(object.o.className(), "ErrorException") {
+	isErrorException := false
+	for c := object.o.class; c != nil; c = c.parent {
+		if equalName(c.name, "ErrorException") {
+			isErrorException = true
+			break
+		}
+	}
+	if isErrorException {
 		params := []parameter{{name: "message"}, {name: "code"}, {name: "severity"}, {name: "filename"}, {name: "line"}, {name: "previous"}}
 		bound, present, _, err := bindCallArguments(args, params, line)
 		if err != nil {

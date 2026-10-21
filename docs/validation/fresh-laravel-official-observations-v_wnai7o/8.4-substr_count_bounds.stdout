@@ -1,0 +1,15 @@
+2
+2
+2
+2
+0
+0
+2
+ValueError: substr_count(): Argument #2 ($needle) must not be empty
+ValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)
+ValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)
+ValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)
+TypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given
+TypeError: substr_count(): Argument #2 ($needle) must be of type string, array given
+TypeError: substr_count(): Argument #3 ($offset) must be of type int, array given
+2

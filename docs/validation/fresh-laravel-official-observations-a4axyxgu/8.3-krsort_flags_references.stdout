@@ -1,0 +1,17 @@
+bool(true)
+["x2","x10","a","A",10,2,"02",-1]
+bool(true)
+[10,2,"02","x10","x2","A","a",-1]
+bool(true)
+["x2","x10","a","A",2,10,"02",-1]
+bool(true)
+["x10","x2","a","A",10,2,"02",-1]
+bool(true)
+["x2","x10","A","a",2,10,"02",-1]
+bool(true)
+["x2","x10","a","A",2,10,"02",-1]
+bool(true)
+1:{"c":3,"b":2,"a":1}
+[{"c":3,"b":2,"a":1}]
+krsort(): Argument #2 ($flags) must be of type int, array given
+{"c":3,"b":2,"a":1}

@@ -1,0 +1,21 @@
+true
+["x2","x10","a","A",10,2,"02",-1]
+true
+[10,2,"02","x10","x2","A","a",-1]
+true
+["x2","x10","a","A",2,10,"02",-1]
+true
+["x10","x2","a","A",10,2,"02",-1]
+true
+["x2","x10","A","a",2,10,"02",-1]
+true
+["x2","x10","a","A",2,10,"02",-1]
+true
+1:{"c":3,"b":2,"a":1}
+[{"c":3,"b":2,"a":1}]
+krsort(): Argument #2 ($flags) must be of type int, array given
+{"c":3,"b":2,"a":1}
+["x10","x2","x1","x02","x000","x0"]
+krsort(): Argument #1 ($array) must be of type array, int given
+17
+krsort(): Argument #1 ($array) could not be passed by reference

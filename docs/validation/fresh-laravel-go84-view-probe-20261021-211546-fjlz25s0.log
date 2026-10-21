@@ -1,0 +1,12 @@
+target: go84-view-probe
+command: .cache/fresh-laravel/gophp --php-version=8.4 .cache/fresh-laravel/view-probe.php
+cwd: /Users/kouji/dev/php
+ArgumentCountError: Illuminate\View\ViewException::__construct() expects at most 3 arguments, 6 given
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(59): Illuminate\View\Engines\CompilerEngine->handleViewException(Object(ParseError), 0)
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(76): Illuminate\View\Engines\PhpEngine->evaluatePath('/Users/kouji/de...', Array)
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/View/View.php(208): Illuminate\View\Engines\CompilerEngine->get('/Users/kouji/de...', Array)
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/View/View.php(191): Illuminate\View\View->getContents()
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/View/View.php(160): Illuminate\View\View->renderContents()
+#5 /Users/kouji/dev/php/.cache/fresh-laravel/view-probe.php(6): Illuminate\View\View->render()
+#6 {main}
+exit_code: 1

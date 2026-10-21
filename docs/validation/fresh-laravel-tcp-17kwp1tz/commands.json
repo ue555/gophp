@@ -1,0 +1,98 @@
+[
+  {
+    "label": "go-8.4-autoload",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/autoload.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-environment",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/environment.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-list",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "artisan",
+      "list",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-about",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "artisan",
+      "about",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-routes",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "artisan",
+      "route:list",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-migrate",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-migrate-again",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.4-server",
+    "command": [
+      "/Users/kouji/dev/php/.cache/fresh-laravel/gophp",
+      "--php-version=8.4",
+      "--serve=127.0.0.1:61530",
+      "public/index.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-evomuubr/go-8.4/app",
+    "pid": 99425,
+    "exit_code": -15
+  }
+]

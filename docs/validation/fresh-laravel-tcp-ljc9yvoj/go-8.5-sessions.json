@@ -1,0 +1,38 @@
+{
+  "sessions": [
+    [
+      "BDVATtROdhAoW2iLE86XIeMxk4OcmeIB9V8F7AjA",
+      "YTozOntzOjY6Il90b2tlbiI7czo0MDoiWU40QUx0bkQxellrcXY2NjI0em1tbXhadUpBQTBVUlR3ZGZrdEc0ViI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly8xMjcuMC4wLjE6NTEzODUiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=",
+      1792586318
+    ],
+    [
+      "KS0W2DXd4IpzoJxbtY8tis4zQNF4P8qtuNi2AwuF",
+      "YTozOntzOjY6Il90b2tlbiI7czo0MDoiNlBQblo3T245VlU2YjZlQ1hoaGZFUHBLaDhaS0JCOEhxRjNIUnJUdiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly8xMjcuMC4wLjE6NTEzODUiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=",
+      1792586318
+    ],
+    [
+      "OnfeRgoKMQvT5t8SboZlWDypJs3pLBSEKCal15Mh",
+      "YTozOntzOjY6Il90b2tlbiI7czo0MDoiVFd2cms1RjZxa2RlUkNDaEpHMDB4OWl3OEJHTTNoWE5zTlpYWmU5UiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly8xMjcuMC4wLjE6NTEzODUiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=",
+      1792586318
+    ],
+    [
+      "gzxfu4SaZ9CL23lPSDKXhIRFQJvS8wxTxDPElvsb",
+      "YTozOntzOjY6Il90b2tlbiI7czo0MDoiU0cyN3pLbGY1V2o0aTRSR0wwZmFVbWozUzhpeUNnODZCT3VFME9UVyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly8xMjcuMC4wLjE6NTEzODUiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=",
+      1792586318
+    ],
+    [
+      "yq0rP73CbvNhgAz1rQcwu2trJmjRQDoAnC00R467",
+      "YTozOntzOjY6Il90b2tlbiI7czo0MDoiWm9RTUl6QkVvaHZWSVBFTE1TcWJKYzBGNWcxdTB5dlJCaUtxVEVmbiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly8xMjcuMC4wLjE6NTEzODUiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=",
+      1792586315
+    ]
+  ],
+  "untouched": {
+    "users": 0,
+    "password_reset_tokens": 0,
+    "jobs": 0,
+    "job_batches": 0,
+    "failed_jobs": 0,
+    "cache": 0,
+    "cache_locks": 0
+  }
+}

@@ -1,0 +1,16 @@
+target: paired84-cookie-session
+command: python3 research/fresh-laravel/verify.py --version 8.4 --binary .cache/fresh-laravel/gophp --sequential 1
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-gqxz0w8b
+RUN official-8.4-autoload
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 173, in main
+    for runtime in ['official','go'] if args.runtime=='both' else [args.runtime]:results[runtime]=run.runtime(runtime,v,temp)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 46, in runtime
+    check(self.command(label+'-autoload',prefix+[str(autoload)],app,env)=='autoload OK\n','autoload output')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 29, in command
+    check(r.returncode==0,f'{label} exit {r.returncode}: {r.stderr[:600]!r}')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 14, in check
+    if not ok:raise RuntimeError(msg)
+RuntimeError: official-8.4-autoload exit 127: b'Error: preparing container 07eac74bbfa5077f3244088026aa91ba1e8c6fa423be6b4f4611357e0201c79e for attach: crun: executable file `docker-php-entrypoint` not found in $PATH: No such file or directory: OCI runtime attempted to invoke a command that was not found\n'
+exit_code: 1

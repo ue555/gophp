@@ -1,0 +1,31 @@
+target: paired84-body-token-comparison
+command: python3 research/fresh-laravel/verify.py --version 8.4 --binary .cache/fresh-laravel/gophp --sequential 1
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-l2xiqs27
+RUN official-8.4-autoload
+RUN official-8.4-environment
+RUN official-8.4-list
+RUN official-8.4-about
+RUN official-8.4-routes
+RUN official-8.4-migrate
+RUN official-8.4-migrate-again
+PASS official-8.4 CLI/migration/HTTP/Blade cold/warm 12 requests
+RUN official-8.4-blade-tokens
+RUN go-8.4-autoload
+RUN go-8.4-environment
+RUN go-8.4-list
+RUN go-8.4-about
+RUN go-8.4-routes
+RUN go-8.4-migrate
+RUN go-8.4-migrate-again
+PASS go-8.4 CLI/migration/HTTP/Blade cold/warm 12 requests
+RUN go-8.4-blade-tokens
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 179, in main
+    if args.runtime=='both':compare_pair(results,out,v)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 159, in compare_pair
+    check(official==go,'official/Go comparison differs; normalized artifacts saved')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 14, in check
+    if not ok:raise RuntimeError(msg)
+RuntimeError: official/Go comparison differs; normalized artifacts saved
+exit_code: 1

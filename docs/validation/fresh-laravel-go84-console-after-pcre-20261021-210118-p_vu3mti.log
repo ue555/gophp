@@ -1,0 +1,14 @@
+target: go84-console-after-pcre
+command: .cache/fresh-laravel/gophp --php-version=8.4 .cache/fresh-laravel/console-probe.php
+cwd: /Users/kouji/dev/php
+Error: Call to undefined function rsort()
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Loader/Resolver.php(41): Dotenv\Parser\Value->getVars()
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Loader/Loader.php(32): Dotenv\Loader\Resolver::resolve(Object(Dotenv\Repository\AdapterRepository), Object(Dotenv\Parser\Value))
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Dotenv.php(224): Dotenv\Loader\Loader->load(Object(Dotenv\Repository\AdapterRepository), Array)
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Dotenv.php(237): Dotenv\Dotenv->load()
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadEnvironmentVariables.php(29): Dotenv\Dotenv->safeLoad()
+#5 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables->bootstrap(Object(Illuminate\Foundation\Application))
+#6 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate\Foundation\Application->bootstrapWith(Array)
+#7 /Users/kouji/dev/php/.cache/fresh-laravel/console-probe.php(6): Illuminate\Foundation\Console\Kernel->bootstrap()
+#8 {main}
+exit_code: 1

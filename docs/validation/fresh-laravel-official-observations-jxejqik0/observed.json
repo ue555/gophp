@@ -1,0 +1,12 @@
+{
+  "success/alternative_if_html.php": {
+    "stdout": "zero!\none!\nother!\notherthree!\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/filemtime_stat.php": {
+    "stdout": "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Filename contains null byte\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

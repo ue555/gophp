@@ -26,7 +26,6 @@ func (e *evaluator) callPregReplaceCallback(node functionCall) (value, error) {
 	if !ok {
 		return value{}, &runtimeError{node.line, "TypeError", "preg_replace_callback(): Argument #2 ($callback) must be a valid callback"}
 	}
-	re, compileErr := compileBasicPCRE(pattern.s)
 	limit := -1
 	if present[3] {
 		v, _, ok := e.coerceType(bound[3], "int", false, e.strictTypes)
@@ -35,18 +34,12 @@ func (e *evaluator) callPregReplaceCallback(node functionCall) (value, error) {
 		}
 		limit = int(v.i)
 	}
-	var indices [][]int
-	if compileErr == nil {
-		indices = re.FindAllStringSubmatchIndex(subject.s, limit)
-	} else {
-		indices, _, err = pcre2MatchAll(pattern.s, subject.s)
-		if err != nil {
-			return value{}, err
-		}
-		if limit >= 0 && len(indices) > limit {
-			indices = indices[:limit]
-		}
+	e.pregLastError = 0
+	indices, _, err := pcre2Matches(pattern.s, subject.s, 0, limit)
+	if err != nil {
+		return e.pregFailure("preg_replace_callback", node.line, err)
 	}
+
 	var out strings.Builder
 	last := 0
 	for _, index := range indices {

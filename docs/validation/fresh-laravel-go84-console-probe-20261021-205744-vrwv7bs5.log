@@ -1,0 +1,14 @@
+target: go84-console-probe
+command: .cache/fresh-laravel/gophp --php-version=8.4 .cache/fresh-laravel/console-probe.php
+cwd: /Users/kouji/dev/php
+bootstrap OK
+Error: Call to undefined function Symfony\Component\EventDispatcher\krsort()
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/event-dispatcher/EventDispatcher.php(50): Symfony\Component\EventDispatcher\EventDispatcher->optimizeListeners('console.termina...')
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/console/Application.php(1144): Symfony\Component\EventDispatcher\EventDispatcher->dispatch(Object(Symfony\Component\Console\Event\ConsoleTerminateEvent), 'console.termina...')
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/console/Application.php(357): Symfony\Component\Console\Application->doRunCommand(Object(Symfony\Component\Console\Command\ListCommand), Object(Symfony\Component\Console\Input\ArrayInput), Object(Symfony\Component\Console\Output\BufferedOutput))
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/symfony/console/Application.php(196): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArrayInput), Object(Symfony\Component\Console\Output\BufferedOutput))
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Console/Application.php(165): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArrayInput), Object(Symfony\Component\Console\Output\BufferedOutput))
+#5 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(447): Illuminate\Console\Application->call('list', Array, NULL)
+#6 /Users/kouji/dev/php/.cache/fresh-laravel/console-probe.php(8): Illuminate\Foundation\Console\Kernel->call('list', Array)
+#7 {main}
+exit_code: 1

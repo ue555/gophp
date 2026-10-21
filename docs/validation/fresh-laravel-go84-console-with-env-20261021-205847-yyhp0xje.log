@@ -1,0 +1,14 @@
+target: go84-console-with-env
+command: .cache/fresh-laravel/gophp --php-version=8.4 .cache/fresh-laravel/console-probe.php
+cwd: /Users/kouji/dev/php
+Error: Call to undefined function preg_last_error()
+#0 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Util/Regex.php(81): Dotenv\Util\Regex::wrap(Array)
+#1 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Parser/Parser.php(25): Dotenv\Util\Regex::split('/(\r\n|\n|\r)/', 'APP_NAME="Fresh...')
+#2 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Dotenv.php(222): Dotenv\Parser\Parser->parse('APP_NAME="Fresh...')
+#3 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/vlucas/phpdotenv/src/Dotenv.php(237): Dotenv\Dotenv->load()
+#4 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadEnvironmentVariables.php(29): Dotenv\Dotenv->safeLoad()
+#5 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables->bootstrap(Object(Illuminate\Foundation\Application))
+#6 /Users/kouji/dev/php/research/fresh-laravel/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate\Foundation\Application->bootstrapWith(Array)
+#7 /Users/kouji/dev/php/.cache/fresh-laravel/console-probe.php(6): Illuminate\Foundation\Console\Kernel->bootstrap()
+#8 {main}
+exit_code: 1

@@ -1,0 +1,4 @@
+target: upstream-skeleton-ref
+command: gh api repos/laravel/laravel/git/ref/tags/v12.12.2
+cwd: /Users/kouji/dev/php
+{"ref":"refs/tags/v12.12.2","node_id":"MDM6UmVmMTg2MzMyOTpyZWZzL3RhZ3MvdjEyLjEyLjI=","url":"https://api.github.com/repos/laravel/laravel/git/refs/tags/v12.12.2","object":{"sha":"945f4e5a9fd3695dc0ee512f497c650fb82cfbb8","type":"commit","url":"https://api.github.com/repos/laravel/laravel/git/commits/945f4e5a9fd3695dc0ee512f497c650fb82cfbb8"}}exit_code: 0

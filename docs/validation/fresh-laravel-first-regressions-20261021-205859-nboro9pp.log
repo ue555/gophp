@@ -1,0 +1,115 @@
+target: first-regressions
+command: python3 -
+cwd: /Users/kouji/dev/php
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php:9\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php on line 9\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php
+  stderr:
+    PHP: b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+    Go:  b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+0 matched, 1 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) cannot be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php on line 2\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n["x2","x10","a","A",10,2,"02",-1]\nbool(true)\n[10,2,"02","x10","x2","A","a",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n["x10","x2","a","A",10,2,"02",-1]\nbool(true)\n["x2","x10","A","a",2,10,"02",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n1:{"c":3,"b":2,"a":1}\n[{"c":3,"b":2,"a":1}]\nkrsort(): Argument #2 ($flags) must be of type int, array given\n{"c":3,"b":2,"a":1}\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php:4\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php on line 4\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/interface_diamond_contracts.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/interface_diamond_arity.php (exit 255)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/variance_diamond.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php:9\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php on line 9\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php
+  stderr:
+    PHP: b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+    Go:  b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+0 matched, 1 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) must not be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php on line 2\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n["x2","x10","a","A",10,2,"02",-1]\nbool(true)\n[10,2,"02","x10","x2","A","a",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n["x10","x2","a","A",10,2,"02",-1]\nbool(true)\n["x2","x10","A","a",2,10,"02",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n1:{"c":3,"b":2,"a":1}\n[{"c":3,"b":2,"a":1}]\nkrsort(): Argument #2 ($flags) must be of type int, array given\n{"c":3,"b":2,"a":1}\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php:4\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php on line 4\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/interface_diamond_contracts.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/interface_diamond_arity.php (exit 255)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/variance_diamond.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php:9\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php on line 9\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php
+  stderr:
+    PHP: b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\nStack trace:\n#0 {main}\n'
+    Go:  b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\nStack trace:\n#0 {main}\n'
+0 matched, 1 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'int(2)\nint(2)\nint(2)\nint(2)\nint(0)\nint(0)\nint(2)\nValueError: substr_count(): Argument #2 ($needle) must not be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\nint(2)\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php on line 2\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php: success fixture must exit 0 in both interpreters (PHP 0, Go 255)
+  PHP stdout: b'bool(true)\n["x2","x10","a","A",10,2,"02",-1]\nbool(true)\n[10,2,"02","x10","x2","A","a",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n["x10","x2","a","A",10,2,"02",-1]\nbool(true)\n["x2","x10","A","a",2,10,"02",-1]\nbool(true)\n["x2","x10","a","A",2,10,"02",-1]\nbool(true)\n1:{"c":3,"b":2,"a":1}\n[{"c":3,"b":2,"a":1}]\nkrsort(): Argument #2 ($flags) must be of type int, array given\n{"c":3,"b":2,"a":1}\n'; stderr: b''
+  Go stdout: b''; stderr: b'Fatal error: Uncaught Error: Call to undefined function var_dump() in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php:4\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php on line 4\n'
+0 matched, 0 different, 1 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/interface_diamond_contracts.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/runtime/interface_diamond_arity.php (exit 255)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/variance_diamond.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 2

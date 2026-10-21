@@ -1,0 +1,11 @@
+preg_match(): Compilation failed: missing closing parenthesis at offset 1
+false:1
+preg_match(): Argument #1 ($pattern) must be of type string, array given
+1
+preg_match(): Unknown modifier 'q'
+false:1
+0:0
+null:4
+false:4
+0:0
+1:0

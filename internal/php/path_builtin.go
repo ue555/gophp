@@ -7,6 +7,35 @@ import (
 	"syscall"
 )
 
+func (e *evaluator) callFilemtime(node functionCall) (value, error) {
+	args, err := e.evalArguments(node.args)
+	if err != nil {
+		return value{}, err
+	}
+	b, p, _, err := bindCallArguments(args, []parameter{{name: "filename"}}, node.line)
+	if err != nil {
+		return value{}, err
+	}
+	if len(args) != 1 || !p[0] {
+		return value{}, &runtimeError{node.line, "ArgumentCountError", "filemtime() expects exactly 1 argument"}
+	}
+	v, _, ok := e.coerceType(b[0], "string", false, e.strictTypes)
+	if !ok {
+		return value{}, builtinTypeError(node.line, "filemtime", 1, "filename", "string", b[0])
+	}
+	if strings.IndexByte(v.s, 0) >= 0 {
+		return value{}, &runtimeError{node.line, "ValueError", "filemtime(): Filename contains null byte"}
+	}
+	info, err := os.Stat(v.s)
+	if err != nil {
+		if err = e.warn(node.line, "filemtime(): stat failed for "+v.s); err != nil {
+			return value{}, err
+		}
+		return boolean(false), nil
+	}
+	return integer(info.ModTime().Unix()), nil
+}
+
 func (e *evaluator) callIsWritable(node functionCall) (value, error) {
 	args, err := e.evalArguments(node.args)
 	if err != nil {

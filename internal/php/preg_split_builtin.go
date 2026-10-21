@@ -2,7 +2,6 @@ package php
 
 import (
 	"strings"
-	"unicode/utf8"
 )
 
 func (e *evaluator) callPregSplit(node functionCall) (value, error) {
@@ -47,33 +46,16 @@ func (e *evaluator) callPregSplit(node functionCall) (value, error) {
 	if flags&^int64(7) != 0 {
 		return value{}, &runtimeError{node.line, "Error", "gophp: preg_split() flag is not implemented"}
 	}
-	var matches [][]int
-	if p.s == "/(.)(?=[A-Z])/u" {
-		for i := 1; i < len(s.s); i++ {
-			if s.s[i] < 'A' || s.s[i] > 'Z' {
-				continue
-			}
-			_, width := utf8.DecodeLastRuneInString(s.s[:i])
-			if width > 0 {
-				matches = append(matches, []int{i - width, i, i - width, i})
-			}
-		}
-	} else {
-		re, err := compileBasicPCRE(p.s)
-		if err != nil {
-			indices, _, pcreErr := pcre2MatchAll(p.s, s.s)
-			if pcreErr != nil {
-				return value{}, pcreErr
-			}
-			matches = indices
-		} else {
-			maxMatches := -1
-			if limit > 0 {
-				maxMatches = limit - 1
-			}
-			matches = re.FindAllStringSubmatchIndex(s.s, maxMatches)
-		}
+	e.pregLastError = 0
+	maxMatches := -1
+	if limit > 0 {
+		maxMatches = limit - 1
 	}
+	matches, _, err := pcre2Matches(p.s, s.s, 0, maxMatches)
+	if err != nil {
+		return e.pregFailure("preg_split", node.line, err)
+	}
+
 	out := arrayValue()
 	appendPart := func(part string, start int) {
 		if flags&1 != 0 && part == "" {

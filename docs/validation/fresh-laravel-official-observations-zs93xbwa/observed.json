@@ -1,0 +1,7 @@
+{
+  "success/json_nested_markup.php": {
+    "stdout": "{\"environment\":{\"composer_version\":\"<fg=yellow;options=bold>-<\\/>\"},\"<key>\":[\"&\",\"<script>\"]}\n{\"environment\":{\"composer_version\":\"-\"},\"\":[\"&\",\"\"]}\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

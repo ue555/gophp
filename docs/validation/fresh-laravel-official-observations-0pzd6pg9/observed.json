@@ -1,0 +1,7 @@
+{
+  "success/random_int_bounds.php": {
+    "stdout": "5:-9223372036854775808:9223372036854775807\nbounded\nrandom_int(): Argument #1 ($min) must be less than or equal to argument #2 ($max)\nrandom_int(): Argument #1 ($min) must be of type int, array given\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

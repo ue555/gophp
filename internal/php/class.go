@@ -798,9 +798,11 @@ func (e *evaluator) initClasses() {
 		}
 		for _, cls := range []*classDecl{dateTime, dateTimeImmutable} {
 			cls.methods = make(map[string]*methodDecl)
-			for _, name := range []string{"__construct", "format", "getTimestamp", "getTimezone", "setTimezone", "getLastErrors", "createFromFormat"} {
+			for _, name := range []string{"__construct", "format", "getTimestamp", "getTimezone", "setTimezone", "getLastErrors", "createFromFormat", "add", "sub"} {
 				method := &methodDecl{name: name, visibility: "public", owner: cls}
 				switch name {
+				case "add", "sub":
+					method.parameters = []parameter{{name: "interval", typeName: "DateInterval"}}
 				case "format":
 					method.parameters = []parameter{{name: "format", typeName: "string"}}
 					method.returnType = "string"
@@ -822,6 +824,10 @@ func (e *evaluator) initClasses() {
 				cls.methodOrder = append(cls.methodOrder, method)
 			}
 		}
+		dateInterval := &classDecl{name: "DateInterval", kind: "class", methods: make(map[string]*methodDecl)}
+		constructor := &methodDecl{name: "__construct", visibility: "public", owner: dateInterval, parameters: []parameter{{name: "duration", typeName: "string"}}}
+		dateInterval.methods["__construct"] = constructor
+		dateInterval.methodOrder = []*methodDecl{constructor}
 		jsonMethod := &methodDecl{name: "jsonSerialize", visibility: "public", abstract: true, owner: jsonSerializable, returnType: "mixed"}
 		jsonSerializable.methods["jsonserialize"] = jsonMethod
 		jsonSerializable.methodOrder = []*methodDecl{jsonMethod}
@@ -855,6 +861,7 @@ func (e *evaluator) initClasses() {
 		pdoException := &classDecl{name: "PDOException", kind: "class", parent: runtimeException}
 		pdoException.properties = append(append([]propertyDecl(nil), runtimeException.properties...), propertyDecl{name: "errorInfo", visibility: "public", initial: literal{value: value{kind: nullKind}}, owner: pdoException})
 		errorException := &classDecl{name: "ErrorException", kind: "class", parent: exception}
+		dateException := &classDecl{name: "DateException", kind: "class", parent: exception}
 		badFunctionCall := &classDecl{name: "BadFunctionCallException", kind: "class", parent: logicException}
 		baseError := &classDecl{name: "Error", kind: "class", interfaces: []*classDecl{throwable}}
 		typeError := &classDecl{name: "TypeError", kind: "class", parent: baseError}
@@ -872,21 +879,23 @@ func (e *evaluator) initClasses() {
 			"stdclass": {name: "stdClass"}, "closure": {name: "Closure", final: true},
 			"throwable": throwable, "exception": exception, "error": baseError,
 			"logicexception": logicException, "runtimeexception": runtimeException,
-			"pdoexception":             pdoException,
-			"errorexception":           errorException,
-			"reflectionexception":      {name: "ReflectionException", kind: "class", parent: exception},
-			"badfunctioncallexception": badFunctionCall,
-			"badmethodcallexception":   {name: "BadMethodCallException", kind: "class", parent: badFunctionCall},
-			"domainexception":          {name: "DomainException", kind: "class", parent: logicException},
-			"invalidargumentexception": {name: "InvalidArgumentException", kind: "class", parent: logicException},
-			"lengthexception":          {name: "LengthException", kind: "class", parent: logicException},
-			"outofrangeexception":      {name: "OutOfRangeException", kind: "class", parent: logicException},
-			"outofboundsexception":     {name: "OutOfBoundsException", kind: "class", parent: runtimeException},
-			"overflowexception":        {name: "OverflowException", kind: "class", parent: runtimeException},
-			"rangeexception":           {name: "RangeException", kind: "class", parent: runtimeException},
-			"underflowexception":       {name: "UnderflowException", kind: "class", parent: runtimeException},
-			"unexpectedvalueexception": {name: "UnexpectedValueException", kind: "class", parent: runtimeException},
-			"unitenum":                 unitEnum, "backedenum": backedEnum,
+			"pdoexception":                         pdoException,
+			"errorexception":                       errorException,
+			"dateexception":                        dateException,
+			"datemalformedintervalstringexception": {name: "DateMalformedIntervalStringException", kind: "class", parent: dateException},
+			"reflectionexception":                  {name: "ReflectionException", kind: "class", parent: exception},
+			"badfunctioncallexception":             badFunctionCall,
+			"badmethodcallexception":               {name: "BadMethodCallException", kind: "class", parent: badFunctionCall},
+			"domainexception":                      {name: "DomainException", kind: "class", parent: logicException},
+			"invalidargumentexception":             {name: "InvalidArgumentException", kind: "class", parent: logicException},
+			"lengthexception":                      {name: "LengthException", kind: "class", parent: logicException},
+			"outofrangeexception":                  {name: "OutOfRangeException", kind: "class", parent: logicException},
+			"outofboundsexception":                 {name: "OutOfBoundsException", kind: "class", parent: runtimeException},
+			"overflowexception":                    {name: "OverflowException", kind: "class", parent: runtimeException},
+			"rangeexception":                       {name: "RangeException", kind: "class", parent: runtimeException},
+			"underflowexception":                   {name: "UnderflowException", kind: "class", parent: runtimeException},
+			"unexpectedvalueexception":             {name: "UnexpectedValueException", kind: "class", parent: runtimeException},
+			"unitenum":                             unitEnum, "backedenum": backedEnum,
 			"countable":                  countable,
 			"stringable":                 stringable,
 			"traversable":                traversable,
@@ -933,7 +942,7 @@ func (e *evaluator) initClasses() {
 			"fiber":                      fiber,
 			"datetimeimmutable":          dateTimeImmutable,
 			"datetimezone":               dateTimeZone,
-			"dateinterval":               {name: "DateInterval", kind: "class"},
+			"dateinterval":               dateInterval,
 			"typeerror":                  typeError,
 			"compileerror":               compileError,
 			"parseerror":                 {name: "ParseError", kind: "class", parent: compileError},
@@ -1018,7 +1027,9 @@ func (e *evaluator) declareClass(decl *classDecl) error {
 						return err
 					}
 				}
-				methods[name] = method
+				if methods[name] == nil {
+					methods[name] = method
+				}
 			}
 		}
 		for _, method := range decl.methodOrder {
@@ -1260,9 +1271,9 @@ func (e *evaluator) declareClass(decl *classDecl) error {
 	return nil
 }
 
-// Interface lookup keeps one method per name, but declaration checking must
-// retain every inherited contract. A class implementing a diamond may need
-// to satisfy two signatures even when its interface's lookup map has only one.
+// Keep independent sibling contracts, but replace an ancestor contract when
+// a descendant redeclares it. The redeclaration was checked at registration;
+// checking the ancestor against that descendant again reverses variance.
 func interfaceContracts(iface *classDecl) []*methodDecl {
 	var result []*methodDecl
 	seen := make(map[*classDecl]bool)
@@ -1275,7 +1286,16 @@ func interfaceContracts(iface *classDecl) []*methodDecl {
 		for _, parent := range current.interfaces {
 			visit(parent)
 		}
-		result = append(result, current.methodOrder...)
+		for _, method := range current.methodOrder {
+			kept := result[:0]
+			for _, previous := range result {
+				if equalName(previous.name, method.name) && classImplements(current, previous.owner.name) {
+					continue
+				}
+				kept = append(kept, previous)
+			}
+			result = append(kept, method)
+		}
 	}
 	visit(iface)
 	return result
@@ -1315,6 +1335,22 @@ func methodSignature(method *methodDecl) string {
 		}
 		if parameter.typeName != "" {
 			parts[i] = declaredTypeText(relativeTypeName(parameter.typeName, method.owner, nil), parameter.nullable) + " " + parts[i]
+		}
+		if initial, ok := parameter.initial.(literal); ok {
+			switch initial.value.kind {
+			case nullKind:
+				parts[i] += " = null"
+			case boolKind:
+				if initial.value.truthy() {
+					parts[i] += " = true"
+				} else {
+					parts[i] += " = false"
+				}
+			case stringKind:
+				parts[i] += " = " + exportString(initial.value.s)
+			case intKind, floatKind:
+				parts[i] += " = " + initial.value.text()
+			}
 		}
 	}
 	signature := method.owner.name + "::" + method.name + "(" + strings.Join(parts, ", ") + ")"
@@ -3490,6 +3526,9 @@ func (e *evaluator) invokeWithCapture(object value, called *classDecl, method *m
 	}
 	if method.owner != nil && (method.owner.name == "DateTime" || method.owner.name == "DateTimeImmutable") {
 		return e.invokeDateTime(object, called, method, args, line)
+	}
+	if method.owner != nil && method.owner.name == "DateInterval" {
+		return e.invokeDateInterval(object, args, line)
 	}
 	if method.owner != nil && method.owner.name == "DateTimeZone" {
 		return e.invokeDateTimeZone(object, method, args, line)

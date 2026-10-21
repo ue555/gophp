@@ -1,0 +1,14 @@
+{
+  "command": [
+    "research/fresh-laravel/verify.py",
+    "--version",
+    "8.4",
+    "--runtime",
+    "official",
+    "--binary",
+    ".cache/fresh-laravel/gophp",
+    "--sequential",
+    "1"
+  ],
+  "exit_code": 0
+}

@@ -29,7 +29,14 @@ func (e *evaluator) initializeRequestArrays(request HTTPRequest) {
 		for _, part := range strings.Split(content, ";") {
 			piece := strings.SplitN(strings.TrimSpace(part), "=", 2)
 			if len(piece) == 2 {
-				cookies.a = cookies.a.with(arrayKey{isString: true, text: piece[0]}, value{kind: stringKind, s: piece[1]})
+				decoded, err := url.QueryUnescape(piece[1])
+				if err != nil {
+					decoded = piece[1]
+				}
+				key := arrayKey{isString: true, text: piece[0]}
+				if _, exists := cookies.a.get(key); !exists {
+					cookies.a = cookies.a.with(key, value{kind: stringKind, s: decoded})
+				}
 			}
 		}
 	}

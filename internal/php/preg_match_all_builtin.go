@@ -133,18 +133,19 @@ func (e *evaluator) callPregMatchAll(node functionCall) (value, error) {
 	if offset < 0 || offset > int64(len(s.s)) {
 		return value{}, &runtimeError{node.line, "ValueError", "preg_match_all(): Argument #5 ($offset) must be contained in argument #2 ($subject)"}
 	}
-	re, err := compileBasicPCRE(p.s)
-	var indices [][]int
-	var names []string
+	e.pregLastError = 0
+	indices, names, err := pcre2Matches(p.s, s.s, int(offset), -1)
 	if err != nil {
-		indices, names, err = pcre2MatchAll(p.s, s.s[offset:])
-		if err != nil {
-			return value{}, err
-		}
-	} else {
-		indices = re.FindAllStringSubmatchIndex(s.s[offset:], -1)
-		names = re.SubexpNames()
+		return e.pregFailure("preg_match_all", node.line, err)
 	}
+	for _, index := range indices {
+		for i, v := range index {
+			if v >= 0 {
+				index[i] = v - int(offset)
+			}
+		}
+	}
+
 	out := arrayValue()
 	makeItem := func(start, stop int) value {
 		position := int64(start) + offset

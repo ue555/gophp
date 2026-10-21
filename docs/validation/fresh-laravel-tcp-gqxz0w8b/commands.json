@@ -1,0 +1,29 @@
+[
+  {
+    "label": "official-8.4-autoload",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-z56scfmn/official-8.4/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.4.26",
+      "/usr/local/bin/php",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-z56scfmn/official-8.4/autoload.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-z56scfmn/official-8.4/app",
+    "exit_code": 127
+  }
+]

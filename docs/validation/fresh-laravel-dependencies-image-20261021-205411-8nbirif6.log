@@ -1,0 +1,25 @@
+target: dependencies-image
+command: podman images --format '{{.Repository}}:{{.Tag}}'
+cwd: /Users/kouji/dev/php
+localhost/gophp-dependency-research:8.5.11
+localhost/gophp-dependency-research:8.4.26
+localhost/gophp-dependency-research:8.3.35
+localhost/gophp-release-build:latest
+localhost/gophp:v1
+<none>:<none>
+<none>:<none>
+<none>:<none>
+docker.io/library/php:8.3.35-cli-bookworm
+docker.io/library/php:8.4.26-cli-bookworm
+docker.io/library/php:8.5.11-cli-bookworm
+<none>:<none>
+localhost/gophp-release-dependencies:latest
+localhost/gophp-dependency-research:8.3
+<none>:<none>
+<none>:<none>
+docker.io/library/golang:1.27.2-alpine3.24
+docker.io/library/composer:2
+docker.io/library/nginx:alpine
+docker.io/library/alpine:3.24
+docker.io/library/alpine:latest
+exit_code: 0

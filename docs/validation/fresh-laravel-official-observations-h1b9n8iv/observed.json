@@ -1,0 +1,7 @@
+{
+  "success/preg_warning_and_failure_state.php": {
+    "stdout": "preg_match(): Compilation failed: missing closing parenthesis at offset 1\nfalse:1\npreg_match(): Argument #1 ($pattern) must be of type string, array given\n1\npreg_match(): Unknown modifier 'q'\nfalse:1\n0:0\nnull:4\nfalse:4\n0:0\n1:0\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

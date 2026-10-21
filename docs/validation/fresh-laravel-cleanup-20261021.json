@@ -1,0 +1,12 @@
+{
+  "command": "inspect owned temporary run directories, SQLite files and server/container processes after runner cleanup",
+  "temporary_run_directories": [],
+  "temporary_sqlite_files": [],
+  "retained_rebuild_dependencies": "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+  "retained_manual_server_port": 8091,
+  "exit_code": 0,
+  "containers": "php-version-83 docker.io/library/php:8.3.35-cli-bookworm\nphp-version-84 docker.io/library/php:8.4.26-cli-bookworm\nphp-version-85 docker.io/library/php:8.5.11-cli-bookworm\n",
+  "go_servers": [
+    "79610 95393 ../../bin/gophp --php-version=8.4 --serve=127.0.0.1:8091 public/index.php"
+  ]
+}

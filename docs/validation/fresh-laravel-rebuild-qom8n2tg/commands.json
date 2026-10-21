@@ -1,0 +1,174 @@
+[
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "install",
+      "--no-scripts",
+      "--no-interaction",
+      "--prefer-dist"
+    ],
+    "version": "8.3.35",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "check-platform-reqs",
+      "--lock",
+      "--format=json"
+    ],
+    "version": "8.3.35",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.3.35",
+      "php",
+      "-m"
+    ],
+    "version": "8.3.35",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.3.35",
+      "php",
+      "-r",
+      "echo PHP_VERSION,\"\\n\";"
+    ],
+    "version": "8.3.35",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.4.26",
+      "composer",
+      "check-platform-reqs",
+      "--lock",
+      "--format=json"
+    ],
+    "version": "8.4.26",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.4.26",
+      "php",
+      "-m"
+    ],
+    "version": "8.4.26",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.4.26",
+      "php",
+      "-r",
+      "echo PHP_VERSION,\"\\n\";"
+    ],
+    "version": "8.4.26",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.5.11",
+      "composer",
+      "check-platform-reqs",
+      "--lock",
+      "--format=json"
+    ],
+    "version": "8.5.11",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.5.11",
+      "php",
+      "-m"
+    ],
+    "version": "8.5.11",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/rebuild-2hr1ykcd/app",
+      "localhost/gophp-dependency-research:8.5.11",
+      "php",
+      "-r",
+      "echo PHP_VERSION,\"\\n\";"
+    ],
+    "version": "8.5.11",
+    "exit_code": 0
+  }
+]

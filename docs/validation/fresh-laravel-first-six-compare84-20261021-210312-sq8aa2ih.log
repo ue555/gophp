@@ -1,0 +1,34 @@
+target: first-six-compare84
+command: python3 -
+cwd: /Users/kouji/dev/php
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php
+  stderr:
+    PHP: b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name = null): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+    Go:  b'Fatal error: Declaration of ChainLeafBad::dispatch(object $event): object must be compatible with ChainMiddleBad::dispatch(object $event, ?string $name): object in /Users/kouji/dev/php/tests/fixtures/runtime/interface_chain_incompatible.php on line 4\n'
+0 matched, 1 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/interface_chain_redeclare.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/krsort_flags_references.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/preg_state_transitions.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/rsort_flags_references.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+DIFF /Users/kouji/dev/php/tests/fixtures/success/substr_count_bounds.php
+  stdout:
+    PHP: b'2\n2\n2\n2\n0\n0\n2\nValueError: substr_count(): Argument #2 ($needle) must not be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\n2\n'
+    Go:  b'2\n2\n2\n2\n0\n0\n2\nValueError: substr_count(): Argument #2 ($needle) cannot be empty\nValueError: substr_count(): Argument #3 ($offset) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nValueError: substr_count(): Argument #4 ($length) must be contained in argument #1 ($haystack)\nTypeError: substr_count(): Argument #1 ($haystack) must be of type string, array given\nTypeError: substr_count(): Argument #2 ($needle) must be of type string, array given\nTypeError: substr_count(): Argument #3 ($offset) must be of type int, array given\n2\n'
+0 matched, 1 different, 0 errors; 1 fixtures
+exit_code: 1

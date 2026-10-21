@@ -1,0 +1,7 @@
+{
+  "success/crypto_cookie_primitives.php": {
+    "stdout": "8b5f48702995c1598c573db1e21866a9b825d4a794d169d7060a03605796360b\n0caf649feee4953d87bf903ac1176c45e028df16\n[true,false,false]\nhash_equals(): Argument #1 ($known_string) must be of type string, int given\nhash_hmac(): Argument #1 ($algo) must be a valid cryptographic hashing algorithm\naes-128-cbc:zNxzfIP/IBCfVJWsqLXY9g==:\n日本 cookie\naes-256-cbc:8yyfduhtOU3UfgxaQ1HLEQ==:\n日本 cookie\naes-128-gcm:+3OD7YARwSd0GA+4lA==:92b9d948afcdbd8e05a945ca793941a3\n日本 cookie\naes-256-gcm:PBNdkq5UgWeUO4oR/g==:62a82ca6365bca21a9c7be4c8ebfb814\n日本 cookie\nfalse\nfalse\n1:16:x\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

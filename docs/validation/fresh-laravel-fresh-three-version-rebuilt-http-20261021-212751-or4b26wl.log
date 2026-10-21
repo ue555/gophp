@@ -1,0 +1,31 @@
+target: fresh-three-version-rebuilt-http
+command: python3 research/fresh-laravel/verify.py --app .cache/fresh-laravel/rebuild-2hr1ykcd/app --binary .cache/fresh-laravel/gophp
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-3q0a_ryp
+RUN official-8.3-autoload
+RUN official-8.3-environment
+RUN official-8.3-list
+RUN official-8.3-about
+RUN official-8.3-routes
+RUN official-8.3-migrate
+RUN official-8.3-migrate-again
+PASS official-8.3 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.3-blade-tokens
+RUN go-8.3-autoload
+RUN go-8.3-environment
+RUN go-8.3-list
+RUN go-8.3-about
+RUN go-8.3-routes
+RUN go-8.3-migrate
+RUN go-8.3-migrate-again
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 177, in main
+    for runtime in ['official','go'] if args.runtime=='both' else [args.runtime]:results[runtime]=run.runtime(runtime,v,temp)
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 106, in runtime
+    for i in range(self.args.sequential):accept(request('/' if i%2==0 else '/up',cookie if i%2==0 else ''))
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 82, in accept
+    check(c['path']=='/' and c['samesite'].lower()=='lax' and int(c['max-age'])==7200,'cookie attributes')
+  File "/Users/kouji/dev/php/research/fresh-laravel/verify.py", line 14, in check
+    if not ok:raise RuntimeError(msg)
+RuntimeError: cookie attributes
+exit_code: 1

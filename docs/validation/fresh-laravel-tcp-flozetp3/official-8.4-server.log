@@ -1,0 +1,28 @@
+[Wed Oct 21 12:24:19 2026] PHP 8.4.26 Development Server (http://0.0.0.0:8080) started
+[Wed Oct 21 12:24:19 2026] 10.88.0.94:57662 Accepted
+[Wed Oct 21 12:24:19 2026] 10.88.0.94:57662 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Oct 21 12:24:19 2026] 10.88.0.94:57662 Closing
+[Wed Oct 21 12:24:19 2026] 10.88.0.94:57674 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57674 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57680 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57680 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57694 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57694 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57702 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57702 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57704 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57720 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57722 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57720 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57738 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57704 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57722 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57744 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57738 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57752 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57744 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57764 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57752 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57780 Accepted
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57764 Closing
+[Wed Oct 21 12:24:20 2026] 10.88.0.94:57780 Closing

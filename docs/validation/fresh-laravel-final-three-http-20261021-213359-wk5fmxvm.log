@@ -1,0 +1,62 @@
+target: final-three-http
+command: python3 research/fresh-laravel/verify.py --app .cache/fresh-laravel/rebuild-2hr1ykcd/app --binary bin/gophp
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-ljc9yvoj
+RUN official-8.3-autoload
+RUN official-8.3-environment
+RUN official-8.3-list
+RUN official-8.3-about
+RUN official-8.3-routes
+RUN official-8.3-migrate
+RUN official-8.3-migrate-again
+PASS official-8.3 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.3-blade-tokens
+RUN go-8.3-autoload
+RUN go-8.3-environment
+RUN go-8.3-list
+RUN go-8.3-about
+RUN go-8.3-routes
+RUN go-8.3-migrate
+RUN go-8.3-migrate-again
+PASS go-8.3 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN go-8.3-blade-tokens
+MATCH 8.3 CLI/DB/HTTP/Blade token streams
+RUN official-8.4-autoload
+RUN official-8.4-environment
+RUN official-8.4-list
+RUN official-8.4-about
+RUN official-8.4-routes
+RUN official-8.4-migrate
+RUN official-8.4-migrate-again
+PASS official-8.4 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.4-blade-tokens
+RUN go-8.4-autoload
+RUN go-8.4-environment
+RUN go-8.4-list
+RUN go-8.4-about
+RUN go-8.4-routes
+RUN go-8.4-migrate
+RUN go-8.4-migrate-again
+PASS go-8.4 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN go-8.4-blade-tokens
+MATCH 8.4 CLI/DB/HTTP/Blade token streams
+RUN official-8.5-autoload
+RUN official-8.5-environment
+RUN official-8.5-list
+RUN official-8.5-about
+RUN official-8.5-routes
+RUN official-8.5-migrate
+RUN official-8.5-migrate-again
+PASS official-8.5 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.5-blade-tokens
+RUN go-8.5-autoload
+RUN go-8.5-environment
+RUN go-8.5-list
+RUN go-8.5-about
+RUN go-8.5-routes
+RUN go-8.5-migrate
+RUN go-8.5-migrate-again
+PASS go-8.5 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN go-8.5-blade-tokens
+MATCH 8.5 CLI/DB/HTTP/Blade token streams
+exit_code: 0

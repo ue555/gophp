@@ -1,0 +1,6 @@
+target: go84-standard-about
+command: .cache/fresh-laravel/gophp --php-version=8.4 research/fresh-laravel/app/artisan about --json --no-ansi
+cwd: /Users/kouji/dev/php
+{"environment":{"application_name":"Fresh Laravel Probe","laravel_version":"12.70.0","php_version":"8.4.26","composer_version":"\u003cfg=yellow;options=bold\u003e-\u003c\/\u003e","environment":"local","debug_mode":true,"url":"localhost","maintenance_mode":false,"timezone":"UTC","locale":"en"},"cache":{"config":false,"events":false,"routes":false,"views":false},"drivers":{"broadcasting":"log","cache":"database","database":"sqlite","logs":["single"],"mail":"log","queue":"database","session":"database"},"storage":{"\/users\/kouji\/dev\/php\/research\/fresh-laravel\/app\/public\/storage":false}}
+
+exit_code: 0

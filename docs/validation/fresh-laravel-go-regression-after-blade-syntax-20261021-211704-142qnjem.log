@@ -1,0 +1,20 @@
+target: go-regression-after-blade-syntax
+command: go test ./internal/php
+cwd: /Users/kouji/dev/php
+--- FAIL: TestFixtures (1.49s)
+    --- FAIL: TestFixtures/success/filemtime_stat.php (0.00s)
+        --- FAIL: TestFixtures/success/filemtime_stat.php/default (0.00s)
+            php_test.go:121: stdout: got "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Argument #1 ($filename) must not contain any null bytes\n", want "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Filename contains null byte\n"
+        --- FAIL: TestFixtures/success/filemtime_stat.php/8.3 (0.00s)
+            php_test.go:121: stdout: got "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Argument #1 ($filename) must not contain any null bytes\n", want "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Filename contains null byte\n"
+        --- FAIL: TestFixtures/success/filemtime_stat.php/8.4 (0.00s)
+            php_test.go:121: stdout: got "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Argument #1 ($filename) must not contain any null bytes\n", want "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Filename contains null byte\n"
+        --- FAIL: TestFixtures/success/filemtime_stat.php/8.5 (0.00s)
+            php_test.go:121: stdout: got "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Argument #1 ($filename) must not contain any null bytes\n", want "integer\npositive\nfilemtime(): stat failed for /gophp-nonexistent-filemtime\nfalse\nfilemtime(): Argument #1 ($filename) must be of type string, array given\nfilemtime(): Filename contains null byte\n"
+--- FAIL: TestRejectUnsupported (0.00s)
+    --- FAIL: TestRejectUnsupported/if_(true):_echo_1;_endif; (0.00s)
+        php_test.go:184: must reject before evaluation: exit=0 stdout="must not execute1" stderr=""
+FAIL
+FAIL	example.com/gophp/internal/php	1.827s
+FAIL
+exit_code: 1

@@ -1,0 +1,12 @@
+{
+  "command": {
+    "http": "docs/validation/fresh-laravel-tcp-ljc9yvoj",
+    "fixtures": "docs/validation/fresh-laravel-fixture-matrix-dlxuo0h8",
+    "task": "docs/validation/task-api-20261021-213736-trqw46y4",
+    "legacy_log": "docs/validation/fresh-laravel-final-fixed-laravel-three-20261021-213737-xfse7cts.log"
+  },
+  "exit_code": 1,
+  "fixtures": 1193,
+  "unchanged_baseline_expectations": 1173,
+  "binary_sha256": "04444cd35f905a4bb9d10558af4010c5513fc1c86a0ea570e24b1664d3623fa8"
+}

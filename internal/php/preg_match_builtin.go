@@ -3,7 +3,6 @@ package php
 import (
 	"regexp"
 	"strconv"
-	"strings"
 	"unicode/utf8"
 )
 
@@ -103,47 +102,21 @@ func (e *evaluator) callPregMatch(node functionCall) (value, error) {
 	if offset < 0 || offset > int64(len(s.s)) {
 		return value{}, &runtimeError{node.line, "ValueError", "preg_match(): Argument #5 ($offset) must be contained in argument #2 ($subject)"}
 	}
-	index, direct := largeDotMatch(p.s, s.s[offset:])
-	if strings.Contains(p.s, `(.*)\1\z`) && strings.Contains(p.s, `\A([`) {
-		// Matching a quoted environment value requires the closing quote to
-		// equal the opening capture. RE2 has no backreferences.
-		direct = true
-		remaining := s.s[offset:]
-		if len(remaining) >= 2 && (remaining[0] == '\'' || remaining[0] == '"') && remaining[len(remaining)-1] == remaining[0] {
-			index = []int{0, len(remaining), 0, 1, 1, len(remaining) - 1}
-		} else {
-			index = nil
+	e.pregLastError = 0
+	matches, names, err := pcre2Matches(p.s, s.s, int(offset), 1)
+	if err != nil {
+		return e.pregFailure("preg_match", node.line, err)
+	}
+	var index []int
+	if len(matches) > 0 {
+		index = matches[0]
+		for i, v := range index {
+			if v >= 0 {
+				index[i] = v - int(offset)
+			}
 		}
 	}
-	var names []string
-	if !direct {
-		pattern := p.s
-		// Symfony-style glob patterns use a zero-width assertion to keep
-		// wildcard path components from beginning with a dot. RE2 cannot
-		// express that assertion; check the same component boundary before
-		// matching the remaining anchored expression.
-		leadingNonDot := strings.Contains(pattern, `(?=[^\.])`) && strings.Contains(pattern, "^")
-		if leadingNonDot {
-			pattern = strings.ReplaceAll(pattern, `(?=[^\.])`, "")
-		}
-		re, compileErr := compileBasicPCRE(pattern)
-		if compileErr != nil {
-			matches, groupNames, matchErr := pcre2MatchAll(pattern, s.s[offset:])
-			if matchErr != nil {
-				return value{}, matchErr
-			}
-			if len(matches) > 0 {
-				index = matches[0]
-			}
-			names = groupNames
-		} else {
-			index = re.FindStringSubmatchIndex(s.s[offset:])
-			names = re.SubexpNames()
-		}
-		if leadingNonDot && (strings.HasPrefix(s.s[offset:], ".") || strings.Contains(s.s[offset:], "/.")) {
-			index = nil
-		}
-	}
+
 	if len(node.args) >= 3 {
 		out := arrayValue()
 		if index != nil {

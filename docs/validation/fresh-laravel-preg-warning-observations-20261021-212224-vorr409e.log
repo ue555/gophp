@@ -1,0 +1,8 @@
+target: preg-warning-observations
+command: python3 research/fresh-laravel/observe.py tests/fixtures/success/preg_warning_and_failure_state.php
+cwd: /Users/kouji/dev/php
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-official-observations-h1b9n8iv
+8.4.26 success/preg_warning_and_failure_state.php exit 0
+8.3.35 success/preg_warning_and_failure_state.php exit 0
+8.5.11 success/preg_warning_and_failure_state.php exit 0
+exit_code: 0

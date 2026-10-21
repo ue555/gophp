@@ -88,6 +88,8 @@ func (e *evaluator) invokeDateTime(object value, called *classDecl, method *meth
 		return value{}, &runtimeError{line, "Error", "Non-static method " + method.owner.name + "::" + method.name + "() cannot be called statically"}
 	}
 	switch strings.ToLower(method.name) {
+	case "add", "sub":
+		return e.dateIntervalChange(object, method, args, line)
 	case "__construct":
 		bound, present, _, err := bindCallArguments(args, []parameter{{name: "datetime"}, {name: "timezone"}}, line)
 		if err != nil {

@@ -1,0 +1,5 @@
+target: go84-standard-routes
+command: .cache/fresh-laravel/gophp --php-version=8.4 research/fresh-laravel/app/artisan route:list --json --no-ansi
+cwd: /Users/kouji/dev/php
+[{"domain":null,"method":"GET|HEAD","uri":"\/","name":null,"action":"Closure","middleware":["web"],"path":"routes\/web.php:5"},{"domain":null,"method":"GET|HEAD","uri":"storage\/{path}","name":"storage.local","action":"Closure","middleware":[],"path":"vendor\/laravel\/framework\/src\/Illuminate\/Filesystem\/FilesystemServiceProvider.php:98"},{"domain":null,"method":"PUT","uri":"storage\/{path}","name":"storage.local.upload","action":"Closure","middleware":[],"path":"vendor\/laravel\/framework\/src\/Illuminate\/Filesystem\/FilesystemServiceProvider.php:106"},{"domain":null,"method":"GET|HEAD","uri":"up","name":null,"action":"Closure","middleware":[],"path":"vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Configuration\/ApplicationBuilder.php:219"}]
+exit_code: 0
