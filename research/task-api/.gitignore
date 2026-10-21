@@ -1,0 +1,6 @@
+/vendor/
+/.composer-cache/
+/bootstrap/cache/
+/storage/
+/database/*.sqlite*
+/.cache/

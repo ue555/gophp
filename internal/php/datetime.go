@@ -122,20 +122,9 @@ func (e *evaluator) invokeDateTime(object value, called *classDecl, method *meth
 		if object.o.dateTime == nil {
 			return value{}, &runtimeError{line, "Error", "DateTime object not initialized"}
 		}
-		format := args[0].value.text()
-		if format == "Y-m-d H:i:s" {
-			return value{kind: stringKind, s: object.o.dateTime.Format("2006-01-02 15:04:05")}, nil
-		}
-		if format == "U.u" {
-			return value{kind: stringKind, s: fmt.Sprintf("%d.%06d", object.o.dateTime.Unix(), object.o.dateTime.Nanosecond()/1000)}, nil
-		}
-		if format == `Y-m-d\TH:i:sP` {
-			return value{kind: stringKind, s: object.o.dateTime.Format("2006-01-02T15:04:05Z07:00")}, nil
-		}
-		if format == `Y-m-d\TH:i:s.vP` {
-			return value{kind: stringKind, s: object.o.dateTime.Format("2006-01-02T15:04:05.000Z07:00")}, nil
-		}
-		return value{}, &runtimeError{line, "Error", "gophp: unsupported DateTime::format pattern"}
+		formatted, err := formatDateTime(*object.o.dateTime, args[0].value.text(), line)
+		return value{kind: stringKind, s: formatted}, err
+
 	case "gettimestamp":
 		if len(args) != 0 {
 			return value{}, &runtimeError{line, "ArgumentCountError", "DateTime::getTimestamp() expects exactly 0 arguments"}
@@ -195,4 +184,68 @@ func (e *evaluator) invokeDateTimeZone(object value, method *methodDecl, args []
 	}
 	object.o.timezone = location
 	return value{kind: nullKind}, nil
+}
+
+// Format the DateTime tokens used by Carbon's Eloquent JSON serialization.
+// Escaped bytes are literal; unknown alphabetic tokens stay explicit errors.
+func formatDateTime(t time.Time, format string, line int) (string, error) {
+	var result strings.Builder
+	for i := 0; i < len(format); i++ {
+		ch := format[i]
+		if ch == '\\' {
+			i++
+			if i < len(format) {
+				result.WriteByte(format[i])
+			} else {
+				result.WriteByte(0)
+			}
+			continue
+		}
+		layouts := map[byte]string{'Y': "2006", 'y': "06", 'm': "01", 'n': "1", 'd': "02", 'j': "2", 'H': "15", 'h': "03", 'g': "3", 'i': "04", 's': "05", 'a': "pm", 'A': "PM", 'e': "", 'T': "MST", 'O': "-0700", 'P': "-07:00", 'p': "Z07:00", 'D': "Mon", 'l': "Monday", 'M': "Jan", 'F': "January", 'c': "2006-01-02T15:04:05-07:00", 'r': "Mon, 02 Jan 2006 15:04:05 -0700"}
+		if layout, ok := layouts[ch]; ok {
+			if ch == 'e' {
+				result.WriteString(t.Location().String())
+			} else {
+				result.WriteString(t.Format(layout))
+			}
+			continue
+		}
+		switch ch {
+		case 'u':
+			fmt.Fprintf(&result, "%06d", t.Nanosecond()/1000)
+		case 'v':
+			fmt.Fprintf(&result, "%03d", t.Nanosecond()/1000000)
+		case 'U':
+			fmt.Fprintf(&result, "%d", t.Unix())
+		case 'G':
+			fmt.Fprintf(&result, "%d", t.Hour())
+		case 'w':
+			fmt.Fprintf(&result, "%d", t.Weekday())
+		case 'N':
+			day := int(t.Weekday())
+			if day == 0 {
+				day = 7
+			}
+			fmt.Fprintf(&result, "%d", day)
+		case 'z':
+			fmt.Fprintf(&result, "%d", t.YearDay()-1)
+		case 't':
+			fmt.Fprintf(&result, "%d", time.Date(t.Year(), t.Month()+1, 0, 0, 0, 0, 0, t.Location()).Day())
+		case 'L':
+			if t.Year()%4 == 0 && (t.Year()%100 != 0 || t.Year()%400 == 0) {
+				result.WriteByte('1')
+			} else {
+				result.WriteByte('0')
+			}
+		case 'Z':
+			_, offset := t.Zone()
+			fmt.Fprintf(&result, "%d", offset)
+		default:
+			if ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z' {
+				return "", &runtimeError{line, "Error", "gophp: unsupported DateTime::format token " + string(ch)}
+			}
+			result.WriteByte(ch)
+		}
+	}
+	return result.String(), nil
 }

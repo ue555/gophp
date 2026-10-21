@@ -1,2 +1,4 @@
 # Preserve raw validation output, including significant whitespace and line endings.
 docs/validation/*.log -text -whitespace
+docs/validation/**/*.log -text -whitespace
+docs/validation/**/*.jsonl -text

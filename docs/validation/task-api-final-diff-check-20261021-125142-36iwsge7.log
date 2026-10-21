@@ -1,0 +1,4 @@
+target: final-diff-check
+command: git diff --check
+cwd: /Users/kouji/dev/php
+exit_code: 0

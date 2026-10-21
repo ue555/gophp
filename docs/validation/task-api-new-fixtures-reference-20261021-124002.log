@@ -1,0 +1,36 @@
+target: official PHP 8.4.26
+command: ['./containers/php-version/bin/php84', '-n', 'tests/fixtures/success/is_writable_basic.php']
+11
+111
+000
+0
+0
+exit_code: 0
+target: official PHP 8.4.26
+command: ['./containers/php-version/bin/php84', '-n', 'tests/fixtures/success/var_export_manifest.php']
+array (
+  'package' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'App\\Provider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
+  7 => true,
+  'nil' => NULL,
+  'text' => 'a\'b\\c' . "\0" . 'd',
+  'float' => 1.25,
+)
+false|2.0|-0.0
+exit_code: 0
+target: official PHP 8.4.26
+command: ['./containers/php-version/bin/php84', '-n', 'tests/fixtures/success/manifest_atomic_replace.php']
+1
+1
+1|0
+Example
+1|0
+exit_code: 0

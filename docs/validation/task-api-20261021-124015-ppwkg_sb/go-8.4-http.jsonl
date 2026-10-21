@@ -1,0 +1,2 @@
+{"method": "GET", "path": "/api/tasks", "request": null, "status": 200, "content_type": "application/json", "raw": "[]"}
+{"method": "POST", "path": "/api/tasks", "request": {"title": "日本語のタスク"}, "status": 500, "content_type": "application/json", "raw": "{\n    \"message\": \"Server Error\"\n}"}

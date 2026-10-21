@@ -1,0 +1,33 @@
+target: prepare-manual-go-8.4
+command: python3 research/task-api/prepare.py --version 8.4
+cwd: /Users/kouji/dev/php
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan package:discover --no-interaction
+
+   INFO  Discovering packages.  
+
+  api-platform/laravel .................................................. DONE
+  nesbot/carbon ......................................................... DONE
+  nunomaduro/termwind ................................................... DONE
+
+exit_code: 0
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan migrate --force --no-interaction
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 18.04ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_21_000000_create_tasks_table .......................... 10.15ms DONE
+
+exit_code: 0
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan migrate:status --no-interaction
+
+  Migration name .............................................. Batch / Status  
+  2026_10_21_000000_create_tasks_table ............................... [1] Ran  
+
+exit_code: 0
+Prepared DB: /Users/kouji/dev/php/research/task-api/database/database.sqlite
+Storage: /Users/kouji/dev/php/research/task-api/storage
+Existing rows retained; no reset or deletion performed.
+exit_code: 0

@@ -1,0 +1,13 @@
+target: protected-files-and-dependencies
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS original composer.json/composer.lock/vendor SHA-256 unchanged: 6675 files
+PASS new lock only differs in content-hash; 94 identical package records
+PASS new vendor independent and matches all 94 locked package versions
+PASS manual DB retained, migrated, empty
+PASS task verification temporary DB/storage directories removed
+PASS tracked legacy app unchanged
+HEAD: cc9388e6b1d600f8cae341281718c68b56f7f0c6
+v0.2.0: 7a5366cb212867b52d4782a362f7cc1e7e130c8e
+No git commit/push/tag/publish operations performed
+exit_code: 0

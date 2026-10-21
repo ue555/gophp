@@ -1,0 +1,10 @@
+target: composer-lock-8.3.35
+command: podman run --rm -v /Users/kouji/dev/php/research/task-api:/app:ro localhost/gophp-dependency-research:8.3.35 composer validate --no-check-publish
+cwd: /Users/kouji/dev/php
+./composer.json is valid, but with a few warnings
+See https://getcomposer.org/doc/04-schema.md for details on the schema
+# General warnings
+- No license specified, it is recommended to do so. For closed-source software you may use "proprietary" as license.
+- require.api-platform/laravel : exact version constraints (5.0.1) should be avoided if the package follows semantic versioning
+- require.laravel/framework : exact version constraints (12.69.3) should be avoided if the package follows semantic versioning
+exit_code: 0

@@ -1,0 +1,14 @@
+target: http-artifact-audit-3versions
+command: python3 research/task-api/audit-evidence.py docs/validation/task-api-20261021-124313-i5cu398g
+cwd: /Users/kouji/dev/php
+PASS raw artifact audit official-8.3: 191 responses, exact JSON types
+PASS raw artifact audit go-8.3: 191 responses, exact JSON types
+PASS strict HTTP comparison official 8.3.35 / Go 8.3
+PASS raw artifact audit official-8.4: 191 responses, exact JSON types
+PASS raw artifact audit go-8.4: 191 responses, exact JSON types
+PASS strict HTTP comparison official 8.4.26 / Go 8.4
+PASS raw artifact audit official-8.5: 191 responses, exact JSON types
+PASS raw artifact audit go-8.5: 191 responses, exact JSON types
+PASS strict HTTP comparison official 8.5.11 / Go 8.5
+PASS all 1146 real HTTP response artifacts; runtime SQLite assertions are recorded separately in run.log
+exit_code: 0

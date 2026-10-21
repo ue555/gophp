@@ -1,0 +1,38 @@
+command: /Library/Developer/CommandLineTools/usr/bin/python3 research/task-api/verify.py --runtime go --version 8.4
+interpreter_sha256: 22cccd0d846bbaa790112330e3057d95fc13da7d52fb87a72be38e58ffa718ff
+target: go-8.4 official_patch: 8.4.26
+environment: {"APP_CONFIG_CACHE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/bootstrap-cache/config.php", "APP_DEBUG": "false", "APP_ENV": "testing", "APP_EVENTS_CACHE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/bootstrap-cache/events.php", "APP_PACKAGES_CACHE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/bootstrap-cache/packages.php", "APP_ROUTES_CACHE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/bootstrap-cache/routes.php", "APP_SERVICES_CACHE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/bootstrap-cache/services.php", "DB_CONNECTION": "sqlite", "DB_DATABASE": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/database.sqlite", "LARAVEL_STORAGE_PATH": "/Users/kouji/dev/php/research/task-api/.cache/task-api-go-8.4-uk88u_5m/storage"}
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan package:discover --no-interaction
+
+In PackageManifest.php line 183:
+                                                                 
+  Call to undefined function Illuminate\Foundation\var_export()  
+                                                                 
+
+[2026-10-21 03:37:43] testing.ERROR: Call to undefined function Illuminate\Foundation\var_export() {"exception":"[object] (Error(code: 0): Call to undefined function Illuminate\\Foundation\\var_export() at /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php:183)
+[stacktrace]
+#0 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(132): Illuminate\\Foundation\\PackageManifest-\u003ewrite(Array)
+#1 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(108): Illuminate\\Foundation\\PackageManifest-\u003ebuild()
+#2 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(90): Illuminate\\Foundation\\PackageManifest-\u003egetManifest()
+#3 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/PackageManifest.php(79): Illuminate\\Foundation\\PackageManifest-\u003econfig('aliases')
+#4 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php(26): Illuminate\\Foundation\\PackageManifest-\u003ealiases()
+#5 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterFacades-\u003ebootstrap(Object(Illuminate\\Foundation\\Application))
+#6 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate\\Foundation\\Application-\u003ebootstrapWith(Array)
+#7 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel-\u003ebootstrap()
+#8 /Users/kouji/dev/php/research/task-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel-\u003ehandle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 /Users/kouji/dev/php/research/task-api/artisan(8): Illuminate\\Foundation\\Application-\u003ehandleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#10 {main}
+"} 
+
+exit_code: 1
+Traceback (most recent call last):
+  File "/Users/kouji/dev/php/research/task-api/verify.py", line 310, in main
+    go = verify('go',version,args.interpreter.resolve(),log_dir) if args.runtime in ('all','go') else None
+  File "/Users/kouji/dev/php/research/task-api/verify.py", line 233, in verify
+    command(prefix+['artisan','package:discover','--no-interaction'], env)
+  File "/Users/kouji/dev/php/research/task-api/verify.py", line 41, in command
+    check(result.returncode == 0, f'command failed: {result.returncode}')
+  File "/Users/kouji/dev/php/research/task-api/verify.py", line 31, in check
+    raise RuntimeError(message)
+RuntimeError: command failed: 1
+exit_code: 1

@@ -1,0 +1,7 @@
+target: official PHP 8.4.26
+command: ['./containers/php-version/bin/php84', '-n', 'tests/fixtures/success/datetime_json_format.php']
+2024-01-02T03:04:05.123456Z
+2024|1|2|3|04|05|123456|123|+00:00|+0000|Z|1704164645.123456
+2024-01-02T12:04:05.123+09:00
+2024-01-02T03:04:05+00:00
+exit_code: 0

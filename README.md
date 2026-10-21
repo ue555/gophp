@@ -1,8 +1,10 @@
 # gophp — 機能を限定したPHP CLI処理系
 
-固定Laravel・API Platformアプリの[全6段階の完成判定](docs/full-stack-development.md)は、定義された対象範囲で達成した。公式PHP 8.3.35・8.4.26・8.5.11との版別比較は各1169件一致・差異0・エラー0・終了0。Go製PHPの実TCPサーバーでも3設定すべてでJSON・入力検証・SQLite CRUD・API Platform・OpenAPI・2000回連続／8並列要求が成功し、検証コマンドは各版終了0。PHP全機能の対応完了を意味しない。
+固定Laravel・API Platformアプリの[全6段階の完成判定](docs/full-stack-development.md)は、定義された対象範囲で達成した。公式PHP 8.3.35・8.4.26・8.5.11との版別比較は各1173件一致・差異0・エラー0・終了0。Go製PHPの実TCPサーバーでも3設定すべてでJSON・入力検証・SQLite CRUD・API Platform・OpenAPI・2000回連続／8並列要求が成功し、検証コマンドは各版終了0。PHP全機能の対応完了を意味しない。
 
-以下の機能別記録に残る「比較待ち」と旧件数は当時の履歴であり、現行1169件の公式比較は完了している。
+追加した[Laravelタスク管理API](research/task-api/README.md)は、SQLite・Eloquent・標準入力検証を使う認証なしのCRUD。公式PHP／Goの3組で各191要求の実TCP比較を行う。[実装時の証拠](docs/validation/task-api-results.md)と[リリース再構築・CIの記録](docs/task-api-release.md)を区別して保存する。新規環境では両アプリの固定lockからvendorを導入し、`scripts/verify-release.py`で全fixture比較・タスクHTTP比較・既存アプリの2000連続／8並列GETまで実行できる。
+
+以下の機能別記録に残る「比較待ち」と旧件数は当時の履歴であり、現行1173件の公式比較は完了している。
 
 `yield from`で`IteratorAggregate`を24段委譲する有限の連鎖を、Go固有の深さ16制限で拒否しないよう修正した。[回帰fixture・公式比較待ち](docs/full-stack-development.md)。
 

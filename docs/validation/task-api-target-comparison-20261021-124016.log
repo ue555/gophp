@@ -1,0 +1,63 @@
+target: 8.3.35
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php83', '--php-version', '8.3.35', '--fixtures', 'tests/fixtures/success/is_writable_basic.php', '--interpreter', './bin/gophp', '--php-version=8.3', '{file}']
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/is_writable_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.3.35
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php83', '--php-version', '8.3.35', '--fixtures', 'tests/fixtures/success/var_export_manifest.php', '--interpreter', './bin/gophp', '--php-version=8.3', '{file}']
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/var_export_manifest.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.3.35
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php83', '--php-version', '8.3.35', '--fixtures', 'tests/fixtures/success/manifest_atomic_replace.php', '--interpreter', './bin/gophp', '--php-version=8.3', '{file}']
+PHP: 8.3.35 (./containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/manifest_atomic_replace.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.4.26
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php84', '--php-version', '8.4.26', '--fixtures', 'tests/fixtures/success/is_writable_basic.php', '--interpreter', './bin/gophp', '--php-version=8.4', '{file}']
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/is_writable_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.4.26
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php84', '--php-version', '8.4.26', '--fixtures', 'tests/fixtures/success/var_export_manifest.php', '--interpreter', './bin/gophp', '--php-version=8.4', '{file}']
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/var_export_manifest.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.4.26
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php84', '--php-version', '8.4.26', '--fixtures', 'tests/fixtures/success/manifest_atomic_replace.php', '--interpreter', './bin/gophp', '--php-version=8.4', '{file}']
+PHP: 8.4.26 (./containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/manifest_atomic_replace.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.5.11
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php85', '--php-version', '8.5.11', '--fixtures', 'tests/fixtures/success/is_writable_basic.php', '--interpreter', './bin/gophp', '--php-version=8.5', '{file}']
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/is_writable_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.5.11
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php85', '--php-version', '8.5.11', '--fixtures', 'tests/fixtures/success/var_export_manifest.php', '--interpreter', './bin/gophp', '--php-version=8.5', '{file}']
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/var_export_manifest.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0
+target: 8.5.11
+command: ['python3', 'skills/php-go-interpreter/scripts/compare_php.py', '--php', './containers/php-version/bin/php85', '--php-version', '8.5.11', '--fixtures', 'tests/fixtures/success/manifest_atomic_replace.php', '--interpreter', './bin/gophp', '--php-version=8.5', '{file}']
+PHP: 8.5.11 (./containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/manifest_atomic_replace.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+exit_code: 0

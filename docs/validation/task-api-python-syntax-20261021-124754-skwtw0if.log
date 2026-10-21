@@ -1,0 +1,4 @@
+target: python-syntax
+command: python3 -m py_compile research/task-api/verify.py research/task-api/prepare.py research/task-api/regression.py research/task-api/record.py research/task-api/audit-evidence.py
+cwd: /Users/kouji/dev/php
+exit_code: 0

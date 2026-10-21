@@ -4,7 +4,35 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"syscall"
 )
+
+func (e *evaluator) callIsWritable(node functionCall) (value, error) {
+	args, err := e.evalArguments(node.args)
+	if err != nil {
+		return value{}, err
+	}
+	bound, present, _, err := bindCallArguments(args, []parameter{{name: "filename"}}, node.line)
+	if err != nil {
+		return value{}, err
+	}
+	if len(args) != 1 || !present[0] {
+		return value{}, &runtimeError{node.line, "ArgumentCountError", node.name + "() expects exactly 1 argument"}
+	}
+	if bound[0].kind == arrayKind || bound[0].kind == objectKind {
+		return value{}, builtinTypeError(node.line, node.name, 1, "filename", "string", bound[0])
+	}
+	path, err := e.toText(bound[0], node.line)
+	if err != nil {
+		return value{}, err
+	}
+	if path == "" || strings.IndexByte(path, 0) >= 0 {
+		return boolean(false), nil
+	}
+	// Check OS access without opening/truncating a file. This also follows
+	// symlinks and accounts for read-only mounts and directory permissions.
+	return boolean(syscall.Access(path, 2) == nil), nil // W_OK
+}
 
 func (e *evaluator) callFileExists(node functionCall) (value, error) {
 	args, err := e.evalArguments(node.args)

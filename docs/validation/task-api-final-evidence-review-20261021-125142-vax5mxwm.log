@@ -1,0 +1,12 @@
+target: final-evidence-review
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS 3519 individual fixture MATCH entries; 1173 x 3 targets, no difference/error
+PASS 6 real TCP scenarios and 3 paired comparisons, exit 0
+PASS legacy app real TCP regression 3 targets, exit 0
+PASS 1173 fixture files and expectations
+PASS final Python script syntax
+PASS changed Go files gofmt
+PASS README and validation report local links
+PASS temporary DB/storage/bootstrap directories cleaned
+exit_code: 0

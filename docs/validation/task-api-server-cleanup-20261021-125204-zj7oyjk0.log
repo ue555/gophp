@@ -1,0 +1,11 @@
+target: server-cleanup
+command: python3 -
+cwd: /Users/kouji/dev/php
+command: ['podman', 'ps', '-a', '--no-trunc', '--format', '{{.ID}} {{.Names}}']
+def398637b2f3d9b245766136a074c760a5996f5c41a218aa5a4fa5b0e3439a3 php-version-83
+73c55ddcf1f63efbb65328f2507196b1ed5b1559ce73445def8fb8870542c98b php-version-84
+990cedb7dec8c8b0fb1ee64037ff481ffa1e95513dd6629f06ce2973f2e1a444 php-version-85
+exit_code: 0
+PASS all 3 owned official HTTP containers removed; pre-existing containers retained
+PASS no Go app test server remains
+exit_code: 0

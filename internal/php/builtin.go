@@ -6,6 +6,12 @@ import (
 )
 
 func builtinName(name string) bool {
+	if manifestFilesystemBuiltin(name) || strings.EqualFold(name, "var_export") {
+		return true
+	}
+	if strings.EqualFold(name, "is_writable") || strings.EqualFold(name, "is_writeable") {
+		return true
+	}
 	if streamBuiltin(name) {
 		return true
 	}
@@ -232,6 +238,12 @@ func builtinRedeclaration(name string, version Version) string {
 }
 
 func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
+	if manifestFilesystemBuiltin(node.name) {
+		return e.callManifestFilesystem(node)
+	}
+	if strings.EqualFold(node.name, "var_export") {
+		return e.callVarExport(node)
+	}
 	if strings.EqualFold(node.name, "glob") {
 		return e.callGlob(node)
 	}
@@ -469,6 +481,9 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 	}
 	if strings.EqualFold(node.name, "file_exists") {
 		return e.callFileExists(node)
+	}
+	if strings.EqualFold(node.name, "is_writable") || strings.EqualFold(node.name, "is_writeable") {
+		return e.callIsWritable(node)
 	}
 	if strings.EqualFold(node.name, "is_link") {
 		return e.callIsLink(node)

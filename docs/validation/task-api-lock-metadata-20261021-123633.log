@@ -1,0 +1,12 @@
+target: official PHP 8.3.35 dependency metadata only
+command: ['podman', 'run', '--rm', '-v', '/Users/kouji/dev/php/research/task-api:/app', 'localhost/gophp-dependency-research:8.3.35', 'php', '-r', "require 'phar:///usr/local/bin/composer/vendor/autoload.php'; echo Composer\\Package\\Locker::getContentHash(file_get_contents('composer.json')); "]
+
+Warning: require(phar:///usr/local/bin/composer/vendor/autoload.php): Failed to open stream: phar error: invalid url or non-existent phar "phar:///usr/local/bin/composer/vendor/autoload.php" in Command line code on line 1
+
+Fatal error: Uncaught Error: Failed opening required 'phar:///usr/local/bin/composer/vendor/autoload.php' (include_path='.:/usr/local/lib/php') in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+
+
+exit_code: 255

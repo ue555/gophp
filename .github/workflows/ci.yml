@@ -1,6 +1,7 @@
-name: Compatibility and fixed app
+name: Compatibility and fixed apps
 on:
   push:
+    branches: ['**']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -21,50 +22,18 @@ jobs:
           cache: false
       - name: Native build dependencies
         run: sudo apt-get update && sudo apt-get install -y build-essential libsqlite3-dev libpcre2-dev python3
-      - name: Install fixed vendor using official PHP
+      - name: Rebuild fixed dependencies and run every release gate
         env:
           PHP_VERSION: ${{ matrix.php }}
-        run: |
-          docker build --build-arg PHP_VERSION="$PHP_VERSION" -f containers/dependency-research/Containerfile -t gophp-dependencies .
-          mkdir -p research/laravel-api/bootstrap/cache research/laravel-api/storage/framework/{cache/data,views,sessions} research/laravel-api/storage/logs
-          docker run --rm --user "$(id -u):$(id -g)" -e COMPOSER_HOME=/tmp/composer -v "$PWD/research/laravel-api:/app" gophp-dependencies composer install --no-dev --no-interaction --prefer-dist --no-scripts --no-plugins
-          docker run --rm -v "$PWD/research/laravel-api:/app" gophp-dependencies composer check-platform-reqs --no-dev
-          docker run --rm --user "$(id -u):$(id -g)" -e DB_DATABASE=:memory: -v "$PWD/research/laravel-api:/app" gophp-dependencies php artisan package:discover --no-interaction
-          git diff --exit-code -- research/laravel-api/composer.lock
-      - name: Go and Python tests, vet and build
-        shell: bash
-        run: |
-          set -o pipefail
-          mkdir -p .cache/ci
-          make test vet build 2>&1 | tee .cache/ci/test.log
-      - name: Compare with official PHP image
-        env:
-          PHP_VERSION: ${{ matrix.php }}
-        shell: bash
-        run: |
-          set -o pipefail
-          mkdir -p .cache/ci
-          docker run -d --name gophp-oracle -v "$PWD:$PWD:ro" -w "$PWD" "php:${PHP_VERSION}-cli-bookworm" php -r 'while (true) { sleep(3600); }'
-          cat > .cache/ci/php <<'SH'
-          #!/bin/sh
-          exec docker exec -i -w "$PWD" -e LC_ALL=C -e LANG=C -e TZ=UTC gophp-oracle php "$@"
-          SH
-          chmod +x .cache/ci/php
-          python3 skills/php-go-interpreter/scripts/compare_php.py --php "$PWD/.cache/ci/php" --php-version "$PHP_VERSION" --fixtures tests/fixtures --interpreter ./bin/gophp --php-version="${PHP_VERSION%.*}" '{file}' 2>&1 | tee .cache/ci/compare.log
-      - name: Real HTTP fixed app
-        env:
-          PHP_VERSION: ${{ matrix.php }}
-        shell: bash
-        run: |
-          set -o pipefail
-          python3 -u research/laravel-api/verify-gophp.py --version "${PHP_VERSION%.*}" --stress-requests 2000 2>&1 | tee .cache/ci/http.log
-      - name: Save logs
+        run: >-
+          python3 -u scripts/verify-release.py
+          --engine docker --version "$PHP_VERSION"
+          --build-images --require-fresh-vendor --output-root .cache/ci
+      - name: Save commands, source identities, failures and HTTP evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: verification-${{ matrix.php }}
-          path: .cache/ci/*.log
+          name: verification-${{ matrix.php }}-${{ github.sha }}
+          path: .cache/ci/
           include-hidden-files: true
-      - name: Stop oracle
-        if: always()
-        run: docker rm -f gophp-oracle || true
+          if-no-files-found: error

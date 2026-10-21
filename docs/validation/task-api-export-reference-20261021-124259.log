@@ -1,0 +1,25 @@
+target: official PHP 8.4.26
+command: ['./containers/php-version/bin/php84', '-n', 'tests/fixtures/success/var_export_manifest.php']
+array (
+  'package' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'App\\Provider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
+  7 => true,
+  'nil' => NULL,
+  'text' => 'a\'b\\c' . "\0" . 'd',
+  'float' => 1.25,
+)
+false|2.0|-0.0
+array (
+  0 => 1000000000000000.0,
+  1 => 1.0E+20,
+  2 => 1.0E-5,
+)
+exit_code: 0

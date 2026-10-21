@@ -1,0 +1,11 @@
+target: official PHP 8.3.35 dependency metadata only
+command: ['podman', 'run', '--rm', '-v', '/Users/kouji/dev/php/research/task-api:/app', 'localhost/gophp-dependency-research:8.3.35', 'composer', 'update', '--lock', '--no-install', '--no-interaction', '--no-scripts', '--no-plugins']
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Writing lock file
+60 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+exit_code: 0
+PASS all locked package records unchanged

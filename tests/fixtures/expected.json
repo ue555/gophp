@@ -6449,5 +6449,25 @@
     "stdout": "sqlite|0|string|7|string|2.5|empty-null|stringify|null-string|unsupported|2|1|IM001|0|null|snapshot|execute",
     "stderr": "Warning: Undefined array key 2 in {file} on line 23\n",
     "exit": 0
+  },
+  "success/is_writable_basic.php": {
+    "stdout": "11\n111\n000\n0\n0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/var_export_manifest.php": {
+    "stdout": "array (\n  'package' => \n  array (\n    'providers' => \n    array (\n      0 => 'App\\\\Provider',\n    ),\n    'aliases' => \n    array (\n    ),\n  ),\n  7 => true,\n  'nil' => NULL,\n  'text' => 'a\\'b\\\\c' . \"\\0\" . 'd',\n  'float' => 1.25,\n)\nfalse|2.0|-0.0\narray (\n  0 => 1000000000000000.0,\n  1 => 1.0E+20,\n  2 => 1.0E-5,\n)\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/manifest_atomic_replace.php": {
+    "stdout": "1\n1\n1|0\nExample\n1|0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/datetime_json_format.php": {
+    "stdout": "2024-01-02T03:04:05.123456Z\n2024|1|2|3|04|05|123456|123|+00:00|+0000|Z|1704164645.123456\n2024-01-02T12:04:05.123+09:00\n2024-01-02T03:04:05+00:00\n",
+    "stderr": "",
+    "exit": 0
   }
 }

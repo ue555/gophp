@@ -2,7 +2,10 @@
 
 2026-10-21現在。主基準はPHP 8.4.26、比較対象は8.3.35・8.5.11。完成判定は[固定アプリのHTTP・DB契約](laravel-api-target.md)と、Go製PHPによる`vendor/autoload.php`、Laravel CLI・HTTP、API Platformの実行結果に従う。固定した`research/laravel-api/composer.lock`と`vendor/`は変更しない。公式PHPでのアプリ成功はGoでの実行成功ではない。
 
-現行fixture・期待値は**1169件**（正常741・実行時294・構文134）。公式PHP [8.3.35](validation/full-stack-1169-oracle-nulls-83-mac.log)・[8.4.26](validation/full-stack-1169-oracle-nulls-84-mac.log)・[8.5.11](validation/full-stack-1169-oracle-nulls-85-mac.log)との版別`make compare`は、各1169件の個別MATCH、差異0・エラー0、終了0を記録した。`check.sh`の3版PASSはユーザー報告であり、`make compare-all`の成功記録ではない。固定アプリはGo製PHPの実TCPサーバーで[8.3](validation/full-stack-real-http-83-mac.log)・[8.4](validation/full-stack-real-http-84-mac.log)・[8.5](validation/full-stack-real-http-85-mac.log)の各設定を検証し、CLI migration、HTTP・SQLite CRUD、入力検証、API Platform IRI／OpenAPI、2000回連続・8並列要求が各版終了0だった。**固定アプリについて定義した全6段階の完成条件は達成**した。PHP全機能の対応完了を示すものではない。
+追加の実用アプリ検証として[research/task-api](../research/task-api/README.md)を作成した。Laravel／Eloquent／SQLiteによるTask CRUDの実HTTP比較は公式PHP・Goの3組、各191要求で成功。新規4 fixtureを含む現行**1173件（正常745・実行時294・構文134）**も公式3版すべて一致し、既存BookアプリのGo3設定実TCP回帰も成功した。[タスクAPIの実装範囲・検証結果・制限・ログ](validation/task-api-results.md)。以下の6段階の完成記録と既存成果は保持する。
+
+
+タスクAPI追加前のfixture・期待値は**1169件**（正常741・実行時294・構文134）。公式PHP [8.3.35](validation/full-stack-1169-oracle-nulls-83-mac.log)・[8.4.26](validation/full-stack-1169-oracle-nulls-84-mac.log)・[8.5.11](validation/full-stack-1169-oracle-nulls-85-mac.log)との版別`make compare`は、各1169件の個別MATCH、差異0・エラー0、終了0を記録した。`check.sh`の3版PASSはユーザー報告であり、`make compare-all`の成功記録ではない。固定アプリはGo製PHPの実TCPサーバーで[8.3](validation/full-stack-real-http-83-mac.log)・[8.4](validation/full-stack-real-http-84-mac.log)・[8.5](validation/full-stack-real-http-85-mac.log)の各設定を検証し、CLI migration、HTTP・SQLite CRUD、入力検証、API Platform IRI／OpenAPI、2000回連続・8並列要求が各版終了0だった。**固定アプリについて定義した全6段階の完成条件は達成**した。PHP全機能の対応完了を示すものではない。
 
 | 段階 | 依存順の実装単位 | 現在の状態 | 統合確認 |
 | --- | --- | --- | --- |
