@@ -80,3 +80,7 @@ Git管理候補だけを別配置へコピーし、vendor・`.env`・既存manif
 リリース時はpushしたコミットSHAと[GitHub Actions](https://github.com/ue555/gophp/actions/workflows/ci.yml)の`headSha`を照合し、3版の全ジョブ成功後にそのSHAへ`v0.2.0`を付ける。各ジョブが固定vendorの新規導入、全fixtureの公式比較、実HTTP 2000回・8並列を検証する。公開状態はリモートタグと対象コミットのCI実行記録を正とし、ローカル成功だけをCI成功とは扱わない。
 
 [再開後の全件公式比較](validation/release-resume-compare-all.log)はPHP 8.3.35・8.4.26・8.5.11の各版で1169一致・0差異・0エラー、全体終了0。ステージ時に見つかった成功fixture 6件の末尾空行を除去し、その6件も[3版で再比較](validation/release-resume-whitespace-fixtures.log)して全件一致した。生ログの出力バイト列を変更しないため、`.gitattributes`で`docs/validation/*.log`だけ空白検査・改行変換の対象外にしている。その他のソース・文書は通常の差分検査を維持する。
+
+最初のコミット`1e47241`を`main`へ通常pushした。[初回CI](https://github.com/ue555/gophp/actions/runs/39533730928)は3版ともGoテストを通過したが、Pythonテストで`compare-all.sh`のMac固定パスが原因となって失敗した。[失敗ログ](validation/release-ci-first-failures.log)を保存し、比較・確認スクリプトは自身の位置からプロジェクトルートを求める形に修正した。回帰テストは空白を含む別配置へスクリプトをコピーし、別ディレクトリから起動して作業ディレクトリ・版指定・終了コードを確認する。CIではテスト工程のログもartifact対象へ追加した。失敗コミットへのタグ付けは行っていない。
+
+[修正後のPython12件・公式PHP3版の起動確認](validation/release-ci-path-fix-test.log)は終了0。別配置での[実HTTP検証](validation/release-resume-relocated-http.log)も、固定vendorの新規導入後、PHP 8.4設定でCLI・SQLite・入力検証・API Platform CRUD・OpenAPI・2000回連続／8並列要求を通過し、検証コマンドは終了0だった。ログの`server_exit_code: -15`は検証後のサーバー停止によるもので、検証コマンドの終了コードではない。

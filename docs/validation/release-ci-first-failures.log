@@ -1,0 +1,138 @@
+verify (8.5.11)	Go and Python tests, vet and build	﻿2026-10-21T02:35:33.7061597Z ##[group]Run make test vet build
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:35:33.7062054Z ^[[36;1mmake test vet build^[[0m
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:35:33.7096925Z shell: /usr/bin/bash -e {0}
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:35:33.7097469Z ##[endgroup]
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:35:33.7177666Z go test ./...
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.2364298Z ok  	example.com/gophp/cmd/gophp	160.817s
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.2364858Z ok  	example.com/gophp/internal/php	7.717s
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.4712397Z python3 -B -m unittest discover -s tests -p 'test_*.py'
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9209325Z ..........FFE.
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9210038Z ======================================================================
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9211000Z ERROR: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 2, 0])
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9212097Z ----------------------------------------------------------------------
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9212988Z Traceback (most recent call last):
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9213892Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 46, in test_version_routing_and_exit_status
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9214758Z     invocations = [json.loads(line) for line in calls.read_text().splitlines()]
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9215627Z                                                 ^^^^^^^^^^^^^^^^^
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9216090Z   File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9216658Z     with self.open(mode='r', encoding=encoding, errors=errors) as f:
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9217195Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9217629Z   File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9218186Z     return io.open(self, mode, buffering, encoding, errors, newline)
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9218928Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9219480Z FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpdh53boax/calls.jsonl'
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9219822Z 
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9220007Z ======================================================================
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9220658Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[0, 0, 0])
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9221353Z ----------------------------------------------------------------------
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9221763Z Traceback (most recent call last):
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9222427Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9223117Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9223871Z AssertionError: 2 != 0 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9224396Z 
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9224560Z ======================================================================
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9225200Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 0, 0])
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9225864Z ----------------------------------------------------------------------
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9226314Z Traceback (most recent call last):
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9226912Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9227622Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9228598Z AssertionError: 2 != 1 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9229130Z 
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9229296Z ----------------------------------------------------------------------
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9229717Z Ran 12 tests in 0.364s
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9229905Z 
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9230070Z FAILED (failures=2, errors=1)
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9352341Z make: *** [Makefile:17: test] Error 1
+verify (8.5.11)	Go and Python tests, vet and build	2026-10-21T02:38:45.9372836Z ##[error]Process completed with exit code 2.
+verify (8.4.26)	Go and Python tests, vet and build	﻿2026-10-21T02:35:20.3711515Z ##[group]Run make test vet build
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:35:20.3711903Z ^[[36;1mmake test vet build^[[0m
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:35:20.3753330Z shell: /usr/bin/bash -e {0}
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:35:20.3754021Z ##[endgroup]
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:35:20.3839145Z go test ./...
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:18.5670985Z ok  	example.com/gophp/cmd/gophp	148.252s
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:18.5672071Z ok  	example.com/gophp/internal/php	7.320s
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:18.7305038Z python3 -B -m unittest discover -s tests -p 'test_*.py'
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1821191Z ..........FFE.
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1822190Z ======================================================================
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1823993Z ERROR: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 2, 0])
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1825694Z ----------------------------------------------------------------------
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1826587Z Traceback (most recent call last):
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1827976Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 46, in test_version_routing_and_exit_status
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1829802Z     invocations = [json.loads(line) for line in calls.read_text().splitlines()]
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1830955Z                                                 ^^^^^^^^^^^^^^^^^
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1831577Z   File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1832371Z     with self.open(mode='r', encoding=encoding, errors=errors) as f:
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1833117Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1833869Z   File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1834578Z     return io.open(self, mode, buffering, encoding, errors, newline)
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1835328Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1836007Z FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp0u2kkbzo/calls.jsonl'
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1836528Z 
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1836727Z ======================================================================
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1837639Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[0, 0, 0])
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1838537Z ----------------------------------------------------------------------
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1839091Z Traceback (most recent call last):
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1839906Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1840837Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1841786Z AssertionError: 2 != 0 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1842488Z 
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1842723Z ======================================================================
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1843953Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 0, 0])
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1844941Z ----------------------------------------------------------------------
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1845481Z Traceback (most recent call last):
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1846278Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1847274Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1848439Z AssertionError: 2 != 1 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1849247Z 
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1849542Z ----------------------------------------------------------------------
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1850145Z Ran 12 tests in 0.343s
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1850370Z 
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1850597Z FAILED (failures=2, errors=1)
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1969706Z make: *** [Makefile:17: test] Error 1
+verify (8.4.26)	Go and Python tests, vet and build	2026-10-21T02:38:19.1987743Z ##[error]Process completed with exit code 2.
+verify (8.3.35)	Go and Python tests, vet and build	﻿2026-10-21T02:35:18.6226819Z ##[group]Run make test vet build
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:35:18.6227168Z ^[[36;1mmake test vet build^[[0m
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:35:18.6286585Z shell: /usr/bin/bash -e {0}
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:35:18.6286846Z ##[endgroup]
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:35:18.6386969Z go test ./...
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:47.5134761Z ok  	example.com/gophp/cmd/gophp	166.647s
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:47.5135384Z ok  	example.com/gophp/internal/php	7.839s
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:47.6357598Z python3 -B -m unittest discover -s tests -p 'test_*.py'
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1020481Z ..........FFE.
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1021171Z ======================================================================
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1022371Z ERROR: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 2, 0])
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1023449Z ----------------------------------------------------------------------
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1023996Z Traceback (most recent call last):
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1024934Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 46, in test_version_routing_and_exit_status
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1026393Z     invocations = [json.loads(line) for line in calls.read_text().splitlines()]
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1027818Z                                                 ^^^^^^^^^^^^^^^^^
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1028442Z   File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1029284Z     with self.open(mode='r', encoding=encoding, errors=errors) as f:
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1030208Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1030899Z   File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1031720Z     return io.open(self, mode, buffering, encoding, errors, newline)
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1032580Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1033279Z FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpe5htlvfh/calls.jsonl'
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1033791Z 
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1033989Z ======================================================================
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1034966Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[0, 0, 0])
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1036115Z ----------------------------------------------------------------------
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1036650Z Traceback (most recent call last):
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1037530Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1038559Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1039663Z AssertionError: 2 != 0 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1040436Z 
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1040632Z ======================================================================
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1041589Z FAIL: test_version_routing_and_exit_status (test_compare_all.CompareAllTests.test_version_routing_and_exit_status) (codes=[1, 0, 0])
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1042605Z ----------------------------------------------------------------------
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1043129Z Traceback (most recent call last):
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1043992Z   File "/home/runner/work/gophp/gophp/tests/test_compare_all.py", line 45, in test_version_routing_and_exit_status
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1045038Z     self.assertEqual(result.returncode, expected_exit, result.stderr)
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1046836Z AssertionError: 2 != 1 : b"/home/runner/work/gophp/gophp/containers/php-version/compare-all.sh: 11: cd: can't cd to /Users/kouji/dev/php\n"
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1047626Z 
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1047876Z ----------------------------------------------------------------------
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1048406Z Ran 12 tests in 0.379s
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1048632Z 
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1048794Z FAILED (failures=2, errors=1)
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1160132Z make: *** [Makefile:17: test] Error 1
+verify (8.3.35)	Go and Python tests, vet and build	2026-10-21T02:38:48.1179681Z ##[error]Process completed with exit code 2.

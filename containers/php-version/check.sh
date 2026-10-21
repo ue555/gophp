@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-cd /Users/kouji/dev/php
+cd "$script_dir/../.."
 
 for spec in '83:8.3.35' '84:8.4.26' '85:8.5.11'; do
   short=${spec%%:*}

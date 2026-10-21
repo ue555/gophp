@@ -1,0 +1,8 @@
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.773s
+
+OK
+PASS: PHP 8.3.35, shared fixture executed
+PASS: PHP 8.4.26, shared fixture executed
+PASS: PHP 8.5.11, shared fixture executed

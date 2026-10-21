@@ -32,7 +32,11 @@ jobs:
           docker run --rm --user "$(id -u):$(id -g)" -e DB_DATABASE=:memory: -v "$PWD/research/laravel-api:/app" gophp-dependencies php artisan package:discover --no-interaction
           git diff --exit-code -- research/laravel-api/composer.lock
       - name: Go and Python tests, vet and build
-        run: make test vet build
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p .cache/ci
+          make test vet build 2>&1 | tee .cache/ci/test.log
       - name: Compare with official PHP image
         env:
           PHP_VERSION: ${{ matrix.php }}
@@ -60,6 +64,7 @@ jobs:
         with:
           name: verification-${{ matrix.php }}
           path: .cache/ci/*.log
+          include-hidden-files: true
       - name: Stop oracle
         if: always()
         run: docker rm -f gophp-oracle || true

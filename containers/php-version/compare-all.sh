@@ -8,7 +8,7 @@ if [ "$#" -lt 2 ]; then
 fi
 fixtures=$1
 shift
-cd /Users/kouji/dev/php
+cd "$script_dir/../.."
 status=0
 for spec in '83:8.3.35' '84:8.4.26' '85:8.5.11'; do
   short=${spec%%:*}
