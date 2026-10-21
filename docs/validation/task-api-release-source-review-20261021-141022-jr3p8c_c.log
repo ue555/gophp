@@ -1,0 +1,9 @@
+target: release-source-review
+command: python3 -
+cwd: /Users/kouji/dev/php
+Independent local source SHA-256: 390aead845413bc831d43ad45d34b2e381834716a5497397fb5944045db34de5
+Published candidate HEAD: f5054981730e5f9044925b7392ec541949db4512
+Published source SHA-256: a97df3f886b34ddf56b07acbe7aa30d0bc33c57145c6d9d774e78c6c74b08c3e
+Differences: ['.gitattributes']
+PASS all executable/app/test/CI sources identical; only nested raw-log Git attributes added after snapshot. Final CI includes these attributes.
+exit_code: 0

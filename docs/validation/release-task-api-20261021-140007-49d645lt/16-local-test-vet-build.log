@@ -1,0 +1,17 @@
+target: local-test-vet-build
+command: make test vet build
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+go test ./...
+ok  	example.com/gophp/cmd/gophp	70.789s
+ok  	example.com/gophp/internal/php	1.900s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+............RUN failed
+RUN passed
+...
+----------------------------------------------------------------------
+Ran 15 tests in 2.188s
+
+OK
+go vet ./...
+go build -o bin/gophp ./cmd/gophp
+exit_code: 0

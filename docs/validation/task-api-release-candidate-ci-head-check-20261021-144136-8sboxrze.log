@@ -1,0 +1,7 @@
+target: release-candidate-ci-head-check
+command: python3 -
+cwd: /Users/kouji/dev/php
+command: gh run view 39547883982 --repo ue555/gophp --json headSha,status,conclusion,jobs,url,createdAt,updatedAt
+actual_exit_code: 0
+PASS exact head and every required job: f5054981730e5f9044925b7392ec541949db4512 https://github.com/ue555/gophp/actions/runs/39547883982
+exit_code: 0

@@ -1,0 +1,5 @@
+target: release-protected-files-review
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS all 13349 protected lock/vendor/manual DB files are unchanged
+exit_code: 0

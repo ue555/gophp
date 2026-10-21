@@ -1,0 +1,8 @@
+target: release-candidate-audit
+command: python3 -
+cwd: /Users/kouji/dev/php
+Candidate count: 2790
+Forbidden generated/data files: []
+Secret-pattern candidate paths (values withheld): []
+PASS candidates exclude manual DB/vendor/cache/binary/environment secrets; public vendor assets already tracked are retained
+exit_code: 0

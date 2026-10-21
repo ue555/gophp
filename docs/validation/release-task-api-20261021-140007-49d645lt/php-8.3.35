@@ -1,0 +1,2 @@
+#!/bin/sh
+exec podman exec -i -w /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq -e LC_ALL=C -e LANG=C -e TZ=UTC gophp-release-oracle-8ffe1a437663 php "$@"

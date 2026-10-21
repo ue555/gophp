@@ -1,0 +1,11 @@
+target: release-python-tests
+command: python3 -B -m unittest discover -s tests -p 'test_*.py'
+cwd: /Users/kouji/dev/php
+............RUN failed
+RUN passed
+...
+----------------------------------------------------------------------
+Ran 15 tests in 1.923s
+
+OK
+exit_code: 0

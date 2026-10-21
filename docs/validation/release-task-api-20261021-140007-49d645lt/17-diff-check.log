@@ -1,0 +1,4 @@
+target: diff-check
+command: git diff --check
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+exit_code: 0

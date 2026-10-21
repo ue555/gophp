@@ -1,0 +1,10 @@
+target: release-fresh-snapshot
+command: python3 -
+cwd: /Users/kouji/dev/php
+command: ['git', 'clone', '--no-hardlinks', '--no-checkout', '/Users/kouji/dev/php', '/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq']
+Cloning into '/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq'...
+done.
+HEAD is now at cc9388e fix: 別配置とLinux CIで比較ラッパーを動作させる
+PASS clean independent candidate, no vendor/cache/DB; source_sha256: 390aead845413bc831d43ad45d34b2e381834716a5497397fb5944045db34de5
+checkout: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+exit_code: 0

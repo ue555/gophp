@@ -1,0 +1,7 @@
+target: release-final-local-audit
+command: python3 -
+cwd: /Users/kouji/dev/php
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+AssertionError
+exit_code: 1

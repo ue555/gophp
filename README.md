@@ -98,7 +98,7 @@ Goで字句解析・構文解析・評価を行うPHPインタプリタです。
 
 ## 実行
 
-Go 1.22以上、Python 3、CコンパイラとSQLite・PCRE2開発ライブラリを使用します。開発時の確認環境はGo 1.27.0・Python 3.9.6・darwin/arm64です。固定アプリの依存導入とCIの手順は[リリース準備](docs/release-preparation.md)を参照してください。
+Go 1.22以上、Python 3、CコンパイラとSQLite・PCRE2開発ライブラリを使用します。開発時の確認環境はGo 1.27.0・Python 3.9.6・darwin/arm64です。固定アプリの依存導入とCIの手順は[v0.3.0の再構築・CI・公開記録](docs/task-api-release.md)を参照してください。
 
 ```sh
 cd /Users/kouji/dev/php
@@ -195,4 +195,4 @@ stdout・stderrをバイト単位、終了コードを厳密に比較します�
 これは今回の変更前の履歴です。[以前の仕様・検証記録](docs/validation/pre-v1-compatibility.md) を参照してください。
 PHP全機能との互換性を示すものではありません。
 
-リリース前の再構築手順・CI・公開状況は[リリース準備](docs/release-preparation.md)を参照してください。
+リリース前の再構築手順・CI・公開状況は[v0.3.0の再構築・CI・公開記録](docs/task-api-release.md)を参照してください。

@@ -1,0 +1,6 @@
+target: release-staged-review
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS staged paths and secret-pattern scan: 101 files
+PASS staged whitespace check (raw evidence preserved)
+exit_code: 0

@@ -1,0 +1,10 @@
+target: release-final-local-audit-corrected
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS local evidence 8.3.35 : 1750 probe + 250 Book sequential GETs, plus initial checks, and 8 parallel GETs
+PASS local evidence 8.4.26 : 1750 probe + 250 Book sequential GETs, plus initial checks, and 8 parallel GETs
+PASS local evidence 8.5.11 : 1750 probe + 250 Book sequential GETs, plus initial checks, and 8 parallel GETs
+PASS 36 commands all exit 0; source/lock/binary identities stable; only documentation/evidence changed since candidate CI
+Local binary SHA256: d7d5c1da1c28b21d4dd76a2f61370068b30e88c8ef7cae0ccdfa9511d8ac6a85
+Earlier extra audit incorrectly assumed all 2000 requests used the probe route. Raw logs and original verifier confirm mixed routes; no API/test expectations changed.
+exit_code: 0

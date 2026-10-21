@@ -1,0 +1,5 @@
+target: oracle-remove-8.5.11
+command: podman rm -f gophp-release-oracle-b7cb3a67892c
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+gophp-release-oracle-b7cb3a67892c
+exit_code: 0

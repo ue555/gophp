@@ -1,0 +1,8 @@
+target: task-http-audit-8.5.11
+command: /Library/Developer/CommandLineTools/usr/bin/python3 research/task-api/audit-evidence.py /Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.5.11/task-api-20261021-143558-jlwkvot1 --version 8.5
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+PASS raw artifact audit official-8.5: 191 responses, exact JSON types
+PASS raw artifact audit go-8.5: 191 responses, exact JSON types
+PASS strict HTTP comparison official 8.5.11 / Go 8.5
+PASS all 382 real HTTP response artifacts; runtime SQLite assertions are recorded separately in run.log
+exit_code: 0

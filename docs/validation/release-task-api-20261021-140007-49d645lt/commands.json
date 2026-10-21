@@ -1,0 +1,638 @@
+[
+  {
+    "label": "container-environment",
+    "command": [
+      "podman",
+      "info"
+    ],
+    "log": "00-container-environment.log",
+    "target": "container-environment",
+    "exit_code": 0
+  },
+  {
+    "label": "build-dependencies-8.3.35",
+    "command": [
+      "podman",
+      "build",
+      "--build-arg",
+      "PHP_VERSION=8.3.35",
+      "-f",
+      "containers/dependency-research/Containerfile",
+      "-t",
+      "localhost/gophp-dependency-research:8.3.35",
+      "."
+    ],
+    "log": "01-build-dependencies-8.3.35.log",
+    "target": "build-dependencies-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "install-laravel-api-8.3.35",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "02-install-laravel-api-8.3.35.log",
+    "target": "install-laravel-api-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-laravel-api-8.3.35",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "03-platform-laravel-api-8.3.35.log",
+    "target": "platform-laravel-api-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "install-task-api-8.3.35",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "04-install-task-api-8.3.35.log",
+    "target": "install-task-api-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-task-api-8.3.35",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.3.35",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "05-platform-task-api-8.3.35.log",
+    "target": "platform-task-api-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "build-dependencies-8.4.26",
+    "command": [
+      "podman",
+      "build",
+      "--build-arg",
+      "PHP_VERSION=8.4.26",
+      "-f",
+      "containers/dependency-research/Containerfile",
+      "-t",
+      "localhost/gophp-dependency-research:8.4.26",
+      "."
+    ],
+    "log": "06-build-dependencies-8.4.26.log",
+    "target": "build-dependencies-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "install-laravel-api-8.4.26",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.4.26",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "07-install-laravel-api-8.4.26.log",
+    "target": "install-laravel-api-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-laravel-api-8.4.26",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.4.26",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "08-platform-laravel-api-8.4.26.log",
+    "target": "platform-laravel-api-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "install-task-api-8.4.26",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.4.26",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "09-install-task-api-8.4.26.log",
+    "target": "install-task-api-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-task-api-8.4.26",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.4.26",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "10-platform-task-api-8.4.26.log",
+    "target": "platform-task-api-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "build-dependencies-8.5.11",
+    "command": [
+      "podman",
+      "build",
+      "--build-arg",
+      "PHP_VERSION=8.5.11",
+      "-f",
+      "containers/dependency-research/Containerfile",
+      "-t",
+      "localhost/gophp-dependency-research:8.5.11",
+      "."
+    ],
+    "log": "11-build-dependencies-8.5.11.log",
+    "target": "build-dependencies-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "install-laravel-api-8.5.11",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.5.11",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "12-install-laravel-api-8.5.11.log",
+    "target": "install-laravel-api-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-laravel-api-8.5.11",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/laravel-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.5.11",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "13-platform-laravel-api-8.5.11.log",
+    "target": "platform-laravel-api-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "install-task-api-8.5.11",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.5.11",
+      "composer",
+      "install",
+      "--no-dev",
+      "--no-interaction",
+      "--prefer-dist",
+      "--no-scripts",
+      "--no-plugins"
+    ],
+    "log": "14-install-task-api-8.5.11.log",
+    "target": "install-task-api-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "platform-task-api-8.5.11",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq/research/task-api:/app",
+      "-e",
+      "COMPOSER_HOME=/tmp/composer",
+      "localhost/gophp-dependency-research:8.5.11",
+      "composer",
+      "check-platform-reqs",
+      "--no-dev"
+    ],
+    "log": "15-platform-task-api-8.5.11.log",
+    "target": "platform-task-api-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "local-test-vet-build",
+    "command": [
+      "make",
+      "test",
+      "vet",
+      "build"
+    ],
+    "log": "16-local-test-vet-build.log",
+    "target": "local-test-vet-build",
+    "exit_code": 0
+  },
+  {
+    "label": "diff-check",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "17-diff-check.log",
+    "target": "diff-check",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-start-8.3.35",
+    "command": [
+      "podman",
+      "run",
+      "-d",
+      "--name",
+      "gophp-release-oracle-8ffe1a437663",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:ro",
+      "-w",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq",
+      "php:8.3.35-cli-bookworm",
+      "php",
+      "-r",
+      "while (true) { sleep(3600); }"
+    ],
+    "log": "18-oracle-start-8.3.35.log",
+    "target": "oracle-start-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "fixtures-8.3.35",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/php-8.3.35",
+      "--php-version",
+      "8.3.35",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.3",
+      "{file}"
+    ],
+    "log": "19-fixtures-8.3.35.log",
+    "target": "fixtures-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-remove-8.3.35",
+    "command": [
+      "podman",
+      "rm",
+      "-f",
+      "gophp-release-oracle-8ffe1a437663"
+    ],
+    "log": "20-oracle-remove-8.3.35.log",
+    "target": "oracle-remove-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-8.3.35",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/verify.py",
+      "--version",
+      "8.3",
+      "--engine",
+      "podman",
+      "--image-template",
+      "localhost/gophp-dependency-research:{version}",
+      "--output-root",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.3.35"
+    ],
+    "log": "21-task-http-8.3.35.log",
+    "target": "task-http-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-audit-8.3.35",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/audit-evidence.py",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.3.35/task-api-20261021-140856-j8knbs0o",
+      "--version",
+      "8.3"
+    ],
+    "log": "22-task-http-audit-8.3.35.log",
+    "target": "task-http-audit-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "legacy-http-8.3.35",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/regression.py",
+      "--version",
+      "8.3",
+      "--stress-requests",
+      "2000"
+    ],
+    "log": "23-legacy-http-8.3.35.log",
+    "target": "legacy-http-8.3.35",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-start-8.4.26",
+    "command": [
+      "podman",
+      "run",
+      "-d",
+      "--name",
+      "gophp-release-oracle-440007ad0ee2",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:ro",
+      "-w",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq",
+      "php:8.4.26-cli-bookworm",
+      "php",
+      "-r",
+      "while (true) { sleep(3600); }"
+    ],
+    "log": "24-oracle-start-8.4.26.log",
+    "target": "oracle-start-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "fixtures-8.4.26",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/php-8.4.26",
+      "--php-version",
+      "8.4.26",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.4",
+      "{file}"
+    ],
+    "log": "25-fixtures-8.4.26.log",
+    "target": "fixtures-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-remove-8.4.26",
+    "command": [
+      "podman",
+      "rm",
+      "-f",
+      "gophp-release-oracle-440007ad0ee2"
+    ],
+    "log": "26-oracle-remove-8.4.26.log",
+    "target": "oracle-remove-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-8.4.26",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/verify.py",
+      "--version",
+      "8.4",
+      "--engine",
+      "podman",
+      "--image-template",
+      "localhost/gophp-dependency-research:{version}",
+      "--output-root",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.4.26"
+    ],
+    "log": "27-task-http-8.4.26.log",
+    "target": "task-http-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-audit-8.4.26",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/audit-evidence.py",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.4.26/task-api-20261021-142228-xlv9dc8h",
+      "--version",
+      "8.4"
+    ],
+    "log": "28-task-http-audit-8.4.26.log",
+    "target": "task-http-audit-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "legacy-http-8.4.26",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/regression.py",
+      "--version",
+      "8.4",
+      "--stress-requests",
+      "2000"
+    ],
+    "log": "29-legacy-http-8.4.26.log",
+    "target": "legacy-http-8.4.26",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-start-8.5.11",
+    "command": [
+      "podman",
+      "run",
+      "-d",
+      "--name",
+      "gophp-release-oracle-b7cb3a67892c",
+      "-v",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:ro",
+      "-w",
+      "/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq",
+      "php:8.5.11-cli-bookworm",
+      "php",
+      "-r",
+      "while (true) { sleep(3600); }"
+    ],
+    "log": "30-oracle-start-8.5.11.log",
+    "target": "oracle-start-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "fixtures-8.5.11",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "skills/php-go-interpreter/scripts/compare_php.py",
+      "--php",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/php-8.5.11",
+      "--php-version",
+      "8.5.11",
+      "--fixtures",
+      "tests/fixtures",
+      "--timeout",
+      "15",
+      "--interpreter",
+      "./bin/gophp",
+      "--php-version=8.5",
+      "{file}"
+    ],
+    "log": "31-fixtures-8.5.11.log",
+    "target": "fixtures-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "oracle-remove-8.5.11",
+    "command": [
+      "podman",
+      "rm",
+      "-f",
+      "gophp-release-oracle-b7cb3a67892c"
+    ],
+    "log": "32-oracle-remove-8.5.11.log",
+    "target": "oracle-remove-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-8.5.11",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/verify.py",
+      "--version",
+      "8.5",
+      "--engine",
+      "podman",
+      "--image-template",
+      "localhost/gophp-dependency-research:{version}",
+      "--output-root",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.5.11"
+    ],
+    "log": "33-task-http-8.5.11.log",
+    "target": "task-http-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "task-http-audit-8.5.11",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/audit-evidence.py",
+      "/Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.5.11/task-api-20261021-143558-jlwkvot1",
+      "--version",
+      "8.5"
+    ],
+    "log": "34-task-http-audit-8.5.11.log",
+    "target": "task-http-audit-8.5.11",
+    "exit_code": 0
+  },
+  {
+    "label": "legacy-http-8.5.11",
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "research/task-api/regression.py",
+      "--version",
+      "8.5",
+      "--stress-requests",
+      "2000"
+    ],
+    "log": "35-legacy-http-8.5.11.log",
+    "target": "legacy-http-8.5.11",
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "command": [
+    ".cache/release-task-api-checkout-krcqcshq/scripts/verify-release.py",
+    "--engine",
+    "podman",
+    "--build-images",
+    "--require-fresh-vendor",
+    "--output-root",
+    "/Users/kouji/dev/php/docs/validation"
+  ],
+  "exit_code": 0,
+  "versions": [
+    "8.3.35",
+    "8.4.26",
+    "8.5.11"
+  ]
+}

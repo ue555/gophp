@@ -1,0 +1,6 @@
+target: release-candidate-push
+command: git push origin main
+cwd: /Users/kouji/dev/php
+To https://github.com/ue555/gophp.git
+   cc9388e..f505498  main -> main
+exit_code: 0

@@ -1,0 +1,5 @@
+target: oracle-start-8.3.35
+command: podman run -d --name gophp-release-oracle-8ffe1a437663 -v /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:/Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq:ro -w /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq php:8.3.35-cli-bookworm php -r 'while (true) { sleep(3600); }'
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+e59f3d477e73a871692fd722cd19817f23725a0f011f3e97ad95678b31906b0c
+exit_code: 0

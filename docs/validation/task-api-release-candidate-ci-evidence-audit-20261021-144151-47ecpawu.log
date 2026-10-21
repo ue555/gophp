@@ -1,0 +1,7 @@
+target: release-candidate-ci-evidence-audit
+command: python3 -
+cwd: /Users/kouji/dev/php
+PASS 8.3.35 : 14 successful commands, 1173 fixture matches, 382 HTTP response artifacts, source/head verified
+PASS 8.4.26 : 14 successful commands, 1173 fixture matches, 382 HTTP response artifacts, source/head verified
+PASS 8.5.11 : 14 successful commands, 1173 fixture matches, 382 HTTP response artifacts, source/head verified
+exit_code: 0

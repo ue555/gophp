@@ -1,0 +1,845 @@
+{
+  "8.3.35": {
+    "artifact": "verification-8.3.35-f5054981730e5f9044925b7392ec541949db4512",
+    "exit_code": 0,
+    "commands": [
+      {
+        "label": "container-environment",
+        "command": [
+          "docker",
+          "info"
+        ],
+        "log": "00-container-environment.log",
+        "target": "container-environment",
+        "exit_code": 0
+      },
+      {
+        "label": "build-dependencies-8.3.35",
+        "command": [
+          "docker",
+          "build",
+          "--build-arg",
+          "PHP_VERSION=8.3.35",
+          "-f",
+          "containers/dependency-research/Containerfile",
+          "-t",
+          "localhost/gophp-dependency-research:8.3.35",
+          "."
+        ],
+        "log": "01-build-dependencies-8.3.35.log",
+        "target": "build-dependencies-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "install-laravel-api-8.3.35",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.3.35",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "02-install-laravel-api-8.3.35.log",
+        "target": "install-laravel-api-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-laravel-api-8.3.35",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.3.35",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "03-platform-laravel-api-8.3.35.log",
+        "target": "platform-laravel-api-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "install-task-api-8.3.35",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.3.35",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "04-install-task-api-8.3.35.log",
+        "target": "install-task-api-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-task-api-8.3.35",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.3.35",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "05-platform-task-api-8.3.35.log",
+        "target": "platform-task-api-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "local-test-vet-build",
+        "command": [
+          "make",
+          "test",
+          "vet",
+          "build"
+        ],
+        "log": "06-local-test-vet-build.log",
+        "target": "local-test-vet-build",
+        "exit_code": 0
+      },
+      {
+        "label": "diff-check",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "07-diff-check.log",
+        "target": "diff-check",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-start-8.3.35",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "gophp-release-oracle-b53c12692eae",
+          "-v",
+          "/home/runner/work/gophp/gophp:/home/runner/work/gophp/gophp:ro",
+          "-w",
+          "/home/runner/work/gophp/gophp",
+          "php:8.3.35-cli-bookworm",
+          "php",
+          "-r",
+          "while (true) { sleep(3600); }"
+        ],
+        "log": "08-oracle-start-8.3.35.log",
+        "target": "oracle-start-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "fixtures-8.3.35",
+        "command": [
+          "/usr/bin/python3",
+          "skills/php-go-interpreter/scripts/compare_php.py",
+          "--php",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nwmj5k1c/php-8.3.35",
+          "--php-version",
+          "8.3.35",
+          "--fixtures",
+          "tests/fixtures",
+          "--timeout",
+          "15",
+          "--interpreter",
+          "./bin/gophp",
+          "--php-version=8.3",
+          "{file}"
+        ],
+        "log": "09-fixtures-8.3.35.log",
+        "target": "fixtures-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-remove-8.3.35",
+        "command": [
+          "docker",
+          "rm",
+          "-f",
+          "gophp-release-oracle-b53c12692eae"
+        ],
+        "log": "10-oracle-remove-8.3.35.log",
+        "target": "oracle-remove-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-8.3.35",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/verify.py",
+          "--version",
+          "8.3",
+          "--engine",
+          "docker",
+          "--image-template",
+          "localhost/gophp-dependency-research:{version}",
+          "--output-root",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nwmj5k1c/http-8.3.35"
+        ],
+        "log": "11-task-http-8.3.35.log",
+        "target": "task-http-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-audit-8.3.35",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/audit-evidence.py",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nwmj5k1c/http-8.3.35/task-api-20261021-051433-mcs2m44x",
+          "--version",
+          "8.3"
+        ],
+        "log": "12-task-http-audit-8.3.35.log",
+        "target": "task-http-audit-8.3.35",
+        "exit_code": 0
+      },
+      {
+        "label": "legacy-http-8.3.35",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/regression.py",
+          "--version",
+          "8.3",
+          "--stress-requests",
+          "2000"
+        ],
+        "log": "13-legacy-http-8.3.35.log",
+        "target": "legacy-http-8.3.35",
+        "exit_code": 0
+      }
+    ],
+    "source_sha256": "a97df3f886b34ddf56b07acbe7aa30d0bc33c57145c6d9d774e78c6c74b08c3e",
+    "binary_sha256": "3c0211cc60d0c678e43655fc3a840c179e7ac1bfe8cd0106fceec605f8a58181",
+    "file_sha256": {
+      "10-oracle-remove-8.3.35.log": "9db46ada953ab3a15fa5cfbce5a4514970dd8535995bfed4851ed9c1a39b9c89",
+      "08-oracle-start-8.3.35.log": "873e1c1902894bbb06a40fd18909c3bf7dd5e9828dfff9309c6b11fa7347dd98",
+      "result.json": "e49ffb513488a94f1a634025c1eba89404303b91d23ea81611fa34f0fa0ad183",
+      "13-legacy-http-8.3.35.log": "4abe7eaa736c08808a5097fb54e8a1797c538b931f1bddd6c38e26e7113989b7",
+      "source-before.json": "6c42ca8769eeb1dabd9d666d3d8b288ced3d92710f4344460f0aa730b3885fc9",
+      "fixture-count.json": "6c3056612bd653b1ab39e5c0537f0a098cac99fe47a1c36956290c85e26dee67",
+      "source-after.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "04-install-task-api-8.3.35.log": "3f77ed30e04720f29ea920556973ec9405a2ad5bc2cd6b56bd72f3acd6833e3a",
+      "01-build-dependencies-8.3.35.log": "957c5a61595f3429e5554279bea2113196db54ec73beca73dd76afe71f2506a5",
+      "source-built.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "commands.json": "1e381a8022f95c74974ebd173aad3d1c901a8c77d2d992bb3472d4688a4b9be7",
+      "03-platform-laravel-api-8.3.35.log": "93b44dc926a618599665bff8e7c880e23822710419b724584813c2cb1be76066",
+      "11-task-http-8.3.35.log": "95d9922f1bec5435516908a80a457ce9a81b3071c3ba7c1a8c5b2f3f5b528e6c",
+      "09-fixtures-8.3.35.log": "1010a547456418eee59c2f7981062e1e044714b196db17e75c108cece9b5c83d",
+      "00-container-environment.log": "3d4d3f65e7a542e97c07a5460809493e7625ab8729cf007d9b8ea6dc5ee6f104",
+      "05-platform-task-api-8.3.35.log": "c1a543fbee7ac7ab07ef558827a433fbf91d5500f70b073c2a3e8323700d3474",
+      "06-local-test-vet-build.log": "0f0bd1b6901fb83c4bbac6d62d5acb6e936b943f6828b7ec900ba5ab359c2259",
+      "12-task-http-audit-8.3.35.log": "981f35327af51fee291d974b0da8a1a80812025203f89816465fb8dc7c59105b",
+      "07-diff-check.log": "87dc0368f126f990e77ec681e1b3a351164ed66680c48a569252837470245b0d",
+      "02-install-laravel-api-8.3.35.log": "2e08cff1d21e7e5f0b8e25f3ec409215282cc098ed220e168a9b9f3a5daa5346",
+      "php-8.3.35": "ce79ae8efef49a3d91ebb57e6711d4a9db74e9b081fbb47e2e590c63cc91b6c9",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/go-8.3-http.jsonl": "1950fec3f902515a66aad87dfd1941e586cf4b28f66fbe1217af4546af296daf",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/official-8.3-http.jsonl": "d22096cdf2682f9522f7ecb7050355153fbbd579537baeadf3b69dfc68770565",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/source.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/run.log": "6b7ce133b755a0f2d1b77e5801b619fd22824d85a048cd77733b9bfaa50dc21a",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/official-8.3-server.log": "5afc900cc4a91243051759591337750983145b9f9bc48de4173a06951881f4ac",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/official-8.3-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/go-8.3-server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "http-8.3.35/task-api-20261021-051433-mcs2m44x/go-8.3-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755"
+    }
+  },
+  "8.4.26": {
+    "artifact": "verification-8.4.26-f5054981730e5f9044925b7392ec541949db4512",
+    "exit_code": 0,
+    "commands": [
+      {
+        "label": "container-environment",
+        "command": [
+          "docker",
+          "info"
+        ],
+        "log": "00-container-environment.log",
+        "target": "container-environment",
+        "exit_code": 0
+      },
+      {
+        "label": "build-dependencies-8.4.26",
+        "command": [
+          "docker",
+          "build",
+          "--build-arg",
+          "PHP_VERSION=8.4.26",
+          "-f",
+          "containers/dependency-research/Containerfile",
+          "-t",
+          "localhost/gophp-dependency-research:8.4.26",
+          "."
+        ],
+        "log": "01-build-dependencies-8.4.26.log",
+        "target": "build-dependencies-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "install-laravel-api-8.4.26",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.4.26",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "02-install-laravel-api-8.4.26.log",
+        "target": "install-laravel-api-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-laravel-api-8.4.26",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.4.26",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "03-platform-laravel-api-8.4.26.log",
+        "target": "platform-laravel-api-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "install-task-api-8.4.26",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.4.26",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "04-install-task-api-8.4.26.log",
+        "target": "install-task-api-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-task-api-8.4.26",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.4.26",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "05-platform-task-api-8.4.26.log",
+        "target": "platform-task-api-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "local-test-vet-build",
+        "command": [
+          "make",
+          "test",
+          "vet",
+          "build"
+        ],
+        "log": "06-local-test-vet-build.log",
+        "target": "local-test-vet-build",
+        "exit_code": 0
+      },
+      {
+        "label": "diff-check",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "07-diff-check.log",
+        "target": "diff-check",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-start-8.4.26",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "gophp-release-oracle-1071bedf61f7",
+          "-v",
+          "/home/runner/work/gophp/gophp:/home/runner/work/gophp/gophp:ro",
+          "-w",
+          "/home/runner/work/gophp/gophp",
+          "php:8.4.26-cli-bookworm",
+          "php",
+          "-r",
+          "while (true) { sleep(3600); }"
+        ],
+        "log": "08-oracle-start-8.4.26.log",
+        "target": "oracle-start-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "fixtures-8.4.26",
+        "command": [
+          "/usr/bin/python3",
+          "skills/php-go-interpreter/scripts/compare_php.py",
+          "--php",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nf4sfe2x/php-8.4.26",
+          "--php-version",
+          "8.4.26",
+          "--fixtures",
+          "tests/fixtures",
+          "--timeout",
+          "15",
+          "--interpreter",
+          "./bin/gophp",
+          "--php-version=8.4",
+          "{file}"
+        ],
+        "log": "09-fixtures-8.4.26.log",
+        "target": "fixtures-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-remove-8.4.26",
+        "command": [
+          "docker",
+          "rm",
+          "-f",
+          "gophp-release-oracle-1071bedf61f7"
+        ],
+        "log": "10-oracle-remove-8.4.26.log",
+        "target": "oracle-remove-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-8.4.26",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/verify.py",
+          "--version",
+          "8.4",
+          "--engine",
+          "docker",
+          "--image-template",
+          "localhost/gophp-dependency-research:{version}",
+          "--output-root",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nf4sfe2x/http-8.4.26"
+        ],
+        "log": "11-task-http-8.4.26.log",
+        "target": "task-http-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-audit-8.4.26",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/audit-evidence.py",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050853-nf4sfe2x/http-8.4.26/task-api-20261021-051359-h3jyf25t",
+          "--version",
+          "8.4"
+        ],
+        "log": "12-task-http-audit-8.4.26.log",
+        "target": "task-http-audit-8.4.26",
+        "exit_code": 0
+      },
+      {
+        "label": "legacy-http-8.4.26",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/regression.py",
+          "--version",
+          "8.4",
+          "--stress-requests",
+          "2000"
+        ],
+        "log": "13-legacy-http-8.4.26.log",
+        "target": "legacy-http-8.4.26",
+        "exit_code": 0
+      }
+    ],
+    "source_sha256": "a97df3f886b34ddf56b07acbe7aa30d0bc33c57145c6d9d774e78c6c74b08c3e",
+    "binary_sha256": "3c0211cc60d0c678e43655fc3a840c179e7ac1bfe8cd0106fceec605f8a58181",
+    "file_sha256": {
+      "02-install-laravel-api-8.4.26.log": "9d1a232a57e8e54888ead730a6b3202fdd9bb1b7bee47508fbf3749c4d3e008d",
+      "result.json": "d1ba9865969e60e28b4e51835e76e786a8c28a41615f2985621cb21cc4a4c1a4",
+      "source-before.json": "6c42ca8769eeb1dabd9d666d3d8b288ced3d92710f4344460f0aa730b3885fc9",
+      "12-task-http-audit-8.4.26.log": "bfd67dc6fd9c205cd41107178766ab7cd521fe0879184faa079c331b970e69a9",
+      "fixture-count.json": "6c3056612bd653b1ab39e5c0537f0a098cac99fe47a1c36956290c85e26dee67",
+      "source-after.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "05-platform-task-api-8.4.26.log": "04b3489458aa8e9b3f0e93c546745c2dae18642e02a52d0e6a80ab9d229077b1",
+      "php-8.4.26": "5838bc85c8ee5e5e62915d2b7343cc00dd6fd3d7a22c26d28857b47ebfc2fc99",
+      "source-built.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "09-fixtures-8.4.26.log": "e035c769ae39d8182f60e7e63fc490ff6d8f71de4a8ff53f614d8a53bbf53d8e",
+      "11-task-http-8.4.26.log": "e17be9b156fe2b98a763835d22ab1cc63cca583ce22de0c703c109a18e007d45",
+      "03-platform-laravel-api-8.4.26.log": "0ab0c40528fe63c57c2e0d4ce7abc5536068c5c94993d762431c5bab772dfffd",
+      "commands.json": "031fd789f70fc6f97280aa4f564afd70604ee2624bc401cd600df86fcc050ab0",
+      "01-build-dependencies-8.4.26.log": "2cfd0cc1fb37487fabd38e7e0de37bce4dd6c87e996c58c3dd61bdfb163b8fe4",
+      "00-container-environment.log": "3d4d3f65e7a542e97c07a5460809493e7625ab8729cf007d9b8ea6dc5ee6f104",
+      "06-local-test-vet-build.log": "14794f7da6682dfb5d57a071ca6eb332398692f101d60fe7693512f799aba6ce",
+      "04-install-task-api-8.4.26.log": "326b1b10ba00c0be3fa7351188258b6e002e4a2cfa74f578c021997eb8ccf961",
+      "07-diff-check.log": "87dc0368f126f990e77ec681e1b3a351164ed66680c48a569252837470245b0d",
+      "08-oracle-start-8.4.26.log": "9ecf9e0e132039d996880c8f98caac3cdeeb692e1ad505070fa00f032862d2ae",
+      "13-legacy-http-8.4.26.log": "a03960caeadf19b3cc7bcae22685e22d3aba2342f3732b95e7351d59939ba48b",
+      "10-oracle-remove-8.4.26.log": "3d1700c2dbfeb7880dff0b17d406008760590622b572e43e3f556d896832bfda",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/go-8.4-server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/official-8.4-server.log": "95938063dcae99bfac3f61c2967bf319e6a27791db2613fa09dddc14cf3e32bf",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/source.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/run.log": "50080cec4d078350f75b89b067a33958b1ac8d04772cf8ab5a6abc5f7c34c522",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/official-8.4-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/official-8.4-http.jsonl": "6ae02260a6ddfd8e463c6834ba5fe57e82a81baad09762de0e61ed03796c6d6c",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/go-8.4-http.jsonl": "57a757e0dfdc8b52d18b9e4344615087355f7aa9642e4880f9fa1da5f1408f54",
+      "http-8.4.26/task-api-20261021-051359-h3jyf25t/go-8.4-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755"
+    }
+  },
+  "8.5.11": {
+    "artifact": "verification-8.5.11-f5054981730e5f9044925b7392ec541949db4512",
+    "exit_code": 0,
+    "commands": [
+      {
+        "label": "container-environment",
+        "command": [
+          "docker",
+          "info"
+        ],
+        "log": "00-container-environment.log",
+        "target": "container-environment",
+        "exit_code": 0
+      },
+      {
+        "label": "build-dependencies-8.5.11",
+        "command": [
+          "docker",
+          "build",
+          "--build-arg",
+          "PHP_VERSION=8.5.11",
+          "-f",
+          "containers/dependency-research/Containerfile",
+          "-t",
+          "localhost/gophp-dependency-research:8.5.11",
+          "."
+        ],
+        "log": "01-build-dependencies-8.5.11.log",
+        "target": "build-dependencies-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "install-laravel-api-8.5.11",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.5.11",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "02-install-laravel-api-8.5.11.log",
+        "target": "install-laravel-api-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-laravel-api-8.5.11",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/laravel-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.5.11",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "03-platform-laravel-api-8.5.11.log",
+        "target": "platform-laravel-api-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "install-task-api-8.5.11",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.5.11",
+          "composer",
+          "install",
+          "--no-dev",
+          "--no-interaction",
+          "--prefer-dist",
+          "--no-scripts",
+          "--no-plugins"
+        ],
+        "log": "04-install-task-api-8.5.11.log",
+        "target": "install-task-api-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "platform-task-api-8.5.11",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "-v",
+          "/home/runner/work/gophp/gophp/research/task-api:/app",
+          "--user",
+          "1001:1001",
+          "-e",
+          "COMPOSER_HOME=/tmp/composer",
+          "localhost/gophp-dependency-research:8.5.11",
+          "composer",
+          "check-platform-reqs",
+          "--no-dev"
+        ],
+        "log": "05-platform-task-api-8.5.11.log",
+        "target": "platform-task-api-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "local-test-vet-build",
+        "command": [
+          "make",
+          "test",
+          "vet",
+          "build"
+        ],
+        "log": "06-local-test-vet-build.log",
+        "target": "local-test-vet-build",
+        "exit_code": 0
+      },
+      {
+        "label": "diff-check",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "log": "07-diff-check.log",
+        "target": "diff-check",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-start-8.5.11",
+        "command": [
+          "docker",
+          "run",
+          "-d",
+          "--name",
+          "gophp-release-oracle-c8812861825d",
+          "-v",
+          "/home/runner/work/gophp/gophp:/home/runner/work/gophp/gophp:ro",
+          "-w",
+          "/home/runner/work/gophp/gophp",
+          "php:8.5.11-cli-bookworm",
+          "php",
+          "-r",
+          "while (true) { sleep(3600); }"
+        ],
+        "log": "08-oracle-start-8.5.11.log",
+        "target": "oracle-start-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "fixtures-8.5.11",
+        "command": [
+          "/usr/bin/python3",
+          "skills/php-go-interpreter/scripts/compare_php.py",
+          "--php",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050849-yrjoi69n/php-8.5.11",
+          "--php-version",
+          "8.5.11",
+          "--fixtures",
+          "tests/fixtures",
+          "--timeout",
+          "15",
+          "--interpreter",
+          "./bin/gophp",
+          "--php-version=8.5",
+          "{file}"
+        ],
+        "log": "09-fixtures-8.5.11.log",
+        "target": "fixtures-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "oracle-remove-8.5.11",
+        "command": [
+          "docker",
+          "rm",
+          "-f",
+          "gophp-release-oracle-c8812861825d"
+        ],
+        "log": "10-oracle-remove-8.5.11.log",
+        "target": "oracle-remove-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-8.5.11",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/verify.py",
+          "--version",
+          "8.5",
+          "--engine",
+          "docker",
+          "--image-template",
+          "localhost/gophp-dependency-research:{version}",
+          "--output-root",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050849-yrjoi69n/http-8.5.11"
+        ],
+        "log": "11-task-http-8.5.11.log",
+        "target": "task-http-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "task-http-audit-8.5.11",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/audit-evidence.py",
+          "/home/runner/work/gophp/gophp/.cache/ci/release-task-api-20261021-050849-yrjoi69n/http-8.5.11/task-api-20261021-051245-a5glv5lv",
+          "--version",
+          "8.5"
+        ],
+        "log": "12-task-http-audit-8.5.11.log",
+        "target": "task-http-audit-8.5.11",
+        "exit_code": 0
+      },
+      {
+        "label": "legacy-http-8.5.11",
+        "command": [
+          "/usr/bin/python3",
+          "research/task-api/regression.py",
+          "--version",
+          "8.5",
+          "--stress-requests",
+          "2000"
+        ],
+        "log": "13-legacy-http-8.5.11.log",
+        "target": "legacy-http-8.5.11",
+        "exit_code": 0
+      }
+    ],
+    "source_sha256": "a97df3f886b34ddf56b07acbe7aa30d0bc33c57145c6d9d774e78c6c74b08c3e",
+    "binary_sha256": "3c0211cc60d0c678e43655fc3a840c179e7ac1bfe8cd0106fceec605f8a58181",
+    "file_sha256": {
+      "12-task-http-audit-8.5.11.log": "5f2a7b74bd8c4f9c64e630e38d079c01874d093c62e38294c3e6536780590d7a",
+      "05-platform-task-api-8.5.11.log": "705ffc77fa0e06704c9efd63440a09c70a27f44bf7fa7308a7bb632aed11706b",
+      "result.json": "fa1465d80cd3eef571e5f39e81ebbb3afb4a9223e01771caf4e9b625cf0eea40",
+      "09-fixtures-8.5.11.log": "2124c0d015ae07ebde4d645d01210dde1d3a472c7b51ba95bf28b45ed38af6f6",
+      "11-task-http-8.5.11.log": "fa3c2c9f2e510fc738183bc75441df9dba0381d60771725d350dce480bb109df",
+      "03-platform-laravel-api-8.5.11.log": "0b452f98e2fab440240b439e298ef5f3079be5a31a6a1eb5e3a113772ee6b0cf",
+      "source-before.json": "6c42ca8769eeb1dabd9d666d3d8b288ced3d92710f4344460f0aa730b3885fc9",
+      "fixture-count.json": "6c3056612bd653b1ab39e5c0537f0a098cac99fe47a1c36956290c85e26dee67",
+      "source-after.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "php-8.5.11": "3f5d2b799d6627b626ce830fa614206613c5345ee5afc940210d2f40f83a493f",
+      "source-built.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "02-install-laravel-api-8.5.11.log": "143f4d2053464c5cc2736abab0aada2f8c00dd0ba7b11e7bfcb9b32d39da570c",
+      "commands.json": "02c2cb560d9e30579e5df8ec72e3f02357b75d7f001d0f667a22a90d2022f062",
+      "08-oracle-start-8.5.11.log": "8c5916a19a4599b41a6f66555667c20db04241f8c705945bdb8b491473dc5768",
+      "13-legacy-http-8.5.11.log": "05b7f7985ed28007fc209c890e3b42c17ac10c778a44c660d61db0406199c258",
+      "00-container-environment.log": "16adfce717fd6a95d1c7f288a00b681130b22efa13a8b32ac97acf7519113716",
+      "06-local-test-vet-build.log": "a009a00172a6a123bb9648e445d6c5f8cc16430b40bf7527c282e196fca3fcd9",
+      "07-diff-check.log": "87dc0368f126f990e77ec681e1b3a351164ed66680c48a569252837470245b0d",
+      "10-oracle-remove-8.5.11.log": "c4c87ec961785030856409d683e5950b20a15b11a3be50b243b854b7012e6071",
+      "01-build-dependencies-8.5.11.log": "3b1110dac6b733bee31a112d6e30a884a53d95abda5edac751d2159cd9963218",
+      "04-install-task-api-8.5.11.log": "8a0f3669f61ab73399d39070b12bfbfa6d893ab74d5ac9aa87a6ace3bdf44a2c",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/source.json": "4d38b3051a38e946973083574b07d2af25d7e71418525dc03715bb1bdaf113e9",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/official-8.5-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/run.log": "37f4d00542ed1db204acbac9749f8a2fe231ccbe5c85ff2b32aab139166d7bcb",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/go-8.5-server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/official-8.5-server.log": "a0426672ef507fec30180e0af640c35274fec3aa5af28358b86c51196b14ba34",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/official-8.5-http.jsonl": "1d6662573efaa8c126fed06ebcea7c68f9934addd74dc08c9a0d5d4ac5698d1a",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/go-8.5-http.jsonl": "c661bf7f45e90b37e00f55e6100974786f99a1a3c8489a8138ca435278aa27ed",
+      "http-8.5.11/task-api-20261021-051245-a5glv5lv/go-8.5-normalized.json": "71df0abfe75f7488389ddc2d409cffa3fddd0fabc8e0c305d141f3dc5f4ec755"
+    }
+  }
+}

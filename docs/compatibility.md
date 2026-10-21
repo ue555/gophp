@@ -1,5 +1,7 @@
 # PHP互換性と検証状況
 
+リリース用の独立再構築・変更後の全検証・CI成果物は[v0.3.0の記録](task-api-release.md)を参照。以下の実装時ログとは実行を分けている。
+
 現行**1173件**について、公式PHP 8.3.35・8.4.26・8.5.11との[全fixture比較](validation/task-api-fixtures-all-3versions-20261021-124313-mipuzcdk.log)は各1173一致・0差異・0エラー・終了0。新規[タスク管理API](../research/task-api/README.md)はLaravelルート・入力検証・Eloquent・SQLiteを用い、公式PHP／Goの3組で各191要求（連続100 GET・8並列GETを含む）の実TCP比較が差異なし。既存固定Laravel/API PlatformアプリもGo3設定で実TCP回帰検証に成功した。[実装範囲・ログ・残る一般機能の制限](validation/task-api-results.md)。
 
 タスクAPIで必要になったmanifest生成のfilesystem関数・スカラー／配列の`var_export`、Carbon日時JSON化のDateTime書式を補完した。通常オブジェクトの`var_export`、`umask(mask)`による変更、filesystem stream context、DateTime全仕様は未対応・未網羅。上記一致をPHP全機能の互換と扱わない。

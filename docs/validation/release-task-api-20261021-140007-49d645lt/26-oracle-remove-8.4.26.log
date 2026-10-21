@@ -1,0 +1,5 @@
+target: oracle-remove-8.4.26
+command: podman rm -f gophp-release-oracle-440007ad0ee2
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+gophp-release-oracle-440007ad0ee2
+exit_code: 0

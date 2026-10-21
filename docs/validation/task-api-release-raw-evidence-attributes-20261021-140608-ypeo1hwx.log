@@ -1,0 +1,8 @@
+target: release-raw-evidence-attributes
+command: git check-attr whitespace text -- docs/validation/task-api-20261021-124313-i5cu398g/run.log docs/validation/release-task-api-20261021-140007-49d645lt/01-build-dependencies-8.3.35.log
+cwd: /Users/kouji/dev/php
+docs/validation/task-api-20261021-124313-i5cu398g/run.log: whitespace: unset
+docs/validation/task-api-20261021-124313-i5cu398g/run.log: text: unset
+docs/validation/release-task-api-20261021-140007-49d645lt/01-build-dependencies-8.3.35.log: whitespace: unset
+docs/validation/release-task-api-20261021-140007-49d645lt/01-build-dependencies-8.3.35.log: text: unset
+exit_code: 0

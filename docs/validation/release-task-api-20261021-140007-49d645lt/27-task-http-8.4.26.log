@@ -1,0 +1,6 @@
+target: task-http-8.4.26
+command: /Library/Developer/CommandLineTools/usr/bin/python3 research/task-api/verify.py --version 8.4 --engine podman --image-template 'localhost/gophp-dependency-research:{version}' --output-root /Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.4.26
+cwd: /Users/kouji/dev/php/.cache/release-task-api-checkout-krcqcshq
+logs: /Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.4.26/task-api-20261021-142228-xlv9dc8h
+result: 0 log: /Users/kouji/dev/php/docs/validation/release-task-api-20261021-140007-49d645lt/http-8.4.26/task-api-20261021-142228-xlv9dc8h/run.log
+exit_code: 0

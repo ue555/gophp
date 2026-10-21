@@ -1,0 +1,4 @@
+target: release-candidate-ci-artifact84
+command: gh run download 39547883982 --repo ue555/gophp --name verification-8.4.26-f5054981730e5f9044925b7392ec541949db4512 --dir .cache/release-ci-candidate/8.4.26
+cwd: /Users/kouji/dev/php
+exit_code: 0
