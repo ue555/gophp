@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_oracle_nulls_version.php
+accepted|1
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_oracle_nulls_version.php
+accepted|1
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_oracle_nulls_version.php
+accepted|9
+exit_code: 0

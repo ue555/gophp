@@ -1,0 +1,18 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_exception_sqlstate.php
+HY000|HY000|1|no such table: absent|23000|23000|19|UNIQUE constraint failed: entries.name
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/eloquent_unique_constraint_vendor.php
+23000|PDOException|23000
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_exception_sqlstate.php
+HY000|HY000|1|no such table: absent|23000|23000|19|UNIQUE constraint failed: entries.name
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/eloquent_unique_constraint_vendor.php
+23000|PDOException|23000
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_exception_sqlstate.php
+HY000|HY000|1|no such table: absent|23000|23000|19|UNIQUE constraint failed: entries.name
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/eloquent_unique_constraint_vendor.php
+23000|PDOException|23000
+exit_code: 0

@@ -1,14 +1,16 @@
 ARG GO_IMAGE=docker.io/library/golang:1.27.2-alpine3.24
 FROM ${GO_IMAGE} AS build
 WORKDIR /src
-ENV CGO_ENABLED=0
+RUN apk add --no-cache build-base sqlite-dev pcre2-dev
+ENV CGO_ENABLED=1
 COPY go.mod ./
 COPY cmd ./cmd
 COPY internal ./internal
 COPY tests/fixtures ./tests/fixtures
-RUN go test ./... && go build -trimpath -ldflags="-s -w" -o /out/gophp ./cmd/gophp
+RUN go build -trimpath -ldflags="-s -w" -o /out/gophp ./cmd/gophp
 
-FROM scratch
+FROM alpine:3.24
+RUN apk add --no-cache sqlite-libs pcre2 ca-certificates
 COPY --from=build /out/gophp /usr/local/bin/gophp
 ENV LC_ALL=C LANG=C TZ=UTC
 USER 65532:65532

@@ -1,0 +1,3 @@
+command: python3 socket.bind(127.0.0.1:0) sandbox probe
+listen_error 1 Operation not permitted
+exit_code: 2

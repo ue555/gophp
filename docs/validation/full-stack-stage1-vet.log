@@ -1,0 +1,4 @@
+command: make vet
+go vet ./...
+
+exit_code: 0

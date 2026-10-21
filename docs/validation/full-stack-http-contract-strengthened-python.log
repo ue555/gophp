@@ -1,0 +1,2 @@
+command: PYTHONPYCACHEPREFIX=/tmp/gophp-pycache python3 -m py_compile research/laravel-api/verify.py research/laravel-api/verify-gophp.py
+exit_code: 0

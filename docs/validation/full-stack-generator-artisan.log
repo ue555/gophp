@@ -1,0 +1,42 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/artisan list
+stdout:
+
+stderr:
+Deprecated: Laravel\Prompts\text(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 13
+Deprecated: Laravel\Prompts\autocomplete(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 32
+Deprecated: Laravel\Prompts\number(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 50
+Deprecated: Laravel\Prompts\textarea(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 60
+Deprecated: Laravel\Prompts\password(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 78
+Deprecated: Laravel\Prompts\select(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 97
+Deprecated: Laravel\Prompts\multiselect(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 120
+Deprecated: Laravel\Prompts\confirm(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 139
+Deprecated: Laravel\Prompts\suggest(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 179
+Deprecated: Laravel\Prompts\search(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 202
+Deprecated: Laravel\Prompts\multisearch(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 224
+Deprecated: Laravel\Prompts\datatable(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 453
+Fatal error: Uncaught Error: Call to undefined method ReflectionClass::getConstructor() in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(933): Illuminate\Foundation\Application->build('Illuminate\\Foun...')
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\Foundation\Application->resolve('Illuminate\\Foun...', Array, false)
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(410): Illuminate\Foundation\Application->resolve('Illuminate\\Foun...', Array, false)
+#3 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(1115): Illuminate\Foundation\Application->{closure:/Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php:405}(Object(Illuminate\Foundation\Application), Array)
+#4 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(933): Illuminate\Foundation\Application->build(Object(Closure))
+#5 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array, true)
+#6 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#7 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\Foundation\Application->make('Illuminate\\Cont...', Array)
+#8 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1233): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#9 /Users/kouji/dev/php/research/laravel-api/artisan(8): Illuminate\Foundation\Application->handleCommand(Object(Symfony\Component\Console\Input\ArgvInput))
+#10 {main}
+
+Next Error: Call to undefined function Illuminate\Container\array_pop() in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php:1117
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(933): Illuminate\Foundation\Application->build(Object(Closure))
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array, true)
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(864): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#3 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\Foundation\Application->make('Illuminate\\Cont...', Array)
+#4 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1233): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#5 /Users/kouji/dev/php/research/laravel-api/artisan(8): Illuminate\Foundation\Application->handleCommand(Object(Symfony\Component\Console\Input\ArgvInput))
+#6 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 1117
+
+exit_code: 255

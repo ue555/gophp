@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_parameter_error_state.php
+HY000|HY000|25|column index out of range|00000|ready
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_parameter_error_state.php
+HY000|HY000|25|column index out of range|00000|ready
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_parameter_error_state.php
+HY000|HY000|25|column index out of range|00000|ready
+exit_code: 0

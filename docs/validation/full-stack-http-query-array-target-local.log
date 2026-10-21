@@ -1,0 +1,8 @@
+command: GOCACHE=$PWD/.cache/go-build go test ./cmd/gophp -run ^TestHTTPBridge(ParsesNestedQueryAndFormValues|PostRequiresPostMethodAndFormMediaType)$ -count=1 -v
+=== RUN   TestHTTPBridgeParsesNestedQueryAndFormValues
+--- PASS: TestHTTPBridgeParsesNestedQueryAndFormValues (0.00s)
+=== RUN   TestHTTPBridgePostRequiresPostMethodAndFormMediaType
+--- PASS: TestHTTPBridgePostRequiresPostMethodAndFormMediaType (0.00s)
+PASS
+ok  	example.com/gophp/cmd/gophp	0.269s
+exit_code: 0

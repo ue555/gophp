@@ -1,0 +1,18 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_fetch_attributes.php
+sqlite|0|string|7|string|2.5|empty-null|stringify|null-string|unsupported|2|1|IM001|0|null|snapshot|execute
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_oracle_nulls_version.php
+accepted|9
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_fetch_attributes.php
+sqlite|0|string|7|string|2.5|empty-null|stringify|null-string|unsupported|2|1|IM001|0|null|snapshot|execute
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_oracle_nulls_version.php
+rejected|0
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_fetch_attributes.php
+sqlite|0|string|7|string|2.5|empty-null|stringify|null-string|unsupported|2|1|IM001|0|null|snapshot|execute
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_oracle_nulls_version.php
+rejected|0
+exit_code: 0

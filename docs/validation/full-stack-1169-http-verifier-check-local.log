@@ -1,0 +1,16 @@
+command: python3 -B research/laravel-api/verify-gophp.py --help
+usage: verify-gophp.py [-h] [--version {8.3,8.4,8.5}]
+                       [--interpreter INTERPRETER] [--cli-only]
+                       [--stress-requests STRESS_REQUESTS]
+
+Exercise the fixed Laravel/API Platform contract through gophp --serve.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version {8.3,8.4,8.5}
+  --interpreter INTERPRETER
+  --cli-only            check migration, custom Artisan command and OpenAPI
+                        without binding an HTTP port
+  --stress-requests STRESS_REQUESTS
+                        number of sustained TCP GET requests (96-2000)
+exit_code: 0

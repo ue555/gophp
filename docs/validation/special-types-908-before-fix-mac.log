@@ -1,0 +1,23 @@
+== 8.3.35
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/special_parent_without_parent.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_final_static_85.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_unknown_hierarchy.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_variance_static_invalid.php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_forward_variance.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_namespace_forward.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+902 matched, 4 different, 2 errors; 908 fixtures
+== 8.4.26
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/special_parent_without_parent.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_final_static_85.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_unknown_hierarchy.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_variance_static_invalid.php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_forward_variance.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_namespace_forward.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+902 matched, 4 different, 2 errors; 908 fixtures
+== 8.5.11
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/special_parent_without_parent.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_unknown_hierarchy.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/special_variance_static_invalid.php
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_forward_variance.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+ERROR /Users/kouji/dev/php/tests/fixtures/success/special_namespace_forward.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+903 matched, 3 different, 2 errors; 908 fixtures

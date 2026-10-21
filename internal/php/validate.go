@@ -114,11 +114,48 @@ func validateExpression(x expr, write bool) *runtimeError {
 		return &runtimeError{expressionLine(x), "", "Can't use nullsafe operator in write context"}
 	}
 	switch node := x.(type) {
+	case variable:
+		if write && node.token.text == "GLOBALS" {
+			return &runtimeError{node.token.line, "", "$GLOBALS can only be modified using the $GLOBALS[$name] = $value syntax"}
+		}
+	case dynamicVariable:
+		return validateExpression(node.nameExpr, false)
+	case staticPropertyExpr:
+		if err := validateExpression(node.classExpr, false); err != nil {
+			return err
+		}
+		return validateExpression(node.nameExpr, false)
+	case staticCallExpr:
+		if err := validateExpression(node.classExpr, false); err != nil {
+			return err
+		}
+		// zend_compile_throw() yields a constant boolean as an expression.
+		// zend_compile_static_call() rejects a constant non-string method name
+		// while compiling, even if this call is never executed. Parentheses do
+		// not create another AST node; a ternary or a function call does.
+		if _, directThrow := node.nameExpr.(throwExpr); directThrow {
+			return &runtimeError{node.line, "", "Method name must be a string"}
+		}
+		if err := validateExpression(node.nameExpr, false); err != nil {
+			return err
+		}
+		for _, arg := range node.args {
+			if err := validateExpression(arg, false); err != nil {
+				return err
+			}
+		}
 	case unpackArgument:
 		return validateExpression(node.operand, false)
 	case namedArgument:
 		return validateExpression(node.operand, false)
 	case throwExpr:
+		return validateExpression(node.operand, false)
+	case yieldExpr:
+		if err := validateExpression(node.key, false); err != nil {
+			return err
+		}
+		return validateExpression(node.item, false)
+	case cloneExpr:
 		return validateExpression(node.operand, false)
 	case dynamicCall:
 		if err := validateExpression(node.callee, false); err != nil {
@@ -129,6 +166,8 @@ func validateExpression(x expr, write bool) *runtimeError {
 				return err
 			}
 		}
+	case firstClassCallable:
+		return validateExpression(node.callee, false)
 	case closureExpr:
 		return validateCallable(node.method)
 	case instanceofExpr:
@@ -158,6 +197,9 @@ func validateExpression(x expr, write bool) *runtimeError {
 		return validateExpression(assignment{node.target, node.source, node.line}, false)
 	case nullsafeExpr:
 		if err := validateExpression(node.base, false); err != nil {
+			return err
+		}
+		if err := validateExpression(node.nameExpr, false); err != nil {
 			return err
 		}
 		for _, arg := range node.args {
@@ -208,6 +250,12 @@ func validateExpression(x expr, write bool) *runtimeError {
 			}
 		}
 	case assignment:
+		if pattern, ok := node.target.(arrayLiteral); ok {
+			if err := validateDestructuring(pattern); err != nil {
+				return err
+			}
+			return validateExpression(node.source, false)
+		}
 		if v, ok := node.target.(variable); ok && v.token.text == "this" {
 			return &runtimeError{node.line, "", "Cannot re-assign $this"}
 		}
@@ -215,18 +263,37 @@ func validateExpression(x expr, write bool) *runtimeError {
 			return err
 		}
 		return validateExpression(node.source, false)
+	case referenceAssignment:
+		if target, ok := node.target.(variable); ok && target.token.text == "this" {
+			return &runtimeError{node.line, "", "Cannot re-assign $this"}
+		}
+		if source, ok := node.source.(variable); ok && source.token.text == "this" {
+			return &runtimeError{node.line, "", "Cannot re-assign $this"}
+		}
+		if err := validateExpression(node.target, true); err != nil {
+			return err
+		}
+		return validateExpression(node.source, true)
 	case offsetExpr:
 		if node.key == nil && !write {
 			return &runtimeError{node.line, "", "Cannot use [] for reading"}
 		}
-		if err := validateExpression(node.base, write); err != nil {
-			return err
+		if base, global := node.base.(variable); !global || base.token.text != "GLOBALS" {
+			if err := validateExpression(node.base, write); err != nil {
+				return err
+			}
 		}
 		return validateExpression(node.key, false)
 	case propertyExpr:
-		return validateExpression(node.base, write)
+		if err := validateExpression(node.base, write); err != nil {
+			return err
+		}
+		return validateExpression(node.nameExpr, false)
 	case methodCall:
 		if err := validateExpression(node.receiver, false); err != nil {
+			return err
+		}
+		if err := validateExpression(node.nameExpr, false); err != nil {
 			return err
 		}
 		for _, arg := range node.args {
@@ -251,6 +318,11 @@ func validateExpression(x expr, write bool) *runtimeError {
 	case unary:
 		return validateExpression(node.operand, false)
 	case arrayLiteral:
+		for _, entry := range node.elements {
+			if entry.value == nil {
+				return &runtimeError{node.line, "", "Cannot use empty array entries in arrays"}
+			}
+		}
 		// A fully literal array with an array key is rejected by PHP's
 		// constant-array compiler, even if the containing branch is skipped.
 		if literalArray(node) {
@@ -272,12 +344,34 @@ func validateExpression(x expr, write bool) *runtimeError {
 	return nil
 }
 
+func validateDestructuring(pattern arrayLiteral) *runtimeError {
+	for _, entry := range pattern.elements {
+		if err := validateExpression(entry.key, false); err != nil {
+			return err
+		}
+		if nested, ok := entry.value.(arrayLiteral); ok {
+			if err := validateDestructuring(nested); err != nil {
+				return err
+			}
+		} else if err := validateExpression(entry.value, true); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func constantInitializer(x expr) bool {
 	switch node := x.(type) {
-	case nil, literal, constantExpr:
+	case nil, literal, constantExpr, classNameExpr:
 		return true
 	case classConstantExpr:
 		return true
+	case propertyExpr:
+		// Enum case name/value may appear in class constant expressions.
+		// The receiver must itself be a class constant, not an arbitrary
+		// object construction or mutable variable.
+		_, caseConstant := node.base.(classConstantExpr)
+		return caseConstant && node.nameExpr == nil && (node.name == "name" || node.name == "value")
 	case unary:
 		return constantInitializer(node.operand)
 	case binary:
@@ -293,6 +387,29 @@ func constantInitializer(x expr) bool {
 		return true
 	}
 	return false
+}
+
+// PHP 8.1 permits new in parameter defaults but not property or class
+// constant defaults. Constructor arguments remain constant expressions.
+func parameterInitializer(x expr) bool {
+	if object, ok := x.(newObject); ok {
+		if object.anonymous != nil || object.classExpr != nil {
+			return false
+		}
+		for _, arg := range object.args {
+			if _, unpack := arg.(unpackArgument); unpack {
+				return false
+			}
+			if named, ok := arg.(namedArgument); ok {
+				arg = named.operand
+			}
+			if !parameterInitializer(arg) {
+				return false
+			}
+		}
+		return true
+	}
+	return constantInitializer(x)
 }
 
 func literalArray(node arrayLiteral) bool {
@@ -313,8 +430,26 @@ func literalArray(node arrayLiteral) bool {
 }
 
 func validateCallable(decl *methodDecl) *runtimeError {
+	if decl.returnsByReference {
+		if line := methodYieldFromLine(decl.body); line != 0 {
+			return &runtimeError{line, "", "Cannot use \"yield from\" inside a by-reference generator"}
+		}
+	}
+	if decl.returnType == "void" || decl.returnType == "never" {
+		if failure := validateReturnStatements(decl.body, decl.returnType, decl.arrow, decl.owner != nil && decl.version != PHP83); failure != nil {
+			return failure
+		}
+	}
 	for _, param := range decl.parameters {
-		if !constantInitializer(param.initial) {
+		if param.typeName != "" && param.initial != nil {
+			if _, ok := param.initial.(arrayLiteral); ok && !parseDeclaredType(param.typeName, param.nullable).has("array") && !parseDeclaredType(param.typeName, param.nullable).has("iterable") && !parseDeclaredType(param.typeName, param.nullable).has("mixed") {
+				return &runtimeError{param.line, "", "Cannot use array as default value for parameter $" + param.name + " of type " + declaredTypeText(param.typeName, param.nullable)}
+			}
+			if lit, ok := param.initial.(literal); ok && !literalFitsDeclaredType(lit.value, param.typeName, param.nullable) {
+				return &runtimeError{param.line, "", "Cannot use " + lit.value.typeName() + " as default value for parameter $" + param.name + " of type " + declaredTypeText(param.typeName, param.nullable)}
+			}
+		}
+		if !parameterInitializer(param.initial) {
 			return &runtimeError{param.line, "", "Constant expression contains invalid operations"}
 		}
 		if err := validateExpression(param.initial, false); err != nil {
@@ -322,4 +457,50 @@ func validateCallable(decl *methodDecl) *runtimeError {
 		}
 	}
 	return validateStatements(decl.body)
+}
+
+// A callable's return restriction is compiled even when the callable is never
+// called. Nested functions and closures own their return statements.
+func validateReturnStatements(body []statement, returnType string, arrow, method bool) *runtimeError {
+	for _, s := range body {
+		if s.kind == "return" {
+			if returnType == "void" && len(s.expressions) != 0 {
+				kind := "function"
+				if method {
+					kind = "method"
+				}
+				message := "A void " + kind + " must not return a value"
+				if literal, ok := s.expressions[0].(literal); ok && literal.value.kind == nullKind {
+					message += " (did you mean \"return;\" instead of \"return null;\"?)"
+				}
+				return &runtimeError{s.line, "", message}
+			}
+			if returnType == "never" && !arrow {
+				kind := "function"
+				if method {
+					kind = "method"
+				}
+				return &runtimeError{s.line, "", "A never-returning " + kind + " must not return"}
+			}
+		}
+		if s.function != nil || s.class != nil {
+			continue
+		}
+		for _, child := range [][]statement{s.thenBranch, s.elseBranch, s.finally} {
+			if failure := validateReturnStatements(child, returnType, false, method); failure != nil {
+				return failure
+			}
+		}
+		for _, clause := range s.catches {
+			if failure := validateReturnStatements(clause.body, returnType, false, method); failure != nil {
+				return failure
+			}
+		}
+		for _, clause := range s.cases {
+			if failure := validateReturnStatements(clause.body, returnType, false, method); failure != nil {
+				return failure
+			}
+		}
+	}
+	return nil
 }

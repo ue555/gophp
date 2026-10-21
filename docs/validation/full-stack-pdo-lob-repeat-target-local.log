@@ -1,0 +1,45 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_bind_stream_repeat.php
+510052|510052
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_bind_unknown_name.php
+registered|execute-error|ready
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_bind_stream_order.php
+|4142
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_statement_argument_validation.php
+zero|empty|param-type|execute-type|7|12
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_bind_value_types.php
+text:313233|integer:3432|integer:31|integer:31|null:|blob:410042|blob:|text|text|text|blob:430044|1|1|7265616479|integer
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_bind_stream_repeat.php
+510052|510052
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_bind_unknown_name.php
+registered|execute-error|ready
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_bind_stream_order.php
+|4142
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_statement_argument_validation.php
+zero|empty|param-type|execute-type|7|12
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_bind_value_types.php
+text:313233|integer:3432|integer:31|integer:31|null:|blob:410042|blob:|text|text|text|blob:430044|1|1|7265616479|integer
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_bind_stream_repeat.php
+510052|510052
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_bind_unknown_name.php
+registered|execute-error|ready
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_bind_stream_order.php
+|4142
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_statement_argument_validation.php
+zero|empty|param-type|execute-type|7|12
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_bind_value_types.php
+text:313233|integer:3432|integer:31|integer:31|null:|blob:410042|blob:|text|text|text|blob:430044|1|1|7265616479|integer
+exit_code: 0

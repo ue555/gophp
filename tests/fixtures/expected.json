@@ -3410,5 +3410,3044 @@
     "stdout": "object|global\nobject|static\nobject|static\n",
     "stderr": "",
     "exit": 0
+  },
+  "parser/callable_property.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Property InvalidCallableProperty::$callback cannot have type callable in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Property InvalidCallableProperty::$callback cannot have type callable in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/class_static_throw_direct.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 4\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 4\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_dynamic_class.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_function.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 5\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 5\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_if.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 5\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 5\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_method.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 6\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_parenthesized.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/class_static_throw_relative.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method name must be a string in {file} on line 5\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {file} on line 5\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_default_invalid.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use array as default value for parameter $value of type (DefaultA&DefaultB)|int in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use array as default value for parameter $value of type (DefaultA&DefaultB)|int in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type B&A is redundant with type A&B in {file} on line 2\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type B&A is redundant with type A&B in {file} on line 2\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_intersection_subset.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type A&B&C is redundant as it is more restrictive than type A&B in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type A&B&C is redundant as it is more restrictive than type A&B in {file} on line 6\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_intersection_subset_reordered.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type C&A&B is redundant as it is more restrictive than type B&A in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type C&A&B is redundant as it is more restrictive than type B&A in {file} on line 6\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_intersection_subset_reverse.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type A&B&C is redundant as it is more restrictive than type A&B in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type A&B&C is redundant as it is more restrictive than type A&B in {file} on line 6\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/dnf_ungrouped.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"|\", expecting variable in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/dynamic_property_nullsafe_write.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Can't use nullsafe operator in write context in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Can't use nullsafe operator in write context in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/enum_property.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Enum InvalidEnum cannot include properties in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Enum InvalidEnum cannot include properties in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/exception_final_override.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot override final method Exception::getTrace() in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot override final method Exception::getTrace() in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/generator_reference_yield_from.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use \"yield from\" inside a by-reference generator in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use \"yield from\" inside a by-reference generator in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/intersection_builtin.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type int cannot be part of an intersection type in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type int cannot be part of an intersection type in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "parser/intersection_nullable_shorthand.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"&\", expecting variable in {file} on line 2\n",
+    "exit": 255
+  },
+  "parser/never_intersection.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type never cannot be part of an intersection type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type never cannot be part of an intersection type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_method_return.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A never-returning method must not return in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: A never-returning function must not return in {file} on line 2\n",
+      "8.5": "Fatal error: A never-returning method must not return in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_nullable.php": {
+    "stdout": "",
+    "stderr": "Fatal error: never can only be used as a standalone type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: never can only be used as a standalone type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_parameter.php": {
+    "stdout": "",
+    "stderr": "Fatal error: never cannot be used as a parameter type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: never cannot be used as a parameter type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_return.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A never-returning function must not return in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: A never-returning function must not return in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_return_unselected.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A never-returning function must not return in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: A never-returning function must not return in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/never_union.php": {
+    "stdout": "",
+    "stderr": "Fatal error: never can only be used as a standalone type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: never can only be used as a standalone type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/php85_attribute_global_const.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"const\" in {file} on line 6\n",
+    "exit": 255,
+    "stdout_by_version": {
+      "8.5": "16384|4"
+    },
+    "stderr_by_version": {
+      "8.5": ""
+    },
+    "exit_by_version": {
+      "8.5": 0
+    }
+  },
+  "parser/promotion_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot redeclare InvalidPromotionDuplicate::$value in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare InvalidPromotionDuplicate::$value in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/promotion_implicit_nullable.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use null as default value for parameter $value of type int in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use null as default value for parameter $value of type int in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/promotion_outside_constructor.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot declare promoted property outside a constructor in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot declare promoted property outside a constructor in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/promotion_variadic.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot declare variadic promoted property in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot declare variadic promoted property in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_class_inheritance.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly class InvalidReadonlyChild cannot extend non-readonly class MutableParent in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly class InvalidReadonlyChild cannot extend non-readonly class MutableParent in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_class_unselected_invalid.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly property UnselectedReadonlyClass::$value must have type in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly property UnselectedReadonlyClass::$value must have type in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_class_untyped.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly property InvalidReadonlyClassUntyped::$value must have type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly property InvalidReadonlyClassUntyped::$value must have type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_parent_mutable_child.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Non-readonly class MutableDescendant cannot extend readonly class ReadonlyAncestor in {file} on line 5\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Non-readonly class MutableDescendant cannot extend readonly class ReadonlyAncestor in {file} on line 5\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_static.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Static property InvalidReadonlyStatic::$value cannot be readonly in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Static property InvalidReadonlyStatic::$value cannot be readonly in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_unselected_invalid.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly property UnselectedInvalidReadonly::$value must have type in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly property UnselectedInvalidReadonly::$value must have type in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/readonly_untyped.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly property InvalidReadonlyUntyped::$value must have type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly property InvalidReadonlyUntyped::$value must have type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/special_parent_without_parent.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use \"parent\" when current class scope has no parent in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use \"parent\" when current class scope has no parent in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/typed_constant_covariance.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type of TypedConstantInvalidChild::VALUE must be compatible with TypedConstantParent::VALUE of type int in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type of TypedConstantInvalidChild::VALUE must be compatible with TypedConstantParent::VALUE of type int in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/typed_constant_invalid_value.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use array as value for class constant InvalidTypedConstant::VALUE of type string in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use array as value for class constant InvalidTypedConstant::VALUE of type string in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/typed_property_invalid_default.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use string as default value for property InvalidTypedDefault::$value of type int in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use string as default value for property InvalidTypedDefault::$value of type int in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/typed_property_invariant.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type of TypedInvariantChild::$value must be int (as in class TypedInvariantParent) in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type of TypedInvariantChild::$value must be int (as in class TypedInvariantParent) in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/typed_property_trait_conflict.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: TypedTraitConflictUser and TypedTraitConflict define the same property ($value) in the composition of TypedTraitConflictUser. However, the definition differs and is considered incompatible. Class was composed in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: TypedTraitConflictUser and TypedTraitConflict define the same property ($value) in the composition of TypedTraitConflictUser. However, the definition differs and is considered incompatible. Class was composed in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_alias_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Duplicate type UnionNamespace\\Base is redundant in {file} on line 6\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Duplicate type UnionNamespace\\Base is redundant in {file} on line 6\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_bool_true.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Duplicate type true is redundant in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Duplicate type true is redundant in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_default_invalid.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Cannot use array as default value for parameter $value of type string|int in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot use array as default value for parameter $value of type string|int in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_duplicate.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Duplicate type int is redundant in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Duplicate type int is redundant in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_mixed.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type mixed can only be used as a standalone type in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type mixed can only be used as a standalone type in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/union_nullable_syntax.php": {
+    "stdout": "",
+    "stderr": "Parse error: syntax error, unexpected token \"|\", expecting variable in {file} on line 3\n",
+    "exit": 255
+  },
+  "parser/void_arrow.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A void function must not return a value in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: A void function must not return a value in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_constructor.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Method Invalid::__construct() cannot declare a return type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method Invalid::__construct() cannot declare a return type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_intersection.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Type void cannot be part of an intersection type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Type void cannot be part of an intersection type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_method_return.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A void method must not return a value in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: A void function must not return a value in {file} on line 2\n",
+      "8.5": "Fatal error: A void method must not return a value in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_nullable.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Void can only be used as a standalone type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Void can only be used as a standalone type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_parameter.php": {
+    "stdout": "",
+    "stderr": "Fatal error: void cannot be used as a parameter type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: void cannot be used as a parameter type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_return_null.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A void function must not return a value (did you mean \"return;\" instead of \"return null;\"?) in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: A void function must not return a value (did you mean \"return;\" instead of \"return null;\"?) in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_return_value.php": {
+    "stdout": "",
+    "stderr": "Fatal error: A void function must not return a value in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: A void function must not return a value in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "parser/void_union.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Void can only be used as a standalone type in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Void can only be used as a standalone type in {file} on line 2\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/callable_private_first_class.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught Error: Call to private method HiddenCallable::run() from global scope in {file}:6\nStack trace:\n#0 {main}\n  thrown in {file} on line 6\n",
+    "exit": 255
+  },
+  "runtime/class_dynamic_static_missing_method.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined method DynamicMissing::gone() in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/class_dynamic_static_private.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot access private property DynamicPrivate::$secret in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/class_static_throw_include.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Method name must be a string in {fixtures}/support/class_static_throw.inc on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Method name must be a string in {fixtures}/support/class_static_throw.inc on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/dnf_partial_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: dnfNeeds(): Argument #1 ($x) must be of type (PartialDnfA&PartialDnfB)|int, OnlyA given, called in {file} on line 6 and defined in {file}:5\nStack trace:\n#0 {file}(6): dnfNeeds(Object(OnlyA))\n#1 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255
+  },
+  "runtime/dnf_return_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: invalidReturn(): Return value must be of type (ReturnA&ReturnB)|int, array returned in {file}:4\nStack trace:\n#0 {file}(5): invalidReturn()\n#1 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/dynamic_property_creation.php": {
+    "stdout": "12\n",
+    "stderr": "Deprecated: Creation of dynamic property CreatedDynamicBox::$extra is deprecated in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/dynamic_property_private.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Cannot access private property PrivateDynamicBox::$value in {file}:5\nStack trace:\n#0 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255
+  },
+  "runtime/dynamic_property_uninitialized.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Error: Typed property UninitializedDynamicBox::$value must not be accessed before initialization in {file}:5\nStack trace:\n#0 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255
+  },
+  "runtime/enum_backed_custom_from.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Cannot redeclare BackedChoice::from() in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare BackedChoice::from() in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/enum_new.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught Error: Cannot instantiate enum Card in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/enum_unit_custom_cases.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Cannot redeclare UnitChoice::cases() in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Cannot redeclare UnitChoice::cases() in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/error_handler_false.php": {
+    "stdout": "handled:2|after\n",
+    "stderr": "Warning: Undefined variable $missing in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/error_handler_invalid_callable.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, function \"notCallable\" not found or invalid function name in {file}:2\nStack trace:\n#0 {file}(2): set_error_handler('notCallable')\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/error_handler_invalid_level.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ValueError: trigger_error(): Argument #2 ($error_level) must be one of E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE, or E_USER_DEPRECATED in {file}:2\nStack trace:\n#0 {file}(2): trigger_error('not user level', 2)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/error_handler_nested_warning.php": {
+    "stdout": "handled|done\n",
+    "stderr": "Warning: Undefined variable $inside in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/error_handler_user_fatal.php": {
+    "stdout": "before|",
+    "stderr": "Deprecated: Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead in {file} on line 4\nFatal error: fatal in {file} on line 4\n",
+    "stderr_by_version": {
+      "8.3": "Fatal error: fatal in {file} on line 4\n",
+      "8.5": "Deprecated: Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead in {file} on line 4\nFatal error: fatal in {file} on line 4\nStack trace:\n#0 {file}(4): trigger_error('fatal', 256)\n#1 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/exception_uncaught_chain.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Uncaught Exception: first in {file}:2\nStack trace:\n#0 {main}\n\nNext Error: second in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/exit_status.php": {
+    "stdout": "",
+    "stderr": "",
+    "exit": 3
+  },
+  "runtime/include_integration_declaration.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Cannot redeclare function integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Cannot redeclare integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\n",
+      "8.5": "Fatal error: Cannot redeclare function integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/include_integration_fatal_finally.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Cannot redeclare function integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Cannot redeclare integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\n",
+      "8.5": "Fatal error: Cannot redeclare function integrationDuplicate() (previously declared in {fixtures}/support/include_integration_duplicate.inc:2) in {fixtures}/support/include_integration_duplicate.inc on line 3\nStack trace:\n#0 {file}(11): loadDuplicate()\n#1 {main}\n"
+    }
+  },
+  "runtime/include_integration_missing.php": {
+    "stdout": "no|no|2\n",
+    "stderr": "Warning: include_once({fixtures}/runtime/../support/absent-integration.inc): Failed to open stream: No such file or directory in {file} on line 8\nWarning: include_once(): Failed opening '{fixtures}/runtime/../support/absent-integration.inc' for inclusion (include_path='.:/usr/local/lib/php') in {file} on line 8\nWarning: include_once({fixtures}/runtime/../support/absent-integration.inc): Failed to open stream: No such file or directory in {file} on line 9\nWarning: include_once(): Failed opening '{fixtures}/runtime/../support/absent-integration.inc' for inclusion (include_path='.:/usr/local/lib/php') in {file} on line 9\n",
+    "exit": 0
+  },
+  "runtime/include_integration_require_catch.php": {
+    "stdout": "caught1|finally1|caught2|finally2|2\n",
+    "stderr": "Warning: require_once({fixtures}/runtime/../support/absent-integration.inc): Failed to open stream: No such file or directory in {file} on line 9\nWarning: require_once({fixtures}/runtime/../support/absent-integration.inc): Failed to open stream: No such file or directory in {file} on line 16\n",
+    "exit": 0
+  },
+  "runtime/include_integration_strict_restore.php": {
+    "stdout": "strict child|3\n",
+    "stderr": "Deprecated: Implicit conversion from float 3.5 to int loses precision in {file} on line 3\n",
+    "exit": 0
+  },
+  "runtime/include_integration_uncaught_trace.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught Exception: from child in {fixtures}/support/include_integration_throw.inc:3\nStack trace:\n#0 {file}(4): require()\n#1 {file}(7): outerCall()\n#2 {main}\n  thrown in {fixtures}/support/include_integration_throw.inc on line 3\n",
+    "exit": 255
+  },
+  "runtime/include_path_get_extra.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: get_include_path() expects exactly 0 arguments, 1 given in {file}:2\nStack trace:\n#0 {file}(2): get_include_path(1)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/include_path_invalid_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: set_include_path(): Argument #1 ($include_path) must be of type string, array given in {file}:2\nStack trace:\n#0 {file}(2): set_include_path(Array)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/include_path_restore_removed.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught Error: Call to undefined function restore_include_path() in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/include_path_warning_false.php": {
+    "stdout": "2|2|missing\n",
+    "stderr": "Warning: include(absent-path.inc): Failed to open stream: No such file or directory in {file} on line 5\nWarning: include(): Failed opening 'absent-path.inc' for inclusion (include_path='{fixtures}/runtime/../support/include_path/first') in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/interface_abstract_child_missing.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Class ConcreteLater contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (RequiredLater::run) in {file} on line 5\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Class ConcreteLater contains 1 abstract method and must therefore be declared abstract or implement the remaining method (RequiredLater::run) in {file} on line 5\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/intersection_implicit_nullable.php": {
+    "stdout": "NULL\n",
+    "stderr": "Deprecated: implicitBoth(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in {file} on line 4\n",
+    "stderr_by_version": {
+      "8.3": ""
+    },
+    "exit": 0
+  },
+  "runtime/intersection_partial_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: requireBoth(): Argument #1 ($x) must be of type PartialA&PartialB, PartialOne given, called in {file} on line 6 and defined in {file}:5\nStack trace:\n#0 {file}(6): requireBoth(Object(PartialOne))\n#1 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255
+  },
+  "runtime/never_implicit.php": {
+    "stdout": "inside\n",
+    "stderr": "Fatal error: Uncaught TypeError: broken(): never-returning function must not implicitly return in {file}:2\nStack trace:\n#0 {file}(3): broken()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/never_method_implicit.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: Worker::stop(): never-returning method must not implicitly return in {file}:2\nStack trace:\n#0 {file}(3): Worker->stop()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Uncaught TypeError: Worker::stop(): never-returning function must not implicitly return in {file}:2\nStack trace:\n#0 {file}(3): Worker->stop()\n#1 {main}\n  thrown in {file} on line 2\n"
+    }
+  },
+  "runtime/never_variance_widen.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of ChildStop::stop(): void must be compatible with ParentStop::stop(): never in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of ChildStop::stop(): void must be compatible with ParentStop::stop(): never in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/readonly_class_trait_property.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Readonly class ReadonlyTraitUser cannot use trait with a non-readonly property ReadonlyTraitField::$value in {file} on line 6\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Readonly class ReadonlyTraitUser cannot use trait with a non-readonly property ReadonlyTraitField::$value in {file} on line 6\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/readonly_private_child_scope.php": {
+    "stdout": "set\n",
+    "stderr": "Deprecated: Creation of dynamic property PrivateReadonlyChild::$value is deprecated in {file} on line 4\n",
+    "exit": 0
+  },
+  "runtime/reference_typed_warning.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught Exception: stop in {file}:5\nStack trace:\n#0 {file}(6): {closure:{file}:5}(8192, 'Implicit conver...', '{trace_file}', 6)\n#1 {main}\n\nNext TypeError: Cannot assign float to reference held by property TypedWarning::$value of type int in {file}:6\nStack trace:\n#0 {main}\n  thrown in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.3": "Fatal error: Uncaught Exception: stop in {file}:5\nStack trace:\n#0 {file}(6): {closure}(8192, 'Implicit conver...', '{trace_file}', 6)\n#1 {main}\n\nNext TypeError: Cannot assign float to reference held by property TypedWarning::$value of type int in {file}:6\nStack trace:\n#0 {main}\n  thrown in {file} on line 6\n"
+    },
+    "exit": 255
+  },
+  "runtime/special_cycle.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Uncaught Error: Class \"SecondCycle\" not found in {file}:3\nStack trace:\n#0 {main}\n  thrown in {file} on line 3\n",
+    "exit": 255
+  },
+  "runtime/special_final_static_85.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of FinalStaticImplementation::make(): FinalStaticImplementation must be compatible with FinalStaticContract::make(): static in {file} on line 4\n",
+    "exit": 255,
+    "stdout_by_version": {
+      "8.5": "final"
+    },
+    "stderr_by_version": {
+      "8.5": ""
+    },
+    "exit_by_version": {
+      "8.5": 0
+    }
+  },
+  "runtime/special_forward_variance.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Could not check compatibility between ForwardImplementation::make(): ForwardDerived and ForwardContract::make(): ForwardBase, because class ForwardDerived is not available in {file} on line 3\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Could not check compatibility between ForwardImplementation::make(): ForwardDerived and ForwardContract::make(): ForwardBase, because class ForwardDerived is not available in {file} on line 3\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/special_namespace_forward.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Could not check compatibility between SpecialTypes\\Implementation::make(): SpecialTypes\\Leaf and SpecialTypes\\Contract::make(): SpecialTypes\\Root, because class SpecialTypes\\Leaf is not available in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Could not check compatibility between SpecialTypes\\Implementation::make(): SpecialTypes\\Leaf and SpecialTypes\\Contract::make(): SpecialTypes\\Root, because class SpecialTypes\\Leaf is not available in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/special_unknown_hierarchy.php": {
+    "stdout": "before",
+    "stderr": "Fatal error: Could not check compatibility between MissingImplementation::make(): MissingDerived and MissingContract::make(): MissingBase, because class MissingDerived is not available in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Could not check compatibility between MissingImplementation::make(): MissingDerived and MissingContract::make(): MissingBase, because class MissingDerived is not available in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/special_variance_static_invalid.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of StaticImplementation::make(): StaticImplementation must be compatible with StaticContract::make(): static in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of StaticImplementation::make(): StaticImplementation must be compatible with StaticContract::make(): static in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/trait_alias_collision.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Trait method AliasSecond::second has not been applied as AliasCollision::same, because of collision with AliasFirst::same in {file} on line 6\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Trait method AliasSecond::second has not been applied as AliasCollision::same, because of collision with AliasFirst::same in {file} on line 6\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/typed_property_uninitialized.php": {
+    "stdout": "before|",
+    "stderr": "Fatal error: Uncaught Error: Typed property TypedUninitialized::$value must not be accessed before initialization in {file}:4\nStack trace:\n#0 {main}\n  thrown in {file} on line 4\n",
+    "exit": 255
+  },
+  "runtime/union_argument_reversed_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: unionReversed(): Argument #1 ($value) must be of type string|int, array given, called in {file} on line 3 and defined in {file}:2\nStack trace:\n#0 {file}(3): unionReversed(Array)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/union_argument_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: unionTake(): Argument #1 ($value) must be of type string|int, array given, called in {file} on line 3 and defined in {file}:2\nStack trace:\n#0 {file}(3): unionTake(Array)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/union_implicit_nullable.php": {
+    "stdout": "NULL\n",
+    "stderr": "Deprecated: implicitUnion(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in {file} on line 2\n",
+    "exit": 0,
+    "stderr_by_version": {
+      "8.3": ""
+    }
+  },
+  "runtime/union_method_signature_order.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of UnionChild::take(array $value): array must be compatible with UnionParent::take(string|int $value): string|int in {file} on line 3\n",
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of UnionChild::take(array $value): array must be compatible with UnionParent::take(string|int $value): string|int in {file} on line 3\nStack trace:\n#0 {main}\n"
+    },
+    "exit": 255
+  },
+  "runtime/union_nullable_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: unionNullable(): Argument #1 ($value) must be of type string|int|null, array given, called in {file} on line 3 and defined in {file}:2\nStack trace:\n#0 {file}(3): unionNullable(Array)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/union_return_type.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught TypeError: unionResult(): Return value must be of type string|int, array returned in {file}:2\nStack trace:\n#0 {file}(3): unionResult()\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "runtime/variance_dnf_narrow.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Declaration of VarianceErrorChild::read(VarianceErrorA&VarianceErrorB $value): VarianceErrorA must be compatible with VarianceErrorContract::read(VarianceErrorA $value): VarianceErrorA in {file} on line 7\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of VarianceErrorChild::read(VarianceErrorA&VarianceErrorB $value): VarianceErrorA must be compatible with VarianceErrorContract::read(VarianceErrorA $value): VarianceErrorA in {file} on line 7\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_float_param.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of FloatParamChild::value(float $number) must be compatible with FloatParamParent::value(int $number) in {file} on line 7\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of FloatParamChild::value(float $number) must be compatible with FloatParamParent::value(int $number) in {file} on line 7\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_float_return.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of FloatReturnChild::value(): int must be compatible with FloatReturnParent::value(): float in {file} on line 7\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of FloatReturnChild::value(): int must be compatible with FloatReturnParent::value(): float in {file} on line 7\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_float_union_param.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of FloatUnionParamChild::value(string|float $number) must be compatible with FloatUnionParamParent::value(string|int $number) in {file} on line 7\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of FloatUnionParamChild::value(string|float $number) must be compatible with FloatUnionParamParent::value(string|int $number) in {file} on line 7\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_float_union_return.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of FloatUnionReturnChild::value(): string|int must be compatible with FloatUnionReturnParent::value(): string|float in {file} on line 7\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of FloatUnionReturnChild::value(): string|int must be compatible with FloatUnionReturnParent::value(): string|float in {file} on line 7\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_param_narrow.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Declaration of VarianceNarrowParam::take(int $value) must be compatible with VarianceWideParam::take(string|int $value) in {file} on line 5\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of VarianceNarrowParam::take(int $value) must be compatible with VarianceWideParam::take(string|int $value) in {file} on line 5\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/variance_return_wide.php": {
+    "stdout": "before\n",
+    "stderr": "Fatal error: Declaration of VarianceWideReturn::make(): string|int|bool must be compatible with VarianceNarrowReturn::make(): string|int in {file} on line 5\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of VarianceWideReturn::make(): string|int|bool must be compatible with VarianceNarrowReturn::make(): string|int in {file} on line 5\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "runtime/void_variance_mixed.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Declaration of ChildResult::result(): void must be compatible with ParentResult::result(): mixed in {file} on line 4\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.5": "Fatal error: Declaration of ChildResult::result(): void must be compatible with ParentResult::result(): mixed in {file} on line 4\nStack trace:\n#0 {main}\n"
+    }
+  },
+  "success/anonymous_class_constructor_trait.php": {
+    "stdout": "4|8|same",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/append_iterator_basic.php": {
+    "stdout": "0:a=1;2:a=2;2:0=3;|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/append_iterator_empty.php": {
+    "stdout": "none|4|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/append_iterator_invalid.php": {
+    "stdout": "rejected|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_access_basic.php": {
+    "stdout": "5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_cast_basic.php": {
+    "stdout": "one|0|box",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_destructuring_basic.php": {
+    "stdout": "10|20|30|40|50",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_paginator_vendor.php": {
+    "stdout": "1:20;|1|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_unpack.php": {
+    "stdout": "1|2|new",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_walk_named_reference.php": {
+    "stdout": "ok|4,5|{\"outer\":{\"x\":6},\"y\":7}",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/artisan_core_primitives.php": {
+    "stdout": "b|a|3|ArtisanProbeParent|ArtisanProbeTrait|a:txt|restored",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/autoload_basic.php": {
+    "stdout": "7|removed",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/bootstrap_array_helpers.php": {
+    "stdout": "x,y|tmp|/tmp|10|20|30|30",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_collection_vendor.php": {
+    "stdout": "xyz|x,y,z.|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_array_access.php": {
+    "stdout": "yes|10|2:20|no|2:Undefined array key \"missing\"|null",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_array_copy.php": {
+    "stdout": "10|20|no|no|20|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_basic.php": {
+    "stdout": "a=x:more;b=y:more;c=z:end;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_cache.php": {
+    "stdout": "1:2:|2|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_call_order.php": {
+    "stdout": "rvckn|10:0:vmorevckn|11:1:vend",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_flags_transition.php": {
+    "stdout": "65792:1|65536|0|b:1|end:256",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_lookahead.php": {
+    "stdout": "a|b|more|1|b|end|2|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_private_flags.php": {
+    "stdout": "0:end|0|65536:valid|65536|66048|512",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/caching_iterator_reject.php": {
+    "stdout": "type|cache|flags",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_basic_forms.php": {
+    "stdout": "6|10|9|14|1110",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_builtin_named_errors.php": {
+    "stdout": "Unknown named parameter $unknown|Named parameter $callback overwrites previous argument",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_builtin_named_order.php": {
+    "stdout": "5|5|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_capture_arguments.php": {
+    "stdout": "6|7|10|12|XY",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_first_class.php": {
+    "stdout": "6|5|6|9|2|0|called|1|1|3|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_handler.php": {
+    "stdout": "1024:handled|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_include_builtin.php": {
+    "stdout": "3|12|23|14|25",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_late_binding.php": {
+    "stdout": "CallableChild|CallableChild|CallableChild",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_namespace.php": {
+    "stdout": "16|2|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_rejection.php": {
+    "stdout": "type|closure-type|from-type|0|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_scope.php": {
+    "stdout": "private|protected|00",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_static_closure.php": {
+    "stdout": "bound|static",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_strict_include.php": {
+    "stdout": "strict|12|23",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/callable_types.php": {
+    "stdout": "8|10|12|1|object|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_binding.php": {
+    "stdout": "DynamicChild|DynamicChild|DynamicChild|DynamicChild|DynamicGrand\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_call.php": {
+    "stdout": "DynamicCallChild:a:default:0|DynamicCallChild:a:b:0|DynamicCallChild:x:y:0|DynamicCallChild:z:default:0|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_errors.php": {
+    "stdout": "class|method|static|method-type\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_keywords.php": {
+    "stdout": "missing|7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_order.php": {
+    "stdout": "class|member|arg|7|class|property|rhs|3|class|caught\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_property.php": {
+    "stdout": "10|10|13|13|yes|set|14|1|14|13|13|5|5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_trait.php": {
+    "stdout": "DynamicStaticOwner:ok|DynamicStaticOwner:yes\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_unselected.php": {
+    "stdout": "1|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_dynamic_static_visibility.php": {
+    "stdout": "base:base-method|child|2|2|private|protected\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_exists_basic.php": {
+    "stdout": "c|i|t|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_static_throw_nested.php": {
+    "stdout": "run|run|caught\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/cli_arguments_basic.php": {
+    "stdout": "1|1|1|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/clone_shallow.php": {
+    "stdout": "1|2|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/closure_bind_basic.php": {
+    "stdout": "3|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/countable_basic.php": {
+    "stdout": "1|2|3|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/debug_backtrace_caller_object.php": {
+    "stdout": "2|inspect|same|absent|absent",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/debug_backtrace_declaring_class.php": {
+    "stdout": "TraceOrigin|same|file,line,function,class,object,type,args",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dirname_basic.php": {
+    "stdout": "/one/two|/one",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_branches.php": {
+    "stdout": "object|string|NULL\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_call_forms.php": {
+    "stdout": "object|integer|object|2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_cross_file_strict.php": {
+    "stdout": "TypeError|integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_inheritance.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_intersection_non_subset.php": {
+    "stdout": "object|object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dnf_namespace_alias.php": {
+    "stdout": "object|NULL\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_instance_method.php": {
+    "stdout": "6|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_basic.php": {
+    "stdout": "1|1|2|23|24|24|25|5,8\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_handler_exception.php": {
+    "stdout": "handled|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_integer_name.php": {
+    "stdout": "seven|seven\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_name_exception.php": {
+    "stdout": "name|stop|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_nullsafe.php": {
+    "stdout": "fallback|no|0|8|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_nullsafe_chain.php": {
+    "stdout": "fallback|0|6|2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_order.php": {
+    "stdout": "receiver|member|rhs|5|5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_protected.php": {
+    "stdout": "9|no|Error\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_quiet.php": {
+    "stdout": "no|empty|missing|6|6|no|missing\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_receiver_change.php": {
+    "stdout": "1|9|1|10\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_strict.php": {
+    "stdout": "TypeError|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_unselected.php": {
+    "stdout": "3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_unset_array.php": {
+    "stdout": "no|1,3|5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/dynamic_property_visibility.php": {
+    "stdout": "2|3|4|7\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/eloquent_cursor_failure_vendor.php": {
+    "stdout": "created|PDOException|formatted",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/eloquent_cursor_vendor.php": {
+    "stdout": "created|2:beta|wrapped|1:alpha|2:beta|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/eloquent_recursion_cache_vendor.php": {
+    "stdout": "guard|later|guard|2:1|caught|caught",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/eloquent_unique_constraint_vendor.php": {
+    "stdout": "23000|PDOException|23000",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_backed_trait_tryfrom.php": {
+    "stdout": "beforeafter",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_cases_basic.php": {
+    "stdout": "2|North|same|alias|distinct|looseDistinct|High|missing|r",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_caught_value_error.php": {
+    "stdout": "caught|finally",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_namespace_include.php": {
+    "stdout": "Ready|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_serialization.php": {
+    "stdout": "E:17:\"SerialState:Ready\";|same|same|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_type_methods.php": {
+    "stdout": "same|interface|Go|o|Stop",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_unit_custom_from.php": {
+    "stdout": "A|A|null",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/enum_unserialize_failure.php": {
+    "stdout": "false|false|false|false|false|10|caught",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_callables.php": {
+    "stdout": "static:1024:one|object:1024:two|closure:1024:three|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_constants.php": {
+    "stdout": "30719|2|8|8192|256|512|1024|16384\n",
+    "stdout_by_version": {
+      "8.3": "32767|2|8|8192|256|512|1024|16384\n"
+    },
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_deprecation_throw.php": {
+    "stdout": "deprecated\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_include.php": {
+    "stdout": "2|same|7|2|same|7|2|same|9|caught|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_include_throw.php": {
+    "stdout": "stop|continued\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_long_message.php": {
+    "stdout": "1100|1100\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_mask.php": {
+    "stdout": "1024:notice|2:Undefined variable $absent|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_named.php": {
+    "stdout": "512:named|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_null_return.php": {
+    "stdout": "done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_reconfigure.php": {
+    "stdout": "first|second|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_register_inside.php": {
+    "stdout": "null|new:nested|new:later|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_register_null_inside.php": {
+    "stdout": "first|null|second|null|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_stack.php": {
+    "stdout": "null|first|second:1024:one|first:512:two|first:1024:three|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_throw.php": {
+    "stdout": "Undefined variable $missing|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_trigger.php": {
+    "stdout": "1024:n|true|512:w|16384:d|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_unselected.php": {
+    "stdout": "ok\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_handler_user_error.php": {
+    "stdout": "8192:Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead|256:handled|continued\n",
+    "stdout_by_version": {
+      "8.3": "256:handled|continued\n"
+    },
+    "stderr": "",
+    "exit": 0
+  },
+  "success/error_suppression.php": {
+    "stdout": "handler|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_constructor_strict.php": {
+    "stdout": "Exception::__construct(): Argument #2 ($code) must be of type int, string given\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_finally_chain.php": {
+    "stdout": "second|first|end\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_finally_existing.php": {
+    "stdout": "second|first|active\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_finally_nested_chain.php": {
+    "stdout": "third|second|first\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_finally_type_error.php": {
+    "stdout": "prior|0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_parent_accessors.php": {
+    "stdout": "hello|same|0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_previous_chain.php": {
+    "stdout": "null|same|same|first|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_previous_type.php": {
+    "stdout": "Exception::__construct(): Argument #3 ($previous) must be of type ?Throwable, stdClass given\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_state_separation.php": {
+    "stdout": "clear|two\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_call_kinds.php": {
+    "stdout": "instance|TraceCalls|->|2\nstaticCall|TraceCalls|::|3\n{closure:{file}:9}|-|-|4\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "instance|TraceCalls|->|2\nstaticCall|TraceCalls|::|3\n{closure}|-|-|4\n"
+    }
+  },
+  "success/exception_trace_creation.php": {
+    "stdout": "2|1|makeError|array|same|2|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_include.php": {
+    "stdout": "2|exceptionTraceFactory|require|3|included\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_named_default.php": {
+    "stdout": "2|1|9\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_values.php": {
+    "stdout": "4|same|2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_variadic.php": {
+    "stdout": "2|10|20\n1|30\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_variadic_appended.php": {
+    "stdout": "2|10|20\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_variadic_changed.php": {
+    "stdout": "2|10|20\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_trace_variadic_unset.php": {
+    "stdout": "2|10|20\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exception_user_parent.php": {
+    "stdout": "child|7|same\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/exit_finally.php": {
+    "stdout": "before|stop",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/extension_loaded_unknown.php": {
+    "stdout": "missing",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/extract_refs_basic.php": {
+    "stdout": "2|9|1|7|1|6|8|1|12|100",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/extract_refs_source_once.php": {
+    "stdout": "2|1|9|7|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/finder_multi_vendor.php": {
+    "stdout": "3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_handler_throw.php": {
+    "stdout": "stop|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_object_dynamic.php": {
+    "stdout": "first:integer;second:array;|2|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_object_private_slots.php": {
+    "stdout": "|same:parent;|same:child;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_object_reference.php": {
+    "stdout": "3|b|c",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/foreach_object_visibility.php": {
+    "stdout": "open:a;|open:a;family:b;hidden:c;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/full_stack_builtins.php": {
+    "stdout": "y|0,1|1,2,3|FooBar|2:2:12|aZc|a9993e364706816aba3e25717850c26c9cd0d89d|9555e8555c62dcfd",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/function_exists_basic.php": {
+    "stdout": "yes|builtin|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_aggregate.php": {
+    "stdout": "1|2|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_array_config.php": {
+    "stdout": "a,b|1a|2b|a|b",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_console_helpers.php": {
+    "stdout": "Second|First|3|90|xxx|file",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_console_regex.php": {
+    "stdout": "2|a|22|b=22:4|one|two|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_control_methods.php": {
+    "stdout": "created|start|valid|first:10|not-returned|middle|second:20|rewind-error|end|closed|NULL|30",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate.php": {
+    "stdout": "4:four|0:8|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate_aggregate.php": {
+    "stdout": "|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate_iterator.php": {
+    "stdout": "2:two|4:four|0:after|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate_send.php": {
+    "stdout": "sent|7|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate_throw.php": {
+    "stdout": "caught|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_filter_iterator.php": {
+    "stdout": "1:2|3:4|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_finally.php": {
+    "stdout": "1|2|finally|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_foreach_expression.php": {
+    "stdout": "1|2|12",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_get_return_lazy.php": {
+    "stdout": "entered|pending|first|still-pending|resumed|done|empty-entered|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_inherited_private_write.php": {
+    "stdout": "3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_initial_methods.php": {
+    "stdout": "begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_lazy_iteration.php": {
+    "stdout": "created|start|first:2|middle|0:3|end|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_reference_array.php": {
+    "stdout": "11|12",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_reference_basic.php": {
+    "stdout": "2|1|0|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_reference_nested_delegate.php": {
+    "stdout": "3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_reference_reject.php": {
+    "stdout": "caught",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_reference_value_read.php": {
+    "stdout": "1|integer|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_send_basic.php": {
+    "stdout": "hello|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_spl_directory.php": {
+    "stdout": "1|1|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_stream_chunk.php": {
+    "stdout": "4096|1024|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_throw_basic.php": {
+    "stdout": "caught",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_to_array.php": {
+    "stdout": "2|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_unicode_escape.php": {
+    "stdout": "yes|N😀",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/get_debug_type_basic.php": {
+    "stdout": "null|bool|int|float|string|array|DebugSample|Closure|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/globals_scope.php": {
+    "stdout": "2|2|present",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/goto_retry_basic.php": {
+    "stdout": "2",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/hash_xxh3_long.php": {
+    "stdout": "16:short|16:same|16:same|16:same|16:same|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/hex_literal.php": {
+    "stdout": "16|475648",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_anonymous_class_reinclude.php": {
+    "stdout": "base|base|different",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_array_walk_recursive.php": {
+    "stdout": "{\"one\":{\"a\":\"Aa\",\"b\":[\"B0\"]},\"two\":\"Ctwo\"}",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_arrayobject_cache.php": {
+    "stdout": "1|Book",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_attribute_di.php": {
+    "stdout": "InjectName|answer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_core_primitives.php": {
+    "stdout": "a,b|1,4,4|1|6|yes|x,y|7|a+b|Thu, 01 Jan 1970 00:00:00",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_destructure_null.php": {
+    "stdout": "null",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_dom_termwind_subset.php": {
+    "stdout": "body|2|AB|notice|B|<span>A</span>",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_dynamic_new_and_udiff.php": {
+    "stdout": "3|5|other",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_hexdec_basic.php": {
+    "stdout": "255|11259375",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_html_string_mb.php": {
+    "stdout": "A &amp; B|A & B|Hello W...|日本|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_inline_template.php": {
+    "stdout": "ABCD",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_number_format.php": {
+    "stdout": "1,235|1 234,56|1,200|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_openapi_primitives.php": {
+    "stdout": "alias|1|a,z|a,z|cba|41",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_output_buffer.php": {
+    "stdout": "a|bc|d",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_phpversion.php": {
+    "stdout": "8.4.26|missing",
+    "stdout_by_version": {
+      "8.3": "8.3.35|missing",
+      "8.5": "8.5.11|missing"
+    },
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_preg_optional_offset.php": {
+    "stdout": "[[[\"ac\",0],[\"\",-1],[\"c\",1]],[[\"abc\",3],[\"b\",4],[\"c\",5]]]",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_process_basic.php": {
+    "stdout": "ready|hello|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_query_primitives.php": {
+    "stdout": "one two|x,y|A B|x y+z|x+y+z|a%20b=1&x%5By%5D=z%20z|AB",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_reflection_runtime.php": {
+    "stdout": "7|1|1|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_response_primitives.php": {
+    "stdout": "/c|a/b|missing|text/html|empty",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_temp_stream.php": {
+    "stdout": "ab|c",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/http_xxh128.php": {
+    "stdout": "99aa06d3014798d86001c324468d497f|06b05ab6733a618578af5f94892f3950|16",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_finally_return.php": {
+    "stdout": "9|outer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_mixed_once.php": {
+    "stdout": "child|child|17|1|17\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_nested_finally.php": {
+    "stdout": "inner-finally|outer-catch|outer-finally\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_parse_catch.php": {
+    "stdout": "before|parse|1|child|17|after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_parse_normal_include.php": {
+    "stdout": "before|first|second|1|after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_parse_normal_require.php": {
+    "stdout": "before|first|second|1|after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_parse_once_history.php": {
+    "stdout": "before|first|1|1|after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_restore_after_catch.php": {
+    "stdout": "from child|file|2|11|from child|file|3|12|done\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_return.php": {
+    "stdout": "caller|child|resumed|18\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_scope.php": {
+    "stdout": "file|finally|restored|5|5|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_throw_once.php": {
+    "stdout": "from child|1|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_type_catch.php": {
+    "stdout": "typed|2|continued\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_integration_unselected.php": {
+    "stdout": "0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_empty.php": {
+    "stdout": "bad|missing|first|restored\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_explicit.php": {
+    "stdout": "first|first|first\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_handler_throw.php": {
+    "stdout": "stopped|0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_named.php": {
+    "stdout": "old|first|restored\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_nested.php": {
+    "stdout": "neighbor|neighbor\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_once.php": {
+    "stdout": "1|1|1|1|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_order.php": {
+    "stdout": "second|first|changed\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_relative.php": {
+    "stdout": "first|neighbor|default\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_require_catch.php": {
+    "stdout": "2|caught|after\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_restore.php": {
+    "stdout": "old|set|restored\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_retry.php": {
+    "stdout": "missing|retried\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_strict_null_restore.php": {
+    "stdout": "TypeError|unchanged\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_strict_null_set.php": {
+    "stdout": "TypeError|unchanged\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/include_path_unselected.php": {
+    "stdout": "0|default\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_array_key_handler.php": {
+    "stdout": "key|0|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_compound_failure_state.php": {
+    "stdout": "division:0|modulo:0|type:0|warning:0|concat:ab:ab|plain:5.5|item:5.5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_concat_handler_state.php": {
+    "stdout": "array:a|int:integer0|object:a|f:double0|ni:integer0|u:integer0|m:integer0|fo:double0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_enum_callable.php": {
+    "stdout": "on|on|type|On",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_finally_callable_include.php": {
+    "stdout": "ready|finally|inside|after",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_include_type_callable.php": {
+    "stdout": "loaded|IntegratedChild|strict|5|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_increment_handler.php": {
+    "stdout": "increment|!",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_modulo_handler.php": {
+    "stdout": "caught|caught|caught|double:5.5|double:5.5|double:0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_modulo_normal.php": {
+    "stdout": "1|1|1|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_promotion_failure_order.php": {
+    "stdout": "first|second|type|body|2|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_warning_define_state.php": {
+    "stdout": "name|clear|4|strlen:0|count:0|cast:0|foreach:0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_warning_define_third.php": {
+    "stdout": "null|clear|warned|created",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/integration_warning_transaction.php": {
+    "stdout": "set|1|1|done",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/interface_abstract_inherited_contract.php": {
+    "stdout": "done:ok\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/intersection_basic.php": {
+    "stdout": "object|same\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/is_subclass_of_fqn.php": {
+    "stdout": "1|1|0|1|1|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterable_type.php": {
+    "stdout": "array|same|yes|plain|rejected",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterator_aggregate.php": {
+    "stdout": "ab",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterator_basic.php": {
+    "stdout": "4:0;5:2;6:4;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterator_count_basic.php": {
+    "stdout": "3|2|NULL|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterator_wrapper_aggregate.php": {
+    "stdout": "inner|x:4;y:5;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/iterator_wrapper_basic.php": {
+    "stdout": "same|first:1;second:2;|first:1;second:2;",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/laravel_once_object_scope.php": {
+    "stdout": "1|1|1|1:1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/limit_iterator_invalid.php": {
+    "stdout": "offset|limit",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/magic_call_basic.php": {
+    "stdout": "missing:7|other:8|bridge",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/magic_property_basic.php": {
+    "stdout": "42",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/namespace_new_fqcn.php": {
+    "stdout": "3|4|3|3|boom\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/never_implicit_catch.php": {
+    "stdout": "inside|broken(): never-returning function must not implicitly return\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/object_cast_env.php": {
+    "stdout": "box|7|clear|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_bind_stream_order.php": {
+    "stdout": "|4142",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_bind_stream_repeat.php": {
+    "stdout": "510052|510052",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_bind_unknown_name.php": {
+    "stdout": "registered|execute-error|ready",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_bind_value_types.php": {
+    "stdout": "text:313233|integer:3432|integer:31|integer:31|null:|blob:410042|blob:|text|text|text|blob:430044|1|1|7265616479|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_default_fetch_mode.php": {
+    "stdout": "4|assoc|num|3|stored|99|rejected",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_errmode_handler_throw.php": {
+    "stdout": "stop|HY000",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_errmode_modes.php": {
+    "stdout": "2|0|silent|HY000|warning|warn-false|HY000|invalid|1|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_errmode_statement_query.php": {
+    "stdout": "statement-false|23000|00000|query-false|23000|00000",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_error_state_handles.php": {
+    "stdout": "fresh|empty|direct|HY000|1|00000|clear|unrun|00000|statement|23000|19|00000|00000|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_exception_catch.php": {
+    "stdout": "PDOException|runtime",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_exception_sqlstate.php": {
+    "stdout": "HY000|HY000|1|no such table: absent|23000|23000|19|UNIQUE constraint failed: entries.name",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_oracle_nulls_version.php": {
+    "stdout": "accepted|1",
+    "stdout_by_version": {
+      "8.5": "accepted|9"
+    },
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_parameter_error_state.php": {
+    "stdout": "HY000|HY000|25|column index out of range|00000|ready",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_query_error_state.php": {
+    "stdout": "query|23000|19|00000|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_sqlite_blob_fetch.php": {
+    "stdout": "string|410042|string|0|NULL",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_sqlite_timeout.php": {
+    "stdout": "60000|set|2000|1000|IM001",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_statement_argument_validation.php": {
+    "stdout": "zero|empty|param-type|execute-type|7|12",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/pdo_statement_fetch_column.php": {
+    "stdout": "2|3|end|negative|missing|assoc",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "2|3|end|negative|missing|both"
+    }
+  },
+  "success/php85_array_edge.php": {
+    "stdout": "no",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.5": "yes|first|last|empty"
+    }
+  },
+  "success/php_version_id.php": {
+    "stdout": "80426",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "80335",
+      "8.5": "80511"
+    }
+  },
+  "success/promotion_untyped.php": {
+    "stdout": "seed|9|string|9\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_child_scope.php": {
+    "stdout": "8\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "blocked\n"
+    }
+  },
+  "success/readonly_class_basic.php": {
+    "stdout": "2:3|write|dynamic|2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_include_finally.php": {
+    "stdout": "caught|finally|6\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_parent_readonly_child.php": {
+    "stdout": "3|readonly",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_promotion_basic.php": {
+    "stdout": "7:default:memo|7:default:memo\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_promotion_composite.php": {
+    "stdout": "object:4|NULL:next\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_promotion_inheritance_trait.php": {
+    "stdout": "hello\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_promotion_parent_call.php": {
+    "stdout": "5|3|5\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_property_operations.php": {
+    "stdout": "4|9|write|array|unset|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_type_failure_state.php": {
+    "stdout": "type|unset|12\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_uninitialized_coalesce.php": {
+    "stdout": "unset|empty|fallback|4\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_uninitialized_unset.php": {
+    "stdout": "outside|8\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/readonly_write_forms.php": {
+    "stdout": "compound|increment|decrement|array-unset|2|1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_append_nested.php": {
+    "stdout": "3|4|NULL|10|10",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_basic.php": {
+    "stdout": "3|3|8|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_caller_scope.php": {
+    "stdout": "9|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_after.php": {
+    "stdout": "1|4|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_after_alias_unset.php": {
+    "stdout": "1|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_after_alias_unset_append.php": {
+    "stdout": "1|4|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_after_alias_unset_source_write.php": {
+    "stdout": "4|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_before.php": {
+    "stdout": "3|1|3|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_copy_external.php": {
+    "stdout": "4|4|6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_elements.php": {
+    "stdout": "5|5|8|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_key_exception.php": {
+    "stdout": "caught|0|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_key_order.php": {
+    "stdout": "1|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_rebind.php": {
+    "stdout": "5|5|2|7|2",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_replace.php": {
+    "stdout": "7|3|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_array_unset.php": {
+    "stdout": "3|no|8|5|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_closure_capture.php": {
+    "stdout": "2|2|9|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_closure_capture_undefined.php": {
+    "stdout": "missing|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_foreach_append.php": {
+    "stdout": "2|3|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_foreach_basic.php": {
+    "stdout": "1|3|5|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_iteration_miniapp.php": {
+    "stdout": "2|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_parameter_closure.php": {
+    "stdout": "3|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_parameter_method.php": {
+    "stdout": "5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_parameter_variable.php": {
+    "stdout": "5|7|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_array.php": {
+    "stdout": "4|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_array_owners.php": {
+    "stdout": "4|4|6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_basic.php": {
+    "stdout": "4|7|7|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_cross_object.php": {
+    "stdout": "7|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_dynamic.php": {
+    "stdout": "RN|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_dynamic_warning.php": {
+    "stdout": "caught|0|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_lifetime.php": {
+    "stdout": "3|5|1|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_private.php": {
+    "stdout": "4|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_readonly_guard.php": {
+    "stdout": "blocked|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_rebind.php": {
+    "stdout": "1|1|9|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_static.php": {
+    "stdout": "4|4|5|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_static_scopes.php": {
+    "stdout": "5|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_static_visibility.php": {
+    "stdout": "4|blocked",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_target_variable.php": {
+    "stdout": "4|4|6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_property_visibility.php": {
+    "stdout": "4|blocked",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_array.php": {
+    "stdout": "4|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_arrow.php": {
+    "stdout": "6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_chain.php": {
+    "stdout": "6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_closure.php": {
+    "stdout": "4|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_parameter.php": {
+    "stdout": "3|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_property.php": {
+    "stdout": "7|integer|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_return_static.php": {
+    "stdout": "5|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_array.php": {
+    "stdout": "9|9|9",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_array_member.php": {
+    "stdout": "3|blocked|3|array",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_array_source.php": {
+    "stdout": "7|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_basic.php": {
+    "stdout": "3|4|integer|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_closure_array_copy.php": {
+    "stdout": "4|4|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_closure_bound_this.php": {
+    "stdout": "rejected|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_cross_static.php": {
+    "stdout": "6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_dynamic.php": {
+    "stdout": "6|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_errors.php": {
+    "stdout": "uninitialized|rejected|1|bind-rejected|1|array",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_lifetime.php": {
+    "stdout": "free",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_multi.php": {
+    "stdout": "conflict|null|42|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_nullable.php": {
+    "stdout": "null|6|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_operations.php": {
+    "stdout": "5|5|6|6|6",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_private.php": {
+    "stdout": "8|blocked",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_readonly.php": {
+    "stdout": "blocked|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_rebind.php": {
+    "stdout": "free|5|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_shared.php": {
+    "stdout": "8|8|integer",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_static_shared.php": {
+    "stdout": "7|7|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_strict.php": {
+    "stdout": "rejected|2|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_uninitialized_target.php": {
+    "stdout": "3|integer|5",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_union_conflict.php": {
+    "stdout": "conflict|ready|ready",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_typed_unset.php": {
+    "stdout": "4|free|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_arrays.php": {
+    "stdout": "3|2|3",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_basic.php": {
+    "stdout": "1|2|3|3|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_include.php": {
+    "stdout": "8|8|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_objects.php": {
+    "stdout": "2|3|2",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_rebind.php": {
+    "stdout": "1|1|10|unset|2|7|10",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_scope.php": {
+    "stdout": "2|2|7|2|3|",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reference_variables_undefined.php": {
+    "stdout": "NULL|5|NULL|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/server_superglobal_basic.php": {
+    "stdout": "array|clear",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/shebang_file_exists.php": {
+    "stdout": "file",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_conditional_type.php": {
+    "stdout": "conditional",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_enum_scope.php": {
+    "stdout": "enum",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_function_loader.php": {
+    "stdout": "function",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_include_variance.php": {
+    "stdout": "included",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_inherited_scope.php": {
+    "stdout": "base|child",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_interface_trait.php": {
+    "stdout": "same",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_parent_property.php": {
+    "stdout": "parent",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_readonly_promotion.php": {
+    "stdout": "linked",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_static_failure_caught.php": {
+    "stdout": "caught",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_static_union.php": {
+    "stdout": "union",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_switch_loader.php": {
+    "stdout": "switch",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_unknown_same.php": {
+    "stdout": "same",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/special_unselected_type.php": {
+    "stdout": "unselected",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/spl_child_subclass_properties.php": {
+    "stdout": "7|valid",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strlen_handler_throw.php": {
+    "stdout": "stop|0",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strrpos_basic.php": {
+    "stdout": "3|missing",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/strtr_basic.php": {
+    "stdout": "a/b|1 2|/",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/substr_basic.php": {
+    "stdout": "cdef|de|cd",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/trait_alias_class_priority.php": {
+    "stdout": "1|2\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/trait_nested_resolution.php": {
+    "stdout": "left/right\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_constant_basics.php": {
+    "stdout": "3|trait|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_constant_float_covariance.php": {
+    "stdout": "2|double",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_array_static.php": {
+    "stdout": "2|2|2|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_basics.php": {
+    "stdout": "unset|empty|fallback|13:9|unset|unset|4",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_caught_errors.php": {
+    "stdout": "instance|static|assignment|unset|unset",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_compound_result.php": {
+    "stdout": "integer|12|integer|12",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_private_inheritance.php": {
+    "stdout": "2|child|5|next",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_strict_cross_file.php": {
+    "stdout": "strict|1|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_property_union.php": {
+    "stdout": "integer|1|1|text|unset",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/typed_static_property_compound_result.php": {
+    "stdout": "integer|12|integer|12",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_call_forms.php": {
+    "stdout": "2|integer|string|string|integer|string|integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_class.php": {
+    "stdout": "NULL|object|object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_cross_file.php": {
+    "stdout": "integer|string|integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_cross_file_strict.php": {
+    "stdout": "TypeError\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_default.php": {
+    "stdout": "default|42\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_handler_throw.php": {
+    "stdout": "halt\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_inheritance.php": {
+    "stdout": "integer|string\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_null_false.php": {
+    "stdout": "NULL|boolean|integer\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_scalar.php": {
+    "stdout": "integer|string|integer|double|integer|double\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_strict.php": {
+    "stdout": "integer|double|TypeError\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/union_true.php": {
+    "stdout": "boolean|integer|NULL\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_abstract_trait.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_class.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_cross_file.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_diamond.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_dnf.php": {
+    "stdout": "object|3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_float_runtime_coercion.php": {
+    "stdout": "double|double\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_intersection.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_mixed_object.php": {
+    "stdout": "boolean|object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_namespace.php": {
+    "stdout": "object\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_union.php": {
+    "stdout": "integer|string\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/variance_variadic.php": {
+    "stdout": "3\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_basic.php": {
+    "stdout": "aNULL|bNULL|stop\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_finally.php": {
+    "stdout": "finally|second\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_include.php": {
+    "stdout": "NULL|loaded\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_methods.php": {
+    "stdout": "done|NULL|stop\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_namespace_case.php": {
+    "stdout": "NULL|stopped\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_nested.php": {
+    "stdout": "4|5|arrow\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_variance.php": {
+    "stdout": "task\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/void_never_variance_edges.php": {
+    "stdout": "NULL|int|mixed\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/extract_refs_lvalue_once.php": {
+    "stdout": "2|1|1|9|7",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_walk_source_once.php": {
+    "stdout": "ok|1|1|6|7|ok|2|6|8",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/extract_refs_shadow.php": {
+    "stdout": "2|10|20|10|11|21",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_walk_recursive_depth.php": {
+    "stdout": "8|1",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/generator_delegate_aggregate_depth.php": {
+    "stdout": "9",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/internal_callback_weak_strict.php": {
+    "stdout": "70616765|1|",
+    "stderr": "Fatal error: Uncaught TypeError: {closure:{file}:5}(): Argument #1 ($value) must be of type string, int given, called in {file} on line 5 and defined in {file}:5\nStack trace:\n#0 {file}(5): {closure:{file}:5}(7)\n#1 {main}\n  thrown in {file} on line 5\n",
+    "exit": 255,
+    "stderr_by_version": {
+      "8.3": "Fatal error: Uncaught TypeError: {closure}(): Argument #1 ($value) must be of type string, int given, called in {file} on line 5 and defined in {file}:5\nStack trace:\n#0 {file}(5): {closure}(7)\n#1 {main}\n  thrown in {file} on line 5\n"
+    }
+  },
+  "runtime/limit_iterator_basic.php": {
+    "stdout": "b:2;|2:30;|",
+    "stderr": "Fatal error: Uncaught OutOfBoundsException: Cannot seek to 0 which is behind offset 0 plus count 0 in {file}:8\nStack trace:\n#0 {file}(8): LimitIterator->rewind()\n#1 {main}\n  thrown in {file} on line 8\n",
+    "exit": 255
+  },
+  "runtime/generator_reference_aggregate.php": {
+    "stdout": "11|12",
+    "stderr": "Deprecated: Return type of & ReferenceBag::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in {file} on line 5\n",
+    "exit": 0
+  },
+  "runtime/pdo_fetch_attributes.php": {
+    "stdout": "sqlite|0|string|7|string|2.5|empty-null|stringify|null-string|unsupported|2|1|IM001|0|null|snapshot|execute",
+    "stderr": "Warning: Undefined array key 2 in {file} on line 23\n",
+    "exit": 0
   }
 }

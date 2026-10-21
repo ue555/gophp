@@ -1,0 +1,16 @@
+[1/2] STEP 1/1: FROM composer:2 AS composer
+--> 2650d5f9fbf3
+[2/2] STEP 1/4: FROM php:8.4.26-cli-bookworm
+[2/2] STEP 2/4: COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+--> Using cache 7dc5031d15700a32b047f28628869291b7063390886b3028b4b28a92f17c83d8
+--> 7dc5031d1570
+[2/2] STEP 3/4: RUN apt-get update     && apt-get install -y --no-install-recommends libicu-dev libonig-dev libsqlite3-dev unzip git     && docker-php-ext-install -j$(nproc) intl mbstring pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+--> Using cache 1188e3e93c544b6c70069c17a294d1c3c17036b0d8fd0e820b5bf4424d24a503
+--> 1188e3e93c54
+[2/2] STEP 4/4: WORKDIR /app
+--> Using cache d9d809849551f8c6e6708c536ac7cacbd9fa154c2ae49ed38d15a0814ef9c8f4
+[2/2] COMMIT localhost/gophp-release-dependencies
+--> d9d809849551
+Successfully tagged localhost/gophp-release-dependencies:latest
+Successfully tagged localhost/gophp-dependency-research:8.4.26
+d9d809849551f8c6e6708c536ac7cacbd9fa154c2ae49ed38d15a0814ef9c8f4

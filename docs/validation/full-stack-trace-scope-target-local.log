@@ -1,0 +1,21 @@
+command: ./bin/gophp --php-version=<8.3|8.4|8.5> tests/fixtures/success/<fixture>.php
+comparison: Go stdout/stderr/exit against provisional expected.json; official PHP not run
+8.3 success/generator_get_return_lazy.php MATCH exit=0 stdout='entered|pending|first|still-pending|resumed|done|empty-entered|7' stderr=''
+8.3 success/generator_initial_methods.php MATCH exit=0 stdout='begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4' stderr=''
+8.3 success/debug_backtrace_declaring_class.php MATCH exit=0 stdout='TraceOrigin|same|file,line,function,class,object,type,args' stderr=''
+8.3 success/debug_backtrace_caller_object.php MATCH exit=0 stdout='2|inspect|same|absent|absent' stderr=''
+8.3 success/laravel_once_object_scope.php MATCH exit=0 stdout='1|1|1|1:1' stderr=''
+8.3 success/eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+8.4 success/generator_get_return_lazy.php MATCH exit=0 stdout='entered|pending|first|still-pending|resumed|done|empty-entered|7' stderr=''
+8.4 success/generator_initial_methods.php MATCH exit=0 stdout='begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4' stderr=''
+8.4 success/debug_backtrace_declaring_class.php MATCH exit=0 stdout='TraceOrigin|same|file,line,function,class,object,type,args' stderr=''
+8.4 success/debug_backtrace_caller_object.php MATCH exit=0 stdout='2|inspect|same|absent|absent' stderr=''
+8.4 success/laravel_once_object_scope.php MATCH exit=0 stdout='1|1|1|1:1' stderr=''
+8.4 success/eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+8.5 success/generator_get_return_lazy.php MATCH exit=0 stdout='entered|pending|first|still-pending|resumed|done|empty-entered|7' stderr=''
+8.5 success/generator_initial_methods.php MATCH exit=0 stdout='begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4' stderr=''
+8.5 success/debug_backtrace_declaring_class.php MATCH exit=0 stdout='TraceOrigin|same|file,line,function,class,object,type,args' stderr=''
+8.5 success/debug_backtrace_caller_object.php MATCH exit=0 stdout='2|inspect|same|absent|absent' stderr=''
+8.5 success/laravel_once_object_scope.php MATCH exit=0 stdout='1|1|1|1:1' stderr=''
+8.5 success/eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+exit_code: 0

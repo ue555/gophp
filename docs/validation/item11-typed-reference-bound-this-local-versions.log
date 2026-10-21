@@ -1,0 +1,75 @@
+command: ./bin/gophp --php-version=<8.3|8.4|8.5> tests/fixtures/success/reference_typed_*.php
+fixture_count: 23
+8.3 MATCH success/reference_typed_array.php
+8.3 MATCH success/reference_typed_array_member.php
+8.3 MATCH success/reference_typed_array_source.php
+8.3 MATCH success/reference_typed_basic.php
+8.3 MATCH success/reference_typed_closure_array_copy.php
+8.3 MATCH success/reference_typed_closure_bound_this.php
+8.3 MATCH success/reference_typed_cross_static.php
+8.3 MATCH success/reference_typed_dynamic.php
+8.3 MATCH success/reference_typed_errors.php
+8.3 MATCH success/reference_typed_lifetime.php
+8.3 MATCH success/reference_typed_multi.php
+8.3 MATCH success/reference_typed_nullable.php
+8.3 MATCH success/reference_typed_operations.php
+8.3 MATCH success/reference_typed_private.php
+8.3 MATCH success/reference_typed_readonly.php
+8.3 MATCH success/reference_typed_rebind.php
+8.3 MATCH success/reference_typed_shared.php
+8.3 MATCH success/reference_typed_static_shared.php
+8.3 MATCH success/reference_typed_strict.php
+8.3 MATCH success/reference_typed_uninitialized_target.php
+8.3 MATCH success/reference_typed_union_conflict.php
+8.3 MATCH success/reference_typed_unset.php
+8.3 MATCH success/reference_typed_warning.php
+8.3 matched: 23 different: 0
+8.4 MATCH success/reference_typed_array.php
+8.4 MATCH success/reference_typed_array_member.php
+8.4 MATCH success/reference_typed_array_source.php
+8.4 MATCH success/reference_typed_basic.php
+8.4 MATCH success/reference_typed_closure_array_copy.php
+8.4 MATCH success/reference_typed_closure_bound_this.php
+8.4 MATCH success/reference_typed_cross_static.php
+8.4 MATCH success/reference_typed_dynamic.php
+8.4 MATCH success/reference_typed_errors.php
+8.4 MATCH success/reference_typed_lifetime.php
+8.4 MATCH success/reference_typed_multi.php
+8.4 MATCH success/reference_typed_nullable.php
+8.4 MATCH success/reference_typed_operations.php
+8.4 MATCH success/reference_typed_private.php
+8.4 MATCH success/reference_typed_readonly.php
+8.4 MATCH success/reference_typed_rebind.php
+8.4 MATCH success/reference_typed_shared.php
+8.4 MATCH success/reference_typed_static_shared.php
+8.4 MATCH success/reference_typed_strict.php
+8.4 MATCH success/reference_typed_uninitialized_target.php
+8.4 MATCH success/reference_typed_union_conflict.php
+8.4 MATCH success/reference_typed_unset.php
+8.4 MATCH success/reference_typed_warning.php
+8.4 matched: 23 different: 0
+8.5 MATCH success/reference_typed_array.php
+8.5 MATCH success/reference_typed_array_member.php
+8.5 MATCH success/reference_typed_array_source.php
+8.5 MATCH success/reference_typed_basic.php
+8.5 MATCH success/reference_typed_closure_array_copy.php
+8.5 MATCH success/reference_typed_closure_bound_this.php
+8.5 MATCH success/reference_typed_cross_static.php
+8.5 MATCH success/reference_typed_dynamic.php
+8.5 MATCH success/reference_typed_errors.php
+8.5 MATCH success/reference_typed_lifetime.php
+8.5 MATCH success/reference_typed_multi.php
+8.5 MATCH success/reference_typed_nullable.php
+8.5 MATCH success/reference_typed_operations.php
+8.5 MATCH success/reference_typed_private.php
+8.5 MATCH success/reference_typed_readonly.php
+8.5 MATCH success/reference_typed_rebind.php
+8.5 MATCH success/reference_typed_shared.php
+8.5 MATCH success/reference_typed_static_shared.php
+8.5 MATCH success/reference_typed_strict.php
+8.5 MATCH success/reference_typed_uninitialized_target.php
+8.5 MATCH success/reference_typed_union_conflict.php
+8.5 MATCH success/reference_typed_unset.php
+8.5 MATCH success/reference_typed_warning.php
+8.5 matched: 23 different: 0
+exit_code: 0

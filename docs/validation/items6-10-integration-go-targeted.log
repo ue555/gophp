@@ -1,0 +1,63 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_array_key_handler.php
+key|0|8
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_enum_callable.php
+on|on|type|On
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_finally_callable_include.php
+ready|finally|inside|after
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_include_type_callable.php
+loaded|IntegratedChild|strict|5|5
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_increment_handler.php
+increment|!
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_promotion_failure_order.php
+first|second|type|body|2|3
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/integration_warning_transaction.php
+absent|1|1|done
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_array_key_handler.php
+key|0|8
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_enum_callable.php
+on|on|type|On
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_finally_callable_include.php
+ready|finally|inside|after
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_include_type_callable.php
+loaded|IntegratedChild|strict|5|5
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_increment_handler.php
+increment|!
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_promotion_failure_order.php
+first|second|type|body|2|3
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/integration_warning_transaction.php
+absent|1|1|done
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_array_key_handler.php
+key|0|8
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_enum_callable.php
+on|on|type|On
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_finally_callable_include.php
+ready|finally|inside|after
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_include_type_callable.php
+loaded|IntegratedChild|strict|5|5
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_increment_handler.php
+increment|!
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_promotion_failure_order.php
+first|second|type|body|2|3
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/integration_warning_transaction.php
+absent|1|1|done
+exit_code: 0

@@ -1,0 +1,17 @@
+8.3 success/append_iterator_basic.php: PASS stdout=b'0:a=1;2:a=2;2:0=3;|3' stderr=b'' exit=0
+8.3 success/append_iterator_empty.php: PASS stdout=b'none|4|4' stderr=b'' exit=0
+8.3 success/append_iterator_invalid.php: PASS stdout=b'rejected|0' stderr=b'' exit=0
+8.3 success/spl_child_subclass_properties.php: PASS stdout=b'7|valid' stderr=b'' exit=0
+8.3 success/finder_multi_vendor.php: PASS stdout=b'3' stderr=b'' exit=0
+8.4 success/append_iterator_basic.php: PASS stdout=b'0:a=1;2:a=2;2:0=3;|3' stderr=b'' exit=0
+8.4 success/append_iterator_empty.php: PASS stdout=b'none|4|4' stderr=b'' exit=0
+8.4 success/append_iterator_invalid.php: PASS stdout=b'rejected|0' stderr=b'' exit=0
+8.4 success/spl_child_subclass_properties.php: PASS stdout=b'7|valid' stderr=b'' exit=0
+8.4 success/finder_multi_vendor.php: PASS stdout=b'3' stderr=b'' exit=0
+8.5 success/append_iterator_basic.php: PASS stdout=b'0:a=1;2:a=2;2:0=3;|3' stderr=b'' exit=0
+8.5 success/append_iterator_empty.php: PASS stdout=b'none|4|4' stderr=b'' exit=0
+8.5 success/append_iterator_invalid.php: PASS stdout=b'rejected|0' stderr=b'' exit=0
+8.5 success/spl_child_subclass_properties.php: PASS stdout=b'7|valid' stderr=b'' exit=0
+8.5 success/finder_multi_vendor.php: PASS stdout=b'3' stderr=b'' exit=0
+passed: 15/15
+exit_code: 0

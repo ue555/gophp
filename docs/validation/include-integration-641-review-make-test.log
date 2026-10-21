@@ -1,0 +1,10 @@
+go test ./...
+ok  	example.com/gophp/cmd/gophp	0.230s
+--- FAIL: TestFixtures (0.12s)
+    --- FAIL: TestFixtures/success/include_integration_strict_restore.php (0.00s)
+        php_test.go:81: success fixture must exit 0 without diagnostics
+FAIL
+FAIL	example.com/gophp/internal/php	0.231s
+FAIL
+make: *** [test] Error 1
+make test exit=2

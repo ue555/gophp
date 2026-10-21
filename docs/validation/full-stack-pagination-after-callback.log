@@ -1,0 +1,9 @@
+=== RUN   TestFixedLaravelCollectionPagination
+    pagination_test.go:59: page=1 status=200 body_bytes=2932 diagnostics=""
+    pagination_test.go:59: page=2 status=200 body_bytes=99 diagnostics=""
+    pagination_test.go:59: page=3 status=200 body_bytes=2 diagnostics=""
+--- PASS: TestFixedLaravelCollectionPagination (1.74s)
+PASS
+ok  	example.com/gophp/cmd/gophp	2.078s
+command: go test ./cmd/gophp -run '^TestFixedLaravelCollectionPagination$' -count=1 -v
+exit_code: 0

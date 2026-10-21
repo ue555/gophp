@@ -1,0 +1,6 @@
+command: ./bin/gophp --php-version=<8.3|8.4|8.5> tests/fixtures/success/eloquent_recursion_cache_vendor.php
+comparison: Go output against provisional expected.json; official PHP not run
+8.3 eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+8.4 eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+8.5 eloquent_recursion_cache_vendor.php MATCH exit=0 stdout='guard|later|guard|2:1|caught|caught' stderr=''
+exit_code: 0

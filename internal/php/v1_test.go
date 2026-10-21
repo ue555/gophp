@@ -12,16 +12,21 @@ import (
 func TestV1UnsupportedForms(t *testing.T) {
 	for _, source := range []string{
 		"foreach ([] as &$v) {}", "foreach ([] as &$k => $v) {}",
-		"foreach ([[1]] as [$v]) {}", "foreach ([] as list($v)) {}",
 		"foreach ([] as $v): endforeach;",
 		"echo (integer)1;", "echo (boolean)1;", "echo (double)1;", "echo (real)1;",
-		"echo (binary)1;", "echo (array)1;", "echo (object)1;", "echo (unset)1;",
-		"echo count_normal;", "echo PHP_VERSION;", "echo isset();", "empty(1, 2);", "unset();",
+		"echo (binary)1;", "echo (unset)1;",
+		"echo count_normal;", "echo isset();", "empty(1, 2);", "unset();",
 	} {
 		t.Run(source, func(t *testing.T) {
 			var out, diagnostics bytes.Buffer
 			code := Run("<?php\necho 'unreachable';\nif (false) { "+source+" }", "input.php", &out, &diagnostics)
-			if source == "echo count_normal;" || source == "echo PHP_VERSION;" {
+			if source == "foreach ([] as &$v) {}" {
+				if code != 0 || out.String() != "unreachable" || diagnostics.Len() != 0 {
+					t.Fatalf("supported foreach: exit=%d stdout=%q stderr=%q", code, &out, &diagnostics)
+				}
+				return
+			}
+			if source == "echo count_normal;" {
 				// Constant identifiers are now valid syntax; missing constants only
 				// fail when evaluated. Retain both original cases and check both paths.
 				if code != 0 || out.String() != "unreachable" || diagnostics.Len() != 0 {
@@ -43,8 +48,7 @@ func TestV1UnsupportedForms(t *testing.T) {
 	for _, object := range []string{"new stdClass", "new C"} {
 		var out, diagnostics bytes.Buffer
 		code := Run("<?php\nclass C {} foreach ("+object+" as $v) {} echo 'unreachable';", "input.php", &out, &diagnostics)
-		want := "Fatal error: Uncaught Error: gophp: foreach over objects is not supported in input.php:2\nStack trace:\n#0 {main}\n  thrown in input.php on line 2\n"
-		if code != 255 || out.Len() != 0 || diagnostics.String() != want {
+		if code != 0 || out.String() != "unreachable" || diagnostics.Len() != 0 {
 			t.Fatalf("exit=%d stdout=%q stderr=%q", code, &out, &diagnostics)
 		}
 	}

@@ -1,0 +1,8 @@
+=== RUN   TestFixedLaravelProbeThroughHTTPBridge
+    main_test.go:390: sustained requests=96 duration=31.910100584s heap_alloc_before=766576 heap_alloc_after=745992
+--- PASS: TestFixedLaravelProbeThroughHTTPBridge (54.13s)
+PASS
+ok  	example.com/gophp/cmd/gophp	54.486s
+
+command: go test ./cmd/gophp -run ^TestFixedLaravelProbeThroughHTTPBridge$ -count=1 -v
+exit_code: 0

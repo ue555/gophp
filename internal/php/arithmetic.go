@@ -7,11 +7,22 @@ import (
 )
 
 func (e *evaluator) modulo(left, right value, line int) (value, error) {
-	a, ok := e.integerOperand(left, line)
+	a, ok, err := e.integerOperand(left, line)
+	if err != nil {
+		if left.kind == floatKind {
+			// The failed float-to-int conversion supplies the zero value
+			// observed by typed-property compound assignment.
+			return integer(0), err
+		}
+		return value{}, err
+	}
 	if !ok {
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %% %s", left.typeName(), right.typeName())}
 	}
-	b, ok := e.integerOperand(right, line)
+	b, ok, err := e.integerOperand(right, line)
+	if err != nil {
+		return value{}, err
+	}
 	if !ok {
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %% %s", left.typeName(), right.typeName())}
 	}
@@ -24,23 +35,28 @@ func (e *evaluator) modulo(left, right value, line int) (value, error) {
 	return integer(a % b), nil
 }
 
-func (e *evaluator) integerOperand(v value, line int) (int64, bool) {
+func (e *evaluator) integerOperand(v value, line int) (int64, bool, error) {
 	// stdClass and user-defined objects cannot be converted for % or %=.
 	// numeric rejects them without the warning used by numeric comparisons.
 	n, trailing, ok := v.numeric()
 	if !ok {
-		return 0, false
+		return 0, false, nil
 	}
 	if trailing {
-		e.warn(line, "A non-numeric value encountered")
+		if err := e.warn(line, "A non-numeric value encountered"); err != nil {
+			return 0, false, err
+		}
 	}
 	if n.kind == intKind {
-		return n.i, true
+		return n.i, true, nil
 	}
 	if v.kind == floatKind {
 		// Integer operand conversion uses the same loss/range diagnostics as keys.
-		key, _ := e.arrayKey(v, line)
-		return key.index, true
+		key, err := e.arrayKey(v, line)
+		if err != nil {
+			return 0, false, err
+		}
+		return key.index, true, nil
 	}
 	// PHP saturates finite float-strings, but wraps actual float operands.
 	i := int64(0)
@@ -55,9 +71,11 @@ func (e *evaluator) integerOperand(v value, line int) (int64, bool) {
 		}
 	}
 	if float64(i) != n.f {
-		e.diagnostic("Deprecated", line, fmt.Sprintf("Implicit conversion from float-string \"%s\" to int loses precision", v.s))
+		if err := e.diagnostic("Deprecated", line, fmt.Sprintf("Implicit conversion from float-string \"%s\" to int loses precision", v.s)); err != nil {
+			return 0, false, err
+		}
 	}
-	return i, true
+	return i, true, nil
 }
 
 func (e *evaluator) evalCompound(node compoundAssignment) (value, error) {
@@ -88,11 +106,54 @@ func (e *evaluator) evalCompound(node compoundAssignment) (value, error) {
 			return value{}, err
 		}
 	}
-	v, err := e.binaryOperation(strings.TrimSuffix(node.op.kind, "="), target.get(), right, node.op.line)
+	op := strings.TrimSuffix(node.op.kind, "=")
+	left := target.get()
+	v, err := e.binaryOperation(op, left, right, node.op.line)
 	if err != nil {
+		// Zend type-checks the temporary result of an arithmetic assignment
+		// to a typed property even when these operations raise an exception.
+		// Ordinary variables and array elements keep their original values.
+		// Keep this to the cases checked against PHP; bitwise assignments have
+		// different operators and are not covered by that evidence.
+		if target.typed && compoundErrorStoresZero(op, left, right, v, err) {
+			_ = target.set(integer(0))
+		}
 		return value{}, err
 	}
-	return v, target.set(v)
+	if err := target.set(v); err != nil {
+		return value{}, err
+	}
+	// A typed property may coerce the operation's result while storing it.
+	// The compound assignment expression yields the value actually stored.
+	return target.get(), nil
+}
+
+func compoundErrorStoresZero(op string, left, right, partial value, err error) bool {
+	if op == "%" && partial.kind == intKind {
+		// The float-to-int warning already produced a zero temporary.
+		return true
+	}
+	if op == "." {
+		// A string left operand is concatenated in place and stays unchanged.
+		return left.kind == intKind || left.kind == floatKind
+	}
+	if left.kind != intKind && left.kind != floatKind {
+		return false
+	}
+	if op == "/" || op == "%" {
+		runtimeErr, ok := err.(*runtimeError)
+		return ok && runtimeErr.class == "DivisionByZeroError"
+	}
+	if op == "+" {
+		if runtimeErr, ok := err.(*runtimeError); ok {
+			return runtimeErr.class == "TypeError" && right.kind == arrayKind
+		}
+		if right.kind == stringKind {
+			_, trailing, numeric := right.numeric()
+			return numeric && trailing
+		}
+	}
+	return false
 }
 
 func (e *evaluator) evalIncrement(node increment) (value, error) {
@@ -115,7 +176,8 @@ func (e *evaluator) evalIncrement(node increment) (value, error) {
 	if node.post {
 		return before, nil
 	}
-	return after, nil
+	// Typed properties can coerce the incremented value while storing it.
+	return target.get(), nil
 }
 
 func (e *evaluator) incrementValue(v value, inc bool, line int) (value, error) {
@@ -127,13 +189,17 @@ func (e *evaluator) incrementValue(v value, inc bool, line int) (value, error) {
 	case intKind, floatKind:
 		return arithmetic(op, v, integer(1)), nil
 	case boolKind:
-		e.warn(line, action+" on type bool has no effect, this will change in the next major version of PHP")
+		if err := e.warn(line, action+" on type bool has no effect, this will change in the next major version of PHP"); err != nil {
+			return value{}, err
+		}
 		return v, nil
 	case nullKind:
 		if inc {
 			return integer(1), nil
 		}
-		e.warn(line, "Decrement on type null has no effect, this will change in the next major version of PHP")
+		if err := e.warn(line, "Decrement on type null has no effect, this will change in the next major version of PHP"); err != nil {
+			return value{}, err
+		}
 		return v, nil
 	case stringKind:
 		if n, trailing, ok := v.numeric(); ok && !trailing {
@@ -141,16 +207,24 @@ func (e *evaluator) incrementValue(v value, inc bool, line int) (value, error) {
 		}
 		if !inc {
 			if v.s == "" {
-				e.diagnostic("Deprecated", line, "Decrement on empty string is deprecated as non-numeric")
+				if err := e.diagnostic("Deprecated", line, "Decrement on empty string is deprecated as non-numeric"); err != nil {
+					return value{}, err
+				}
 				return integer(-1), nil
 			}
-			e.diagnostic("Deprecated", line, "Decrement on non-numeric string has no effect and is deprecated")
+			if err := e.diagnostic("Deprecated", line, "Decrement on non-numeric string has no effect and is deprecated"); err != nil {
+				return value{}, err
+			}
 			return v, nil
 		}
 		if e.version == PHP85 {
-			e.diagnostic("Deprecated", line, "Increment on non-numeric string is deprecated, use str_increment() instead")
+			if err := e.diagnostic("Deprecated", line, "Increment on non-numeric string is deprecated, use str_increment() instead"); err != nil {
+				return value{}, err
+			}
 		} else if !asciiAlphanumeric(v.s) {
-			e.diagnostic("Deprecated", line, "Increment on non-alphanumeric string is deprecated")
+			if err := e.diagnostic("Deprecated", line, "Increment on non-alphanumeric string is deprecated"); err != nil {
+				return value{}, err
+			}
 		}
 		return value{kind: stringKind, s: incrementString(v.s)}, nil
 	default:

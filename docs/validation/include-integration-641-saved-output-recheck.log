@@ -1,0 +1,7 @@
+8.3.35 runtime/include_integration_strict_restore.php saved-stderr-match exit 0
+8.4.26 runtime/include_integration_strict_restore.php saved-stderr-match exit 0
+8.5.11 runtime/include_integration_strict_restore.php saved-stderr-match exit 0
+8.5.11 runtime/include_integration_declaration.php saved-stderr-match exit 255
+8.5.11 runtime/include_integration_fatal_finally.php saved-stderr-match exit 255
+saved-output recheck exit=0
+saved-output recheck command exit=0

@@ -1,0 +1,11 @@
+8.3 never_nullable.php stdout/stderr/exit MATCH
+8.3 void_constructor.php stdout/stderr/exit MATCH
+8.3 void_nullable.php stdout/stderr/exit MATCH
+8.4 never_nullable.php stdout/stderr/exit MATCH
+8.4 void_constructor.php stdout/stderr/exit MATCH
+8.4 void_nullable.php stdout/stderr/exit MATCH
+8.5 never_nullable.php stdout/stderr/exit MATCH
+8.5 void_constructor.php stdout/stderr/exit MATCH
+8.5 void_nullable.php stdout/stderr/exit MATCH
+9 version/fixture comparisons against saved official output MATCH
+saved-output comparison exit=0

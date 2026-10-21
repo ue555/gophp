@@ -1,0 +1,47 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_control_methods.php
+php_target: 8.3
+fixture: success/generator_control_methods.php
+go_stdout: 'created|start|valid|first:10|not-returned|middle|second:20|rewind-error|end|closed|NULL|30'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_initial_methods.php
+php_target: 8.3
+fixture: success/generator_initial_methods.php
+go_stdout: 'begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_control_methods.php
+php_target: 8.4
+fixture: success/generator_control_methods.php
+go_stdout: 'created|start|valid|first:10|not-returned|middle|second:20|rewind-error|end|closed|NULL|30'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_initial_methods.php
+php_target: 8.4
+fixture: success/generator_initial_methods.php
+go_stdout: 'begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_control_methods.php
+php_target: 8.5
+fixture: success/generator_control_methods.php
+go_stdout: 'created|start|valid|first:10|not-returned|middle|second:20|rewind-error|end|closed|NULL|30'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_initial_methods.php
+php_target: 8.5
+fixture: success/generator_initial_methods.php
+go_stdout: 'begin|1|0|begin|2|empty-begin|empty|return-begin|pending|4'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True

@@ -34,6 +34,10 @@ func (e *evaluator) valueOrder(a, b value, line int, active map[*phpArray]bool) 
 		if a.o == b.o {
 			return 0, nil
 		}
+		if a.o.enumCase != "" || b.o.enumCase != "" {
+			// Enum objects are identity-comparable but have no value ordering.
+			return 1, nil
+		}
 		if a.o.className() != b.o.className() {
 			return 1, nil
 		}
@@ -101,7 +105,7 @@ func (e *evaluator) arrayOrder(a, b *phpArray, line int, active map[*phpArray]bo
 		if !found {
 			return 1, nil
 		}
-		order, err := e.valueOrder(entry.value, other, line, active)
+		order, err := e.valueOrder(dereference(entry.value), other, line, active)
 		if err != nil || order != 0 {
 			return order, err
 		}

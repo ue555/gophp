@@ -12,6 +12,43 @@ import (
 // outside the integer range, and on NaN converted to bool/string.
 func (e *evaluator) cast(v value, name string, line int) (value, error) {
 	switch name {
+	case "object":
+		if v.kind == objectKind {
+			return v, nil
+		}
+		e.initClasses()
+		object := value{kind: objectKind, o: &phpObject{class: e.classes["stdclass"], properties: &phpArray{}}}
+		if v.kind == arrayKind {
+			for _, entry := range v.a.entries {
+				key := entry.key.text
+				if !entry.key.isString {
+					key = strconv.FormatInt(entry.key.index, 10)
+				}
+				object.o.properties = object.o.properties.with(arrayKey{isString: true, text: key}, entry.value)
+			}
+		} else if v.kind != nullKind {
+			object.o.properties = object.o.properties.with(arrayKey{isString: true, text: "scalar"}, v)
+		}
+		return object, nil
+	case "array":
+		switch v.kind {
+		case arrayKind:
+			return v, nil
+		case nullKind:
+			return arrayValue(), nil
+		case objectKind:
+			result := arrayValue()
+			if v.o.properties != nil {
+				for _, item := range v.o.properties.entries {
+					result.a = result.a.with(item.key, item.value)
+				}
+			}
+			return result, nil
+		default:
+			result := arrayValue()
+			result.a = result.a.with(arrayKey{index: 0}, v)
+			return result, nil
+		}
 	case "bool":
 		return boolean(e.toBool(v, line)), nil
 	case "string":
@@ -19,7 +56,9 @@ func (e *evaluator) cast(v value, name string, line int) (value, error) {
 		return value{kind: stringKind, s: s}, err
 	case "int", "float":
 		if v.kind == objectKind {
-			e.warn(line, fmt.Sprintf("Object of class %s could not be converted to %s", v.o.className(), name))
+			if err := e.warn(line, fmt.Sprintf("Object of class %s could not be converted to %s", v.o.className(), name)); err != nil {
+				return value{}, err
+			}
 			v = integer(1)
 		} else if v.kind == arrayKind {
 			v = boolean(len(v.a.entries) > 0)
@@ -52,7 +91,9 @@ func (e *evaluator) cast(v value, name string, line int) (value, error) {
 				return integer(math.MinInt64), nil
 			}
 		} else if e.version == PHP85 && floatOutsideInt(n.f) {
-			e.warn(line, "The float "+floatText(n.f, -1)+" is not representable as an int, cast occurred")
+			if err := e.warn(line, "The float "+floatText(n.f, -1)+" is not representable as an int, cast occurred"); err != nil {
+				return value{}, err
+			}
 		}
 		return integer(floatToInt(n.f)), nil
 	}

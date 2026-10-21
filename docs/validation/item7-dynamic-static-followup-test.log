@@ -1,0 +1,8 @@
+go test ./...
+# example.com/gophp/internal/php
+internal/php/class_test.go:321:14: illegal character U+003F '?'
+FAIL	example.com/gophp/internal/php [setup failed]
+ok  	example.com/gophp/cmd/gophp	0.235s
+FAIL
+make: *** [test] Error 1
+make test exit=2

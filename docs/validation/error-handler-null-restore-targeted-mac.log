@@ -1,0 +1,22 @@
+
+Comparing with PHP 8.3.35
+Go target: PHP 8.3
+PHP: 8.3.35 (/Users/kouji/dev/php/containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/error_handler_register_null_inside.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+
+Comparing with PHP 8.4.26
+Go target: PHP 8.4
+PHP: 8.4.26 (/Users/kouji/dev/php/containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/error_handler_register_null_inside.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+
+Comparing with PHP 8.5.11
+Go target: PHP 8.5
+PHP: 8.5.11 (/Users/kouji/dev/php/containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/error_handler_register_null_inside.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+targeted exit=0

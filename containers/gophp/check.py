@@ -51,7 +51,9 @@ def main():
                 code = want.get("exit_by_version", {}).get(version, want["exit"])
                 stdout = want.get("stdout_by_version", {}).get(version, want["stdout"])
                 stderr = want.get("stderr_by_version", {}).get(version, want["stderr"])
-                wanted = (code, stdout.encode(), stderr.replace("{file}", path).encode())
+                trace_file = path[:15] + "..." if len(path) > 15 else path
+                stderr = stderr.replace("{file}", path).replace("{fixtures}", str(FIXTURES)).replace("{trace_file}", trace_file)
+                wanted = (code, stdout.replace("{file}", path).encode(), stderr.encode())
                 actual = execute(["--php-version=" + version, path])
                 if actual != wanted:
                     print("FAIL: PHP target {} {}\nexpected: {!r}\nactual: {!r}".format(
@@ -59,7 +61,7 @@ def main():
                     return 1
                 count += 1
             print("PASS: PHP target {}: {} fixtures".format(version, len(names)), flush=True)
-        usage = b"usage: gophp [--php-version=8.3|8.4|8.5] <file.php>\n"
+        usage = b"usage: gophp [--php-version=8.3|8.4|8.5] <file.php> [arguments...]\n"
         for arguments, wanted in ((["--help"], (0, b"", usage)),
                                   ([], (2, b"", usage))):
             if execute(arguments) != wanted:

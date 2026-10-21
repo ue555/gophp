@@ -1,0 +1,5 @@
+python3 -B containers/gophp/check.py
+PASS: PHP target 8.3: 7 fixtures
+PASS: PHP target 8.4: 7 fixtures
+PASS: PHP target 8.5: 7 fixtures
+PASS: 21 fixture executions and 2 CLI checks (saved expectations)

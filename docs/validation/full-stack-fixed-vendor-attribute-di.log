@@ -1,0 +1,6 @@
+command: GOCACHE=/Users/kouji/dev/php/.cache/go-build go test ./cmd/gophp -run TestFixedVendorAttributeDiscoveryAndContainer -count=1 -v
+=== RUN   TestFixedVendorAttributeDiscoveryAndContainer
+--- PASS: TestFixedVendorAttributeDiscoveryAndContainer (0.08s)
+PASS
+ok  	example.com/gophp/cmd/gophp	0.164s
+exit_code: 0

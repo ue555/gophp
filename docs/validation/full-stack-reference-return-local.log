@@ -1,0 +1,108 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_array.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_arrow.php
+result: MATCH
+stdout: '6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_chain.php
+result: MATCH
+stdout: '6|6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_closure.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_parameter.php
+result: MATCH
+stdout: '3|1'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_property.php
+result: MATCH
+stdout: '7|integer|7'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/reference_return_static.php
+result: MATCH
+stdout: '5|5'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_array.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_arrow.php
+result: MATCH
+stdout: '6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_chain.php
+result: MATCH
+stdout: '6|6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_closure.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_parameter.php
+result: MATCH
+stdout: '3|1'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_property.php
+result: MATCH
+stdout: '7|integer|7'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/reference_return_static.php
+result: MATCH
+stdout: '5|5'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_array.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_arrow.php
+result: MATCH
+stdout: '6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_chain.php
+result: MATCH
+stdout: '6|6'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_closure.php
+result: MATCH
+stdout: '4|4'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_parameter.php
+result: MATCH
+stdout: '3|1'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_property.php
+result: MATCH
+stdout: '7|integer|7'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/reference_return_static.php
+result: MATCH
+stdout: '5|5'
+stderr: ''
+exit_code: 0
+local_matched: 21
+local_different: 0
+fixture_count: 7

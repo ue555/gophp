@@ -37,3 +37,25 @@ func TestModuloRejectsObjects(t *testing.T) {
 		}
 	}
 }
+
+func TestModuloHandlerExceptionPreservesTargets(t *testing.T) {
+	const source = `<?php
+class Box { public float $value = 5.5; }
+$number = 5.5; $array = [5.5]; $box = new Box;
+set_error_handler(function ($level, $message) { throw new Exception('stop'); });
+try { $number %= 2; } catch (Exception $e) { echo 'caught|'; }
+try { $array[0] %= 2; } catch (Exception $e) { echo 'caught|'; }
+try { $box->value %= 2; } catch (Exception $e) { echo 'caught|'; }
+restore_error_handler();
+echo gettype($number), ':', $number, '|', gettype($array[0]), ':', $array[0], '|', gettype($box->value), ':', $box->value;`
+	const want = "caught|caught|caught|double:5.5|double:5.5|double:0"
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		t.Run(string(version), func(t *testing.T) {
+			var stdout, stderr bytes.Buffer
+			code := RunWithVersion(source, "input.php", &stdout, &stderr, version)
+			if code != 0 || stdout.String() != want || stderr.Len() != 0 {
+				t.Fatalf("exit=%d stdout=%q stderr=%q", code, &stdout, &stderr)
+			}
+		})
+	}
+}

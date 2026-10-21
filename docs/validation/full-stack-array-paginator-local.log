@@ -1,0 +1,7 @@
+command: ./bin/gophp /private/tmp/gophp-array-paginator-probe.php
+1:20;|Fatal error: Uncaught Error: Call to undefined function ApiPlatform\State\Pagination\iterator_count() in /Users/kouji/dev/php/research/laravel-api/vendor/api-platform/state/Pagination/ArrayPaginator.php:86
+Stack trace:
+#0 /private/tmp/gophp-array-paginator-probe.php(5): ApiPlatform\State\Pagination\ArrayPaginator->count()
+#1 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/api-platform/state/Pagination/ArrayPaginator.php on line 86
+exit_code: 255

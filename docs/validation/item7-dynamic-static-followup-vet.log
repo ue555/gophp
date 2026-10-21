@@ -1,0 +1,4 @@
+go vet ./...
+internal/php/class_test.go:321:14: illegal character U+003F '?'
+make: *** [vet] Error 1
+make vet exit=2

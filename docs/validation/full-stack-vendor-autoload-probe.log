@@ -1,0 +1,10 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught Error: Undefined constant "PHP_VERSION_ID" in /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php:5
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php on line 5
+
+exit_code: 255

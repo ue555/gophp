@@ -1,0 +1,11 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught Error: Call to undefined function dirname() in /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:28
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(22): ComposerAutoloaderInit9081827c28c13f81a15682fabebfd1c7::getLoader()
+#1 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php on line 28
+
+exit_code: 255

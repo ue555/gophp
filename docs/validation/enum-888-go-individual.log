@@ -1,0 +1,276 @@
+Go-only individual execution log; official PHP comparison was unavailable (Podman exit 125).
+cwd=/Users/kouji/dev/php
+fixture_count=10
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/parser/enum_backed_custom_from.php
+exit_code=255
+stdout_length=0
+
+stderr_length=135
+Fatal error: Cannot redeclare BackedChoice::from() in /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php on line 5
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/parser/enum_property.php
+exit_code=255
+stdout_length=0
+
+stderr_length=120
+Fatal error: Enums may not include properties in /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php on line 3
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/parser/enum_unit_custom_cases.php
+exit_code=255
+stdout_length=0
+
+stderr_length=133
+Fatal error: Cannot redeclare UnitChoice::cases() in /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php on line 5
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+exit_code=255
+stdout_length=6
+before
+stderr_length=146
+Fatal error: Cannot redeclare BackedTraitChoice::tryFrom() in /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php on line 6
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/runtime/enum_new.php
+exit_code=255
+stdout_length=7
+before|
+stderr_length=222
+Fatal error: Uncaught Error: Cannot instantiate enum Card in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php:4
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php on line 4
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/success/enum_cases_basic.php
+exit_code=0
+stdout_length=56
+2|North|same|alias|distinct|looseDistinct|High|missing|r
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/success/enum_caught_value_error.php
+exit_code=0
+stdout_length=14
+caught|finally
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/success/enum_namespace_include.php
+exit_code=0
+stdout_length=10
+Ready|done
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/success/enum_type_methods.php
+exit_code=0
+stdout_length=24
+same|interface|Go|o|Stop
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.3 tests/fixtures/success/enum_unit_custom_from.php
+exit_code=0
+stdout_length=8
+A|A|null
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/parser/enum_backed_custom_from.php
+exit_code=255
+stdout_length=0
+
+stderr_length=135
+Fatal error: Cannot redeclare BackedChoice::from() in /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php on line 5
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/parser/enum_property.php
+exit_code=255
+stdout_length=0
+
+stderr_length=120
+Fatal error: Enums may not include properties in /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php on line 3
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/parser/enum_unit_custom_cases.php
+exit_code=255
+stdout_length=0
+
+stderr_length=133
+Fatal error: Cannot redeclare UnitChoice::cases() in /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php on line 5
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+exit_code=255
+stdout_length=6
+before
+stderr_length=146
+Fatal error: Cannot redeclare BackedTraitChoice::tryFrom() in /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php on line 6
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/runtime/enum_new.php
+exit_code=255
+stdout_length=7
+before|
+stderr_length=222
+Fatal error: Uncaught Error: Cannot instantiate enum Card in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php:4
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php on line 4
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/success/enum_cases_basic.php
+exit_code=0
+stdout_length=56
+2|North|same|alias|distinct|looseDistinct|High|missing|r
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/success/enum_caught_value_error.php
+exit_code=0
+stdout_length=14
+caught|finally
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/success/enum_namespace_include.php
+exit_code=0
+stdout_length=10
+Ready|done
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/success/enum_type_methods.php
+exit_code=0
+stdout_length=24
+same|interface|Go|o|Stop
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.4 tests/fixtures/success/enum_unit_custom_from.php
+exit_code=0
+stdout_length=8
+A|A|null
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/parser/enum_backed_custom_from.php
+exit_code=255
+stdout_length=0
+
+stderr_length=158
+Fatal error: Cannot redeclare BackedChoice::from() in /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php on line 5
+Stack trace:
+#0 {main}
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/parser/enum_property.php
+exit_code=255
+stdout_length=0
+
+stderr_length=143
+Fatal error: Enums may not include properties in /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php on line 3
+Stack trace:
+#0 {main}
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/parser/enum_unit_custom_cases.php
+exit_code=255
+stdout_length=0
+
+stderr_length=156
+Fatal error: Cannot redeclare UnitChoice::cases() in /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php on line 5
+Stack trace:
+#0 {main}
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+exit_code=255
+stdout_length=6
+before
+stderr_length=169
+Fatal error: Cannot redeclare BackedTraitChoice::tryFrom() in /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php on line 6
+Stack trace:
+#0 {main}
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/runtime/enum_new.php
+exit_code=255
+stdout_length=7
+before|
+stderr_length=222
+Fatal error: Uncaught Error: Cannot instantiate enum Card in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php:4
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/enum_new.php on line 4
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/success/enum_cases_basic.php
+exit_code=0
+stdout_length=56
+2|North|same|alias|distinct|looseDistinct|High|missing|r
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/success/enum_caught_value_error.php
+exit_code=0
+stdout_length=14
+caught|finally
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/success/enum_namespace_include.php
+exit_code=0
+stdout_length=10
+Ready|done
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/success/enum_type_methods.php
+exit_code=0
+stdout_length=24
+same|interface|Go|o|Stop
+stderr_length=0
+
+end_result
+
+command=./bin/gophp --php-version=8.5 tests/fixtures/success/enum_unit_custom_from.php
+exit_code=0
+stdout_length=8
+A|A|null
+stderr_length=0
+
+end_result
+logging_command_exit_code=0

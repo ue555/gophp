@@ -1,0 +1,49 @@
+[1/2] STEP 1/9: FROM docker.io/library/golang:1.27.2-alpine3.24 AS build
+[1/2] STEP 2/9: WORKDIR /src
+--> Using cache 71dbef5a80fd9e4ca70abfd797b38f7d26c14918c302f1ddb210f84f1d38b51d
+--> 71dbef5a80fd
+[1/2] STEP 3/9: RUN apk add --no-cache build-base sqlite-dev pcre2-dev
+--> Using cache a346cb0ef8398d9a1e0ddd97fcc84f3743b8e20ec87fef864e3ad7872d2d9d44
+--> a346cb0ef839
+[1/2] STEP 4/9: ENV CGO_ENABLED=1
+--> Using cache 0648f65d29624d286de53828f2ce3d314bc778d896fb4341103f04b6c54804d2
+--> 0648f65d2962
+[1/2] STEP 5/9: COPY go.mod ./
+--> Using cache 9fab23e5533b49e4cd7270abe41cacc948f2a4a01824bbc95debce426aa87d57
+--> 9fab23e5533b
+[1/2] STEP 6/9: COPY cmd ./cmd
+--> 98a35cd4a577
+[1/2] STEP 7/9: COPY internal ./internal
+--> 4cebf5a34102
+[1/2] STEP 8/9: COPY tests/fixtures ./tests/fixtures
+--> 2375dfde1f28
+[1/2] STEP 9/9: RUN go build -trimpath -ldflags="-s -w" -o /out/gophp ./cmd/gophp
+--> faa9f1cbaf0d
+[2/2] STEP 1/7: FROM alpine:3.24
+Resolved "alpine" as an alias (/usr/share/containers/registries.conf.d/000-shortnames.conf)
+Trying to pull docker.io/library/alpine:3.24...
+Getting image source signatures
+Copying blob sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00
+Copying config sha256:33bee74c45f307e3268adc2010c0f55c48e7a6041e12cd12432bb1a46e498e43
+Writing manifest to image destination
+[2/2] STEP 2/7: RUN apk add --no-cache sqlite-libs pcre2 ca-certificates
+(1/3) Installing ca-certificates (20261020-r0)
+(2/3) Installing pcre2 (10.49-r0)
+(3/3) Installing sqlite-libs (3.53.4-r0)
+Executing busybox-1.37.0-r31.trigger
+Executing ca-certificates-20261020-r0.trigger
+OK: 10.9 MiB in 19 packages
+--> dcd49f86889f
+[2/2] STEP 3/7: COPY --from=build /out/gophp /usr/local/bin/gophp
+--> 9b8533524a81
+[2/2] STEP 4/7: ENV LC_ALL=C LANG=C TZ=UTC
+--> 141ab9a75990
+[2/2] STEP 5/7: USER 65532:65532
+--> c2db4f8361f3
+[2/2] STEP 6/7: WORKDIR /workspace
+--> 3f06b9c4bf63
+[2/2] STEP 7/7: ENTRYPOINT ["/usr/local/bin/gophp"]
+[2/2] COMMIT localhost/gophp:v1
+--> 3fa93f65d40c
+Successfully tagged localhost/gophp:v1
+3fa93f65d40c09ece3f148792e0f5813d827cc162f408357db6729a7f0950d44

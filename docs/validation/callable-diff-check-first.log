@@ -1,0 +1,3 @@
+command=git diff --check
+docs/phase2-design.md:199: new blank line at EOF.
+exit_code=2

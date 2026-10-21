@@ -1,0 +1,7 @@
+=== RUN   TestFixedLaravelCustomCommand
+--- PASS: TestFixedLaravelCustomCommand (0.94s)
+PASS
+ok  	example.com/gophp/cmd/gophp	1.061s
+
+command: go test ./cmd/gophp -run ^TestFixedLaravelCustomCommand$ -count=1 -v
+exit_code: 0

@@ -63,7 +63,10 @@ func validateUnset(x expr) *runtimeError {
 		return validateExpression(n.key, false)
 	case propertyExpr:
 		// $this may be the receiver, even though it cannot itself be unset.
-		return validateExpression(n.base, false)
+		if err := validateExpression(n.base, false); err != nil {
+			return err
+		}
+		return validateExpression(n.nameExpr, false)
 	}
 	return nil
 }
@@ -97,16 +100,24 @@ func (e *evaluator) quietAccess(x expr, final bool) (value, error) {
 	}
 	switch n := x.(type) {
 	case staticPropertyExpr:
-		class, err := e.resolveClassName(n.className, n.line)
+		class, err := e.resolveStaticClass(n.className, n.classExpr, n.line)
 		if err != nil {
 			return value{}, err
 		}
-		if class.staticProperties[n.name] == nil {
+		name, err := e.staticMemberName(n.name, n.nameExpr, n.line)
+		if err != nil {
+			return value{}, err
+		}
+		if class.staticProperties[name] == nil {
 			return value{}, nil
 		}
+		n.className, n.classExpr, n.name, n.nameExpr = class.name, nil, name, nil
 		loc, err := e.staticPropertyLocation(n)
 		if err != nil {
 			return value{}, err
+		}
+		if !class.staticProperties[name].initialized {
+			return value{}, nil
 		}
 		return loc.get(), nil
 	case variable:
@@ -120,6 +131,11 @@ func (e *evaluator) quietAccess(x expr, final bool) (value, error) {
 		if err != nil {
 			return value{}, err
 		}
+		name, err := e.instancePropertyName(n.name, n.nameExpr, n.line)
+		if err != nil {
+			return value{}, err
+		}
+		n.name = name
 		if base.kind != objectKind {
 			return value{}, nil
 		}
@@ -155,6 +171,24 @@ func (e *evaluator) quietAccess(x expr, final bool) (value, error) {
 			v, _ := base.a.get(k)
 			return v, nil
 		case objectKind:
+			if classImplements(base.o.class, "ArrayAccess") {
+				existsMethod := e.lookupMethod(base.o.class, "offsetExists")
+				if existsMethod == nil {
+					return value{}, &runtimeError{n.line, "Error", "ArrayAccess::offsetExists() is missing"}
+				}
+				exists, callErr := e.invoke(base, existsMethod, []callArgument{{value: key, line: n.line}}, n.line)
+				if callErr != nil {
+					return value{}, callErr
+				}
+				if !exists.truthy() {
+					return value{kind: nullKind}, nil
+				}
+				getMethod := e.lookupMethod(base.o.class, "offsetGet")
+				if getMethod == nil {
+					return value{}, &runtimeError{n.line, "Error", "ArrayAccess::offsetGet() is missing"}
+				}
+				return e.invoke(base, getMethod, []callArgument{{value: key, line: n.line}}, n.line)
+			}
 			return value{}, &runtimeError{n.line, "Error", "Cannot use object of type " + base.o.className() + " as array"}
 		case stringKind:
 			if key.kind == arrayKind || key.kind == objectKind {
@@ -238,6 +272,13 @@ func (e *evaluator) unset(x expr) error {
 		e.deleteVariable(v.token.text)
 		return nil
 	}
+	if hasDynamicPropertyTarget(x) {
+		// unsetLocation already resolves each component once and performs its
+		// quiet receiver fetch. Preparing it as an assignment would warn for
+		// an undefined receiver before unset gets to suppress that warning.
+		_, err := e.unsetLocation(x, true)
+		return err
+	}
 	prepared, err := e.prepareTarget(x)
 	if err != nil {
 		return err
@@ -246,10 +287,20 @@ func (e *evaluator) unset(x expr) error {
 	return err
 }
 
+func hasDynamicPropertyTarget(x expr) bool {
+	switch n := x.(type) {
+	case propertyExpr:
+		return n.nameExpr != nil || hasDynamicPropertyTarget(n.base)
+	case offsetExpr:
+		return hasDynamicPropertyTarget(n.base)
+	}
+	return false
+}
+
 // Resolve an unset path without creating missing containers. Intermediate
 // locations allow nested array deletion to copy only the affected array path.
 func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
-	noop := location{func() value { return value{} }, func(value) error { return nil }}
+	noop := location{func() value { return value{} }, func(value) error { return nil }, false}
 	switch n := x.(type) {
 	case staticPropertyExpr:
 		return e.staticPropertyLocation(n)
@@ -257,7 +308,7 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 		if _, exists := e.readVariable(n.token.text); !exists {
 			e.warn(n.token.line, "Undefined variable $"+n.token.text)
 		}
-		return e.variableSlot(n.token.text), nil
+		return e.variableSlotAt(n.token.text, n.token.line), nil
 	case propertyExpr:
 		var base value
 		var err error
@@ -277,17 +328,37 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 		if err != nil {
 			return noop, err
 		}
+		name, err := e.instancePropertyName(n.name, n.nameExpr, n.line)
+		if err != nil {
+			return noop, err
+		}
+		n.name = name
 		if base.kind != objectKind {
 			return noop, nil
+		}
+		if base.o.enumCase != "" {
+			return noop, &runtimeError{n.line, "Error", "Cannot unset readonly property " + base.o.className() + "::$" + n.name}
 		}
 		k, err := e.propertyKey(base.o, n.name, n.line)
 		if err != nil {
 			return noop, err
 		}
+		property := propertyForKey(base.o, k)
+		if remove && property != nil && (property.readonly || property.owner.readonly) {
+			if _, initialized := base.o.properties.get(k); initialized {
+				return noop, &runtimeError{n.line, "Error", "Cannot unset readonly property " + property.owner.name + "::$" + property.name}
+			}
+			if !e.canInitializeReadonlyProperty(property) {
+				return noop, e.readonlyScopeError(property, n.line, "unset")
+			}
+		}
 		if remove {
+			if old, ok := base.o.properties.getRaw(k); ok && old.kind == refKind && property != nil && property.typeName != "" {
+				old.ref.removeSource(propertyReferenceSource{property: *property, object: base.o, key: k})
+			}
 			base.o.properties = base.o.properties.without(k)
 		}
-		return location{func() value { v, _ := base.o.properties.get(k); return v }, func(v value) error { base.o.properties = base.o.properties.with(k, v); return nil }}, nil
+		return location{func() value { v, _ := base.o.properties.get(k); return v }, func(v value) error { return e.storeObjectProperty(base.o, k, property, v, n.line) }, false}, nil
 	case offsetExpr:
 		parent, err := e.unsetLocation(n.base, false)
 		if err != nil {
@@ -297,6 +368,25 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 		key, err := e.eval(n.key)
 		if err != nil {
 			return noop, err
+		}
+		if base.kind == objectKind && base.o != nil && classImplements(base.o.class, "ArrayAccess") {
+			if remove {
+				method := e.lookupMethod(base.o.class, "offsetUnset")
+				_, err := e.invoke(base, method, []callArgument{{value: key, line: n.line}}, n.line)
+				return noop, err
+			}
+			return location{get: func() value {
+				method := e.lookupMethod(base.o.class, "offsetGet")
+				v, callErr := e.invoke(base, method, []callArgument{{value: key, line: n.line}}, n.line)
+				if callErr != nil {
+					e.pendingDiagnostic = callErr
+				}
+				return v
+			}, set: func(v value) error {
+				method := e.lookupMethod(base.o.class, "offsetSet")
+				_, callErr := e.invoke(base, method, []callArgument{{value: key, line: n.line}, {value: v, line: n.line}}, n.line)
+				return callErr
+			}}, nil
 		}
 		if base.kind != arrayKind {
 			switch base.kind {
@@ -319,7 +409,7 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 			return noop, err
 		}
 		if remove {
-			base.a = base.a.without(k)
+			base.a = e.arrayCopyForWrite(base.a).without(k)
 			if err = parent.set(base); err != nil {
 				return noop, err
 			}
@@ -336,9 +426,12 @@ func (e *evaluator) unsetLocation(x expr, remove bool) (location, error) {
 			if latest.kind != arrayKind {
 				return nil
 			}
-			latest.a = latest.a.with(k, v)
+			latest.a, err = e.arrayWithAssigned(latest.a, k, v, n.line)
+			if err != nil {
+				return err
+			}
 			return parent.set(latest)
-		}}, nil
+		}, false}, nil
 	}
 	return noop, fmt.Errorf("unsupported unset target")
 }

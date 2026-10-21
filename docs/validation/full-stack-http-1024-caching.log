@@ -1,0 +1,7 @@
+command: GOPHP_HTTP_STRESS_REQUESTS=1024 go test ./cmd/gophp -run TestFixedLaravelProbeThroughHTTPBridge -count=1 -v
+=== RUN   TestFixedLaravelProbeThroughHTTPBridge
+    main_test.go:399: sustained requests=1024 duration=7m59.605617166s heap_alloc_before=908936 heap_alloc_after=705504
+--- PASS: TestFixedLaravelProbeThroughHTTPBridge (502.22s)
+PASS
+ok  	example.com/gophp/cmd/gophp	502.391s
+exit_code: 0

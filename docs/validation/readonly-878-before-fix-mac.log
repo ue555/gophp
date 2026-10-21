@@ -1,0 +1,12 @@
+== 8.3.35
+ERROR /Users/kouji/dev/php/tests/fixtures/success/readonly_class_trait_property.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+DIFF /Users/kouji/dev/php/tests/fixtures/success/readonly_private_child_scope.php
+876 matched, 1 different, 1 errors; 878 fixtures
+== 8.4.26
+ERROR /Users/kouji/dev/php/tests/fixtures/success/readonly_class_trait_property.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+DIFF /Users/kouji/dev/php/tests/fixtures/success/readonly_private_child_scope.php
+876 matched, 1 different, 1 errors; 878 fixtures
+== 8.5.11
+ERROR /Users/kouji/dev/php/tests/fixtures/success/readonly_class_trait_property.php: success fixture must exit 0 in both interpreters (PHP 255, Go 0)
+DIFF /Users/kouji/dev/php/tests/fixtures/success/readonly_private_child_scope.php
+876 matched, 1 different, 1 errors; 878 fixtures

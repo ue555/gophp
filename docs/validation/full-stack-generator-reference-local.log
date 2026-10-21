@@ -1,0 +1,119 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_aggregate.php
+php_target: 8.3
+fixture: success/generator_reference_aggregate.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_array.php
+php_target: 8.3
+fixture: success/generator_reference_array.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_basic.php
+php_target: 8.3
+fixture: success/generator_reference_basic.php
+go_stdout: '2|1|0|'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_reject.php
+php_target: 8.3
+fixture: success/generator_reference_reject.php
+go_stdout: 'caught'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_value_read.php
+php_target: 8.3
+fixture: success/generator_reference_value_read.php
+go_stdout: '1|integer|1'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_aggregate.php
+php_target: 8.4
+fixture: success/generator_reference_aggregate.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_array.php
+php_target: 8.4
+fixture: success/generator_reference_array.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_basic.php
+php_target: 8.4
+fixture: success/generator_reference_basic.php
+go_stdout: '2|1|0|'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_reject.php
+php_target: 8.4
+fixture: success/generator_reference_reject.php
+go_stdout: 'caught'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_value_read.php
+php_target: 8.4
+fixture: success/generator_reference_value_read.php
+go_stdout: '1|integer|1'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_aggregate.php
+php_target: 8.5
+fixture: success/generator_reference_aggregate.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_array.php
+php_target: 8.5
+fixture: success/generator_reference_array.php
+go_stdout: '11|12'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_basic.php
+php_target: 8.5
+fixture: success/generator_reference_basic.php
+go_stdout: '2|1|0|'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_reject.php
+php_target: 8.5
+fixture: success/generator_reference_reject.php
+go_stdout: 'caught'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True
+
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_value_read.php
+php_target: 8.5
+fixture: success/generator_reference_value_read.php
+go_stdout: '1|integer|1'
+go_stderr: ''
+exit_code: 0
+local_expected_match: True

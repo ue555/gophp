@@ -24,11 +24,17 @@ func (e *evaluator) bitwise(op string, left, right value, line int) (value, erro
 		}
 		return value{kind: stringKind, s: string(out)}, nil
 	}
-	a, ok := e.integerOperand(left, line)
+	a, ok, err := e.integerOperand(left, line)
+	if err != nil {
+		return value{}, err
+	}
 	if !ok {
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %s %s", left.typeName(), op, right.typeName())}
 	}
-	b, ok := e.integerOperand(right, line)
+	b, ok, err := e.integerOperand(right, line)
+	if err != nil {
+		return value{}, err
+	}
 	if !ok {
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %s %s", left.typeName(), op, right.typeName())}
 	}
@@ -60,6 +66,9 @@ func (e *evaluator) bitwiseNot(v value, line int) (value, error) {
 	if v.kind != intKind && v.kind != floatKind {
 		return value{}, &runtimeError{line, "TypeError", "Cannot perform bitwise not on " + v.typeName()}
 	}
-	i, _ := e.integerOperand(v, line)
+	i, _, err := e.integerOperand(v, line)
+	if err != nil {
+		return value{}, err
+	}
 	return integer(^i), nil
 }

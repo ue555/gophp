@@ -18,7 +18,7 @@ make container-run
 Podman machineが停止している場合は、先に `podman machine start` を実行してください。
 初回ビルドではGoのベースイメージを取得します。ホスト側にGoは不要です。
 `container-check` はホストのPython 3を使用します。
-ビルドはコンテナ内でGoテストを実行し、成功した場合に実行ファイルを作ります。
+ビルドはコンテナ内で実行ファイルを作ります。全件テストは固定vendorの導入後に`make test`またはCIで実行します。
 Goのソースを変更したら `make container-build` でイメージを更新してください。
 
 イメージ名は `localhost/gophp:v1`。実行ごとにコンテナを作成し、終了後に削除します。
@@ -67,7 +67,7 @@ python3 -B containers/gophp/check.py --all
 
 通常のチェックは7fixtureを3設定で実行し、さらにヘルプ・引数不足の終了コードを検査します。
 日本語の出力、警告、構文／致命エラー、版によって異なる診断・構文を確認します。
-`--all` は`tests/fixtures/expected.json`に登録された全fixture（現在588件）を3設定で実行します。これは保存済み期待値との照合であり、[ホストの公式PHP全件比較](../../docs/validation/item7-588-user-comparison-after-fix.log)とは別です。
+`--all` は`tests/fixtures/expected.json`に登録された全fixtureを3設定で実行します。固定vendorを必要とするfixtureがあるため、先に[依存導入](../../docs/release-preparation.md)を行います。これは保存済み期待値との照合であり、公式PHPとの実比較とは別です。
 エラーを含めてstdout・stderrをバイト単位で比較し、終了コードも検査します。
 終了コードはチェック成功0、不一致1、コンテナ接続失敗等の検証エラー2です。
 
@@ -84,8 +84,9 @@ podman start php-version-83 php-version-84 php-version-85
 ## 構成と検証状況
 
 [Containerfile](Containerfile) は、Goの公式イメージ `golang:1.27.2-alpine3.24` で
-`CGO_ENABLED=0` のLinuxバイナリをビルドし、scratchイメージへコピーします。
-実行イメージにはgophpの実行ファイルだけを含め、UID/GID 65532で実行します。
+SQLite・PCRE2開発ライブラリと`CGO_ENABLED=1`でLinuxバイナリをビルドし、両ライブラリのランタイムを含むAlpineイメージへコピーします。
+UID/GID 65532で実行します。全件テストには固定vendorが必要なため、イメージ作成とは別に依存導入後の`make test`とCIで実行します。
+2026-10-21にLinux/arm64で実ビルドと21fixture実行・CLI確認2件が成功しました。[リリース準備の検証記録](../../docs/release-preparation.md)を参照してください。
 プロジェクトは読み取り専用、ネットワークなしで実行します。Webポートは使用しません。
 Apple SiliconではLinux/arm64、Intelの64ビット環境ではLinux/amd64のビルドを想定しています。
 ベースイメージのタグ・対応アーキテクチャは [Go公式イメージ定義](https://github.com/docker-library/official-images/blob/master/library/golang)、
@@ -94,7 +95,7 @@ Apple SiliconではLinux/arm64、Intelの64ビット環境ではLinux/amd64の�
 必要に応じてビルド・実行の両方に同じ `GOPHP_IMAGE` 環境変数を渡せます。
 別のGoイメージを使う場合は `./containers/gophp/build.sh --build-arg GO_IMAGE=...` を指定します。
 
-2026-10-12、このCodexセッションからのPodman接続は `operation not permitted` で拒否されました。
+以下は過去の検証記録です。2026-10-12、このCodexセッションからのPodman接続は `operation not permitted` で拒否されました。
 コンテナの実ビルド・実行・公式PHPとのコンテナ版実比較は未実施です。
 過去のホスト版の全1,398件一致とは区別します。ターミナルで上記のビルド・チェックを実行してください。
 

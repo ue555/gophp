@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/extract_refs_basic.php
+2|9|1|7|1|6|8|1|12|100
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/extract_refs_basic.php
+2|9|1|7|1|6|8|1|12|100
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/extract_refs_basic.php
+2|9|1|7|1|6|8|1|12|100
+exit_code: 0

@@ -1,0 +1,6 @@
+command: make build
+stdout:
+go build -o bin/gophp ./cmd/gophp
+
+stderr:
+exit_code: 0

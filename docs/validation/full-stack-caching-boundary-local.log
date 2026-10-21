@@ -1,0 +1,10 @@
+rvckn|10:0:vmorevckn|11:1:vend|8.3:caching_iterator_call_order
+65792:1|65536|0|b:1|end:256|8.3:caching_iterator_flags_transition
+0:end|0|65536:valid|65536|8.3:caching_iterator_private_flags
+rvckn|10:0:vmorevckn|11:1:vend|8.4:caching_iterator_call_order
+65792:1|65536|0|b:1|end:256|8.4:caching_iterator_flags_transition
+0:end|0|65536:valid|65536|8.4:caching_iterator_private_flags
+rvckn|10:0:vmorevckn|11:1:vend|8.5:caching_iterator_call_order
+65792:1|65536|0|b:1|end:256|8.5:caching_iterator_flags_transition
+0:end|0|65536:valid|65536|8.5:caching_iterator_private_flags
+exit_code: 0

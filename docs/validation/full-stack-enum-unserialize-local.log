@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/enum_unserialize_failure.php
+false|false|false|false|false|10|caught
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/enum_unserialize_failure.php
+false|false|false|false|false|10|caught
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/enum_unserialize_failure.php
+false|false|false|false|false|10|caught
+exit_code: 0

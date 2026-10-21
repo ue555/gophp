@@ -2,6 +2,7 @@ package php
 
 import (
 	"math"
+	"math/big"
 	"regexp"
 	"strconv"
 	"strings"
@@ -17,15 +18,20 @@ const (
 	boolKind
 	arrayKind
 	objectKind
+	// refKind is internal to variable and array-element bindings; evaluated PHP values never expose it.
+	refKind
+	resourceKind
 )
 
 type value struct {
-	kind valueKind
-	i    int64
-	f    float64
-	s    string
-	a    *phpArray
-	o    *phpObject
+	kind   valueKind
+	i      int64
+	f      float64
+	s      string
+	a      *phpArray
+	o      *phpObject
+	ref    *referenceCell
+	stream *phpStream
 }
 
 func integer(i int64) value    { return value{kind: intKind, i: i} }
@@ -55,6 +61,8 @@ func (v value) truthy() bool {
 		return len(v.a.entries) != 0
 	case objectKind:
 		return true
+	case resourceKind:
+		return true
 	}
 	panic("invalid value kind")
 }
@@ -75,6 +83,8 @@ func (v value) identical(other value) bool {
 		return v.s == other.s
 	case objectKind:
 		return v.o == other.o
+	case resourceKind:
+		return v.stream == other.stream
 	case arrayKind:
 		if v.a == other.a {
 			return true
@@ -84,7 +94,7 @@ func (v value) identical(other value) bool {
 		}
 		for i, entry := range v.a.entries {
 			otherEntry := other.a.entries[i]
-			if entry.key != otherEntry.key || !entry.value.identical(otherEntry.value) {
+			if entry.key != otherEntry.key || !dereference(entry.value).identical(dereference(otherEntry.value)) {
 				return false
 			}
 		}
@@ -93,6 +103,9 @@ func (v value) identical(other value) bool {
 	panic("invalid value kind")
 }
 func (v value) typeName() string {
+	if v.kind == resourceKind {
+		return "resource"
+	}
 	if v.kind == objectKind {
 		return v.o.className()
 	}
@@ -123,6 +136,36 @@ func parseNumber(s string) value {
 			return integer(n)
 		}
 	}
+	f, _ := strconv.ParseFloat(s, 64)
+	return floating(f)
+}
+
+func parseLiteralNumber(s string) value {
+	s = strings.ReplaceAll(s, "_", "")
+	if len(s) > 1 && s[0] == '0' && !strings.ContainsAny(s, ".eE") {
+		base := 8
+		digits := s[1:]
+		if len(s) > 2 && (s[1] == 'x' || s[1] == 'X') {
+			base, digits = 16, s[2:]
+		} else if len(s) > 2 && (s[1] == 'b' || s[1] == 'B') {
+			base, digits = 2, s[2:]
+		} else if len(s) > 2 && (s[1] == 'o' || s[1] == 'O') {
+			digits = s[2:]
+		}
+		if n, err := strconv.ParseInt(digits, base, 64); err == nil {
+			return integer(n)
+		}
+	}
+	if strings.HasPrefix(s, "0x") || strings.HasPrefix(s, "0X") {
+		if n, err := strconv.ParseInt(s[2:], 16, 64); err == nil {
+			return integer(n)
+		}
+	}
+	if !strings.ContainsAny(s, ".eE") {
+		if n, err := strconv.ParseInt(s, 10, 64); err == nil {
+			return integer(n)
+		}
+	}
 	// The caller validates syntax. Range errors intentionally produce +/-Inf,
 	// matching PHP's conversion to a double for out-of-range decimal values.
 	f, _ := strconv.ParseFloat(s, 64)
@@ -146,6 +189,8 @@ func (v value) text() string {
 		return "Array"
 	case floatKind:
 		return floatText(v.f, 14)
+	case resourceKind:
+		return "Resource id #1"
 	}
 	panic("invalid value kind")
 }
@@ -206,6 +251,13 @@ func arithmetic(op string, a, b value) value {
 	if a.kind == intKind && b.kind == intKind {
 		x, y := a.i, b.i
 		switch op {
+		case "**":
+			if y >= 0 && y <= 63 {
+				result := new(big.Int).Exp(big.NewInt(x), big.NewInt(y), nil)
+				if result.IsInt64() {
+					return integer(result.Int64())
+				}
+			}
 		case "+":
 			z := x + y
 			if !((y > 0 && z < x) || (y < 0 && z > x)) {
@@ -232,6 +284,8 @@ func arithmetic(op string, a, b value) value {
 	}
 	x, y := a.asFloat(), b.asFloat()
 	switch op {
+	case "**":
+		return floating(math.Pow(x, y))
 	case "+":
 		return floating(x + y)
 	case "-":

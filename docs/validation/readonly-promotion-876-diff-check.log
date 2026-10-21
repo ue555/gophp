@@ -1,0 +1,3 @@
+git diff --check exit=0
+final git diff --check exit=0
+post-doc git diff --check exit=0

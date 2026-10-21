@@ -1,0 +1,3 @@
+ok  	example.com/gophp/internal/php	0.271s [no tests to run]
+ok  	example.com/gophp/cmd/gophp	6.682s
+exit_code: 0

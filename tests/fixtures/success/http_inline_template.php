@@ -1,0 +1,1 @@
+A<?php if (true) { ?>B<?php } ?>C<?= 'D' ?>

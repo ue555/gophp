@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_default_fetch_mode.php
+4|assoc|num|3|rejected
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_default_fetch_mode.php
+4|assoc|num|3|rejected
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_default_fetch_mode.php
+4|assoc|num|3|rejected
+exit_code: 0

@@ -1,0 +1,21 @@
+command: GOPATH=/tmp/gophp-go-path GOCACHE=/tmp/gophp-go-cache go test ./cmd/gophp -run '^TestFixedLaravelCollectionPagination$' -count=1 -v
+=== RUN   TestFixedLaravelCollectionPagination
+=== RUN   TestFixedLaravelCollectionPagination/8.3
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+=== RUN   TestFixedLaravelCollectionPagination/8.4
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+=== RUN   TestFixedLaravelCollectionPagination/8.5
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+--- PASS: TestFixedLaravelCollectionPagination (5.31s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.3 (1.78s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.4 (1.76s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.5 (1.77s)
+PASS
+ok  	example.com/gophp/cmd/gophp	5.611s
+exit_code: 0

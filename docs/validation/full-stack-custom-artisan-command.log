@@ -1,0 +1,4 @@
+probe-ok
+
+command: APP_ENV=testing APP_KEY=<test-key> ./bin/gophp research/laravel-api/artisan gophp:probe
+exit_code: 0

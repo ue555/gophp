@@ -1,0 +1,3 @@
+command: GOPROXY=off make vet
+go vet ./...
+command exit: 0

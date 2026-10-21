@@ -1,0 +1,7 @@
+command: python3 -B -m unittest discover -s tests -p test_*.py
+............
+----------------------------------------------------------------------
+Ran 12 tests in 1.707s
+
+OK
+exit_code: 0

@@ -1,0 +1,12 @@
+8.3 runtime/error_handler_invalid_callable.php stderr MATCH exit 255
+8.3 runtime/error_handler_invalid_level.php stderr MATCH exit 255
+8.3 success/error_handler_mask.php stdout MATCH exit 0
+8.4 runtime/error_handler_invalid_callable.php stderr MATCH exit 255
+8.4 runtime/error_handler_invalid_level.php stderr MATCH exit 255
+8.4 success/error_handler_mask.php stdout MATCH exit 0
+8.5 runtime/error_handler_invalid_callable.php stderr MATCH exit 255
+8.5 runtime/error_handler_invalid_level.php stderr MATCH exit 255
+8.5 runtime/error_handler_user_fatal.php stderr MATCH exit 255
+8.5 success/error_handler_mask.php stdout MATCH exit 0
+saved_output_cases 10 differences 0
+saved output recheck exit=0

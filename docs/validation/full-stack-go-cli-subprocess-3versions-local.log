@@ -1,0 +1,47 @@
+command: python3 research/laravel-api/verify-gophp.py --cli-only
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.3 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 14.81ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 4.56ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.3 artisan gophp:probe
+exit_code: 0
+probe-ok
+PASS Go PHP 8.3: CLI migration, custom command, SQLite table
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 13.98ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 4.52ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.4 artisan gophp:probe
+exit_code: 0
+probe-ok
+PASS Go PHP 8.4: CLI migration, custom command, SQLite table
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.5 artisan migrate --force
+exit_code: 0
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 15.33ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 4.61ms DONE
+
+command: /Users/kouji/dev/php/bin/gophp --php-version=8.5 artisan gophp:probe
+exit_code: 0
+probe-ok
+PASS Go PHP 8.5: CLI migration, custom command, SQLite table
+exit_code: 0

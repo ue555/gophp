@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/array_walk_recursive_depth.php
+8|1
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/array_walk_recursive_depth.php
+8|1
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/array_walk_recursive_depth.php
+8|1
+exit_code: 0

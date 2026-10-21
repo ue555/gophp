@@ -1,0 +1,18 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/enum_serialization.php
+E:17:"SerialState:Ready";|same|same|done
+exit_code: 0
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/get_debug_type_basic.php
+null|bool|int|float|string|array|DebugSample|Closure|
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/enum_serialization.php
+E:17:"SerialState:Ready";|same|same|done
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/get_debug_type_basic.php
+null|bool|int|float|string|array|DebugSample|Closure|
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/enum_serialization.php
+E:17:"SerialState:Ready";|same|same|done
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/get_debug_type_basic.php
+null|bool|int|float|string|array|DebugSample|Closure|
+exit_code: 0

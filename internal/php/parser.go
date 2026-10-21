@@ -1,6 +1,7 @@
 package php
 
 import (
+	"fmt"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -21,6 +22,10 @@ type binary struct {
 	left, right expr
 }
 type assignment struct {
+	target, source expr
+	line           int
+}
+type referenceAssignment struct {
 	target, source expr
 	line           int
 }
@@ -49,7 +54,10 @@ type castExpr struct {
 	operand expr
 	line    int
 }
-type arrayElement struct{ key, value expr }
+type arrayElement struct {
+	key, value expr
+	byRef      bool
+}
 type arrayLiteral struct {
 	elements []arrayElement
 	line     int
@@ -59,12 +67,15 @@ type offsetExpr struct {
 	line      int
 }
 type propertyExpr struct {
-	base expr
-	name string
-	line int
+	base     expr
+	name     string
+	line     int
+	nameExpr expr
+	grouped  bool
 }
 type newObject struct {
 	name               string
+	anonymous          *classDecl
 	classExpr          expr
 	line               int
 	arguments, grouped bool
@@ -73,6 +84,7 @@ type newObject struct {
 type methodCall struct {
 	receiver expr
 	name     string
+	nameExpr expr
 	args     []expr
 	line     int
 }
@@ -80,6 +92,19 @@ type includeExpr struct {
 	kind string
 	path expr
 	line int
+}
+type yieldExpr struct {
+	key, item expr
+	from      bool
+	line      int
+}
+type cloneExpr struct {
+	operand expr
+	line    int
+}
+type dynamicVariable struct {
+	nameExpr expr
+	line     int
 }
 type instanceofExpr struct {
 	operand   expr
@@ -90,6 +115,10 @@ type instanceofExpr struct {
 type dynamicCall struct {
 	callee expr
 	args   []expr
+	line   int
+}
+type firstClassCallable struct {
+	callee expr
 	line   int
 }
 type unpackArgument struct {
@@ -107,55 +136,68 @@ type throwExpr struct {
 }
 type closureExpr struct {
 	method   *methodDecl
-	captures []string
+	captures []closureCapture
 	auto     bool
 	static   bool
 	line     int
 }
+
+type closureCapture struct {
+	name  string
+	byRef bool
+}
 type classNameExpr struct {
-	name string
-	line int
+	name    string
+	line    int
+	dynamic expr
 }
 type classConstantExpr struct {
 	className, name string
 	line            int
 }
 type staticPropertyExpr struct {
-	className, name string
-	line            int
+	className, name     string
+	line                int
+	classExpr, nameExpr expr
 }
 type staticCallExpr struct {
-	className, name string
-	args            []expr
-	line            int
+	className, name     string
+	args                []expr
+	line                int
+	classExpr, nameExpr expr
 }
 
-func (literal) expression()            {}
-func (variable) expression()           {}
-func (unary) expression()              {}
-func (binary) expression()             {}
-func (assignment) expression()         {}
-func (compoundAssignment) expression() {}
-func (increment) expression()          {}
-func (functionCall) expression()       {}
-func (languageExpr) expression()       {}
-func (castExpr) expression()           {}
-func (arrayLiteral) expression()       {}
-func (offsetExpr) expression()         {}
-func (propertyExpr) expression()       {}
-func (newObject) expression()          {}
-func (methodCall) expression()         {}
-func (includeExpr) expression()        {}
-func (instanceofExpr) expression()     {}
-func (dynamicCall) expression()        {}
-func (unpackArgument) expression()     {}
-func (namedArgument) expression()      {}
-func (throwExpr) expression()          {}
-func (closureExpr) expression()        {}
-func (classNameExpr) expression()      {}
-func (classConstantExpr) expression()  {}
-func (staticPropertyExpr) expression() {}
-func (staticCallExpr) expression()     {}
+func (literal) expression()             {}
+func (variable) expression()            {}
+func (unary) expression()               {}
+func (binary) expression()              {}
+func (assignment) expression()          {}
+func (referenceAssignment) expression() {}
+func (compoundAssignment) expression()  {}
+func (increment) expression()           {}
+func (functionCall) expression()        {}
+func (languageExpr) expression()        {}
+func (castExpr) expression()            {}
+func (arrayLiteral) expression()        {}
+func (offsetExpr) expression()          {}
+func (propertyExpr) expression()        {}
+func (newObject) expression()           {}
+func (yieldExpr) expression()           {}
+func (cloneExpr) expression()           {}
+func (dynamicVariable) expression()     {}
+func (methodCall) expression()          {}
+func (includeExpr) expression()         {}
+func (instanceofExpr) expression()      {}
+func (dynamicCall) expression()         {}
+func (firstClassCallable) expression()  {}
+func (unpackArgument) expression()      {}
+func (namedArgument) expression()       {}
+func (throwExpr) expression()           {}
+func (closureExpr) expression()         {}
+func (classNameExpr) expression()       {}
+func (classConstantExpr) expression()   {}
+func (staticPropertyExpr) expression()  {}
+func (staticCallExpr) expression()      {}
 
 // Boolean conversion opcodes in Zend use the line left by compiling their
 // operand. For this expression subset, that is the last operand's token line.
@@ -177,6 +219,8 @@ func expressionLine(expression expr) int {
 		return expressionLine(node.right)
 	case assignment:
 		return expressionLine(node.source)
+	case referenceAssignment:
+		return node.line
 	case compoundAssignment:
 		return expressionLine(node.source)
 	case increment:
@@ -199,9 +243,17 @@ func expressionLine(expression expr) int {
 		return node.line
 	case includeExpr:
 		return node.line
+	case yieldExpr:
+		return node.line
+	case cloneExpr:
+		return node.line
+	case dynamicVariable:
+		return node.line
 	case instanceofExpr:
 		return node.line
 	case dynamicCall:
+		return node.line
+	case firstClassCallable:
 		return node.line
 	case closureExpr:
 		return node.line
@@ -241,6 +293,7 @@ type statement struct {
 	function               *methodDecl
 	initial, update        []expr
 	keyTarget, valueTarget expr
+	foreachByRef           bool
 	line                   int
 	cases                  []switchCase
 	constant               *constantDecl
@@ -263,6 +316,9 @@ type parser struct {
 	strictTypes         bool
 	seenStrictTypes     bool
 	classDepth          int
+	currentClass        *classDecl
+	currentCallable     string
+	anonymousClasses    int
 	imports             map[string]map[string]string
 	declaredNames       map[string]map[string]bool
 }
@@ -340,6 +396,37 @@ func (p *parser) statements(end string) ([]statement, error) {
 }
 
 func (p *parser) statement() (statement, error) {
+	if p.current().kind == "#[" {
+		attributes, err := p.attributes()
+		if err != nil {
+			return statement{}, err
+		}
+		decl, err := p.statement()
+		if err != nil {
+			return decl, err
+		}
+		switch decl.kind {
+		case "class":
+			decl.class.attributes = attributes
+		case "function":
+			decl.function.attributes = attributes
+		default:
+			return statement{}, syntax(p.current().line, "Attributes can only be applied to declarations")
+		}
+		return decl, nil
+	}
+	if p.current().kind == "name" && p.pos+1 < len(p.tokens) && p.tokens[p.pos+1].kind == ":" {
+		label := p.advance()
+		p.advance()
+		return statement{kind: "label", names: []string{label.text}, line: label.line}, nil
+	}
+	if t := p.current(); p.acceptKeyword("goto") {
+		label := p.current()
+		if err := p.expect("name"); err != nil {
+			return statement{}, err
+		}
+		return statement{kind: "goto", names: []string{label.text}, line: t.line}, p.expect(";")
+	}
 	if t := p.current(); p.acceptKeyword("try") {
 		body, err := p.block()
 		if err != nil {
@@ -427,23 +514,57 @@ func (p *parser) statement() (statement, error) {
 		decl, err := p.classDeclaration("trait")
 		return statement{kind: "class", class: decl}, err
 	}
+	if p.acceptKeyword("enum") {
+		decl, err := p.classDeclaration("enum")
+		return statement{kind: "class", class: decl}, err
+	}
 	if p.acceptKeyword("final") {
+		readonly := p.acceptKeyword("readonly")
 		if !p.acceptKeyword("class") {
 			return statement{}, unexpected(p.current())
 		}
 		decl, err := p.classDeclaration("class")
 		if decl != nil {
 			decl.final = true
+			decl.readonly = readonly
+			if readonly && err == nil {
+				err = validateReadonlyClassDeclaration(decl)
+			}
+		}
+		return statement{kind: "class", class: decl}, err
+	}
+	if p.acceptKeyword("readonly") {
+		final := p.acceptKeyword("final")
+		abstract := false
+		if !final {
+			abstract = p.acceptKeyword("abstract")
+		}
+		if !p.acceptKeyword("class") {
+			return statement{}, unexpected(p.current())
+		}
+		decl, err := p.classDeclaration("class")
+		if decl != nil {
+			decl.readonly = true
+			decl.final = final
+			decl.abstract = abstract
+			if err == nil {
+				err = validateReadonlyClassDeclaration(decl)
+			}
 		}
 		return statement{kind: "class", class: decl}, err
 	}
 	if p.acceptKeyword("abstract") {
+		readonly := p.acceptKeyword("readonly")
 		if !p.acceptKeyword("class") {
 			return statement{}, unexpected(p.current())
 		}
 		decl, err := p.classDeclaration("class")
 		if decl != nil {
 			decl.abstract = true
+			decl.readonly = readonly
+			if readonly && err == nil {
+				err = validateReadonlyClassDeclaration(decl)
+			}
 		}
 		return statement{kind: "class", class: decl}, err
 	}
@@ -589,7 +710,10 @@ func (p *parser) block() ([]statement, error) {
 }
 
 const (
-	assignmentPrecedence = iota + 1
+	keywordOrPrecedence = iota + 1
+	keywordXorPrecedence
+	keywordAndPrecedence
+	assignmentPrecedence
 	ternaryPrecedence
 	coalescePrecedence
 	orPrecedence
@@ -606,10 +730,17 @@ const (
 	notPrecedence
 	instanceofPrecedence
 	unaryPrecedence
+	exponentPrecedence
 )
 
 func precedence(kind string) int {
 	switch kind {
+	case "or":
+		return keywordOrPrecedence
+	case "xor":
+		return keywordXorPrecedence
+	case "and":
+		return keywordAndPrecedence
 	case "=", "+=", "-=", "*=", "/=", "%=", ".=", "??=", "&=", "|=", "^=", "<<=", ">>=":
 		return assignmentPrecedence
 	case "?":
@@ -638,6 +769,8 @@ func precedence(kind string) int {
 		return addPrecedence
 	case "*", "/", "%":
 		return multiplyPrecedence
+	case "**":
+		return exponentPrecedence
 	default:
 		return 0
 	}
@@ -648,7 +781,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 	var left expr
 	switch t.kind {
 	case "number":
-		left = literal{parseNumber(t.text), t.line}
+		left = literal{parseLiteralNumber(t.text), t.line}
 	case "string":
 		left = literal{value{kind: stringKind, s: t.text}, t.line}
 	case "interpolated":
@@ -659,6 +792,12 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		}
 	case "variable":
 		left = variable{t}
+	case "$":
+		nameExpr, err := p.expression(unaryPrecedence, end...)
+		if err != nil {
+			return nil, err
+		}
+		left = dynamicVariable{nameExpr: nameExpr, line: t.line}
 	case "[":
 		var err error
 		left, err = p.arrayLiteral("]")
@@ -676,23 +815,9 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			if !equalName(name, "self") && !equalName(name, "parent") && !equalName(name, "static") {
 				name, _ = p.resolveName(name, "class")
 			}
-			member := p.current()
-			if p.acceptKeyword("class") {
-				left = classNameExpr{name, member.line}
-			} else if p.accept("variable") {
-				left = staticPropertyExpr{name, member.text, member.line}
-			} else if p.accept("name") {
-				if p.accept("(") {
-					args, err := p.arguments()
-					if err != nil {
-						return nil, err
-					}
-					left = staticCallExpr{name, member.text, args, member.line}
-				} else {
-					left = classConstantExpr{name, member.text, member.line}
-				}
-			} else {
-				return nil, unexpected(member, "name", "variable")
+			left, nameErr = p.staticMember(name, nil)
+			if nameErr != nil {
+				return nil, nameErr
 			}
 			break
 		}
@@ -705,6 +830,36 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			break
 		}
 		switch strings.ToLower(t.text) {
+		case "clone":
+			operand, err := p.expression(unaryPrecedence, end...)
+			if err != nil {
+				return nil, err
+			}
+			left = cloneExpr{operand: operand, line: t.line}
+		case "yield":
+			node := yieldExpr{line: t.line}
+			if p.acceptKeyword("from") {
+				node.from = true
+				var err error
+				node.item, err = p.expression(assignmentPrecedence, end...)
+				if err != nil {
+					return nil, err
+				}
+			} else if p.current().kind != ";" && p.current().kind != ")" && p.current().kind != "," {
+				var err error
+				node.item, err = p.expression(assignmentPrecedence, end...)
+				if err != nil {
+					return nil, err
+				}
+				if p.accept("=>") {
+					node.key = node.item
+					node.item, err = p.expression(assignmentPrecedence, end...)
+					if err != nil {
+						return nil, err
+					}
+				}
+			}
+			left = node
 		case "throw":
 			operand, err := p.expression(assignmentPrecedence, end...)
 			if err != nil {
@@ -713,6 +868,28 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			left = throwExpr{operand: operand, line: t.line}
 		case "__namespace__":
 			left = literal{value{kind: stringKind, s: p.namespace}, t.line}
+		case "__line__":
+			left = literal{integer(int64(t.line)), t.line}
+		case "__function__":
+			left = literal{value{kind: stringKind, s: p.currentCallable}, t.line}
+		case "__method__":
+			name := p.currentCallable
+			if p.currentClass != nil && name != "" {
+				name = p.currentClass.name + "::" + name
+			}
+			left = literal{value{kind: stringKind, s: name}, t.line}
+		case "__class__":
+			name := ""
+			if p.currentClass != nil {
+				name = p.currentClass.name
+			}
+			left = literal{value{kind: stringKind, s: name}, t.line}
+		case "__trait__":
+			name := ""
+			if p.currentClass != nil && p.currentClass.kind == "trait" {
+				name = p.currentClass.name
+			}
+			left = literal{value{kind: stringKind, s: name}, t.line}
 		case "__file__":
 			filename := p.filename
 			if canonical, err := filepath.EvalSymlinks(filename); err == nil {
@@ -760,10 +937,68 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			}
 		case "new":
 			name := p.current()
+			if p.acceptKeyword("class") {
+				arguments := p.accept("(")
+				var args []expr
+				if arguments {
+					var err error
+					args, err = p.arguments()
+					if err != nil {
+						return nil, err
+					}
+				}
+				p.anonymousClasses++
+				generated := fmt.Sprintf("class@anonymous:%s:%d:%d", p.filename, name.line, p.anonymousClasses)
+				decl, err := p.classDeclarationNamed("class", token{kind: "name", text: generated, line: name.line})
+				if err != nil {
+					return nil, err
+				}
+				left = newObject{name: decl.name, anonymous: decl, line: t.line, arguments: arguments, args: args}
+				break
+			}
 			var classExpr expr
-			if name.kind == "variable" {
+			if name.kind == "(" {
+				p.advance()
+				var err error
+				classExpr, err = p.expression(0, ")")
+				if err != nil {
+					return nil, err
+				}
+				if err := p.expect(")"); err != nil {
+					return nil, err
+				}
+			} else if name.kind == "variable" {
 				p.advance()
 				classExpr = variable{name}
+				for {
+					if p.accept("->") {
+						member := p.current()
+						if member.kind != "name" && member.kind != "variable" {
+							return nil, unexpected(member, "name", "variable")
+						}
+						p.advance()
+						property := propertyExpr{base: classExpr, line: member.line}
+						if member.kind == "name" {
+							property.name = member.text
+						} else {
+							property.nameExpr = variable{member}
+						}
+						classExpr = property
+						continue
+					}
+					if p.accept("[") {
+						key, keyErr := p.expression(0, "]")
+						if keyErr != nil {
+							return nil, keyErr
+						}
+						if err := p.expect("]"); err != nil {
+							return nil, err
+						}
+						classExpr = offsetExpr{base: classExpr, key: key, line: name.line}
+						continue
+					}
+					break
+				}
 			} else {
 				var err error
 				name, err = p.readName()
@@ -772,6 +1007,32 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 				}
 				if (equalName(name.text, "self") || equalName(name.text, "parent") || equalName(name.text, "static")) && p.classDepth == 0 {
 					return nil, &fatalDiagnostic{name.line, "Cannot use " + strings.ToLower(name.text) + " when no class scope is active"}
+				}
+				if p.accept("::") {
+					className := name.text
+					if !equalName(className, "self") && !equalName(className, "parent") && !equalName(className, "static") {
+						className, _ = p.resolveName(className, "class")
+					}
+					if p.current().kind == "variable" {
+						member := p.current()
+						p.advance()
+						classExpr = staticPropertyExpr{className: className, name: member.text, line: member.line}
+					} else {
+						classExpr, err = p.staticMember(className, nil)
+						if err != nil {
+							return nil, err
+						}
+					}
+					for p.accept("[") {
+						key, keyErr := p.expression(0, "]")
+						if keyErr != nil {
+							return nil, keyErr
+						}
+						if err := p.expect("]"); err != nil {
+							return nil, err
+						}
+						classExpr = offsetExpr{base: classExpr, key: key, line: name.line}
+					}
 				}
 			}
 			arguments := p.accept("(")
@@ -800,6 +1061,15 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			if err != nil {
 				return nil, err
 			}
+		case "list":
+			if err := p.expect("("); err != nil {
+				return nil, err
+			}
+			var err error
+			left, err = p.arrayLiteral(")")
+			if err != nil {
+				return nil, err
+			}
 		case "static":
 			if p.acceptKeyword("fn") {
 				var err error
@@ -818,7 +1088,32 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 				return nil, err
 			}
 		default:
+			if strings.EqualFold(t.text, "eval") && p.accept("(") {
+				args, err := p.arguments()
+				if err != nil {
+					return nil, err
+				}
+				left = functionCall{name: "eval", args: args, line: t.line}
+				break
+			}
+			if strings.EqualFold(t.text, "exit") || strings.EqualFold(t.text, "die") {
+				var args []expr
+				if p.accept("(") {
+					var err error
+					args, err = p.arguments()
+					if err != nil {
+						return nil, err
+					}
+				}
+				left = functionCall{name: strings.ToLower(t.text), args: args, line: t.line}
+				break
+			}
 			if p.accept("(") && !reservedName(t.text) {
+				if p.firstClassArgument() {
+					name, fallback := p.resolveName(t.text, "function")
+					left = firstClassCallable{callee: functionCall{name: name, line: t.line, fallback: fallback}, line: t.line}
+					break
+				}
 				args, err := p.arguments()
 				if err != nil {
 					return nil, err
@@ -842,7 +1137,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			return nil, syntax(t.line, "invalid increment/decrement target")
 		}
 		left = increment{target, t, false}
-	case "+", "-", "!", "~":
+	case "+", "-", "!", "~", "@":
 		prec := unaryPrecedence
 		if t.kind == "!" {
 			prec = notPrecedence
@@ -856,7 +1151,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		if p.current().kind == "name" && p.tokens[p.pos+1].kind == ")" {
 			name := strings.ToLower(p.current().text)
 			switch name {
-			case "bool", "int", "float", "string":
+			case "bool", "int", "float", "string", "array", "object":
 				p.advance()
 				p.advance()
 				operand, err := p.expression(unaryPrecedence, end...)
@@ -864,7 +1159,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 					return nil, err
 				}
 				left = castExpr{name, operand, t.line}
-			case "boolean", "integer", "double", "real", "binary", "array", "object", "unset":
+			case "boolean", "integer", "double", "real", "binary", "unset":
 				return nil, syntax(t.line, "unsupported cast (%s)", name)
 			}
 			if left != nil {
@@ -883,6 +1178,10 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			node.grouped = true
 			left = node
 		}
+		if node, ok := left.(propertyExpr); ok {
+			node.grouped = true
+			left = node
+		}
 		if node, ok := left.(ternaryExpr); ok {
 			node.grouped = true
 			left = node
@@ -896,6 +1195,21 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 	compared := 0
 	for {
 		op := p.current()
+		if op.kind == "name" {
+			switch strings.ToLower(op.text) {
+			case "and", "or", "xor":
+				op.kind = strings.ToLower(op.text)
+			}
+		}
+		if op.kind == "::" {
+			p.advance()
+			var err error
+			left, err = p.staticMember("", left)
+			if err != nil {
+				return nil, err
+			}
+			continue
+		}
 		if op.kind == "name" && strings.EqualFold(op.text, "instanceof") {
 			if instanceofPrecedence < min {
 				return left, nil
@@ -929,15 +1243,23 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			left = property
 			continue
 		}
-		if property, ok := left.(propertyExpr); ok && p.accept("(") {
+		if property, ok := left.(propertyExpr); ok && !property.grouped && p.accept("(") {
+			if p.firstClassArgument() {
+				left = firstClassCallable{callee: methodCall{receiver: property.base, name: property.name, nameExpr: property.nameExpr, line: property.line}, line: property.line}
+				continue
+			}
 			args, err := p.arguments()
 			if err != nil {
 				return nil, err
 			}
-			left = methodCall{property.base, property.name, args, property.line}
+			left = methodCall{receiver: property.base, name: property.name, nameExpr: property.nameExpr, args: args, line: property.line}
 			continue
 		}
 		if p.accept("(") {
+			if p.firstClassArgument() {
+				left = firstClassCallable{callee: left, line: op.line}
+				continue
+			}
 			args, err := p.arguments()
 			if err != nil {
 				return nil, err
@@ -967,14 +1289,31 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 			continue
 		}
 		if p.accept("->") || p.accept("?->") {
-			name := p.current()
-			if err := p.expect("name"); err != nil {
-				return nil, err
+			member := p.current()
+			var name string
+			var nameExpr expr
+			switch member.kind {
+			case "name":
+				name = p.advance().text
+			case "variable":
+				nameExpr = variable{p.advance()}
+			case "{":
+				p.advance()
+				var err error
+				nameExpr, err = p.expression(0, "}")
+				if err != nil {
+					return nil, err
+				}
+				if err := p.expect("}"); err != nil {
+					return nil, err
+				}
+			default:
+				return nil, unexpected(member, "name", "variable", "{")
 			}
 			if op.kind == "?->" {
-				left = nullsafeExpr{base: left, name: name.text, line: name.line}
+				left = nullsafeExpr{base: left, name: name, line: member.line, nameExpr: nameExpr}
 			} else {
-				left = propertyExpr{left, name.text, name.line}
+				left = propertyExpr{base: left, name: name, line: member.line, nameExpr: nameExpr}
 			}
 			continue
 		}
@@ -988,6 +1327,18 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		}
 		if precedence(op.kind) == assignmentPrecedence && writable(left) {
 			p.advance()
+			if op.kind == "=" && p.current().kind == "&" {
+				p.advance()
+				right, err := p.expression(assignmentPrecedence, end...)
+				if err != nil {
+					return nil, err
+				}
+				if !referenceTargetSyntax(left) || !referenceSourceSyntax(right) {
+					return nil, syntax(op.line, "gophp: unsupported reference assignment target")
+				}
+				left = referenceAssignment{left, right, op.line}
+				continue
+			}
 			right, err := p.expression(assignmentPrecedence, end...)
 			if err != nil {
 				return nil, err
@@ -1052,7 +1403,7 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		}
 		p.advance()
 		rightPrec := prec + 1
-		if op.kind == "??" {
+		if op.kind == "??" || op.kind == "**" {
 			rightPrec = prec
 		}
 		right, err := p.expression(rightPrec, end...)
@@ -1061,6 +1412,88 @@ func (p *parser) expression(min int, end ...string) (expr, error) {
 		}
 		left = binary{op, left, right}
 	}
+}
+
+// The scope token has been consumed. A bare $name denotes a property on a
+// read, but denotes a variable method name when followed by a call.
+func (p *parser) staticMember(className string, classExpr expr) (expr, error) {
+	member := p.current()
+	if member.kind == "name" && equalName(member.text, "class") {
+		p.advance()
+		if classExpr == nil {
+			return classNameExpr{name: className, line: member.line}, nil
+		}
+		return classNameExpr{line: member.line, dynamic: classExpr}, nil
+	}
+	var name string
+	var nameExpr expr
+	property := false
+	switch member.kind {
+	case "name":
+		p.advance()
+		name = member.text
+	case "variable":
+		p.advance()
+		name = member.text
+		property = true
+		if p.current().kind == "(" {
+			nameExpr = variable{member}
+		}
+	case "{":
+		p.advance()
+		var err error
+		nameExpr, err = p.expression(0, "}")
+		if err != nil {
+			return nil, err
+		}
+		if err = p.expect("}"); err != nil {
+			return nil, err
+		}
+	case "$":
+		p.advance()
+		if err := p.expect("{"); err != nil {
+			return nil, err
+		}
+		var err error
+		nameExpr, err = p.expression(0, "}")
+		if err != nil {
+			return nil, err
+		}
+		if err = p.expect("}"); err != nil {
+			return nil, err
+		}
+		property = true
+	default:
+		return nil, unexpected(member, "name", "variable")
+	}
+	if p.accept("(") {
+		if p.firstClassArgument() {
+			return firstClassCallable{callee: staticCallExpr{className: className, name: name, line: member.line, classExpr: classExpr, nameExpr: nameExpr}, line: member.line}, nil
+		}
+		args, err := p.arguments()
+		if err != nil {
+			return nil, err
+		}
+		return staticCallExpr{className: className, name: name, args: args, line: member.line, classExpr: classExpr, nameExpr: nameExpr}, nil
+	}
+	if property {
+		return staticPropertyExpr{className: className, name: name, line: member.line, classExpr: classExpr, nameExpr: nameExpr}, nil
+	}
+	if nameExpr != nil {
+		return nil, unexpected(p.current(), "(")
+	}
+	return classConstantExpr{className, name, member.line}, nil
+}
+
+// A sole ellipsis is the PHP 8.1+ first-class callable syntax, not an
+// unpacked argument. The opening parenthesis has already been consumed.
+func (p *parser) firstClassArgument() bool {
+	if p.current().kind != "..." || p.pos+1 >= len(p.tokens) || p.tokens[p.pos+1].kind != ")" {
+		return false
+	}
+	p.advance()
+	p.advance()
+	return true
 }
 
 // The opening parenthesis has already been consumed.
@@ -1114,12 +1547,30 @@ func writable(e expr) bool {
 	switch node := e.(type) {
 	case variable:
 		return true
+	case dynamicVariable:
+		return true
 	case staticPropertyExpr:
 		return true
 	case offsetExpr:
-		return writable(node.base)
+		if writable(node.base) {
+			return true
+		}
+		// PHP permits an offset write through a call result. Whether the
+		// returned value is writable is determined when the expression runs.
+		switch node.base.(type) {
+		case functionCall, methodCall, dynamicCall:
+			return true
+		}
+		return false
 	case propertyExpr:
 		return true
+	case arrayLiteral:
+		for _, element := range node.elements {
+			if element.value != nil && !writable(element.value) {
+				return false
+			}
+		}
+		return len(node.elements) != 0
 	}
 	return false
 }
@@ -1127,18 +1578,32 @@ func writable(e expr) bool {
 func (p *parser) arrayLiteral(end string) (expr, error) {
 	node := arrayLiteral{}
 	for p.current().kind != end {
+		if p.accept(",") {
+			node.elements = append(node.elements, arrayElement{})
+			continue
+		}
 		// At the start of an optional element (including after a comma),
 		// the closing delimiter is expected if the statement ends here.
 		if t := p.current(); t.kind == ";" || t.kind == "eof" {
 			return nil, unexpected(t, end)
 		}
+		unpack := p.accept("...")
+		byRef := p.accept("&")
 		v, err := p.expression(0)
 		if err != nil {
 			return nil, err
 		}
-		entry := arrayElement{value: v}
+		if unpack {
+			node.elements = append(node.elements, arrayElement{value: unpackArgument{operand: v, line: expressionLine(v)}})
+			if !p.accept(",") {
+				break
+			}
+			continue
+		}
+		entry := arrayElement{value: v, byRef: byRef}
 		if p.accept("=>") {
 			entry.key = v
+			entry.byRef = p.accept("&")
 			entry.value, err = p.expression(0)
 			if err != nil {
 				return nil, err

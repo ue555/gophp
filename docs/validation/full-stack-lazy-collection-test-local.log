@@ -1,0 +1,5 @@
+=== RUN   TestFixedLaravelLazyCollectionGenerators
+--- PASS: TestFixedLaravelLazyCollectionGenerators (0.08s)
+PASS
+ok  	example.com/gophp/cmd/gophp	0.445s
+exit_code: 0

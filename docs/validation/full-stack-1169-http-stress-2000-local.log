@@ -1,0 +1,5 @@
+command: GOPHP_HTTP_STRESS_REQUESTS=2000 GOCACHE=$PWD/.cache/go-build go test ./cmd/gophp -run ^TestFixedLaravelProbeThroughHTTPBridge$ -count=1 -v
+=== RUN   TestFixedLaravelProbeThroughHTTPBridge
+signal: interrupt
+FAIL	example.com/gophp/cmd/gophp	468.668s
+exit_code: 130 (重複検証を中断。既存の2000回成功ログを採用)

@@ -1,0 +1,14 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught Error: Call to undefined function extension_loaded() in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/polyfill-mbstring/bootstrap80.php:155
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/symfony/polyfill-mbstring/bootstrap.php(13): require()
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(41): require()
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(45): {closure:/Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:37}('0e6d7bf4a5811bf...', '/Users/kouji/de...')
+#3 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(22): ComposerAutoloaderInit9081827c28c13f81a15682fabebfd1c7::getLoader()
+#4 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/polyfill-mbstring/bootstrap80.php on line 155
+
+exit_code: 255

@@ -8,7 +8,7 @@
 
 2026-10-13 時点で `composer.lock` と `vendor/` は作成済みです。提供されたMacでの検証ログは3版でHTTP成功を示します。このエージェント環境からのPodmanソケット接続は `operation not permitted` で拒否されるため、今回ここでの再実行はできません。[依存コード調査](../../docs/dependency-audit.md)は実vendorの代表コードまで更新しています。
 
-このディレクトリには最小Laravelアプリも置いた。`bootstrap/app.php` は Laravel 12 形式で Composer autoload から起動し、`routes/api.php` は JSON 応答・SQLite保存/取得・入力検証を行う。`app/Models/Book.php` の `#[ApiResource]` は Laravel向けAPI Platformの公式統合方式に従う。`database/migrations/` は `books` の最小テーブルを作る。既存の比較用PHPコンテナは変更しない。
+このディレクトリには最小Laravelアプリも置いた。`bootstrap/app.php` は Laravel 12 形式で Composer autoload から起動し、`routes/api.php` は JSON 応答・SQLite保存/取得・入力検証を行う。`routes/console.php` はCLI統合確認用の`gophp:probe`を登録する。`app/Models/Book.php` の `#[ApiResource]` は Laravel向けAPI Platformの公式統合方式に従う。`database/migrations/` は `books` の最小テーブルを作る。既存の比較用PHPコンテナは変更しない。
 
 Macで既存の調査用イメージとvendorがある場合、HTTPの再検証は次のとおり。Podman VMが起動済みなら再起動せず、作成済みの比較コンテナを削除・初期化しない。ログを `tee` に渡すときは終了コードを直後に保存する。
 
@@ -38,6 +38,8 @@ done
 ```
 
 `verify.py` は版ごとに `.cache` 下の独立した一時SQLiteとファイルキャッシュを作り、migrate後にキャッシュを消去する。`package:discover`、`migrate`、`api-platform:install`、`metadata:dump --path=/probe/metadata.dump` を実行し、ダンプの実ファイルを確認してからHTTPとDB状態を検査する。一時DBとダンプは終了時に削除される。ダンプ生成とHTTP成功は別の判定である。
+
+Go製PHPの実CLI・実HTTPサーバーでも、[verify-gophp.py](verify-gophp.py)が版別の一時SQLite・storageを作り、migration、初期HTTP契約、API Platformの更新・削除・OpenAPI、DB行を検査する。さらにクエリ付きGET、96〜2000回の連続GET、8並列GETを確認し、起動したサーバーを停止してサーバー出力も検証ログへ含める。Goのin-process HTTPテストや公式PHPの`verify.py`とは別の証拠として扱う。[3設定の`--cli-only`実行](../../docs/validation/full-stack-go-cli-openapi-subprocess-3versions-local.log)では、別プロセスによるmigration・独自コマンド・OpenAPI出力とSQLiteテーブル作成が成功した。制限環境での[以前の8.4設定の試行](../../docs/validation/full-stack-1169-real-http-84-local.log)はポート確保で拒否された。その後Macでは[8.3](../../docs/validation/full-stack-real-http-83-mac.log)・[8.4](../../docs/validation/full-stack-real-http-84-mac.log)・[8.5](../../docs/validation/full-stack-real-http-85-mac.log)の実TCP検証が各2000回連続・8並列要求を含めて終了0。現行fixtureの[公式PHP3版各1169件一致](../../docs/full-stack-development.md)とは別の証拠として記録する。Macでのビルド、版別実行、ログ・終了コード保存手順は[進捗文書](../../docs/full-stack-development.md)に記録した。
 
 vendor監査では、`composer.lock` の全パッケージ名・版を `vendor/composer/installed.json` と照合し、autoloadとLaravel/API Platformの代表実コードを目視確認した。`audit-vendor.php` の構文候補とHTTP成功だけで個別の内部経路を実行確認済みとはしない。結果は[依存コード調査](../../docs/dependency-audit.md)に記録した。再監査は次のコマンドで、終了コードを直後に記録する。
 

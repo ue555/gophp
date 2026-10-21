@@ -1,0 +1,7 @@
+command: GOPHP_HTTP_STRESS_REQUESTS=2000 GOCACHE=$PWD/.cache/go-build go test ./cmd/gophp -run ^TestFixedLaravelProbeThroughHTTPBridge$ -count=1 -v -timeout 20m
+=== RUN   TestFixedLaravelProbeThroughHTTPBridge
+    main_test.go:480: sustained requests=2000 duration=18m45.033379292s heap_alloc_before=865448 heap_alloc_after=744720
+--- PASS: TestFixedLaravelProbeThroughHTTPBridge (1147.69s)
+PASS
+ok  	example.com/gophp/cmd/gophp	1147.845s
+exit_code: 0

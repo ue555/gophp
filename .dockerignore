@@ -1,0 +1,14 @@
+.cache
+.git
+.agents
+.codex
+.aws
+bin
+**/__pycache__
+**/*.pyc
+
+**/.env
+**/.env.*
+research/laravel-api/vendor
+research/laravel-api/storage
+research/laravel-api/bootstrap/cache

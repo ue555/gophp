@@ -3,6 +3,7 @@ package php
 import (
 	"strconv"
 	"strings"
+	"unicode/utf8"
 )
 
 type stringPart struct {
@@ -49,6 +50,8 @@ func interpolationAccess(x expr) bool {
 		return n.key != nil && interpolationAccess(n.base)
 	case propertyExpr:
 		return interpolationAccess(n.base)
+	case methodCall:
+		return interpolationAccess(n.receiver)
 	}
 	return false
 }
@@ -135,7 +138,21 @@ func (l *lexer) stringContents(terminator byte, line int) (token, error) {
 				}
 			case 'u':
 				if l.pos < len(l.source) && l.source[l.pos] == '{' {
-					return t, syntax(l.line, "unsupported syntax: Unicode codepoint escape")
+					l.take()
+					from := l.pos
+					for l.pos < len(l.source) && hex(l.source[l.pos]) {
+						l.take()
+					}
+					if from == l.pos || l.pos >= len(l.source) || l.source[l.pos] != '}' {
+						return t, syntax(l.line, "Invalid UTF-8 codepoint escape sequence")
+					}
+					code, err := strconv.ParseUint(l.source[from:l.pos], 16, 32)
+					l.take()
+					if err != nil || code > utf8.MaxRune || code >= 0xD800 && code <= 0xDFFF {
+						return t, syntax(l.line, "Invalid UTF-8 codepoint escape sequence")
+					}
+					b.WriteRune(rune(code))
+					break
 				}
 				b.WriteString(`\u`)
 			default:
@@ -338,7 +355,7 @@ func (l *lexer) heredoc() (token, error) {
 			if quote == '\'' {
 				return token{kind: "string", text: body, line: line}, nil
 			}
-			child := lexer{source: body, line: bodyLine}
+			child := lexer{source: body, line: bodyLine, phpMode: true}
 			return child.stringContents(0, line)
 		}
 		for l.pos < len(l.source) && l.take() != '\n' {

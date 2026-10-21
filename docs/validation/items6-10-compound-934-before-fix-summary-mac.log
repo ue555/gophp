@@ -1,0 +1,9 @@
+== 8.3.35
+DIFF /Users/kouji/dev/php/tests/fixtures/success/integration_compound_failure_state.php
+933 matched, 1 different, 0 errors; 934 fixtures
+== 8.4.26
+DIFF /Users/kouji/dev/php/tests/fixtures/success/integration_compound_failure_state.php
+933 matched, 1 different, 0 errors; 934 fixtures
+== 8.5.11
+DIFF /Users/kouji/dev/php/tests/fixtures/success/integration_compound_failure_state.php
+933 matched, 1 different, 0 errors; 934 fixtures

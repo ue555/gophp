@@ -1,0 +1,11 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/artisan list
+exit_code: 0
+stdout:
+
+In Finder.php line 783:
+                                                
+  Class "RecursiveDirectoryIterator" not found  
+                                                
+
+
+stderr:

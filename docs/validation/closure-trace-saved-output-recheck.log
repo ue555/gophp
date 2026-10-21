@@ -1,0 +1,3 @@
+PHP 8.4 saved stdout bytes=145 Go exact match=True stderr=b'' exit=0
+PHP 8.5 saved stdout bytes=145 Go exact match=True stderr=b'' exit=0
+saved-output recheck exit=0

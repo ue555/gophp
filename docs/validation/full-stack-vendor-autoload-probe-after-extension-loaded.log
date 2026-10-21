@@ -1,0 +1,13 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught ParseError: unsupported numeric literal in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/polyfill-php84/bootstrap.php:20
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(41): require()
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(45): {closure:/Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:37}('9d2b9fc6db0f153...', '/Users/kouji/de...')
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(22): ComposerAutoloaderInit9081827c28c13f81a15682fabebfd1c7::getLoader()
+#3 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/polyfill-php84/bootstrap.php on line 20
+
+exit_code: 255

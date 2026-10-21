@@ -1,0 +1,1 @@
+<?php $visits++; return $visits;

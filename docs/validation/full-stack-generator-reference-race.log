@@ -1,0 +1,4 @@
+ok  	example.com/gophp/internal/php	3.056s
+
+command: GOCACHE="$PWD/.cache/go-build" go test -race ./internal/php -run "^TestFixtures$" -count=1
+exit_code: 0

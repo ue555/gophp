@@ -1,0 +1,11 @@
+command: DB_CONNECTION=sqlite DB_DATABASE=/tmp/gophp-migrate.GZUU6e/database.sqlite ./bin/gophp research/laravel-api/artisan migrate --force
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 15.23ms DONE
+
+   INFO  Running migrations.  
+
+  2026_10_12_000000_create_books_table ........................... 4.83ms DONE
+
+exit_code: 0

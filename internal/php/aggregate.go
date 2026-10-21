@@ -3,8 +3,10 @@ package php
 import (
 	"fmt"
 	"math"
+	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type arrayKey struct {
@@ -16,9 +18,11 @@ type arrayEntry struct {
 	key   arrayKey
 	value value
 }
+type priorityEntry struct{ data, priority value }
 
-// Arrays are immutable after publication. Each write copies the affected path;
-// nested arrays have value semantics, while objects retain shared identity.
+// Array containers copy on write. References stored in entries retain shared
+// cells across container copies; nested arrays have value semantics, while
+// objects retain shared identity.
 type phpArray struct {
 	entries []arrayEntry
 	next    int64
@@ -26,10 +30,64 @@ type phpArray struct {
 	full    bool
 }
 type phpObject struct {
-	properties *phpArray
-	class      *classDecl
-	closure    *phpClosure
-	exception  *exceptionData
+	dom                *domNode
+	pdo                *sqliteConnection
+	pdoStatement       *sqliteStatement
+	dateTime           *time.Time
+	timezone           *time.Location
+	weakMap            map[*phpObject]value
+	objectStorage      map[*phpObject]value
+	properties         *phpArray
+	class              *classDecl
+	enumCase           string
+	closure            *phpClosure
+	exception          *exceptionData
+	generator          *phpGenerator
+	reflected          *classDecl
+	reflectedMethod    *methodDecl
+	reflectedProperty  *propertyDecl
+	reflectedClosure   *phpClosure
+	reflectedAttribute *attributeDecl
+	attributeScope     *classDecl
+	reflectedParameter *parameter
+	reflectedOwner     *classDecl
+	reflectedTypeName  string
+	reflectedNullable  bool
+	iteratorArray      *phpArray
+	iteratorIndex      int
+	iteratorInner      value
+	iteratorReady      bool
+	iteratorOffset     int64
+	iteratorLimit      int64
+	iteratorPosition   int64
+	appendIterators    []value
+	appendIndex        int
+	appendReady        bool
+	cachingFlags       int64
+	cachingCurrent     value
+	cachingKey         value
+	cachingValid       bool
+	cachingArray       *phpArray
+	cachingText        string
+	filterInner        value
+	filterValid        bool
+	regexPattern       string
+	regexCompiled      *regexp.Regexp
+	regexExclude       *regexp.Regexp
+	regexMode          int64
+	regexCurrent       value
+	filePath           string
+	directoryPath      string
+	directorySubPath   string
+	directoryEntries   []string
+	directoryIndex     int
+	directoryFlags     int64
+	recursiveItems     []recursiveItem
+	recursiveIndex     int
+	recursiveInner     value
+	priorityItems      []priorityEntry
+	priorityFlags      int64
+	priorityIndex      int64
 }
 
 func (o *phpObject) className() string {
@@ -39,12 +97,12 @@ func (o *phpObject) className() string {
 	return o.class.name
 }
 
-func (o *phpObject) dynamicProperty(name string) bool {
+func (o *phpObject) dynamicProperty(name string, scope *classDecl) bool {
 	if o.class == nil || strings.EqualFold(o.class.name, "stdClass") {
 		return false
 	}
 	for _, property := range o.class.properties {
-		if property.name == name {
+		if !property.static && property.name == name && (property.visibility != "private" || property.owner == scope) {
 			return false
 		}
 	}
@@ -61,6 +119,10 @@ func (a *phpArray) find(k arrayKey) int {
 	return -1
 }
 func (a *phpArray) get(k arrayKey) (value, bool) {
+	v, ok := a.getRaw(k)
+	return dereference(v), ok
+}
+func (a *phpArray) getRaw(k arrayKey) (value, bool) {
 	if i := a.find(k); i >= 0 {
 		return a.entries[i].value, true
 	}
@@ -97,7 +159,9 @@ func (e *evaluator) arrayKey(v value, line int) (arrayKey, error) {
 		return arrayKey{index: v.i}, nil
 	case nullKind:
 		if e.version == PHP85 {
-			e.diagnostic("Deprecated", line, "Using null as an array offset is deprecated, use an empty string instead")
+			if err := e.diagnostic("Deprecated", line, "Using null as an array offset is deprecated, use an empty string instead"); err != nil {
+				return arrayKey{}, err
+			}
 		}
 		return arrayKey{isString: true}, nil
 	case stringKind:
@@ -110,12 +174,16 @@ func (e *evaluator) arrayKey(v value, line int) (arrayKey, error) {
 		n := floatToInt(v.f)
 		outOfRange := math.IsNaN(v.f) || math.IsInf(v.f, 0) || v.f >= math.Ldexp(1, 63) || v.f < -math.Ldexp(1, 63)
 		if e.version == PHP85 && outOfRange {
-			e.warn(line, fmt.Sprintf("The float %s is not representable as an int, cast occurred", floatText(v.f, -1)))
+			if err := e.warn(line, fmt.Sprintf("The float %s is not representable as an int, cast occurred", floatText(v.f, -1))); err != nil {
+				return arrayKey{}, err
+			}
 		}
 		// Zend's range macro regards NaN as in range (both ordered tests are
 		// false), so 8.5 emits the precision deprecation after its warning.
 		if float64(n) != v.f && (e.version != PHP85 || !outOfRange || math.IsNaN(v.f)) {
-			e.diagnostic("Deprecated", line, fmt.Sprintf("Implicit conversion from float %s to int loses precision", floatText(v.f, -1)))
+			if err := e.diagnostic("Deprecated", line, fmt.Sprintf("Implicit conversion from float %s to int loses precision", floatText(v.f, -1))); err != nil {
+				return arrayKey{}, err
+			}
 		}
 		return arrayKey{index: n}, nil
 	default:
@@ -141,7 +209,68 @@ func floatToInt(f float64) int64 {
 func (e *evaluator) evalArray(node arrayLiteral) (value, error) {
 	result := arrayValue()
 	for _, element := range node.elements {
+		if spread, ok := element.value.(unpackArgument); ok {
+			iterable, err := e.eval(spread.operand)
+			if err != nil {
+				return value{}, err
+			}
+			if iterable.kind == objectKind && iterable.o != nil && classImplements(iterable.o.class, "Traversable") {
+				iterable, err = e.iteratorToArrayValue(iterable, true, spread.line)
+				if err != nil {
+					return value{}, err
+				}
+			}
+			if iterable.kind != arrayKind {
+				return value{}, &runtimeError{spread.line, "Error", "Only arrays and Traversables can be unpacked"}
+			}
+			for _, entry := range iterable.a.entries {
+				key := entry.key
+				if !key.isString {
+					key, err = result.a.appendKey(spread.line)
+					if err != nil {
+						return value{}, err
+					}
+				}
+				result.a = result.a.with(key, dereference(entry.value))
+			}
+			continue
+		}
 		line := expressionLine(element.value)
+		if element.byRef {
+			if !referenceTargetSyntax(element.value) {
+				return value{}, &runtimeError{line, "Error", "Cannot create references to/from string offsets"}
+			}
+			var key arrayKey
+			if element.key == nil {
+				var err error
+				key, err = result.a.appendKey(line)
+				if err != nil {
+					return value{}, err
+				}
+			} else {
+				raw, err := e.eval(element.key)
+				if err != nil {
+					return value{}, err
+				}
+				key, err = e.arrayKey(raw, line)
+				if err != nil {
+					return value{}, err
+				}
+			}
+			place, err := e.referencePlace(element.value, true)
+			if err != nil {
+				return value{}, err
+			}
+			stored := place.read()
+			if stored.kind != refKind {
+				stored = value{kind: refKind, ref: &referenceCell{value: dereference(stored)}}
+				if err := place.replace(stored); err != nil {
+					return value{}, err
+				}
+			}
+			result.a = result.a.with(key, stored)
+			continue
+		}
 		values, err := e.evalOperands(element.key, element.value, line, true)
 		if err != nil {
 			return value{}, err
@@ -170,6 +299,10 @@ func (e *evaluator) readOffset(node offsetExpr) (value, error) {
 	}
 	base, raw := values[0], values[1]
 	if base.kind == objectKind {
+		if classImplements(base.o.class, "ArrayAccess") {
+			method := e.lookupMethod(base.o.class, "offsetGet")
+			return e.invoke(base, method, []callArgument{{value: raw}}, node.line)
+		}
 		return value{}, &runtimeError{node.line, "Error", "Cannot use object of type " + base.o.className() + " as array"}
 	}
 	if base.kind == stringKind {
@@ -183,7 +316,9 @@ func (e *evaluator) readOffset(node offsetExpr) (value, error) {
 				name = "true"
 			}
 		}
-		e.warn(node.line, "Trying to access array offset on "+name)
+		if err := e.warn(node.line, "Trying to access array offset on "+name); err != nil {
+			return value{}, err
+		}
 		return value{}, nil
 	}
 	k, err := e.arrayKey(raw, node.line)
@@ -197,7 +332,9 @@ func (e *evaluator) readOffset(node offsetExpr) (value, error) {
 	if k.isString {
 		label = "\"" + k.text + "\""
 	}
-	e.warn(node.line, "Undefined array key "+label)
+	if err := e.warn(node.line, "Undefined array key "+label); err != nil {
+		return value{}, err
+	}
 	return value{}, nil
 }
 
@@ -238,9 +375,31 @@ func (e *evaluator) readProperty(node propertyExpr) (value, error) {
 	if err != nil {
 		return value{}, err
 	}
+	name, err := e.instancePropertyName(node.name, node.nameExpr, node.line)
+	if err != nil {
+		return value{}, err
+	}
+	node.name = name
 	if base.kind != objectKind {
-		e.warn(node.line, fmt.Sprintf("Attempt to read property \"%s\" on %s", node.name, base.typeName()))
+		if err := e.warn(node.line, fmt.Sprintf("Attempt to read property \"%s\" on %s", node.name, base.typeName())); err != nil {
+			return value{}, err
+		}
 		return value{}, nil
+	}
+	if base.o.enumCase != "" && node.name != "name" && node.name != "value" {
+		return value{}, &runtimeError{node.line, "Error", "Undefined property: " + base.o.className() + "::$" + node.name}
+	}
+	if base.o.reflectedMethod != nil && node.name == "class" && base.o.reflectedMethod.owner != nil {
+		return value{kind: stringKind, s: base.o.reflectedMethod.owner.name}, nil
+	}
+	if base.o.reflected != nil && node.name == "name" {
+		return value{kind: stringKind, s: base.o.reflected.name}, nil
+	}
+	if base.o.reflectedProperty != nil && node.name == "name" {
+		return value{kind: stringKind, s: base.o.reflectedProperty.name}, nil
+	}
+	if base.o.reflectedMethod != nil && node.name == "name" {
+		return value{kind: stringKind, s: base.o.reflectedMethod.name}, nil
 	}
 	k, err := e.propertyKey(base.o, node.name, node.line)
 	if err != nil {
@@ -249,7 +408,15 @@ func (e *evaluator) readProperty(node propertyExpr) (value, error) {
 	if v, ok := base.o.properties.get(k); ok {
 		return v, nil
 	}
-	e.warn(node.line, "Undefined property: "+base.o.className()+"::$"+node.name)
+	if property := propertyForKey(base.o, k); property != nil && property.typeName != "" {
+		return value{}, uninitializedPropertyError(*property, node.line)
+	}
+	if method := e.lookupMethod(base.o.class, "__get"); method != nil {
+		return e.invoke(base, method, []callArgument{{value: value{kind: stringKind, s: node.name}}}, node.line)
+	}
+	if err := e.warn(node.line, "Undefined property: "+base.o.className()+"::$"+node.name); err != nil {
+		return value{}, err
+	}
 	return value{}, nil
 }
 
@@ -257,6 +424,9 @@ func (e *evaluator) readProperty(node propertyExpr) (value, error) {
 type location struct {
 	get func() value
 	set func(value) error
+	// typed marks a typed property, whose compound result is type-checked
+	// before it is stored.
+	typed bool
 }
 
 type locationMode uint8
@@ -275,23 +445,47 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 	}
 	rw := mode != locationWrite
 	switch node := target.(type) {
+	case literal:
+		if node.value.kind == objectKind && node.value.o != nil && classImplements(node.value.o.class, "ArrayAccess") {
+			return location{get: func() value { return node.value }, set: func(value) error {
+				return &runtimeError{node.line, "Error", "Cannot assign to temporary object"}
+			}}, nil
+		}
+		return location{}, &runtimeError{node.line, "Error", "Cannot use temporary expression in write context"}
 	case variable:
 		if e.variables == nil {
 			e.variables = make(map[string]value)
 		}
 		if _, exists := e.readVariable(node.token.text); rw && !exists {
-			e.warn(node.token.line, "Undefined variable $"+node.token.text)
+			if err := e.warn(node.token.line, "Undefined variable $"+node.token.text); err != nil {
+				return location{}, err
+			}
 		}
-		return e.variableSlot(node.token.text), nil
+		return e.variableSlotAt(node.token.text, node.token.line), nil
 	case staticPropertyExpr:
-		return e.staticPropertyLocation(node)
+		loc, err := e.staticPropertyLocation(node)
+		if err != nil {
+			return location{}, err
+		}
+		if rw {
+			class, err := e.resolveClassName(node.className, node.line)
+			if err != nil {
+				return location{}, err
+			}
+			if slot := class.staticProperties[node.name]; slot != nil && !slot.initialized {
+				return location{}, uninitializedPropertyError(slot.decl, node.line)
+			}
+		}
+		return loc, nil
 	case propertyExpr:
 		var base value
 		var err error
 		if v, ok := node.base.(variable); ok && v.token.text != "this" {
 			base, _ = e.readVariable(v.token.text)
 			if _, exists := e.readVariable(v.token.text); rw && !exists {
-				e.warn(v.token.line, "Undefined variable $"+v.token.text)
+				if err := e.warn(v.token.line, "Undefined variable $"+v.token.text); err != nil {
+					return location{}, err
+				}
 			}
 		} else {
 			base, err = e.eval(node.base)
@@ -299,6 +493,11 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 		if err != nil {
 			return location{}, err
 		}
+		name, err := e.instancePropertyName(node.name, node.nameExpr, node.line)
+		if err != nil {
+			return location{}, err
+		}
+		node.name, node.nameExpr = name, nil
 		if base.kind != objectKind {
 			action := "assign"
 			if mode == locationIncrement {
@@ -317,25 +516,79 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			}
 			return location{}, &runtimeError{node.line, "Error", fmt.Sprintf("Attempt to %s property \"%s\" on %s", action, node.name, name)}
 		}
+		if base.o.enumCase != "" {
+			return location{}, &runtimeError{node.line, "Error", "Cannot modify readonly property " + base.o.className() + "::$" + node.name}
+		}
 		k, err := e.propertyKey(base.o, node.name, node.line)
 		if err != nil {
 			return location{}, err
 		}
-		if rw && base.o.properties.find(k) < 0 {
-			if base.o.dynamicProperty(node.name) {
-				e.diagnostic("Deprecated", node.line, "Creation of dynamic property "+base.o.className()+"::$"+node.name+" is deprecated")
+		property := propertyForKey(base.o, k)
+		if property == nil && base.o.properties.find(k) < 0 {
+			if method := e.lookupMethod(base.o.class, "__set"); method != nil && !rw {
+				return location{get: func() value { return value{} }, set: func(v value) error {
+					_, callErr := e.invoke(base, method, []callArgument{{value: value{kind: stringKind, s: node.name}}, {value: v}}, node.line)
+					return callErr
+				}}, nil
 			}
-			e.warn(node.line, "Undefined property: "+base.o.className()+"::$"+node.name)
+		}
+		if property == nil && base.o.class != nil && base.o.class.readonly {
+			return location{}, &runtimeError{node.line, "Error", "Cannot create dynamic property " + base.o.class.name + "::$" + node.name}
+		}
+		if rw && property != nil && property.typeName != "" && base.o.properties.find(k) < 0 {
+			return location{}, uninitializedPropertyError(*property, node.line)
+		}
+		if rw && base.o.properties.find(k) < 0 {
+			if base.o.dynamicProperty(node.name, e.scope) {
+				if err := e.diagnostic("Deprecated", node.line, "Creation of dynamic property "+base.o.className()+"::$"+node.name+" is deprecated"); err != nil {
+					return location{}, err
+				}
+			}
+			if err := e.warn(node.line, "Undefined property: "+base.o.className()+"::$"+node.name); err != nil {
+				return location{}, err
+			}
 			base.o.properties = base.o.properties.with(k, value{})
 		}
 		return location{func() value { v, _ := base.o.properties.get(k); return v }, func(v value) error {
-			if base.o.dynamicProperty(node.name) && base.o.properties.find(k) < 0 {
-				e.diagnostic("Deprecated", node.line, "Creation of dynamic property "+base.o.className()+"::$"+node.name+" is deprecated")
+			creating := base.o.dynamicProperty(node.name, e.scope) && base.o.properties.find(k) < 0
+			if err := e.storeObjectProperty(base.o, k, property, v, node.line); err != nil {
+				return err
 			}
-			base.o.properties = base.o.properties.with(k, v)
+			// Zend creates the property first, so a throwing handler keeps it.
+			if creating {
+				return e.diagnostic("Deprecated", node.line, "Creation of dynamic property "+base.o.className()+"::$"+node.name+" is deprecated")
+			}
 			return nil
-		}}, nil
+		}, property != nil && property.typeName != ""}, nil
 	case offsetExpr:
+		if root, ok := node.base.(variable); ok && root.token.text == "GLOBALS" {
+			if node.key == nil {
+				return location{}, &runtimeError{node.line, "Error", "Cannot append to $GLOBALS"}
+			}
+			raw, err := e.eval(node.key)
+			if err != nil {
+				return location{}, err
+			}
+			key, err := e.arrayKey(raw, node.line)
+			if err != nil {
+				return location{}, err
+			}
+			name := key.text
+			if !key.isString {
+				name = fmt.Sprint(key.index)
+			}
+			if name == "GLOBALS" {
+				return location{}, &runtimeError{node.line, "Error", "Cannot modify $GLOBALS array directly"}
+			}
+			if rw {
+				if _, exists := e.rootScope[name]; !exists {
+					if err := e.warn(node.line, "Undefined global variable $"+name); err != nil {
+						return location{}, err
+					}
+				}
+			}
+			return e.variableScopeSlot(e.rootScope, name, node.line), nil
+		}
 		parentMode := locationWrite
 		if rw {
 			parentMode = locationModify
@@ -345,14 +598,93 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			return location{}, err
 		}
 		base := parent.get()
+		if base.kind == objectKind && classImplements(base.o.class, "ArrayAccess") {
+			key := value{kind: nullKind}
+			if node.key != nil {
+				key, err = e.eval(node.key)
+				if err != nil {
+					return location{}, err
+				}
+			}
+			return location{get: func() value {
+				method := e.lookupMethod(base.o.class, "offsetGet")
+				v, callErr := e.invoke(base, method, []callArgument{{value: key}}, node.line)
+				if callErr != nil {
+					e.pendingDiagnostic = callErr
+				}
+				return v
+			}, set: func(v value) error {
+				method := e.lookupMethod(base.o.class, "offsetSet")
+				_, callErr := e.invoke(base, method, []callArgument{{value: key}, {value: v}}, node.line)
+				return callErr
+			}}, nil
+		}
 		if base.kind == nullKind || base.kind == boolKind && base.i == 0 {
 			if base.kind == boolKind {
-				e.diagnostic("Deprecated", node.line, "Automatic conversion of false to array is deprecated")
+				if err := e.diagnostic("Deprecated", node.line, "Automatic conversion of false to array is deprecated"); err != nil {
+					return location{}, err
+				}
 			}
 			base = arrayValue()
 			if err := parent.set(base); err != nil {
 				return location{}, err
 			}
+		}
+		if base.kind == stringKind && node.key != nil {
+			raw, keyErr := e.eval(node.key)
+			if keyErr != nil {
+				return location{}, keyErr
+			}
+			if raw.kind == stringKind {
+				converted, trailing, ok := raw.numeric()
+				if !ok || converted.kind != intKind {
+					return location{}, &runtimeError{node.line, "TypeError", "Cannot access offset of type string on string"}
+				}
+				if trailing {
+					if err := e.warn(node.line, "Illegal string offset \""+raw.s+"\""); err != nil {
+						return location{}, err
+					}
+				}
+				raw = converted
+			} else if raw.kind != intKind {
+				if raw.kind == arrayKind || raw.kind == objectKind {
+					return location{}, &runtimeError{node.line, "TypeError", "Cannot access offset of type " + raw.typeName() + " on string"}
+				}
+				if err := e.warn(node.line, "String offset cast occurred"); err != nil {
+					return location{}, err
+				}
+				if raw.kind == floatKind {
+					raw = integer(floatToInt(raw.f))
+				} else {
+					raw = integer(raw.i)
+				}
+			}
+			index := raw.i
+			if index < 0 {
+				index += int64(len(base.s))
+			}
+			return location{get: func() value { v, _ := e.stringOffset(parent.get(), integer(index), node.line); return v }, set: func(v value) error {
+				if index < 0 {
+					return &runtimeError{node.line, "Error", "Illegal string offset "}
+				}
+				converted, err := e.toText(v, node.line)
+				if err != nil {
+					return err
+				}
+				if converted == "" {
+					return &runtimeError{node.line, "Error", "Cannot assign an empty string to a string offset"}
+				}
+				current := parent.get()
+				if current.kind != stringKind {
+					return &runtimeError{node.line, "TypeError", "Cannot use a scalar value as an array"}
+				}
+				bytes := []byte(current.s)
+				for int64(len(bytes)) <= index {
+					bytes = append(bytes, ' ')
+				}
+				bytes[index] = converted[0]
+				return parent.set(value{kind: stringKind, s: string(bytes)})
+			}}, nil
 		}
 		if base.kind != arrayKind {
 			message := "Cannot use a scalar value as an array"
@@ -380,14 +712,17 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 		// Reserve intermediate append slots for nested writes (e.g. $a[][]).
 		if rw && node.key != nil && base.a.find(k) < 0 {
 			if k.isString {
-				e.warn(node.line, fmt.Sprintf("Undefined array key \"%s\"", k.text))
+				err = e.warn(node.line, fmt.Sprintf("Undefined array key \"%s\"", k.text))
 			} else {
-				e.warn(node.line, fmt.Sprintf("Undefined array key %d", k.index))
+				err = e.warn(node.line, fmt.Sprintf("Undefined array key %d", k.index))
+			}
+			if err != nil {
+				return location{}, err
 			}
 		}
 		// The RHS has already been evaluated at this point.
 		if node.key == nil {
-			base.a = base.a.with(k, value{})
+			base.a = e.arrayWith(base.a, k, value{})
 			if err := parent.set(base); err != nil {
 				return location{}, err
 			}
@@ -404,11 +739,14 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			if latest.kind != arrayKind {
 				return &runtimeError{node.line, "Error", "Cannot use a scalar value as an array"}
 			}
-			latest.a = latest.a.with(k, v)
+			latest.a, err = e.arrayWithAssigned(latest.a, k, v, node.line)
+			if err != nil {
+				return err
+			}
 			return parent.set(latest)
-		}}, nil
+		}, false}, nil
 	}
-	return location{}, fmt.Errorf("unsupported assignment target")
+	return location{}, fmt.Errorf("gophp: unsupported assignment target %T at %s:%d", target, e.filename, expressionLine(target))
 }
 
 // Target key subexpressions execute before the RHS, but the writes and bare
@@ -417,8 +755,14 @@ func (e *evaluator) prepareTarget(target expr) (expr, error) {
 	switch node := target.(type) {
 	case variable:
 		return node, nil
+	case dynamicVariable:
+		name, err := e.dynamicVariableName(node)
+		if err != nil {
+			return nil, err
+		}
+		return variable{token{kind: "variable", text: name, line: node.line}}, nil
 	case staticPropertyExpr:
-		return node, nil
+		return e.prepareStaticProperty(node)
 	case offsetExpr:
 		base, err := e.prepareTarget(node.base)
 		if err != nil {
@@ -438,7 +782,15 @@ func (e *evaluator) prepareTarget(target expr) (expr, error) {
 	case propertyExpr:
 		base, err := e.prepareTarget(node.base)
 		node.base = base
-		return node, err
+		if err != nil {
+			return nil, err
+		}
+		name, err := e.instancePropertyName(node.name, node.nameExpr, node.line)
+		if err != nil {
+			return nil, err
+		}
+		node.name, node.nameExpr = name, nil
+		return node, nil
 	default:
 		v, err := e.eval(target)
 		return literal{v, expressionLine(target)}, err
@@ -458,6 +810,16 @@ func rootVariable(target expr) string {
 }
 
 func (e *evaluator) evalAssignment(node assignment) (value, error) {
+	if pattern, ok := node.target.(arrayLiteral); ok {
+		v, err := e.eval(node.source)
+		if err != nil {
+			return value{}, err
+		}
+		if err := e.assignDestructured(pattern, v); err != nil {
+			return value{}, err
+		}
+		return v, nil
+	}
 	prepared, err := e.prepareTarget(node.target)
 	if err != nil {
 		return value{}, err
@@ -485,5 +847,52 @@ func (e *evaluator) evalAssignment(node assignment) (value, error) {
 	if err := target.set(v); err != nil {
 		return value{}, err
 	}
-	return v, nil
+	return target.get(), nil
+}
+
+func (e *evaluator) assignDestructured(pattern arrayLiteral, source value) error {
+	next := int64(0)
+	for _, entry := range pattern.elements {
+		if entry.value == nil {
+			next++
+			continue
+		}
+		key := value{kind: intKind, i: next}
+		if entry.key != nil {
+			v, err := e.eval(entry.key)
+			if err != nil {
+				return err
+			}
+			key = v
+		} else {
+			next++
+		}
+		line := expressionLine(entry.value)
+		item := value{kind: nullKind}
+		if source.kind != nullKind {
+			var err error
+			item, err = e.readOffset(offsetExpr{base: literal{source, line}, key: literal{key, line}, line: line})
+			if err != nil {
+				return err
+			}
+		}
+		if nested, ok := entry.value.(arrayLiteral); ok {
+			if err := e.assignDestructured(nested, item); err != nil {
+				return err
+			}
+			continue
+		}
+		place, err := e.prepareTarget(entry.value)
+		if err != nil {
+			return err
+		}
+		target, err := e.locate(place)
+		if err != nil {
+			return err
+		}
+		if err := target.set(item); err != nil {
+			return err
+		}
+	}
+	return nil
 }

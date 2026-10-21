@@ -1,0 +1,15 @@
+command: PYTHONPYCACHEPREFIX=/tmp/gophp-pycache python3 -m py_compile research/laravel-api/verify.py research/laravel-api/verify-gophp.py
+compile_exit_code: 0
+command: python3 research/laravel-api/verify-gophp.py --help
+usage: verify-gophp.py [-h] [--version {8.3,8.4,8.5}]
+                       [--interpreter INTERPRETER] [--cli-only]
+
+Exercise the fixed Laravel/API Platform contract through gophp --serve.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version {8.3,8.4,8.5}
+  --interpreter INTERPRETER
+  --cli-only            check migration and custom Artisan command without
+                        binding an HTTP port
+help_exit_code: 0

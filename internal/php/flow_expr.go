@@ -12,11 +12,12 @@ type coalesceAssignment struct {
 	line           int
 }
 type nullsafeExpr struct {
-	base   expr
-	name   string
-	args   []expr
-	method bool
-	line   int
+	base     expr
+	name     string
+	nameExpr expr
+	args     []expr
+	method   bool
+	line     int
 }
 type matchArm struct {
 	conditions []expr
@@ -56,7 +57,7 @@ func (e *evaluator) prepareCoalesceTarget(x expr) (expr, error) {
 	case variable:
 		return n, nil
 	case staticPropertyExpr:
-		return n, nil
+		return e.prepareStaticProperty(n)
 	case offsetExpr:
 		base, err := e.prepareCoalesceTarget(n.base)
 		if err != nil {
@@ -74,6 +75,11 @@ func (e *evaluator) prepareCoalesceTarget(x expr) (expr, error) {
 			return nil, err
 		}
 		n.base = literal{base, expressionLine(n.base)}
+		name, err := e.instancePropertyName(n.name, n.nameExpr, n.line)
+		if err != nil {
+			return nil, err
+		}
+		n.name, n.nameExpr = name, nil
 		return n, nil
 	default:
 		v, err := e.eval(x)
@@ -98,7 +104,10 @@ func (e *evaluator) evalCoalesceAssignment(n coalesceAssignment) (value, error) 
 	if err != nil {
 		return value{}, err
 	}
-	return v, loc.set(v)
+	if err := loc.set(v); err != nil {
+		return value{}, err
+	}
+	return loc.get(), nil
 }
 
 func hasNullsafe(x expr) bool {
@@ -174,21 +183,21 @@ func (e *evaluator) quietNullsafeChain(x expr, final, methodReceiver bool) (valu
 			return value{}, true, nil
 		}
 		if n.method {
-			v, err = e.callMethod(methodCall{literal{v, expressionLine(base)}, n.name, n.args, n.line})
+			v, err = e.callMethod(methodCall{receiver: literal{v, expressionLine(base)}, name: n.name, nameExpr: n.nameExpr, args: n.args, line: n.line})
 		} else if methodReceiver {
-			v, err = e.readProperty(propertyExpr{literal{v, expressionLine(base)}, n.name, n.line})
+			v, err = e.readProperty(propertyExpr{base: literal{v, expressionLine(base)}, name: n.name, line: n.line, nameExpr: n.nameExpr})
 		} else {
-			v, err = e.quietAccess(propertyExpr{literal{v, expressionLine(base)}, n.name, n.line}, final)
+			v, err = e.quietAccess(propertyExpr{base: literal{v, expressionLine(base)}, name: n.name, line: n.line, nameExpr: n.nameExpr}, final)
 		}
 	case propertyExpr:
-		access := propertyExpr{literal{v, expressionLine(base)}, n.name, n.line}
+		access := propertyExpr{base: literal{v, expressionLine(base)}, name: n.name, line: n.line, nameExpr: n.nameExpr}
 		if methodReceiver {
 			v, err = e.readProperty(access)
 		} else {
 			v, err = e.quietAccess(access, final)
 		}
 	case methodCall:
-		v, err = e.callMethod(methodCall{literal{v, expressionLine(base)}, n.name, n.args, n.line})
+		v, err = e.callMethod(methodCall{receiver: literal{v, expressionLine(base)}, name: n.name, nameExpr: n.nameExpr, args: n.args, line: n.line})
 	case offsetExpr:
 		key, keyErr := e.eval(n.key)
 		if keyErr != nil {
@@ -230,9 +239,9 @@ func (e *evaluator) evalChain(x expr) (value, bool, error) {
 			return value{}, true, nil
 		}
 		if n.method {
-			x = methodCall{literal{v, expressionLine(base)}, n.name, n.args, n.line}
+			x = methodCall{receiver: literal{v, expressionLine(base)}, name: n.name, nameExpr: n.nameExpr, args: n.args, line: n.line}
 		} else {
-			x = propertyExpr{literal{v, expressionLine(base)}, n.name, n.line}
+			x = propertyExpr{base: literal{v, expressionLine(base)}, name: n.name, line: n.line, nameExpr: n.nameExpr}
 		}
 	}
 	switch n := x.(type) {

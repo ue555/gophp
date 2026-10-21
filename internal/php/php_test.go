@@ -38,6 +38,17 @@ func TestFixtures(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// The differential runner executes fixtures from the repository root.
+	// Relative include_path entries and explicit ./ paths must see that CWD
+	// during the saved-expectation test as well.
+	priorCWD, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chdir(filepath.Dir(filepath.Dir(root))); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { os.Chdir(priorCWD) })
 	data, err := os.ReadFile(filepath.Join(root, "expected.json"))
 	if err != nil {
 		t.Fatal(err)
@@ -102,6 +113,7 @@ func TestFixtures(t *testing.T) {
 					if override, ok := want.StdoutByVersion[string(version)]; ok {
 						wantStdout = override
 					}
+					wantStdout = strings.ReplaceAll(wantStdout, "{file}", path)
 					if code != wantExit {
 						t.Errorf("exit: got %d, want %d", code, wantExit)
 					}
@@ -113,6 +125,12 @@ func TestFixtures(t *testing.T) {
 						wantStderr = override
 					}
 					wantStderr = strings.ReplaceAll(wantStderr, "{file}", path)
+					wantStderr = strings.ReplaceAll(wantStderr, "{fixtures}", root)
+					traceFile := path
+					if len(traceFile) > 15 {
+						traceFile = traceFile[:15] + "..."
+					}
+					wantStderr = strings.ReplaceAll(wantStderr, "{trace_file}", traceFile)
 					if strings.HasPrefix(rel, "success/") && wantExit != 0 {
 						t.Fatal("success fixture must exit 0 in every version")
 					}
@@ -134,16 +152,16 @@ func TestFixtures(t *testing.T) {
 
 func TestRejectUnsupported(t *testing.T) {
 	// Keep the original inputs: newly supported forms now assert their result.
-	newlySupported := map[string]string{"echo 1 & 2;": "0", "echo 1 << 2;": "4", "echo true & false;": "0", "echo true | false;": "1", "echo \"$name\";": "", "echo \"{$name}\";": "", "function f(): int {}": "", "function f(...$x) {}": ""}
+	newlySupported := map[string]string{"$a = &$b;": "", "foreach ([] as &$x) {}": "", "echo 2 ** 3;": "8", "echo 1 & 2;": "0", "echo 1 << 2;": "4", "echo true & false;": "0", "echo true | false;": "1", "echo true and false;": "", "echo true or false;": "1", "echo true xor false;": "1", "echo \"$name\";": "", "echo \"{$name}\";": "", "function f(): int {}": "", "function f(...$x) {}": "", "function f(&$x) {}": "", "echo 0x10;": "16", "echo $argc;": "1", "echo 1_000;": "1000", "#[Attribute] class A {}": "", "echo 0b10;": "2", "echo 0o10;": "8", "echo \"\\u{41}\";": "A", "echo 1 ?>trailing HTML": "1trailing HTML", "echo 1; ?><?php echo 2;": "12"}
 	cases := []string{
-		"$a = &$b;", "$a = [...$b];", "$o = new class {};", "foreach ([] as &$x) {}", "function f(&$x) {}", "class A extends B {}",
+		"$a = &$b;", "foreach ([] as &$x) {}", "function f(&$x) {}", "class A extends B {}",
 		"function f(...$x) {}", "function f(): int {}", "echo 2 ** 3;",
-		"$a = 1; $a **= 2;", "echo 1 & 2;", "echo 0x10;", "echo 010;",
+		"$a = 1; $a **= 2;", "echo 1 & 2;", "echo 0x10;",
 		"echo 1_000;", "echo \"$name\";", "echo \"${name}\";", "echo \"{$name}\";",
 		"echo \"\\u{41}\";", "echo \"\\777\";", "#[Attribute] class A {}",
 		"echo 1 ?>trailing HTML", "echo 1; ?><?php echo 2;",
 		"echo 1e;", "echo 1e+;", "echo 0b10;", "echo 0o10;", "echo `ls`;",
-		"echo $_SERVER;", "echo $GLOBALS;", "echo $argc;",
+		"echo $argc;",
 		"if (true): echo 1; endif;",
 		"echo 1 << 2;", "echo true and false;", "echo true or false;",
 		"echo true xor false;", "echo true & false;", "echo true | false;",

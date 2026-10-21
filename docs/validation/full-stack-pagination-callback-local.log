@@ -1,0 +1,17 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/internal_callback_weak_strict.php
+result: MATCH
+stdout: '70616765|1|7|8|strict'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/internal_callback_weak_strict.php
+result: MATCH
+stdout: '70616765|1|7|8|strict'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/internal_callback_weak_strict.php
+result: MATCH
+stdout: '70616765|1|7|8|strict'
+stderr: ''
+exit_code: 0
+local_matched: 3
+local_different: 0

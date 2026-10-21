@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 )
 
 type token struct {
 	kind  string
 	text  string
 	line  int
+	start int
 	parts []stringPart
 }
 
@@ -25,13 +27,24 @@ func syntax(line int, format string, args ...any) error {
 }
 
 type lexer struct {
-	source string
-	pos    int
-	line   int
+	source  string
+	pos     int
+	line    int
+	phpMode bool
+	pending []token
 }
 
 func whitespace(c byte) bool { return strings.ContainsRune(" \t\r\n\v\f", rune(c)) }
 func digit(c byte) bool      { return c >= '0' && c <= '9' }
+func (l *lexer) numericDigit(chars string, start int) bool {
+	if l.pos >= len(l.source) {
+		return false
+	}
+	if strings.ContainsRune(chars, rune(l.source[l.pos])) {
+		return true
+	}
+	return l.source[l.pos] == '_' && l.pos > start && l.pos+1 < len(l.source) && strings.ContainsRune(chars, rune(l.source[l.pos+1]))
+}
 func nameStart(c byte) bool {
 	return c == '_' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= 0x80
 }
@@ -48,10 +61,16 @@ func (l *lexer) take() byte {
 
 func lex(source string) ([]token, error) {
 	l := lexer{source: source, line: 1}
-	if len(source) < 6 || !strings.EqualFold(source[:5], "<?php") || !whitespace(source[5]) {
-		return nil, syntax(1, "unsupported syntax: file must begin with <?php followed by whitespace")
+	if strings.HasPrefix(source, "#!") {
+		if end := strings.IndexByte(source, '\n'); end >= 0 {
+			l.pos = end + 1
+			l.line = 2
+		}
 	}
-	l.pos = 5
+	if len(source)-l.pos >= 6 && strings.EqualFold(source[l.pos:l.pos+5], "<?php") && whitespace(source[l.pos+5]) {
+		l.pos += 5
+		l.phpMode = true
+	}
 	var tokens []token
 	for {
 		t, err := l.next()
@@ -66,6 +85,35 @@ func lex(source string) ([]token, error) {
 }
 
 func (l *lexer) next() (token, error) {
+	if len(l.pending) > 0 {
+		t := l.pending[0]
+		l.pending = l.pending[1:]
+		return t, nil
+	}
+	if !l.phpMode {
+		start, line := l.pos, l.line
+		for l.pos < len(l.source) {
+			rest := l.source[l.pos:]
+			if len(rest) >= 6 && strings.EqualFold(rest[:5], "<?php") && whitespace(rest[5]) || strings.HasPrefix(rest, "<?=") {
+				break
+			}
+			l.take()
+		}
+		if l.pos > start {
+			l.pending = []token{{kind: "string", text: l.source[start:l.pos], line: line, start: start}, {kind: ";", line: line, start: start}}
+			return token{kind: "name", text: "echo", line: line, start: start}, nil
+		}
+		if l.pos == len(l.source) {
+			return token{kind: "eof", line: l.line, start: l.pos}, nil
+		}
+		if strings.HasPrefix(l.source[l.pos:], "<?=") {
+			l.pos += 3
+			l.phpMode = true
+			return token{kind: "name", text: "echo", line: l.line, start: l.pos - 3}, nil
+		}
+		l.pos += 5
+		l.phpMode = true
+	}
 	for l.pos < len(l.source) {
 		rest := l.source[l.pos:]
 		if whitespace(rest[0]) {
@@ -73,7 +121,7 @@ func (l *lexer) next() (token, error) {
 			continue
 		}
 		if strings.HasPrefix(rest, "#[") {
-			return token{}, syntax(l.line, "unsupported syntax: attributes")
+			break
 		}
 		if strings.HasPrefix(rest, "//") || rest[0] == '#' {
 			for l.pos < len(l.source) && l.source[l.pos] != '\n' && l.source[l.pos] != '\r' && !strings.HasPrefix(l.source[l.pos:], "?>") {
@@ -97,12 +145,18 @@ func (l *lexer) next() (token, error) {
 		}
 		break
 	}
-	t := token{line: l.line}
+	t := token{line: l.line, start: l.pos}
 	if l.pos == len(l.source) {
 		t.kind = "eof"
 		return t, nil
 	}
 	rest := l.source[l.pos:]
+	if strings.HasPrefix(rest, "#[") {
+		l.take()
+		l.take()
+		t.kind = "#["
+		return t, nil
+	}
 	if strings.HasPrefix(rest, "?>") {
 		l.take()
 		l.take()
@@ -112,9 +166,7 @@ func (l *lexer) next() (token, error) {
 		if l.pos < len(l.source) && l.source[l.pos] == '\n' {
 			l.take()
 		}
-		if l.pos != len(l.source) {
-			return t, syntax(l.line, "unsupported syntax: inline HTML or multiple PHP blocks")
-		}
+		l.phpMode = false
 		t.kind = ";" // A final closing tag also terminates the statement.
 		return t, nil
 	}
@@ -133,6 +185,10 @@ func (l *lexer) next() (token, error) {
 	}
 	if c == '$' {
 		l.take()
+		if l.pos < len(l.source) && (l.source[l.pos] == '{' || l.source[l.pos] == '$') {
+			t.kind = "$"
+			return t, nil
+		}
 		if l.pos == len(l.source) || !nameStart(l.source[l.pos]) {
 			return t, syntax(t.line, "expected variable name after $")
 		}
@@ -141,10 +197,6 @@ func (l *lexer) next() (token, error) {
 			l.take()
 		}
 		t.kind, t.text = "variable", l.source[start:l.pos]
-		switch t.text {
-		case "GLOBALS", "_SERVER", "_GET", "_POST", "_FILES", "_COOKIE", "_SESSION", "_REQUEST", "_ENV", "argc", "argv":
-			return t, syntax(t.line, "unsupported predefined variable $%s", t.text)
-		}
 		return t, nil
 	}
 	if nameStart(c) {
@@ -157,13 +209,43 @@ func (l *lexer) next() (token, error) {
 	}
 	if digit(c) || c == '.' && len(rest) > 1 && digit(rest[1]) {
 		start := l.pos
-		for l.pos < len(l.source) && digit(l.source[l.pos]) {
+		if len(rest) > 2 && rest[0] == '0' && (rest[1] == 'x' || rest[1] == 'X') {
+			l.take()
+			l.take()
+			digits := l.pos
+			for l.numericDigit("0123456789abcdefABCDEF", digits) {
+				l.take()
+			}
+			if l.pos == digits || l.pos < len(l.source) && namePart(l.source[l.pos]) {
+				return t, syntax(t.line, "unsupported numeric literal")
+			}
+			t.kind, t.text = "number", l.source[start:l.pos]
+			return t, nil
+		}
+		if len(rest) > 2 && rest[0] == '0' && (rest[1] == 'o' || rest[1] == 'O' || rest[1] == 'b' || rest[1] == 'B') {
+			base := "01234567"
+			if rest[1] == 'b' || rest[1] == 'B' {
+				base = "01"
+			}
+			l.take()
+			l.take()
+			digits := l.pos
+			for l.numericDigit(base, digits) {
+				l.take()
+			}
+			if l.pos == digits || l.pos < len(l.source) && namePart(l.source[l.pos]) {
+				return t, syntax(t.line, "unsupported numeric literal")
+			}
+			t.kind, t.text = "number", l.source[start:l.pos]
+			return t, nil
+		}
+		for l.numericDigit("0123456789", start) {
 			l.take()
 		}
 		integerEnd := l.pos
 		if l.pos < len(l.source) && l.source[l.pos] == '.' {
 			l.take()
-			for l.pos < len(l.source) && digit(l.source[l.pos]) {
+			for l.numericDigit("0123456789", start) {
 				l.take()
 			}
 		}
@@ -173,7 +255,7 @@ func (l *lexer) next() (token, error) {
 				l.take()
 			}
 			exponent := l.pos
-			for l.pos < len(l.source) && digit(l.source[l.pos]) {
+			for l.numericDigit("0123456789", start) {
 				l.take()
 			}
 			if exponent == l.pos {
@@ -184,25 +266,27 @@ func (l *lexer) next() (token, error) {
 			return t, syntax(t.line, "unsupported numeric literal")
 		}
 		if integerEnd == l.pos && l.pos-start > 1 && c == '0' {
-			return t, syntax(t.line, "unsupported numeric literal: octal")
+			for _, digit := range l.source[start+1 : l.pos] {
+				if digit == '_' {
+					continue
+				}
+				if digit < '0' || digit > '7' {
+					return t, syntax(t.line, "Invalid numeric literal")
+				}
+			}
 		}
 		t.kind, t.text = "number", l.source[start:l.pos]
 		return t, nil
 	}
 	// Longest matches first, including !== before the unary ! token.
-	for _, op := range []string{"??=", "?->", "<<=", ">>=", "===", "!==", "<=>", "...", "??", "<<", ">>", "&=", "|=", "^=", "::", "++", "--", "+=", "-=", "*=", "/=", "%=", ".=", "&&", "||", "==", "!=", "<>", "<=", ">=", "=>", "->"} {
+	for _, op := range []string{"??=", "?->", "<<=", ">>=", "===", "!==", "<=>", "...", "??", "<<", ">>", "&=", "|=", "^=", "::", "++", "--", "+=", "-=", "*=", "/=", "%=", ".=", "**", "&&", "||", "==", "!=", "<>", "<=", ">=", "=>", "->"} {
 		if strings.HasPrefix(rest, op) {
 			l.pos += len(op)
 			t.kind, t.text = op, op
 			return t, nil
 		}
 	}
-	for _, op := range []string{"**"} {
-		if strings.HasPrefix(rest, op) {
-			return t, syntax(t.line, "unsupported operator %q", op)
-		}
-	}
-	if strings.ContainsRune("=;,+-*/%.(){}[]!<>&|^~?:\\", rune(c)) {
+	if strings.ContainsRune("=;,+-*/%.(){}[]!<>&|^~?:@\\", rune(c)) {
 		l.take()
 		t.kind, t.text = string(c), string(c)
 		return t, nil
@@ -268,7 +352,21 @@ func (l *lexer) quoted(quote byte) (string, error) {
 			}
 		case 'u':
 			if l.pos < len(l.source) && l.source[l.pos] == '{' {
-				return "", syntax(l.line, "unsupported syntax: Unicode codepoint escape")
+				l.take()
+				start := l.pos
+				for l.pos < len(l.source) && hex(l.source[l.pos]) {
+					l.take()
+				}
+				if l.pos == start || l.pos >= len(l.source) || l.source[l.pos] != '}' {
+					return "", syntax(l.line, "Invalid UTF-8 codepoint escape sequence")
+				}
+				code, err := strconv.ParseUint(l.source[start:l.pos], 16, 32)
+				l.take()
+				if err != nil || code > utf8.MaxRune || code >= 0xD800 && code <= 0xDFFF {
+					return "", syntax(l.line, "Invalid UTF-8 codepoint escape sequence")
+				}
+				b.WriteRune(rune(code))
+				break
 			}
 			b.WriteString("\\u")
 		default:

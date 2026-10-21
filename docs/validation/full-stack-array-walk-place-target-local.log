@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/array_walk_source_once.php
+ok|1|1|6|7|ok|2|6|8
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/array_walk_source_once.php
+ok|1|1|6|7|ok|2|6|8
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/array_walk_source_once.php
+ok|1|1|6|7|ok|2|6|8
+exit_code: 0

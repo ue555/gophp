@@ -1,0 +1,13 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught ParseError: unsupported keyword, constant, or function "exit" in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/var-dumper/Resources/functions/dump.php:55
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(41): require()
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(45): {closure:/Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:37}('667aeda72477189...', '/Users/kouji/de...')
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(22): ComposerAutoloaderInit9081827c28c13f81a15682fabebfd1c7::getLoader()
+#3 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/var-dumper/Resources/functions/dump.php on line 55
+
+exit_code: 255

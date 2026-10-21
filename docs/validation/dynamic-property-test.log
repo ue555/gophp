@@ -1,0 +1,10 @@
+go test ./...
+ok  	example.com/gophp/cmd/gophp	0.075s
+ok  	example.com/gophp/internal/php	0.360s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.800s
+
+OK
+make test exit=0

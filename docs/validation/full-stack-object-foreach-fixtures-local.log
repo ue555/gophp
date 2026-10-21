@@ -1,0 +1,45 @@
+=== RUN   TestFixtures
+=== RUN   TestFixtures/success/foreach_object_dynamic.php
+=== RUN   TestFixtures/success/foreach_object_dynamic.php/default
+=== RUN   TestFixtures/success/foreach_object_dynamic.php/8.3
+=== RUN   TestFixtures/success/foreach_object_dynamic.php/8.4
+=== RUN   TestFixtures/success/foreach_object_dynamic.php/8.5
+=== RUN   TestFixtures/success/foreach_object_private_slots.php
+=== RUN   TestFixtures/success/foreach_object_private_slots.php/default
+=== RUN   TestFixtures/success/foreach_object_private_slots.php/8.3
+=== RUN   TestFixtures/success/foreach_object_private_slots.php/8.4
+=== RUN   TestFixtures/success/foreach_object_private_slots.php/8.5
+=== RUN   TestFixtures/success/foreach_object_reference.php
+=== RUN   TestFixtures/success/foreach_object_reference.php/default
+=== RUN   TestFixtures/success/foreach_object_reference.php/8.3
+=== RUN   TestFixtures/success/foreach_object_reference.php/8.4
+=== RUN   TestFixtures/success/foreach_object_reference.php/8.5
+=== RUN   TestFixtures/success/foreach_object_visibility.php
+=== RUN   TestFixtures/success/foreach_object_visibility.php/default
+=== RUN   TestFixtures/success/foreach_object_visibility.php/8.3
+=== RUN   TestFixtures/success/foreach_object_visibility.php/8.4
+=== RUN   TestFixtures/success/foreach_object_visibility.php/8.5
+--- PASS: TestFixtures (0.01s)
+    --- PASS: TestFixtures/success/foreach_object_dynamic.php (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_dynamic.php/default (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_dynamic.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_dynamic.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_dynamic.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/foreach_object_private_slots.php (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_private_slots.php/default (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_private_slots.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_private_slots.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_private_slots.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/foreach_object_reference.php (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_reference.php/default (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_reference.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_reference.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_reference.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/foreach_object_visibility.php (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_visibility.php/default (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_visibility.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_visibility.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/foreach_object_visibility.php/8.5 (0.00s)
+PASS
+ok  	example.com/gophp/internal/php	0.150s
+exit_code: 0

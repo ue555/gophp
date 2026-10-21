@@ -1,6 +1,164 @@
 # PHP互換性と検証状況
 
-現在の収録fixtureは**622件**（正常318・実行時230・構文74）。主基準PHP 8.4.26、追加対象8.3.35・8.5.11。ユーザーがMacで実行した[修正後の全件比較ログ](validation/named-exception-622-compare-all-mac.log)では各版622一致・0不一致・0環境エラー、`make compare-all`終了0。605件から追加した17件と、名前付き引数・文字列キーの引数展開・例外基盤・レビュー修正3件は、収録fixtureの範囲で比較済み。今回は保存済みログの確認・保存であり、比較を再実行していない。項目9・10および項目6〜10全体は部分実装で、Go製PHPでのLaravel起動も未対応。[実装範囲と残件](items6-10-progress.md)を参照。
+現行1169件について、公式PHP 8.3.35・8.4.26・8.5.11との版別`make compare`は各1169一致・0差異・0エラー・終了0。Go製PHPの固定Laravel・API Platformアプリは、3設定の[実TCP検証](full-stack-development.md)でもHTTP・SQLite CRUD・OpenAPI・2000回連続／8並列要求を通過し、各版終了0だった。修正前の不一致と制限環境の接続拒否は履歴として残す。これらの一致をPHP全機能の互換と扱わない。
+
+以下の機能別記録にある古い件数や「比較待ち」は作業当時の履歴であり、現行1169件の比較状況は上記を基準とする。
+
+`IteratorAggregate::getIterator()`を経由した`yield from`の24段有限連鎖をGoの3設定で確認した。[対応範囲・循環時の制限](full-stack-development.md)。初回1169件比較では別のGenerator委譲境界に差異が出て修正し、現行fixtureの範囲では後続の公式3版比較で一致した。循環時の診断など未収録の境界は未確認。
+
+`array_walk_recursive()`は再帰中の配列を追跡し、70段の有限配列をGoの3設定で処理した。[対象ケースと制限](full-stack-development.md)。現行1168件の公式PHP3版比較は未実施で、期待値は暫定。
+
+`extract(..., EXTR_REFS)`で入力配列の変数名と同名キーを取り込む場合の参照セルを修正した。[Goの対象出力とPHP公式ソースからの暫定判断](full-stack-development.md)。当時1167件の公式PHP3版実比較は未実施。
+
+`array_walk()`／`array_walk_recursive()`の配列引数の格納先を呼び出し時に保持し、参照コールバックへの要素渡しに再利用する。[評価回数のfixtureと公式比較待ち](full-stack-development.md)。Go3設定の対象実行は成功したが、当時1167件の公式PHP3版比較は未実施。
+
+`extract(..., EXTR_REFS)`の基本形をGoの3設定でローカル確認した。[fixture・未検証の境界](full-stack-development.md)。当時1167件の公式PHP3版比較は未実施で、期待値は暫定。
+
+`array_walk()`／`array_walk_recursive()`は、参照コールバックへ渡す配列を逆順の名前付き引数`callback:`・`array:`から解決するよう修正した。[回帰fixtureと公式比較待ち](full-stack-development.md)。Goの3設定で対象出力・終了0を確認したが、当時1167件の公式PHP3版比較は未実施。
+
+PDO束縛の追加範囲（2026-10-21）：`bindValue()`の主要`PDO::PARAM_*`型、NULを含むLOB、stream resourceの基本形、名前付き引数と`execute(array)`の文字列束縛をGoの3設定でローカル確認した。[対象fixtureと制限](full-stack-development.md)。公式PHP3版との実比較は未実施。
+
+PDO状態の追加範囲（2026-10-21）：SQLite接続と準備済みStatementへ独立した`errorCode()`／`errorInfo()`、接続の`ATTR_ERRMODE`、列名・取得値に作用する`ATTR_CASE`・`ATTR_ORACLE_NULLS`・`ATTR_STRINGIFY_FETCHES`の基本経路を追加した。Goの3設定で対象fixtureを確認した。[対象と制限](full-stack-development.md)。当時1167件の公式PHP3版比較は未実施で、期待値は暫定。
+
+SQLite失敗の追加範囲（2026-10-21）：`PDOException::getCode()`へSQLSTATE文字列を、`errorInfo`へSQLSTATE・番号・詳細を保持し、固定Laravelの一意制約例外へ接続した。[2 fixtureと公式ソースに基づく暫定期待値](full-stack-development.md)。Goの3設定では確認済みだが、公式PHP3版との当時1167件の実比較は未実施。
+
+最新の追加範囲（2026-10-21）：固定vendorのLaravel/Eloquentカーソルの遅延実行・束縛引数・LazyCollection委譲と、`PDOException`の捕捉・`QueryException`への連鎖をGoの3設定で確認した。[3 fixtureと検証の限界](full-stack-development.md)を参照。当時1144件の公式PHP3版比較は未実施で、期待値は暫定。項目11と全6段階は部分実装のままである。
+
+1167件時点の履歴（2026-10-21）：fixture・期待値は**1167件**（正常743・実行時290・構文134）。公式PHP 8.3.35・8.4.26・8.5.11との最後の比較済み基準は各997件一致・終了0の[版別生ログ](item11-progress.md)。追加170件と変更後の全件は公式比較未実施で、期待値は暫定。Goローカルでは通常オブジェクトの`foreach`とIteratorラッパー、固定vendorの`ArrayPaginator`・Finderの複数探索先・Laravel Collectionの`CachingIterator`、Generator、`artisan list`・`about`・`route:list`・独自`gophp:probe`、OpenAPI export、固定アプリのHTTP/SQLite/API Platform基本CRUDと追加8回の連続CRUD、[512回](validation/full-stack-http-512-after-callback.log)・[1024回の追加GET](validation/full-stack-http-1024-caching.log)、JSON-LD Collection形式の[ページ分割](validation/full-stack-pagination-jsonld.log)・8並列GETを実行した。enum caseの`E`形式シリアライズと`get_debug_type()`も追加した。[統合テストと制限](full-stack-development.md)。実行成功はPHP3版との互換性証明ではなく、項目11と全6段階は未完了。
+
+HTTP入力の追加範囲：GETの`filter[name]`・`items[]`などとPOSTフォーム本文を既存の`parse_str()`解析へ接続した。PUT本文と別メディア型を`$_POST`へ取り込まない。[GoのHTTP対象テスト](validation/full-stack-http-query-array-target-local.log)は終了0。HTTP経路の公式PHP3版実比較とmultipart/form-dataなどの全境界は未実施・未対応であり、[詳細](full-stack-development.md)に分けて記録する。
+
+固定アプリの同一Goプロセスでの[2000リクエスト試験](validation/full-stack-http-2000-stress-local.log)は終了0で、保持ヒープはGC後865448→744720バイトだった。これはローカル統合試験であり、PHP版別の厳密比較と運用条件の負荷検証とは区別する。
+
+PDOStatementの未定義パラメータ実行でSQLiteが返す`HY000`を保持し、次の成功した`execute()`でエラー状態をクリアする。Go3設定の[対象fixtureログ](validation/full-stack-pdo-param-error-target-local.log)は終了0。診断とエラーモードの版別厳密比較は未実施で、[詳細](full-stack-development.md)に暫定範囲を記録する。
+
+実HTTPサーバーの検証範囲：固定アプリのCLI migrationからAPI Platform CRUDまでを`gophp --serve`経由で確認する[版別スクリプト](../research/laravel-api/verify-gophp.py)を準備した。構文検査と[3設定の別プロセスでのmigration・独自コマンド・OpenAPI・テーブル作成](validation/full-stack-go-cli-openapi-subprocess-3versions-local.log)は終了0。現在のsandboxは[ローカル待ち受けを拒否](validation/full-stack-real-server-sandbox-check.log)するため、実HTTP応答は未検証。in-processのHTTPテスト成功と区別する。
+
+以前の状態（履歴）：収録997件は[版別生ログ](item11-progress.md)で公式PHP3版それぞれと一致、終了0。現行fixture・期待値は**1035件**（正常613・実行時290・構文132）。今回の匿名クラス、配列分解代入、`goto`、`__call`／`__callStatic`／`__toString`、CLI shebangと引数、`file_exists()`、`(object)`、`$_ENV`などを含む追加38件と全件の公式比較はPodman接続拒否で未実施、期待値は暫定。[全6段階の実装状態](full-stack-development.md)。項目11とアプリ完成条件は未完了。
+
+今回の追加前の比較済み基準：[PHP 8.3](validation/reference-property-974-83-mac.log)・[8.4](validation/reference-property-974-84-mac.log)・[8.5](validation/reference-property-974-85-mac.log)の版別生ログは各974件の個別MATCH、**974一致・0不一致・0エラー、終了0**を記録する。追加15件は収録fixtureの範囲で比較済み。版ごとの`make compare`で、`check.sh`のPASSはユーザー報告。以下の974件「未比較」は比較前の履歴。
+
+974件比較前の基準（履歴）：[版別生ログ](item11-progress.md)で公式PHP3版が各959一致・0不一致・0エラー、終了0。追加15件と訂正した期待値は収録範囲で比較済み。以下の959件時点の「未比較」は当時の履歴。
+
+959件比較前（履歴）：呼び出し元スコープの要素参照を共有判定へ加え、fixture・期待値は**959件**（正常539・実行時288・構文132）。Goローカル検証済み、公式PHP3版はPodman接続拒否で未比較。新規期待値は暫定。[項目11の詳細とログ](item11-progress.md)。項目11全体は部分実装。
+
+今回の修正前（履歴、2026-10-18）：配列コピー時の参照分離を修正し、fixture・期待値は**958件**（正常538・実行時288・構文132）。Goローカル検証済み、公式PHP3版はPodman接続拒否で未比較。既存1件の訂正値と新規3件の期待値は暫定。[項目11の詳細とログ](item11-progress.md)。項目11全体は部分実装。
+
+958件への修正前（履歴、2026-10-18）：配列要素への参照を加えたfixture・期待値は**955件**（正常535・実行時288・構文132）。Goのtest・vet・build・差分検査は終了0。公式PHP3版の対象・全件比較はPodman接続拒否で未実施、新規期待値は暫定。[項目11の対応範囲・試行ログ](item11-progress.md)。項目11全体は部分実装。
+
+955件追加前の基準（履歴）：fixture・期待値は**944件**（正常524・実行時288・構文132）。[版別生ログ](item11-progress.md)でPHP 8.3.35・8.4.26・8.5.11の各版が**944一致・0不一致・0エラー、終了0**。変数間の参照代入を含む追加7件は収録fixtureの範囲で公式比較済み。今回は保存済みログの確認で、比較は再実行していない。項目11全体・項目6〜10の全仕様対応は未完了。[項目11の設計・制限](item11-progress.md)。以下の「比較待ち」は各時点の履歴。
+
+944件比較前の状況（履歴、2026-10-18）：既存937件は[版別生ログ](items6-10-integration-gate.md)で公式PHP 8.3.35・8.4.26・8.5.11の各版と全件一致し、比較終了コードも0。変数間の参照代入を追加した現在のfixture・期待値は**944件**（正常524・実行時288・構文132）。追加7件と修正後全件の公式比較はPodman接続拒否で未実施、期待値は暫定。[項目11の設計と試行ログ](item11-progress.md)。項目6〜10の全仕様対応および項目11全体は未完了。以下は937件以前の履歴。
+
+## `define()`第3引数の診断中断（2026-10-18、937件比較前の履歴）
+
+`null`の`bool`変換で非推奨診断ハンドラが投げた場合は定数登録前に中断する。`true`の警告処理は別経路とする。fixture・期待値は**937件**（正常517・実行時288・構文132）。Goローカル検証は成功し、公式PHP3版の対象・全件比較はPodman接続拒否で未実施。追加2件の期待値は暫定。[監査・比較試行ログ](items6-10-integration-gate.md)を参照。以下は936件以前の履歴。
+
+## 警告中断経路の追加監査（2026-10-18、936件時点の履歴）
+
+`define(null, ...)`の非推奨診断でハンドラが投げても定数を登録していたGo側の経路を修正し、診断後の定数状態と後続副作用を観測するfixtureを1件追加した。総数は**936件**（正常516・実行時288・構文132）。既存935件の[版別生ログ](items6-10-integration-gate.md)は変更前の証拠。新規・全件の公式PHP3版再比較はPodman接続拒否で未実施、期待値は暫定。[監査範囲・ログ・移行条件](items6-10-integration-gate.md)。以下は935件時点以前の履歴。
+
+## 複合代入エラー時の格納（2026-10-18、936件追加前の履歴）
+
+fixture・期待値は**935件**（正常515・実行時288・構文132）。公式PHP 8.3.35・8.4.26・8.5.11の版別生ログで各版935一致・0不一致・0エラー。型付きプロパティの`/= 0`・`%= 0`・`+= []`・警告ハンドラ例外を伴う`+= '2x'`の失敗後の値0、および`.=`の左辺型別の違いを収録fixtureの範囲で確認した。`.=`では文字列型プロパティが値を保つ例と、数値型・nullable・union・mixedのプロパティが0になる例があり、一律の値保持規則とはしない。通常変数・配列要素の警告中断は型付きプロパティと分けて扱う。ビット複合代入への一般化は未検証。[版別ログと移行条件](items6-10-integration-gate.md)。比較コマンドの終了0と`check.sh`のPASSはユーザー報告で、ログには終了コードがない。以下の934件・933件の記述は当時の履歴。
+
+934件時点の履歴：修正前の[集計](validation/items6-10-compound-934-before-fix-summary-mac.log)は3版とも933一致・1不一致・0エラー。Go側修正後はPodman接続拒否で比較できず、期待値を暫定としていた。[933件一致集計](validation/items6-10-compound-933-after-fix-summary-mac.log)は元ログとバイト一致で保存済み。
+
+## 剰余複合代入の警告中断（2026-10-17、934件追加前の履歴）
+
+現行fixtureは**933件**（正常513・実行時288・構文132）。`%=`の整数変換でハンドラが例外を投げた場合、格納前に中断する。Goの3版設定で検証済み。公式PHPの[8.3](validation/items6-10-modulo-compare-83.log)・[8.4](validation/items6-10-modulo-compare-84.log)・[8.5](validation/items6-10-modulo-compare-85.log)の比較試行はPodman接続拒否で各終了2。各版0一致・0不一致・1環境エラー・933件未実施。追加期待値は暫定。[移行判定](items6-10-integration-gate.md)。次節の931件は修正前の履歴。
+
+## 項目6〜10の統合検証（2026-10-17、933件への追加前の履歴）
+
+fixtureは**931件**（正常511・実行時288・構文132）。前回の[924件版別一致集計](validation/callable-924-after-fix-summary-mac.log)は今回の変更前の記録。新規7件はGoの3版設定と期待値テストで検証し、警告ハンドラ例外後の動的プロパティ・配列キー・増減の格納中断を修正した。公式PHPの[8.3](validation/items6-10-integration-compare-83.log)・[8.4](validation/items6-10-integration-compare-84.log)・[8.5](validation/items6-10-integration-compare-85.log)の版別比較試行はPodman接続拒否で各コマンド終了2。各版0一致・0不一致・1環境エラー・931件未実施で、期待値は暫定。[統合検証と移行判定](items6-10-integration-gate.md)。下の924件全一致は今回の変更前の履歴。
+
+## callable／Closureの924件（2026-10-17、今回の変更前の比較済み履歴）
+
+fixtureは**924件**（正常504・実行時288・構文132）。ユーザーが版ごとに`make compare`を実行した[修正後の6行集計](validation/callable-924-after-fix-summary-mac.log)ではPHP 8.3.35・8.4.26・8.5.11の各版が**924一致・0不一致・0エラー**。`call_user_func_array`と`call_user_func`自身の名前付き引数の修正を含む、新規16件の比較待ちは収録fixtureの範囲で解消した。`check.sh`のPASSはユーザー報告であり、集計ログに個別fixture行と各コマンドの終了コードはない。今回はログの保存・照合のみで比較は再実行していない。[以前の対象比較試行](validation/callable-named-targeted-84-attempt.log)と版別全件比較試行のPodman接続拒否は当時の履歴として残す。項目9と項目6〜10全体は部分実装。[実装・未対応の境界](items6-10-progress.md)を参照。
+
+## 特殊型・未登録型の908件比較（2026-10-16、今回の変更前の履歴）
+
+fixtureは**908件**（正常490・実行時287・構文131）。ユーザーが版別に`make compare`を実行した後の[修正後6行集計ログ](validation/special-types-908-after-fix-summary-mac.log)で、PHP 8.3.35・8.4.26・8.5.11がそれぞれ**908一致・0不一致・0エラー**と確認できた。888件からの追加20件は収録fixtureの範囲で公式比較済み。ログに個別fixture行と終了コードは含まれず、修正6件の解消と`check.sh`のPASSはユーザー報告である。今回は既存ログの保存・照合であり、比較は再実行していない。以下の不一致と接続拒否は当時の履歴として維持する。[未対応範囲](items6-10-progress.md)。
+
+## 特殊型のレビュー差異を修正（2026-10-16、修正直後の履歴）
+
+[ユーザー提供の修正前集計ログ](validation/special-types-908-before-fix-mac.log)は8.3.35・8.4.26で各902一致／4不一致／2テストエラー、8.5.11で903一致／3不一致／2テストエラー。`self`を宣言元クラス名として署名診断に表示し、親なし`parent`の引用符と未登録型名を修正した。継承比較に必要な後方型宣言を先行登録せず、2件を`success`から`runtime`へ移した。総数は**908件**（正常490・実行時287・構文131）。修正直後はPodman接続拒否で公式PHP3版比較を実施できず、期待診断を暫定としていた。後続の冒頭908件集計で収録範囲の比較待ちは解消した。[進捗](items6-10-progress.md)を参照。
+
+## 特殊型と未登録型（2026-10-16、修正前の履歴）
+
+この追加時点のfixtureは**908件**（正常492・実行時285・構文131）。既存888件は[版別の成功集計](validation/enum-888-after-fix-summary-mac.log)でPHP 8.3.35・8.4.26・8.5.11の各版と一致済み。新規20件はGo側で実行・期待値テスト済みだったが、公式PHPは[8.3](validation/special-types-compare-83-attempt.log)・[8.4](validation/special-types-compare-84-attempt.log)・[8.5](validation/special-types-compare-85-attempt.log)ともPodman接続拒否でバージョン確認に失敗し、各コマンド終了2だった。後続の修正前比較と今回の修正は上記を参照。`self`／`parent`は宣言元、`static`戻り値は呼び出し先のクラスで照合する。[対象範囲と制限](items6-10-progress.md)。
+
+## enum宣言診断の修正（2026-10-16、収録fixtureの比較済み）
+
+[修正前のMac比較集計](validation/enum-888-before-fix-mac-summary.log)では、各版884一致・4不一致・0エラーだった。Go側でenumの予約メソッドの宣言時点、プロパティ拒否文言、trait由来`from()`／`tryFrom()`の扱いを修正した。現在のfixtureは**888件**（正常477・実行時281・構文130）。ユーザーが版別に`make compare`を実行した後の[修正後集計ログ](validation/enum-888-after-fix-summary-mac.log)は、PHP 8.3.35・8.4.26・8.5.11で各**888一致・0不一致・0エラー**を記録する。追加11件の比較待ちは収録fixtureの範囲で解消した。この6行ログに個別fixture行と各コマンドの終了コードはなく、修正4件の解消と`check.sh`のPASSはユーザー報告である。今回は保存済みログの確認・保存のみ行い、比較を再実行していない。[Podman接続拒否による修正後試行](validation/enum-888-diagnostic-compare-all-attempt.log)は履歴として残す。[進捗](items6-10-progress.md)を参照。
+
+## 通常enumのfrom／tryFrom宣言を許す修正（2026-10-16、修正前の履歴）
+
+通常enumの`from()`／`tryFrom()`はユーザー定義メソッドとして扱う。backed enumでは既存の組み込みAPIとの競合として拒否し、`cases()`は両方で拒否する。直接宣言とtrait取り込み後の検査を修正した。戻り値の`self`／`?self`は今回の再現例に必要なメソッド範囲で追加した。fixtureは**888件**（正常476・実行時280・構文132）で、既存878件のみ[保存済み集計](validation/readonly-878-after-fix-summary-mac.log)で公式PHP3版と一致済み。新規11件の[対象比較](validation/enum-method-targeted-attempt.log)と[全件比較](validation/enum-method-compare-all-attempt.log)は環境エラーにより未実施で、期待値は暫定である。[進捗](items6-10-progress.md)を参照。
+
+## enum基本機能の884件時点の検証状況（2026-10-16）
+
+Go側へ通常／int・string backed enum、case同一性、`name`／`value`、`cases()`、`from()`／`tryFrom()`、型検査、interface・プロパティを持たないtraitの基本経路を追加した。fixtureは**884件**（正常475・実行時279・構文130）。既存878件は[版別集計](validation/readonly-878-after-fix-summary-mac.log)で3版とも一致済み。新規6件は[対象比較](validation/enum-targeted-attempt.log)と[全件比較試行](validation/enum-compare-all-attempt.log)がPodman接続拒否で終了2となり、各版0一致・0不一致・1環境エラー、6件未実施。期待値は暫定である。宣言制約、定数式、組み込みAPIの引数・診断、比較・変換の境界は残る。[進捗](items6-10-progress.md)を参照。
+
+## readonlyとプロパティ昇格の878件時点の検証状況（2026-10-16）
+
+fixtureは**878件**（正常471・実行時278・構文129）。コンストラクタ引数からのプロパティ宣言と本体実行前の初期代入、readonlyの一度だけの初期化・再代入／unset／配列書き換え拒否、readonly classの型付きプロパティと動的プロパティ作成禁止を部分実装した。readonly親クラスを通常の子クラスが継承する誤受理も修正した。PHP 8.3ではreadonlyの初期化を宣言元クラスに限り、8.4・8.5では公開／保護プロパティの子クラス初期化を許す。ユーザーが版別に`make compare`を実行した後の[6行の集計ログ](validation/readonly-878-after-fix-summary-mac.log)で各版**878一致・0不一致・0エラー**を確認し、追加27件の比較待ちは収録範囲で解消した。集計ログに個別fixture行・終了コードはなく、指摘2件の解消と`check.sh`のPASSはユーザー報告である。比較を今回再実行していない。[修正前の876一致・1不一致・1テストエラー](validation/readonly-878-before-fix-mac.log)と[接続拒否による修正後の試行](validation/readonly-878-followup-compare-all-attempt.log)は履歴として維持する。clone、参照、フック、非対称可視性、未収録の宣言診断は残る。[進捗と制限](items6-10-progress.md)を参照。
+
+## 851件の公式比較済み基準（別実行による確認）
+
+ユーザーのMacでの[全件比較](validation/readonly-baseline-851-compare-all-mac.log)は、8.3.35・8.4.26が各851一致／0不一致／0エラー、8.5.11が830一致／0不一致／21環境エラーで`make compare-all`終了2。VM再起動後の[8.5.11単独比較](validation/readonly-baseline-851-85only-mac.log)は851一致／0不一致／0エラー、終了0だった。3版それぞれで851件一致を確認したが、1回の`make compare-all`が成功したわけではない。Podman資源枯渇は未確認の仮説である。
+
+## 動的プロパティ追加直後の記録（履歴）
+
+動的インスタンスプロパティ名`$object->$name`・`$object->{$name}`・`$object->{式}`とnullsafeの読み取り、通常／複合代入、増減、`isset`・`empty`・`??`・`??=`・`unset`、配列要素操作を既存の宣言スロットへ接続した。fixtureは**851件**（正常457・実行時276・構文118）。ユーザーのMacでの[修正前の全件比較](validation/dynamic-property-851-before-fix-mac.log)は8.3.35・8.4.26が各850一致／1不一致／0エラー、8.5.11が829一致／1不一致／21環境エラー、終了2。不一致の`dynamic_property_receiver_change.php`は、Goが代入先の受け手を名前式・右辺より早く固定していたため。Go側を修正し、公式PHPのstdout`1|9|1|10`に期待値を訂正した。[修正後のローカルテスト](validation/dynamic-property-receiver-fix-test.log)は成功したが、[対象比較](validation/dynamic-property-receiver-fix-targeted-attempt.log)・[全件比較](validation/dynamic-property-receiver-fix-compare-all-attempt.log)はPodman接続拒否で終了2。**修正後の公式比較は未実施**である。旧[比較試行](validation/dynamic-property-compare-all-attempt.log)も履歴として維持する。名前式の非文字列変換、評価順序の未収録ケース、マジックメソッド等は残る。項目7・8と項目6〜10全体は未完了。[詳細](items6-10-progress.md)を参照。
+
+### 833件の比較済み基準（履歴）
+
+fixtureは**833件**（正常443・実行時273・構文117）。型付きインスタンス／staticプロパティ、型付きクラス／interface／trait定数の基本形、および複合代入式の格納値返却を追加した。ユーザーのMacでの[修正後の全件比較](validation/typed-members-833-retry-mac.log)は、公式PHP 8.3.35・8.4.26・8.5.11の各版で**833一致・0不一致・0エラー**、ログ記載の終了コード0。元ログとのバイト一致を確認して保存した。817件から追加した16件の公式比較待ちは収録fixtureの範囲で解消した。途中の[診断2件の不一致](validation/typed-members-833-before-fix-mac.log)と[8.5の一時的なタイムアウト](validation/typed-members-833-after-mac.log)は履歴として残す。今回はログの確認・保存で、比較を再実行していない。動的インスタンスプロパティアクセスなどは未対応で、項目8と項目6〜10全体は部分実装のままである。[進捗・制限](items6-10-progress.md)。
+
+## 817件比較時点（履歴）
+
+2026-10-15時点は**817件**（正常433・実行時272・構文112）。ユーザーの[修正後の公式PHP3版全件比較](validation/void-never-817-after-fix-mac.log)は各版**817一致・0不一致・0エラー**、終了コード0。787件からの追加30件は収録fixtureの範囲で公式比較済み。今回は保存済みログを確認・保存したもので、比較は再実行していない。[修正前の不一致](validation/void-never-817-before-fix-mac.log)は履歴として維持する。型付きプロパティ・定数、未登録型の解決などは残る。[詳細](items6-10-progress.md)。
+
+### 787件追加直後の比較試行（履歴）
+
+当時は新規18件がGoローカルテストを通過したが、[全件比較試行](validation/type-variance-float-compare-all-attempt.log)はPodman接続拒否で終了2。各版0一致・0不一致・1環境エラーであり、この時点の新規期待値・診断は暫定だった。後続の上記787件成功ログで収録範囲の比較待ちは解消した。
+
+### 782件追加直後の記録（履歴）
+
+当時は13件を追加し、Goローカルテストが通過した。[当時の全件比較試行](validation/type-variance-compare-all-attempt.log)はPodman接続拒否で終了2。`int`を`float`の宣言時下位型とした誤りは、後続レビューを受けて上記のとおり修正した。
+
+### 769件の確定記録（履歴）
+
+ユーザーのMacで実行した`/tmp/php-compare-769-after.log`を[保存済みログ](validation/dnf-769-after-fix-mac.log)へバイト単位でコピーした。各版769一致・0不一致・0エラー、ログ末尾の終了コード0。以下の765件・769件追加直後の接続拒否と暫定期待値は当時の履歴であり、収録769件の比較待ちはこの成功で解消した。今回はログの確認・保存で、比較を再実行していない。
+
+### 765件時点の追加直後（履歴）
+
+当時は追加15件がGoローカル照合を通過し、[比較試行](validation/dnf-compare-all-attempt.log)はPodman接続拒否で終了2、公式PHP3版との比較は未実施だった。この時点ではintersection同士の包含関係を宣言時に検査していなかった。
+
+### 750件時点の確定履歴
+
+当時の収録fixtureは**750件**（正常405・実行時257・構文88）。主基準PHP 8.4.26、追加対象8.3.35・8.5.11。ユーザーのMacでの[修正後全件比較](validation/union-diagnostic-750-after-fix-mac.log)は各版**750一致・0不一致・0エラー**、ログ記載の終了コード0。[`union_nullable_syntax.php`の対象比較](validation/union-nullable-syntax-targeted-mac.log)も各版1一致・0不一致・0エラーで、比較コマンド終了0はユーザー報告による確認である。追加23件の比較待ちは収録fixtureの範囲で解消した。これは保存済みログの確認・保存であり、今回の比較結果ではない。項目8と項目6〜10全体は部分実装で、Go製PHPでのLaravel起動は未対応。[詳細](items6-10-progress.md)を参照。
+
+### 750件の修正前不一致（履歴）
+
+[修正前の全件比較](validation/union-diagnostic-750-before-fix-mac.log)は各版749一致・1不一致・0エラー、終了2だった。唯一の差は`parser/union_nullable_syntax.php`の診断文で、Go側の解析エラーと期待値を公式PHPの実出力に合わせて修正した。この環境からの[対象比較試行](validation/union-nullable-syntax-targeted-attempt.log)と[全件比較試行](validation/union-nullable-syntax-compare-all-attempt.log)はPodman接続拒否で終了2だったが、後続の上記Mac成功ログで収録fixtureの差異解消を確認した。
+
+### 727件の全一致（直前の確定履歴）
+
+ユーザーのMacでの[修正後全件比較](validation/static-throw-727-compare-all-mac.log)は各版727一致・0不一致・0エラー、終了0。新規9件を含む全件がMATCHし、直接`Class::{throw ...}()`の事前拒否は収録fixtureの範囲で公式比較済みである。この記録は保存済みログの確認・保存であり、今回の比較結果ではない。
+
+### 718件比較時点（履歴）
+
+修正前に比較済みの収録fixtureは**718件**（正常393・実行時250・構文75）。主基準PHP 8.4.26、追加対象8.3.35・8.5.11。ユーザーのMacでの[修正後全件比較](validation/item7-dynamic-static-718-after-fix-mac.log)は各版718一致・0不一致・0エラー、終了0。`success/class_dynamic_static_order.php`も3版すべてで一致し、追加11件の比較待ちは解消した。今回は保存済みログの確認・保存であり、比較は再実行していない。[修正前の失敗](validation/item7-dynamic-static-718-before-fix-mac.log)は履歴として残す。直接`Class::{throw ...}()`をGoが受理する差は、この718件の比較時点では収録fixture外の既知不具合だった。[進捗・対象範囲](items6-10-progress.md)を参照。項目7と項目6〜10全体は部分実装で、Go製PHPでのLaravel起動は未対応。
+
+### 727件追加直後の比較待ち（履歴）
+
+2026-10-15追補：当時は**727件**（正常394・実行時251・構文82）。直接の動的staticメソッド名`{throw ...}`とその括弧付き形を事前検査で拒否する修正を加え、未選択分岐、未呼び出し関数・メソッド、動的クラス名、`parent::`、読み込み先、合法な三項式と関数呼び出しの対比を9件に収録した。Go側の期待値テストは成功。この時点では新規9件の公式PHP3版比較がPodman接続拒否で**未実施**で、期待診断は暫定だった。後続の冒頭727件成功ログで比較待ちは解消した。[対象比較試行](validation/static-throw-targeted-attempt.log)と[全件比較試行](validation/static-throw-compare-all-attempt.log)は一致・不一致の実測値ではない。上記718件の全一致は変更前の確定履歴である。[詳細と再実行手順](items6-10-progress.md)を参照。項目7と項目6〜10全体は引き続き部分実装。
+
+### 641件の修正前比較（履歴）
+
+ユーザーの[修正前全件比較](validation/include-integration-641-user-before-fix.log)は、8.3.35・8.4.26が各640一致・1不一致、8.5.11が638一致・3不一致、環境エラー各0、終了2だった。弱い`int`引数への小数変換の非推奨警告と8.5の読み込み先宣言エラートレースを修正し、後続の上記641件成功ログで解消を確認した。修正途中の[保存済み公式stderrとの照合](validation/include-integration-641-saved-output-recheck.log)と[比較試行](validation/include-integration-641-review-compare-all-attempt.log)は、当時の記録として維持する。
 
 ## 622件の修正前比較（履歴）
 
@@ -371,6 +529,6 @@ Goでユーザー関数名に使用した場合の互換性も対象外です。
 
 資料からの実装判断と保存済み期待値の一致は、公式PHPでプログラムを実行して得た結果と区別しています。
 
-## 項目6〜10の現在の追加範囲
+## 項目6〜10の追加範囲（662件時点の履歴）
 
-現在のGo実装は、ローカルファイル読み込み、継承・interface・trait・staticメンバー・型なしクラス定数、単純な引数・戻り値型、ファイル単位strict_types、値捕捉クロージャ・arrow関数、可変長・名前付き引数、配列の整数／文字列キー展開、基本的な例外制御を**部分対応**とする。収録済み622件は[3版全一致ログ](validation/named-exception-622-compare-all-mac.log)で確認済み。高度な型、参照捕捉、Traversable展開、残るThrowable APIと継承規則、エラーハンドラ、Composer生成autoload、Reflection・Attribute、HTTP・DB統合は残る。項目9・10および項目6〜10全体は部分実装。[進捗と制限](items6-10-progress.md)を参照。上の第1版時点の未対応一覧と、以前の[538件時点の試行ログ](validation/items6-10-compare-all.log)は履歴である。
+現在のGo実装は、ローカルファイル読み込み、継承・interface・trait・staticメンバー・型なしクラス定数、単純な引数・戻り値型、ファイル単位strict_types、値捕捉クロージャ・arrow関数、可変長・名前付き引数、配列の整数／文字列キー展開、基本的な例外制御を**部分対応**とする。読み込み先のParseError捕捉、読み込みを含むトレース、失敗別の`_once`履歴を追加した。通常の`include`／`require`は解析成功後、`*_once`は解析前に読込履歴へ登録する。例外連鎖関連の新規21件を含む662件は[修正後の3版全一致ログ](validation/throwable-chain-662-compare-all-mac.log)で検証済み。高度な型、参照捕捉、Traversable展開、残るThrowable APIと継承規則、エラーハンドラ、include_path全般・ストリームラッパー、Composer生成autoload、Reflection・Attribute、HTTP・DB統合はこの記録時点では残件だった。後続のエラーハンドラは684件で比較済み、include_pathのローカル探索は700件時点では公式比較待ちだった。その後の702件全一致は冒頭の成功ログで確認済み。項目6・10および項目6〜10全体は部分実装。[進捗と制限](items6-10-progress.md)を参照。上の第1版時点の未対応一覧と、以前の[538件時点の試行ログ](validation/items6-10-compare-all.log)は履歴である。

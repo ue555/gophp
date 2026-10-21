@@ -1,0 +1,11 @@
+command: make test
+go test ./...
+ok  	example.com/gophp/cmd/gophp	67.141s
+ok  	example.com/gophp/internal/php	(cached)
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+............
+----------------------------------------------------------------------
+Ran 12 tests in 1.860s
+
+OK
+exit_code: 0

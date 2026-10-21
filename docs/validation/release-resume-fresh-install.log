@@ -1,0 +1,262 @@
+RUN ['podman', 'run', '--rm', '-e', 'COMPOSER_HOME=/tmp/composer', '-e', 'DB_DATABASE=:memory:', '-v', '/Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api:/app', 'localhost/gophp-release-dependencies', 'composer', 'install', '--no-dev', '--no-interaction', '--prefer-dist', '--no-scripts', '--no-plugins']
+Installing dependencies from lock file
+Verifying lock file contents can be installed on current platform.
+Package operations: 94 installs, 0 updates, 0 removals
+  - Downloading willdurand/negotiation (3.1.0)
+  - Downloading psr/link (2.0.1)
+  - Downloading symfony/web-link (v7.4.8)
+  - Downloading symfony/deprecation-contracts (v3.7.1)
+  - Downloading psr/container (2.0.2)
+  - Downloading symfony/type-info (v7.4.20)
+  - Downloading voku/portable-ascii (2.1.1)
+  - Downloading symfony/polyfill-php80 (v1.43.0)
+  - Downloading symfony/polyfill-mbstring (v1.43.0)
+  - Downloading symfony/polyfill-ctype (v1.37.0)
+  - Downloading phpoption/phpoption (1.10.0)
+  - Downloading graham-campbell/result-type (v1.2.0)
+  - Downloading vlucas/phpdotenv (v5.7.0)
+  - Downloading symfony/css-selector (v7.4.18)
+  - Downloading tijsverkoyen/css-to-inline-styles (v2.4.0)
+  - Downloading symfony/var-dumper (v7.4.18)
+  - Downloading symfony/polyfill-uuid (v1.43.0)
+  - Downloading symfony/uid (v7.4.20)
+  - Downloading symfony/routing (v7.4.20)
+  - Downloading symfony/process (v7.4.19)
+  - Downloading symfony/polyfill-php85 (v1.43.0)
+  - Downloading symfony/polyfill-php84 (v1.43.0)
+  - Downloading symfony/polyfill-php83 (v1.43.0)
+  - Downloading symfony/polyfill-intl-normalizer (v1.43.0)
+  - Downloading symfony/polyfill-intl-idn (v1.43.0)
+  - Downloading symfony/mime (v7.4.19)
+  - Downloading symfony/service-contracts (v3.7.3)
+  - Downloading psr/event-dispatcher (1.0.0)
+  - Downloading symfony/event-dispatcher-contracts (v3.7.1)
+  - Downloading symfony/event-dispatcher (v7.4.17)
+  - Downloading psr/log (3.0.2)
+  - Downloading doctrine/lexer (3.0.3)
+  - Downloading egulias/email-validator (4.0.4)
+  - Downloading symfony/mailer (v7.4.19)
+  - Downloading symfony/http-foundation (v7.4.20)
+  - Downloading symfony/error-handler (v7.4.20)
+  - Downloading symfony/http-kernel (v7.4.20)
+  - Downloading symfony/finder (v7.4.20)
+  - Downloading symfony/polyfill-intl-grapheme (v1.43.0)
+  - Downloading symfony/string (v7.4.19)
+  - Downloading symfony/console (v7.4.20)
+  - Downloading ramsey/collection (2.1.1)
+  - Downloading brick/math (0.14.8)
+  - Downloading ramsey/uuid (4.9.4)
+  - Downloading psr/simple-cache (3.0.0)
+  - Downloading nunomaduro/termwind (v2.4.0)
+  - Downloading symfony/translation-contracts (v3.7.1)
+  - Downloading symfony/translation (v7.4.17)
+  - Downloading psr/clock (1.0.0)
+  - Downloading symfony/clock (v7.4.8)
+  - Downloading carbonphp/carbon-doctrine-types (3.2.1)
+  - Downloading nesbot/carbon (3.14.2)
+  - Downloading monolog/monolog (3.12.1)
+  - Downloading psr/http-message (2.0)
+  - Downloading psr/http-factory (1.1.0)
+  - Downloading league/uri-interfaces (7.8.1)
+  - Downloading league/uri (7.8.1)
+  - Downloading league/mime-type-detection (1.17.0)
+  - Downloading league/flysystem-local (3.35.3)
+  - Downloading league/flysystem (3.36.0)
+  - Downloading nette/utils (v4.1.5)
+  - Downloading nette/schema (v1.3.6)
+  - Downloading dflydev/dot-access-data (v3.0.3)
+  - Downloading league/config (v1.2.0)
+  - Downloading league/commonmark (2.10.3)
+  - Downloading laravel/serializable-closure (v2.1.0)
+  - Downloading laravel/prompts (v0.3.25)
+  - Downloading guzzlehttp/uri-template (v1.0.11)
+  - Downloading psr/http-client (1.0.3)
+  - Downloading ralouphie/getallheaders (3.0.3)
+  - Downloading guzzlehttp/psr7 (2.13.1)
+  - Downloading guzzlehttp/promises (2.5.3)
+  - Downloading guzzlehttp/guzzle (7.15.5)
+  - Downloading fruitcake/php-cors (v1.4.0)
+  - Downloading dragonmantank/cron-expression (v3.6.0)
+  - Downloading doctrine/inflector (2.1.0)
+  - Downloading laravel/framework (v12.69.3)
+  - Downloading symfony/serializer (v7.4.20)
+  - Downloading symfony/property-info (v7.4.20)
+  - Downloading psr/cache (3.0.0)
+  - Downloading api-platform/metadata (v5.0.3)
+  - Downloading api-platform/state (v5.0.3)
+  - Downloading symfony/validator (v7.4.20)
+  - Downloading symfony/property-access (v7.4.16)
+  - Downloading api-platform/serializer (v5.0.3)
+  - Downloading symfony/filesystem (v7.4.18)
+  - Downloading api-platform/json-schema (v5.0.3)
+  - Downloading api-platform/openapi (v5.0.3)
+  - Downloading api-platform/jsonld (v5.0.3)
+  - Downloading api-platform/documentation (v5.0.3)
+  - Downloading api-platform/json-api (v5.0.3)
+  - Downloading api-platform/hydra (v5.0.3)
+  - Downloading api-platform/hal (v5.0.3)
+  - Downloading api-platform/laravel (v5.0.1)
+  0/94 [>---------------------------]   0%
+ 16/94 [====>-----------------------]  17%
+ 26/94 [=======>--------------------]  27%
+ 29/94 [========>-------------------]  30%
+ 38/94 [===========>----------------]  40%
+ 47/94 [==============>-------------]  50%
+ 59/94 [=================>----------]  62%
+ 66/94 [===================>--------]  70%
+ 76/94 [======================>-----]  80%
+ 85/94 [=========================>--]  90%
+ 93/94 [===========================>]  98%
+ 94/94 [============================] 100%
+  - Installing willdurand/negotiation (3.1.0): Extracting archive
+  - Installing psr/link (2.0.1): Extracting archive
+  - Installing symfony/web-link (v7.4.8): Extracting archive
+  - Installing symfony/deprecation-contracts (v3.7.1): Extracting archive
+  - Installing psr/container (2.0.2): Extracting archive
+  - Installing symfony/type-info (v7.4.20): Extracting archive
+  - Installing voku/portable-ascii (2.1.1): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-ctype (v1.37.0): Extracting archive
+  - Installing phpoption/phpoption (1.10.0): Extracting archive
+  - Installing graham-campbell/result-type (v1.2.0): Extracting archive
+  - Installing vlucas/phpdotenv (v5.7.0): Extracting archive
+  - Installing symfony/css-selector (v7.4.18): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (v2.4.0): Extracting archive
+  - Installing symfony/var-dumper (v7.4.18): Extracting archive
+  - Installing symfony/polyfill-uuid (v1.43.0): Extracting archive
+  - Installing symfony/uid (v7.4.20): Extracting archive
+  - Installing symfony/routing (v7.4.20): Extracting archive
+  - Installing symfony/process (v7.4.19): Extracting archive
+  - Installing symfony/polyfill-php85 (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-php84 (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-php83 (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.43.0): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.43.0): Extracting archive
+  - Installing symfony/mime (v7.4.19): Extracting archive
+  - Installing symfony/service-contracts (v3.7.3): Extracting archive
+  - Installing psr/event-dispatcher (1.0.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v3.7.1): Extracting archive
+  - Installing symfony/event-dispatcher (v7.4.17): Extracting archive
+  - Installing psr/log (3.0.2): Extracting archive
+  - Installing doctrine/lexer (3.0.3): Extracting archive
+  - Installing egulias/email-validator (4.0.4): Extracting archive
+  - Installing symfony/mailer (v7.4.19): Extracting archive
+  - Installing symfony/http-foundation (v7.4.20): Extracting archive
+  - Installing symfony/error-handler (v7.4.20): Extracting archive
+  - Installing symfony/http-kernel (v7.4.20): Extracting archive
+  - Installing symfony/finder (v7.4.20): Extracting archive
+  - Installing symfony/polyfill-intl-grapheme (v1.43.0): Extracting archive
+  - Installing symfony/string (v7.4.19): Extracting archive
+  - Installing symfony/console (v7.4.20): Extracting archive
+  - Installing ramsey/collection (2.1.1): Extracting archive
+  - Installing brick/math (0.14.8): Extracting archive
+  - Installing ramsey/uuid (4.9.4): Extracting archive
+  - Installing psr/simple-cache (3.0.0): Extracting archive
+  - Installing nunomaduro/termwind (v2.4.0): Extracting archive
+  - Installing symfony/translation-contracts (v3.7.1): Extracting archive
+  - Installing symfony/translation (v7.4.17): Extracting archive
+  - Installing psr/clock (1.0.0): Extracting archive
+  - Installing symfony/clock (v7.4.8): Extracting archive
+  - Installing carbonphp/carbon-doctrine-types (3.2.1): Extracting archive
+  - Installing nesbot/carbon (3.14.2): Extracting archive
+  - Installing monolog/monolog (3.12.1): Extracting archive
+  - Installing psr/http-message (2.0): Extracting archive
+  - Installing psr/http-factory (1.1.0): Extracting archive
+  - Installing league/uri-interfaces (7.8.1): Extracting archive
+  - Installing league/uri (7.8.1): Extracting archive
+  - Installing league/mime-type-detection (1.17.0): Extracting archive
+  - Installing league/flysystem-local (3.35.3): Extracting archive
+  - Installing league/flysystem (3.36.0): Extracting archive
+  - Installing nette/utils (v4.1.5): Extracting archive
+  - Installing nette/schema (v1.3.6): Extracting archive
+  - Installing dflydev/dot-access-data (v3.0.3): Extracting archive
+  - Installing league/config (v1.2.0): Extracting archive
+  - Installing league/commonmark (2.10.3): Extracting archive
+  - Installing laravel/serializable-closure (v2.1.0): Extracting archive
+  - Installing laravel/prompts (v0.3.25): Extracting archive
+  - Installing guzzlehttp/uri-template (v1.0.11): Extracting archive
+  - Installing psr/http-client (1.0.3): Extracting archive
+  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+  - Installing guzzlehttp/psr7 (2.13.1): Extracting archive
+  - Installing guzzlehttp/promises (2.5.3): Extracting archive
+  - Installing guzzlehttp/guzzle (7.15.5): Extracting archive
+  - Installing fruitcake/php-cors (v1.4.0): Extracting archive
+  - Installing dragonmantank/cron-expression (v3.6.0): Extracting archive
+  - Installing doctrine/inflector (2.1.0): Extracting archive
+  - Installing laravel/framework (v12.69.3): Extracting archive
+  - Installing symfony/serializer (v7.4.20): Extracting archive
+  - Installing symfony/property-info (v7.4.20): Extracting archive
+  - Installing psr/cache (3.0.0): Extracting archive
+  - Installing api-platform/metadata (v5.0.3): Extracting archive
+  - Installing api-platform/state (v5.0.3): Extracting archive
+  - Installing symfony/validator (v7.4.20): Extracting archive
+  - Installing symfony/property-access (v7.4.16): Extracting archive
+  - Installing api-platform/serializer (v5.0.3): Extracting archive
+  - Installing symfony/filesystem (v7.4.18): Extracting archive
+  - Installing api-platform/json-schema (v5.0.3): Extracting archive
+  - Installing api-platform/openapi (v5.0.3): Extracting archive
+  - Installing api-platform/jsonld (v5.0.3): Extracting archive
+  - Installing api-platform/documentation (v5.0.3): Extracting archive
+  - Installing api-platform/json-api (v5.0.3): Extracting archive
+  - Installing api-platform/hydra (v5.0.3): Extracting archive
+  - Installing api-platform/hal (v5.0.3): Extracting archive
+  - Installing api-platform/laravel (v5.0.1): Extracting archive
+  0/94 [>---------------------------]   0%
+ 15/94 [====>-----------------------]  15%
+ 26/94 [=======>--------------------]  27%
+ 33/94 [=========>------------------]  35%
+ 41/94 [============>---------------]  43%
+ 49/94 [==============>-------------]  52%
+ 67/94 [===================>--------]  71%
+ 78/94 [=======================>----]  82%
+ 88/94 [==========================>-]  93%
+ 93/94 [===========================>]  98%
+ 94/94 [============================] 100%
+Generating autoload files
+60 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+RUN ['podman', 'run', '--rm', '-e', 'COMPOSER_HOME=/tmp/composer', '-e', 'DB_DATABASE=:memory:', '-v', '/Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api:/app', 'localhost/gophp-release-dependencies', 'composer', 'check-platform-reqs', '--no-dev']
+Checking non-dev platform requirements for packages in the vendor dir
+composer-runtime-api 2.2.2      success                                       
+ext-ctype            *          success provided by symfony/polyfill-ctype    
+ext-dom              20031129   success                                       
+ext-fileinfo         8.4.26     success                                       
+ext-filter           8.4.26     success                                       
+ext-hash             8.4.26     success                                       
+ext-iconv            8.4.26     success                                       
+ext-intl             8.4.26     success                                       
+ext-json             8.4.26     success                                       
+ext-libxml           8.4.26     success                                       
+ext-mbstring         *          success provided by symfony/polyfill-mbstring 
+ext-openssl          8.4.26     success                                       
+ext-pcre             8.4.26     success                                       
+ext-pdo              8.4.26     success                                       
+ext-pdo_sqlite       8.4.26     success                                       
+ext-session          8.4.26     success                                       
+ext-tokenizer        8.4.26     success                                       
+php                  8.4.26     success                                       
+RUN ['podman', 'run', '--rm', '-e', 'COMPOSER_HOME=/tmp/composer', '-e', 'DB_DATABASE=:memory:', '-v', '/Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api:/app', 'localhost/gophp-release-dependencies', 'php', 'artisan', 'package:discover', '--no-interaction']
+
+   INFO  Discovering packages.  
+
+  api-platform/laravel .................................................. DONE
+  nesbot/carbon ......................................................... DONE
+  nunomaduro/termwind ................................................... DONE
+
+PASS composer.lock unchanged
+RUN ['make', 'test', 'vet', 'build']
+go test ./...
+--- FAIL: TestFixedLaravelCustomCommand (0.92s)
+    main_test.go:157: version=8.3 exit=0 stdout="\nIn Metadata.php line 577:\n                                                                               \n  Typed property ApiPlatform\\Metadata\\ApiResource::$stateOptions must not be   \n  accessed before initialization                                               \n                                                                               \n\n" stderr="[2026-10-21 02:24:12] testing.ERROR: Typed property ApiPlatform\\Metadata\\ApiResource::$stateOptions must not be accessed before initialization {\"exception\":\"[object] (Error(code: 0): Typed property ApiPlatform\\\\Metadata\\\\ApiResource::$stateOptions must not be accessed before initialization at /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/api-platform/metadata/Metadata.php:577)\n[stacktrace]\n#0 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/api-platform/laravel/Metadata/Resource/Factory/ParameterResourceMetadataCollectionFactory.php(40): ApiPlatform\\\\Metadata\\\\Metadata-\\u003egetStateOptions()\n#1 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/api-platform/laravel/routes/api.php(40): ApiPlatform\\\\Laravel\\\\Metadata\\\\Resource\\\\Factory\\\\ParameterResourceMetadataCollectionFactory-\\u003ecreate('ApiPlatform\\\\\\\\Lar...')\n#2 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Routing/Router.php(524): Illuminate\\\\Support\\\\ServiceProvider-\\u003e{closure}(Object(Illuminate\\\\Routing\\\\Router))\n#3 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Routing/Router.php(480): Illuminate\\\\Routing\\\\Router-\\u003eloadRoutes(Object(Closure))\n#4 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(212): Illuminate\\\\Routing\\\\Router-\\u003egroup(Array, Object(Closure))\n#5 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/api-platform/laravel/routes/api.php(34): Illuminate\\\\Routing\\\\RouteRegistrar-\\u003egroup(Object(Closure))\n#6 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Support/ServiceProvider.php(201): require()\n#7 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/api-platform/laravel/ApiPlatformProvider.php(1626): Illuminate\\\\Support\\\\ServiceProvider-\\u003eloadRoutesFrom('/Users/kouji/de...')\n#8 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): ApiPlatform\\\\Laravel\\\\ApiPlatformProvider-\\u003eboot()\n#9 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\\\Container\\\\BoundMethod-\\u003e{closure}()\n#10 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate\\\\Container\\\\Util::unwrapIfClosure(Object(Closure))\n#11 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\\\Container\\\\BoundMethod::callBoundMethod(Object(Illuminate\\\\Foundation\\\\Application), Array, Object(Closure))\n#12 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(799): Illuminate\\\\Container\\\\BoundMethod::call(Object(Illuminate\\\\Foundation\\\\Application), Array, Array, NULL)\n#13 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\\\Container\\\\Container-\\u003ecall(Array)\n#14 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\\\Foundation\\\\Application-\\u003ebootProvider(Object(ApiPlatform\\\\Laravel\\\\ApiPlatformProvider))\n#15 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): Illuminate\\\\Foundation\\\\Application-\\u003e{closure}(Object(ApiPlatform\\\\Laravel\\\\ApiPlatformProvider), 'ApiPlatform\\\\\\\\Lar...')\n#16 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\\\Foundation\\\\Application-\\u003eboot()\n#17 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\\\Foundation\\\\Bootstrap\\\\BootProviders-\\u003ebootstrap(Object(Illuminate\\\\Foundation\\\\Application))\n#18 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(494): Illuminate\\\\Foundation\\\\Application-\\u003ebootstrapWith(Array)\n#19 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\\\Foundation\\\\Console\\\\Kernel-\\u003ebootstrap()\n#20 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\\\Foundation\\\\Console\\\\Kernel-\\u003ehandle(Object(Symfony\\\\Component\\\\Console\\\\Input\\\\ArgvInput), Object(Symfony\\\\Component\\\\Console\\\\Output\\\\ConsoleOutput))\n#21 /Users/kouji/dev/php/.cache/gophp-release-p61v5ix8/research/laravel-api/artisan(8): Illuminate\\\\Foundation\\\\Application-\\u003ehandleCommand(Object(Symfony\\\\Component\\\\Console\\\\Input\\\\ArgvInput))\n#22 {main}\n\"} \n\n"
+FAIL
+FAIL	example.com/gophp/cmd/gophp	82.015s
+ok  	example.com/gophp/internal/php	2.537s
+FAIL
+make: *** [test] Error 1
+Traceback (most recent call last):
+  File "<stdin>", line 14, in <module>
+  File "<stdin>", line 7, in run
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['make', 'test', 'vet', 'build']' returned non-zero exit status 2.

@@ -1,0 +1,5 @@
+=== RUN   TestFixedLaravelNestedTranslation
+--- PASS: TestFixedLaravelNestedTranslation (0.15s)
+PASS
+ok  	example.com/gophp/cmd/gophp	0.501s
+exit_code: 0

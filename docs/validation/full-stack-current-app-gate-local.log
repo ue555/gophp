@@ -1,0 +1,30 @@
+command: GOCACHE=$PWD/.cache/go-build go test ./cmd/gophp -run '^TestFixedLaravel(ProbeThroughHTTPBridge|APIPlatformAcrossVersions|CollectionPagination)$' -count=1 -v
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions/8.3
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions/8.5
+--- PASS: TestFixedLaravelAPIPlatformAcrossVersions (5.15s)
+    --- PASS: TestFixedLaravelAPIPlatformAcrossVersions/8.3 (2.58s)
+    --- PASS: TestFixedLaravelAPIPlatformAcrossVersions/8.5 (2.57s)
+=== RUN   TestFixedLaravelProbeThroughHTTPBridge
+    main_test.go:587: sustained requests=96 duration=31.387379084s heap_alloc_before=876712 heap_alloc_after=762200
+--- PASS: TestFixedLaravelProbeThroughHTTPBridge (53.26s)
+=== RUN   TestFixedLaravelCollectionPagination
+=== RUN   TestFixedLaravelCollectionPagination/8.3
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+=== RUN   TestFixedLaravelCollectionPagination/8.4
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+=== RUN   TestFixedLaravelCollectionPagination/8.5
+    pagination_test.go:74: page=1 status=200 content_type="application/ld+json" body_bytes=2254 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/1\",\"@type\":\"Book\",\"id\":1,\"title\":\"" diagnostics=""
+    pagination_test.go:74: page=2 status=200 content_type="application/ld+json" body_bytes=333 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[{\"@id\":\"\\/api\\/books\\/31\",\"@type\":\"Book\",\"id\":31,\"title\"" diagnostics=""
+    pagination_test.go:74: page=3 status=200 content_type="application/ld+json" body_bytes=267 body_prefix="{\"@context\":\"\\/api\\/contexts\\/Book\",\"@id\":\"\\/api\\/books\",\"@type\":\"Collection\",\"totalItems\":31,\"member\":[],\"view\":{\"@id\":\"\\/api\\/books?page=3\",\"@type\":\"PartialCo" diagnostics=""
+--- PASS: TestFixedLaravelCollectionPagination (5.52s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.3 (1.86s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.4 (1.83s)
+    --- PASS: TestFixedLaravelCollectionPagination/8.5 (1.83s)
+PASS
+ok  	example.com/gophp/cmd/gophp	64.094s
+exit_code: 0

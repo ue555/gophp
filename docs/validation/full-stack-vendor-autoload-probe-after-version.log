@@ -1,0 +1,11 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Fatal error: Uncaught ParseError: unsupported predefined variable $GLOBALS in /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:38
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(20): require_once()
+#1 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php on line 38
+
+exit_code: 255

@@ -1,0 +1,6 @@
+command: make vet
+stdout:
+go vet ./...
+
+stderr:
+exit_code: 0

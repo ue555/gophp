@@ -1,0 +1,13 @@
+Release preparation review
+Candidate secret-format scan: private keys, GitHub token patterns, AWS access-key IDs: 0 matches (not an exhaustive secret audit).
+Ignored-path check: bin/gophp, .cache, fixed vendor, .env, storage logs excluded.
+Fixed composer.lock vs installed.json: 94 names/versions equal.
+Workflow YAML: parsed with Ruby YAML; GitHub runner execution not performed.
+Python unittest: 12 tests passed.
+Podman availability: exit 125; see release-preparation-podman.log.
+Git stage probe (git add --dry-run): exit 128; .git/index.lock Operation not permitted.
+GitHub read probe (git ls-remote origin HEAD): exit 128; Could not resolve host github.com.
+No commit, push, or tag created.
+Relocated tree preserves symlinks. Existing vendor and bootstrap manifests copied for offline testing; fresh Composer install is not verified.
+Relocated make test vet build: exit 0; Go packages, Python 12 tests, vet and build passed. See release-relocated-test.log.
+Final git diff --check: exit 0.

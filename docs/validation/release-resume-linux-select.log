@@ -1,0 +1,26 @@
+STEP 1/9: FROM docker.io/library/golang:1.27.2-alpine3.24 AS build
+STEP 2/9: WORKDIR /src
+--> Using cache 71dbef5a80fd9e4ca70abfd797b38f7d26c14918c302f1ddb210f84f1d38b51d
+--> 71dbef5a80fd
+STEP 3/9: RUN apk add --no-cache build-base sqlite-dev pcre2-dev
+--> Using cache a346cb0ef8398d9a1e0ddd97fcc84f3743b8e20ec87fef864e3ad7872d2d9d44
+--> a346cb0ef839
+STEP 4/9: ENV CGO_ENABLED=1
+--> Using cache 0648f65d29624d286de53828f2ce3d314bc778d896fb4341103f04b6c54804d2
+--> 0648f65d2962
+STEP 5/9: COPY go.mod ./
+--> Using cache 9fab23e5533b49e4cd7270abe41cacc948f2a4a01824bbc95debce426aa87d57
+--> 9fab23e5533b
+STEP 6/9: COPY cmd ./cmd
+--> Using cache 98a35cd4a577ce4ab237108ef42bfc4404a92e17e0036bb68915f47490c7a7fd
+--> 98a35cd4a577
+STEP 7/9: COPY internal ./internal
+--> ad30a029093b
+STEP 8/9: COPY tests/fixtures ./tests/fixtures
+--> 953c9a216147
+STEP 9/9: RUN go build -trimpath -ldflags="-s -w" -o /out/gophp ./cmd/gophp
+COMMIT localhost/gophp-release-build
+--> 1bfd51622494
+Successfully tagged localhost/gophp-release-build:latest
+1bfd51622494a65c7a9eb3d0e8cbdbdb2b109803e8ddedce599f7f1629b3e2d6
+ok  	example.com/gophp/internal/php	0.003s

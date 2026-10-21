@@ -1,0 +1,18 @@
+== 8.3.35
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+884 matched, 4 different, 0 errors; 888 fixtures
+== 8.4.26
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+884 matched, 4 different, 0 errors; 888 fixtures
+== 8.5.11
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_backed_custom_from.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_property.php
+DIFF /Users/kouji/dev/php/tests/fixtures/parser/enum_unit_custom_cases.php
+DIFF /Users/kouji/dev/php/tests/fixtures/runtime/enum_backed_trait_tryfrom.php
+884 matched, 4 different, 0 errors; 888 fixtures

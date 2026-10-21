@@ -1,0 +1,32 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/parser/generator_reference_yield_from.php
+result: MATCH
+stdout: ''
+stderr: 'Fatal error: Cannot use "yield from" inside a by-reference generator in /Users/kouji/dev/php/tests/fixtures/parser/generator_reference_yield_from.php on line 4\n'
+exit_code: 255
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/generator_reference_nested_delegate.php
+result: MATCH
+stdout: '3'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/parser/generator_reference_yield_from.php
+result: MATCH
+stdout: ''
+stderr: 'Fatal error: Cannot use "yield from" inside a by-reference generator in /Users/kouji/dev/php/tests/fixtures/parser/generator_reference_yield_from.php on line 4\n'
+exit_code: 255
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/generator_reference_nested_delegate.php
+result: MATCH
+stdout: '3'
+stderr: ''
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/parser/generator_reference_yield_from.php
+result: MATCH
+stdout: ''
+stderr: 'Fatal error: Cannot use "yield from" inside a by-reference generator in /Users/kouji/dev/php/tests/fixtures/parser/generator_reference_yield_from.php on line 4\nStack trace:\n#0 {main}\n'
+exit_code: 255
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/generator_reference_nested_delegate.php
+result: MATCH
+stdout: '3'
+stderr: ''
+exit_code: 0
+local_matched: 6
+local_different: 0

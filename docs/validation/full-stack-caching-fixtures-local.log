@@ -1,0 +1,22 @@
+default success/caching_iterator_basic.php: PASS stdout=b'a=x:more;b=y:more;c=z:end;' stderr=b'' exit=0
+default success/caching_iterator_cache.php: PASS stdout=b'1:2:|2|1' stderr=b'' exit=0
+default success/caching_iterator_reject.php: PASS stdout=b'type|cache|flags' stderr=b'' exit=0
+default success/caching_iterator_lookahead.php: PASS stdout=b'a|b|more|1|b|end|2|1' stderr=b'' exit=0
+default success/caching_collection_vendor.php: PASS stdout=b'xyz|x,y,z.|3' stderr=b'' exit=0
+8.3 success/caching_iterator_basic.php: PASS stdout=b'a=x:more;b=y:more;c=z:end;' stderr=b'' exit=0
+8.3 success/caching_iterator_cache.php: PASS stdout=b'1:2:|2|1' stderr=b'' exit=0
+8.3 success/caching_iterator_reject.php: PASS stdout=b'type|cache|flags' stderr=b'' exit=0
+8.3 success/caching_iterator_lookahead.php: PASS stdout=b'a|b|more|1|b|end|2|1' stderr=b'' exit=0
+8.3 success/caching_collection_vendor.php: PASS stdout=b'xyz|x,y,z.|3' stderr=b'' exit=0
+8.4 success/caching_iterator_basic.php: PASS stdout=b'a=x:more;b=y:more;c=z:end;' stderr=b'' exit=0
+8.4 success/caching_iterator_cache.php: PASS stdout=b'1:2:|2|1' stderr=b'' exit=0
+8.4 success/caching_iterator_reject.php: PASS stdout=b'type|cache|flags' stderr=b'' exit=0
+8.4 success/caching_iterator_lookahead.php: PASS stdout=b'a|b|more|1|b|end|2|1' stderr=b'' exit=0
+8.4 success/caching_collection_vendor.php: PASS stdout=b'xyz|x,y,z.|3' stderr=b'' exit=0
+8.5 success/caching_iterator_basic.php: PASS stdout=b'a=x:more;b=y:more;c=z:end;' stderr=b'' exit=0
+8.5 success/caching_iterator_cache.php: PASS stdout=b'1:2:|2|1' stderr=b'' exit=0
+8.5 success/caching_iterator_reject.php: PASS stdout=b'type|cache|flags' stderr=b'' exit=0
+8.5 success/caching_iterator_lookahead.php: PASS stdout=b'a|b|more|1|b|end|2|1' stderr=b'' exit=0
+8.5 success/caching_collection_vendor.php: PASS stdout=b'xyz|x,y,z.|3' stderr=b'' exit=0
+passed: 20/20
+exit_code: 0

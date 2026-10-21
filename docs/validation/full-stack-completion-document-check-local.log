@@ -1,0 +1,12 @@
+command: python3 -B -m unittest discover -s tests -p test_*.py
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.890s
+
+OK
+exit_code: 0
+command: python3 -B -c "import ast,pathlib; ast.parse(pathlib.Path(...)...)"
+syntax: PASS
+exit_code: 0
+command: git diff --check
+exit_code: 0

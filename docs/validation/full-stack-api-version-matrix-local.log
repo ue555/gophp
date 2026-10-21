@@ -1,0 +1,9 @@
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions/8.3
+=== RUN   TestFixedLaravelAPIPlatformAcrossVersions/8.5
+--- PASS: TestFixedLaravelAPIPlatformAcrossVersions (5.32s)
+    --- PASS: TestFixedLaravelAPIPlatformAcrossVersions/8.3 (2.67s)
+    --- PASS: TestFixedLaravelAPIPlatformAcrossVersions/8.5 (2.65s)
+PASS
+ok  	example.com/gophp/cmd/gophp	5.672s
+exit_code: 0

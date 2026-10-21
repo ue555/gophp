@@ -1,0 +1,3 @@
+go build -o bin/gophp ./cmd/gophp
+
+終了コード: 0

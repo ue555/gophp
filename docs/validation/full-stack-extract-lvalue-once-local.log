@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/extract_refs_lvalue_once.php
+2|1|1|9|7
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/extract_refs_lvalue_once.php
+2|1|1|9|7
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/extract_refs_lvalue_once.php
+2|1|1|9|7
+exit_code: 0

@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 /tmp/gophp-translation-probe.php
+{"first":"Hi Ada","deeper":{"second":"Bye Ada"}}
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 /tmp/gophp-translation-probe.php
+{"first":"Hi Ada","deeper":{"second":"Bye Ada"}}
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 /tmp/gophp-translation-probe.php
+{"first":"Hi Ada","deeper":{"second":"Bye Ada"}}
+exit_code: 0

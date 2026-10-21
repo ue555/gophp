@@ -1,0 +1,4 @@
+command: python3 skills/php-go-interpreter/scripts/compare_php.py --php ./containers/php-version/bin/php85 --php-version 8.5.11 --fixtures tests/fixtures/success/reference_typed_basic.php --interpreter ./bin/gophp --php-version=8.5 {file}
+target_php: 8.5.11
+ERROR: could not verify official PHP: expected PHP 8.5.11; got '', exit 125, stderr b'Cannot connect to Podman. Please verify your connection to the Linux system using `podman system connection list`, or try `podman machine init` and `podman machine start` to manage a new Linux VM\nError: unable to connect to Podman socket: failed to connect: dial tcp 127.0.0.1:52097: connect: operation not permitted\n'
+exit_code: 2

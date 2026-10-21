@@ -1,0 +1,71 @@
+package php
+
+import "strings"
+
+func (e *evaluator) callArrayFilterOrUnique(node functionCall) (value, error) {
+	name := strings.ToLower(node.name)
+	args, err := e.evalArguments(node.args)
+	if err != nil {
+		return value{}, err
+	}
+	params := []parameter{{name: "array"}, {name: "callback"}, {name: "mode"}}
+	if name == "array_unique" {
+		params = []parameter{{name: "array"}, {name: "flags"}}
+	}
+	bound, present, _, err := bindCallArguments(args, params, node.line)
+	if err != nil {
+		return value{}, err
+	}
+	if len(args) < 1 || len(args) > len(params) || !present[0] {
+		return value{}, &runtimeError{node.line, "ArgumentCountError", name + "() expects 1 to 3 arguments"}
+	}
+	if bound[0].kind != arrayKind {
+		return value{}, builtinTypeError(node.line, name, 1, "array", "array", bound[0])
+	}
+	out := arrayValue()
+	seen := make(map[string]bool)
+	var callback resolvedCallable
+	if name == "array_filter" && present[1] && bound[1].kind != nullKind {
+		var ok bool
+		callback, ok = e.resolveCallable(bound[1], node.line)
+		if !ok {
+			return value{}, &runtimeError{node.line, "TypeError", "array_filter(): Argument #2 ($callback) must be a valid callback or null"}
+		}
+	}
+	for _, entry := range bound[0].a.entries {
+		item := dereference(entry.value)
+		keep := true
+		if name == "array_unique" {
+			key, convertErr := e.toText(item, node.line)
+			if convertErr != nil {
+				return value{}, convertErr
+			}
+			keep = !seen[key]
+			seen[key] = true
+		} else if present[1] && bound[1].kind != nullKind {
+			callArgs := []callArgument{{value: item}}
+			if present[2] && bound[2].i != 0 {
+				key := integer(entry.key.index)
+				if entry.key.isString {
+					key = value{kind: stringKind, s: entry.key.text}
+				}
+				if bound[2].i == 2 {
+					callArgs = []callArgument{{value: key}}
+				} else {
+					callArgs = append(callArgs, callArgument{value: key})
+				}
+			}
+			result, callErr := e.invokeInternalCallback(callback, callArgs, node.line)
+			if callErr != nil {
+				return value{}, callErr
+			}
+			keep = result.truthy()
+		} else {
+			keep = item.truthy()
+		}
+		if keep {
+			out.a = out.a.with(entry.key, item)
+		}
+	}
+	return out, nil
+}

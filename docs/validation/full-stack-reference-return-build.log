@@ -1,0 +1,4 @@
+go build -o bin/gophp ./cmd/gophp
+go: writing stat cache: open /Users/kouji/go/pkg/mod/cache/download/example.com/gophp/@v/v0.1.1-0.20261014020352-62ba3f46eb63.info406993474.tmp: operation not permitted
+command: make build
+exit_code: 0

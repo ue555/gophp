@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"net/url"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -14,6 +16,10 @@ type runtimeError struct {
 	class   string
 	message string
 }
+
+type exitSignal struct{ code int }
+
+func (s *exitSignal) Error() string { return "script exited" }
 
 func (e *runtimeError) Error() string { return e.message }
 
@@ -25,6 +31,7 @@ type evaluator struct {
 	stdout, stderr        io.Writer
 	variables             variableScope
 	rootScope             variableScope
+	suspendedScopes       []variableScope
 	bindings              map[string]bindingKind
 	staticScope           variableScope
 	staticScopes          map[*methodDecl]variableScope
@@ -37,7 +44,38 @@ type evaluator struct {
 	lateClass             *classDecl
 	frames, failureFrames []callFrame
 	loadedFiles           map[string]bool
+	includePath           string
 	includeDepth          int
+	errorHandler          value
+	errorHandlerMask      int64
+	errorReporting        int64
+	constantAttributes    map[string][]attributeDecl
+	exceptionHandler      value
+	exceptionHandlerStack []value
+	shutdownFunctions     []shutdownCall
+	lastError             value
+	jsonLastError         int64
+	responseHeaders       []string
+	responseStatus        int64
+	requestBody           string
+	strtokRest            string
+	errorHandlerStack     []errorHandlerState
+	pendingDiagnostic     error
+	suppressedDiagnostics int
+	autoloaders           []resolvedCallable
+	autoloading           map[string]bool
+	activeGenerator       *phpGenerator
+	generatorRunning      bool
+	generatorEntering     *methodDecl
+	generators            *generatorRegistry
+	objectIDs             map[*phpObject]int64
+	defaultTimezone       string
+	defaultMimetype       string
+	foreachTempCounter    int
+	sqliteConnections     []*sqliteConnection
+	processes             []*phpProcess
+	openStreams           []*phpStream
+	outputBuffers         []outputBuffer
 }
 
 // Run parses the entire source before executing it, so a syntax error cannot
@@ -48,10 +86,33 @@ func Run(source, filename string, stdout, stderr io.Writer) int {
 
 // RunWithVersion keeps the same execution pipeline for all supported versions.
 func RunWithVersion(source, filename string, stdout, stderr io.Writer, version Version) int {
-	return run(source, filename, stdout, stderr, version, 0)
+	return runWithArguments(source, filename, []string{filename}, stdout, stderr, version, 0, nil, nil)
+}
+
+func RunWithArguments(source, filename string, arguments []string, stdout, stderr io.Writer, version Version) int {
+	return runWithArguments(source, filename, arguments, stdout, stderr, version, 0, nil, nil)
 }
 
 func run(source, filename string, stdout, stderr io.Writer, version Version, budget int) int {
+	return runWithArguments(source, filename, []string{filename}, stdout, stderr, version, budget, nil, nil)
+}
+
+type HTTPRequest struct {
+	Method, URI, Host, Body, RemoteAddr string
+	Headers                             map[string]string
+}
+type HTTPResponse struct {
+	Status  int
+	Headers []string
+}
+
+func RunHTTPRequest(source, filename string, request HTTPRequest, stdout, stderr io.Writer, version Version) (int, HTTPResponse) {
+	response := HTTPResponse{Status: 200}
+	code := runWithArguments(source, filename, []string{filename}, stdout, stderr, version, 0, &request, &response)
+	return code, response
+}
+
+func runWithArguments(source, filename string, arguments []string, stdout, stderr io.Writer, version Version, budget int, request *HTTPRequest, response *HTTPResponse) (exitCode int) {
 	if _, err := ParseVersion(string(version)); err != nil {
 		fmt.Fprintf(stderr, "gophp: %v\n", err)
 		return 2
@@ -92,8 +153,68 @@ func run(source, filename string, stdout, stderr io.Writer, version Version, bud
 		}
 		return 255
 	}
-	e := evaluator{version: version, filename: filename, strictTypes: strictTypes, stdout: stdout, stderr: stderr, variables: make(map[string]value), bounded: budget > 0, steps: budget, loadedFiles: make(map[string]bool)}
+	e := evaluator{version: version, filename: filename, strictTypes: strictTypes, stdout: stdout, stderr: stderr, variables: make(map[string]value), bounded: budget > 0, steps: budget, loadedFiles: make(map[string]bool), includePath: defaultIncludePath, generators: &generatorRegistry{}, objectIDs: make(map[*phpObject]int64), defaultTimezone: "UTC", defaultMimetype: "text/html", errorReporting: allErrorLevels(version)}
+	defer e.closeSQLiteConnections()
+	defer e.closeProcesses()
+	defer e.closeOpenStreams()
+	defer e.flushOutputBuffers()
+	if response != nil {
+		defer func() {
+			if e.responseStatus > 0 {
+				response.Status = int(e.responseStatus)
+			}
+			response.Headers = append([]string(nil), e.responseHeaders...)
+		}()
+	}
+	defer e.generators.closeAll()
+	defer func() {
+		if err := e.runShutdownFunctions(); err != nil {
+			fmt.Fprintf(stderr, "Fatal error: %s in %s\n", err.Error(), e.filename)
+			exitCode = 255
+		}
+	}()
 	e.rootScope = e.variables
+	argv := arrayValue()
+	for i, argument := range arguments {
+		argv.a = argv.a.with(arrayKey{index: int64(i)}, value{kind: stringKind, s: argument})
+	}
+	argc := integer(int64(len(arguments)))
+	server := arrayValue()
+	for _, entry := range os.Environ() {
+		if cut := strings.IndexByte(entry, '='); cut >= 0 {
+			server.a = server.a.with(arrayKey{isString: true, text: entry[:cut]}, value{kind: stringKind, s: entry[cut+1:]})
+		}
+	}
+	server.a = server.a.with(arrayKey{isString: true, text: "argv"}, argv)
+	server.a = server.a.with(arrayKey{isString: true, text: "argc"}, argc)
+	server.a = server.a.with(arrayKey{isString: true, text: "PHP_SELF"}, value{kind: stringKind, s: filename})
+	if request != nil {
+		e.requestBody = request.Body
+		fields := map[string]string{"REQUEST_METHOD": request.Method, "REQUEST_URI": request.URI, "SCRIPT_NAME": "/" + filepath.Base(filename), "SCRIPT_FILENAME": filename, "SERVER_PROTOCOL": "HTTP/1.1", "HTTP_HOST": request.Host, "REMOTE_ADDR": request.RemoteAddr}
+		if uri, err := url.ParseRequestURI(request.URI); err == nil {
+			fields["QUERY_STRING"] = uri.RawQuery
+		}
+		for name, content := range request.Headers {
+			key := strings.ToUpper(strings.ReplaceAll(name, "-", "_"))
+			if key == "CONTENT_TYPE" || key == "CONTENT_LENGTH" {
+				fields[key] = content
+			}
+			fields["HTTP_"+key] = content
+		}
+		for key, content := range fields {
+			server.a = server.a.with(arrayKey{isString: true, text: key}, value{kind: stringKind, s: content})
+		}
+	}
+	e.rootScope["_SERVER"] = server
+	e.rootScope["_ENV"] = arrayValue()
+	for _, name := range []string{"_GET", "_POST", "_FILES", "_COOKIE", "_REQUEST"} {
+		e.rootScope[name] = arrayValue()
+	}
+	if request != nil {
+		e.initializeRequestArrays(*request)
+	}
+	e.rootScope["argv"] = argv
+	e.rootScope["argc"] = argc
 	if absolute, pathErr := filepath.Abs(filename); pathErr == nil {
 		if canonical, canonicalErr := filepath.EvalSymlinks(absolute); canonicalErr == nil {
 			absolute = canonical
@@ -103,6 +224,10 @@ func run(source, filename string, stdout, stderr io.Writer, version Version, bud
 	e.callableDiagnostics(statements)
 	e.controlDiagnostics(statements, nil)
 	if err := e.executeProgram(statements); err != nil {
+		var stopped *exitSignal
+		if errors.As(err, &stopped) {
+			return stopped.code
+		}
 		errorFilename := filename
 		var sourced *sourceError
 		if errors.As(err, &sourced) {
@@ -126,9 +251,20 @@ func run(source, filename string, stdout, stderr io.Writer, version Version, bud
 		}
 		var failure *runtimeError
 		var raised *thrown
+		if e.exceptionHandler.kind != nullKind {
+			if caught, ok := e.catchable(err); ok {
+				if target, valid := e.resolveCallable(e.exceptionHandler, caught.object.o.exception.line); valid {
+					_, handlerErr := e.invokeResolved(target, []callArgument{{value: caught.object, line: caught.object.o.exception.line}}, caught.object.o.exception.line)
+					if handlerErr == nil {
+						return 0
+					}
+					err = handlerErr
+				}
+			}
+		}
 		if errors.As(err, &raised) {
 			data := raised.object.o.exception
-			fmt.Fprintf(stderr, "Fatal error: Uncaught %s: %s in %s:%d\nStack trace:\n%s  thrown in %s on line %d\n", raised.object.o.className(), data.message, data.file, data.line, data.trace, data.file, data.line)
+			fmt.Fprintf(stderr, "Fatal error: Uncaught %s\n  thrown in %s on line %d\n", exceptionDiagnostic(raised.object), data.file, data.line)
 			return 255
 		}
 		if errors.As(err, &failure) {
@@ -185,6 +321,15 @@ func (e *evaluator) executeProgram(statements []statement) error {
 		if e.predeclared[decl] {
 			return true, nil
 		}
+		// Enum built-in method redeclarations are checked when the enum is
+		// bound. A preceding statement must run before this declaration error.
+		if hasExecutedBefore[decl] && decl.kind == "enum" {
+			for name := range decl.methods {
+				if name == "__construct" || name == "cases" || decl.enumBacking != "" && (name == "from" || name == "tryfrom") {
+					return false, nil
+				}
+			}
+		}
 		// Interface implementation and trait composition are bound when the
 		// declaration is reached after executable code in the same file.
 		if hasExecutedBefore[decl] && (len(decl.interfaceNames) != 0 || len(decl.traitUses) != 0) {
@@ -220,6 +365,11 @@ func (e *evaluator) executeProgram(statements []statement) error {
 					}
 				} else {
 					e.initClasses()
+					if e.classes[traitKey] == nil && len(e.autoloaders) != 0 {
+						if err := e.tryAutoload(name, decl.line); err != nil {
+							return false, err
+						}
+					}
 					if e.classes[traitKey] == nil {
 						if canDefineBefore[decl] {
 							return false, nil
@@ -240,6 +390,11 @@ func (e *evaluator) executeProgram(statements []statement) error {
 				}
 			} else {
 				e.initClasses()
+				if e.classes[interfaceKey] == nil && len(e.autoloaders) != 0 {
+					if err := e.tryAutoload(name, decl.line); err != nil {
+						return false, err
+					}
+				}
 				if e.classes[interfaceKey] == nil {
 					if canDefineBefore[decl] {
 						return false, nil
@@ -259,11 +414,42 @@ func (e *evaluator) executeProgram(statements []statement) error {
 				}
 			} else {
 				e.initClasses()
+				if e.classes[parentKey] == nil && len(e.autoloaders) != 0 {
+					if err := e.tryAutoload(decl.parentName, decl.line); err != nil {
+						return false, err
+					}
+				}
 				if e.classes[parentKey] == nil {
 					if canDefineBefore[decl] {
 						return false, nil
 					}
 					return false, &runtimeError{decl.line, "Error", "Class \"" + decl.parentName + "\" not found"}
+				}
+			}
+		}
+		// A method contract may refer to a class declared later in this file.
+		// Unlike an extends dependency, that type must not be bound early just
+		// to establish a variance relationship. PHP checks the relationship at
+		// this class declaration and can report that the type is unavailable.
+		if decl.parentName != "" || len(decl.interfaceNames) != 0 {
+			e.initClasses()
+			references := classTypeReferences(decl)
+			if parent := e.classes[strings.ToLower(decl.parentName)]; parent != nil {
+				references = append(references, classTypeReferences(parent)...)
+			}
+			for _, interfaceName := range decl.interfaceNames {
+				if iface := e.classes[strings.ToLower(interfaceName)]; iface != nil {
+					references = append(references, classTypeReferences(iface)...)
+				}
+			}
+			// A prior runtime statement may have required the missing type.
+			// Defer this declaration so that execution can define it first.
+			if hasExecutedBefore[decl] {
+				for _, typeName := range references {
+					key := strings.ToLower(typeName)
+					if pending[key] == nil && e.classes[key] == nil {
+						return false, nil
+					}
 				}
 			}
 		}
@@ -332,11 +518,11 @@ func expressionMayDefineClass(x expr) bool {
 	case offsetExpr:
 		return expressionMayDefineClass(n.base) || expressionMayDefineClass(n.key)
 	case propertyExpr:
-		return expressionMayDefineClass(n.base)
+		return expressionMayDefineClass(n.base) || expressionMayDefineClass(n.nameExpr)
 	case methodCall:
 		return true
 	case nullsafeExpr:
-		if expressionMayDefineClass(n.base) {
+		if expressionMayDefineClass(n.base) || expressionMayDefineClass(n.nameExpr) {
 			return true
 		}
 		for _, arg := range n.args {
@@ -352,6 +538,8 @@ func expressionMayDefineClass(x expr) bool {
 		}
 	case dynamicCall:
 		return true
+	case firstClassCallable:
+		return expressionMayDefineClass(n.callee)
 	case namedArgument:
 		return expressionMayDefineClass(n.operand)
 	case newObject:
@@ -384,9 +572,51 @@ func expressionMayDefineClass(x expr) bool {
 	return false
 }
 
+type gotoSignal struct {
+	label string
+	line  int
+}
+
+func (g *gotoSignal) Error() string { return "goto " + g.label }
+
 func (e *evaluator) execute(statements []statement) error {
-	for _, statement := range statements {
+	labels := make(map[string]int)
+	for i, s := range statements {
+		if s.kind == "label" {
+			labels[s.names[0]] = i
+		}
+	}
+	for start := 0; start < len(statements); {
+		err := e.executeFrom(statements, start)
+		jump, ok := err.(*gotoSignal)
+		if !ok {
+			return err
+		}
+		index, found := labels[jump.label]
+		if !found {
+			return err
+		}
+		start = index + 1
+	}
+	return nil
+}
+
+func (e *evaluator) executeFrom(statements []statement, start int) (err error) {
+	defer func() {
+		if e.pendingDiagnostic != nil {
+			err = e.pendingDiagnostic
+			e.pendingDiagnostic = nil
+		}
+	}()
+	for _, statement := range statements[start:] {
+		if e.pendingDiagnostic != nil {
+			return e.pendingDiagnostic
+		}
 		switch statement.kind {
+		case "label":
+			continue
+		case "goto":
+			return &gotoSignal{statement.names[0], statement.line}
 		case "static":
 			if e.currentMethod == nil {
 				return &runtimeError{statement.line, "", "static variables require a function or method scope"}
@@ -426,7 +656,12 @@ func (e *evaluator) execute(statements []statement) error {
 			if err != nil {
 				return err
 			}
-			e.defineConstant(decl.name, v, decl.line)
+			if e.defineConstant(decl.name, v, decl.line) && len(decl.attributes) != 0 {
+				if e.constantAttributes == nil {
+					e.constantAttributes = make(map[string][]attributeDecl)
+				}
+				e.constantAttributes[decl.name] = decl.attributes
+			}
 			continue
 		case "switch":
 			if err := e.executeSwitch(statement); err != nil {
@@ -478,7 +713,22 @@ func (e *evaluator) execute(statements []statement) error {
 			var v value
 			var err error
 			if len(statement.expressions) != 0 {
-				v, err = e.eval(statement.expressions[0])
+				x := statement.expressions[0]
+				if e.currentMethod != nil && e.currentMethod.returnsByReference && !methodContainsYield(e.currentMethod.body) {
+					if !referenceSourceSyntax(x) {
+						return &runtimeError{statement.line, "Error", "gophp: returning an expression by reference is not implemented"}
+					}
+					e.foreachTempCounter++
+					name := fmt.Sprintf("\x00return_reference_%d", e.foreachTempCounter)
+					target := variable{token{kind: "variable", text: name, line: statement.line}}
+					_, err = e.evalReferenceAssignment(referenceAssignment{target: target, source: x, line: statement.line})
+					if err == nil {
+						v = e.variables[name]
+						delete(e.variables, name)
+					}
+				} else {
+					v, err = e.eval(x)
+				}
 			}
 			if err != nil {
 				return err
@@ -491,13 +741,23 @@ func (e *evaluator) execute(statements []statement) error {
 			}
 			continue
 		}
+		if statement.kind == "expression" && len(statement.expressions) == 1 {
+			if _, unusedVariable := statement.expressions[0].(variable); unusedVariable {
+				// PHP does not fetch a simple variable whose value is discarded.
+				continue
+			}
+		}
 		if statement.kind == "if" {
 			condition, err := e.eval(statement.condition)
 			if err != nil {
 				return err
 			}
 			branch := statement.elseBranch
-			if e.toBool(condition, statement.conditionLine) {
+			truth := e.toBool(condition, statement.conditionLine)
+			if e.pendingDiagnostic != nil {
+				return e.pendingDiagnostic
+			}
+			if truth {
 				branch = statement.thenBranch
 			}
 			// Blocks share the surrounding PHP variable scope. Unchosen
@@ -527,22 +787,50 @@ func (e *evaluator) execute(statements []statement) error {
 	return nil
 }
 
-func (e *evaluator) warn(line int, message string) {
-	e.diagnostic("Warning", line, message)
+func (e *evaluator) warn(line int, message string) error {
+	return e.diagnostic("Warning", line, message)
 }
 
-func (e *evaluator) diagnostic(level string, line int, message string) {
-	fmt.Fprintf(e.stderr, "%s: %s in %s on line %d\n", level, message, e.filename, line)
+func (e *evaluator) diagnostic(level string, line int, message string) error {
+	if e.pendingDiagnostic != nil {
+		return e.pendingDiagnostic
+	}
+	if err := e.handleDiagnostic(level, line, message); err != nil {
+		e.pendingDiagnostic = err
+		return err
+	}
+	return nil
 }
 
 func (e *evaluator) toText(v value, line int) (string, error) {
 	if e.version == PHP85 && v.kind == floatKind && math.IsNaN(v.f) {
-		e.warn(line, "unexpected NAN value was coerced to string")
+		if err := e.warn(line, "unexpected NAN value was coerced to string"); err != nil {
+			return "", err
+		}
 	}
 	if v.kind == arrayKind {
-		e.warn(line, "Array to string conversion")
+		if err := e.warn(line, "Array to string conversion"); err != nil {
+			return "", err
+		}
 	}
 	if v.kind == objectKind {
+		if v.o != nil && v.o.class != nil && v.o.class.name == "ReflectionNamedType" {
+			name := v.o.reflectedTypeName
+			if v.o.reflectedNullable && name != "mixed" && name != "null" && !strings.Contains(name, "|") {
+				name = "?" + name
+			}
+			return name, nil
+		}
+		if method := e.lookupMethod(v.o.class, "__toString"); method != nil {
+			result, err := e.invoke(v, method, nil, line)
+			if err != nil {
+				return "", err
+			}
+			if result.kind != stringKind {
+				return "", &runtimeError{line, "TypeError", v.o.className() + "::__toString(): Return value must be of type string, " + result.diagnosticName() + " returned"}
+			}
+			return result.s, nil
+		}
 		return "", &runtimeError{line, "Error", "Object of class " + v.o.className() + " could not be converted to string"}
 	}
 	return v.text(), nil
@@ -555,12 +843,23 @@ func (e *evaluator) toBool(v value, line int) bool {
 	return v.truthy()
 }
 
-func (e *evaluator) eval(expression expr) (value, error) {
+func (e *evaluator) eval(expression expr) (result value, err error) {
+	if e.pendingDiagnostic != nil {
+		return value{}, e.pendingDiagnostic
+	}
+	defer func() {
+		if e.pendingDiagnostic != nil {
+			result, err = value{}, e.pendingDiagnostic
+			e.pendingDiagnostic = nil
+		}
+	}()
 	if hasNullsafe(expression) {
 		v, _, err := e.evalChain(expression)
 		return v, err
 	}
 	switch node := expression.(type) {
+	case firstClassCallable:
+		return e.evalFirstClass(node)
 	case throwExpr:
 		v, err := e.eval(node.operand)
 		if err != nil {
@@ -568,45 +867,8 @@ func (e *evaluator) eval(expression expr) (value, error) {
 		}
 		return value{}, e.throwValue(v, node.line)
 	case dynamicCall:
-		callee, err := e.eval(node.callee)
-		if err != nil {
-			return value{}, err
-		}
-		if callee.kind == stringKind {
-			return e.callFunction(functionCall{name: strings.TrimPrefix(callee.s, "\\"), args: node.args, line: node.line})
-		}
-		if callee.kind == objectKind && callee.o.closure != nil {
-			return e.invokeClosure(callee.o.closure, node.args, node.line)
-		}
-		if callee.kind == arrayKind && len(callee.a.entries) == 2 && !callee.a.entries[0].key.isString && callee.a.entries[0].key.index == 0 && !callee.a.entries[1].key.isString && callee.a.entries[1].key.index == 1 {
-			receiver, member := callee.a.entries[0].value, callee.a.entries[1].value
-			if member.kind == stringKind && receiver.kind == objectKind {
-				return e.callMethod(methodCall{receiver: literal{value: receiver, line: node.line}, name: member.s, args: node.args, line: node.line})
-			}
-			if member.kind == stringKind && receiver.kind == stringKind {
-				e.initClasses()
-				class := e.classes[strings.ToLower(strings.TrimPrefix(receiver.s, "\\"))]
-				if class == nil {
-					return value{}, &runtimeError{node.line, "Error", fmt.Sprintf("Class %q not found", receiver.s)}
-				}
-				method := e.lookupMethod(class, member.s)
-				if method == nil {
-					return value{}, &runtimeError{node.line, "Error", "Call to undefined method " + class.name + "::" + member.s + "()"}
-				}
-				if err := e.methodAccess(class, method, node.line); err != nil {
-					return value{}, err
-				}
-				if !method.static {
-					return value{}, &runtimeError{node.line, "Error", "Non-static method " + method.owner.name + "::" + method.name + "() cannot be called statically"}
-				}
-				args, err := e.evalArguments(node.args)
-				if err != nil {
-					return value{}, err
-				}
-				return e.invokeWithClass(value{}, class, method, args, node.line)
-			}
-		}
-		return value{}, &runtimeError{node.line, "Error", "Value of type " + callee.typeName() + " is not callable"}
+		result, err := e.callDynamic(node)
+		return dereference(result), err
 	case instanceofExpr:
 		v, err := e.eval(node.operand)
 		if err != nil {
@@ -652,6 +914,23 @@ func (e *evaluator) eval(expression expr) (value, error) {
 	case constantExpr:
 		return e.constant(node)
 	case classNameExpr:
+		if node.dynamic != nil {
+			selector, err := e.eval(node.dynamic)
+			if err != nil {
+				return value{}, err
+			}
+			if selector.kind == objectKind && selector.o != nil {
+				return value{kind: stringKind, s: selector.o.className()}, nil
+			}
+			if selector.kind != stringKind {
+				return value{}, &runtimeError{node.line, "TypeError", "Class name must be a valid object or a string"}
+			}
+			class, err := e.resolveClassName(selector.s, node.line)
+			if err != nil {
+				return value{}, err
+			}
+			return value{kind: stringKind, s: class.name}, nil
+		}
 		if equalName(node.name, "self") || equalName(node.name, "parent") || equalName(node.name, "static") {
 			class, err := e.resolveClassName(node.name, node.line)
 			if err != nil {
@@ -663,13 +942,26 @@ func (e *evaluator) eval(expression expr) (value, error) {
 	case classConstantExpr:
 		return e.readClassConstant(node)
 	case staticPropertyExpr:
+		prepared, err := e.prepareStaticProperty(node)
+		if err != nil {
+			return value{}, err
+		}
+		node = prepared
 		loc, err := e.staticPropertyLocation(node)
 		if err != nil {
 			return value{}, err
 		}
+		class, err := e.resolveClassName(node.className, node.line)
+		if err != nil {
+			return value{}, err
+		}
+		if slot := class.staticProperties[node.name]; slot != nil && !slot.initialized {
+			return value{}, uninitializedPropertyError(slot.decl, node.line)
+		}
 		return loc.get(), nil
 	case staticCallExpr:
-		return e.callStaticMethod(node)
+		v, err := e.callStaticMethod(node)
+		return dereference(v), err
 	case interpolatedString:
 		return e.evalInterpolated(node)
 	case ternaryExpr:
@@ -696,16 +988,26 @@ func (e *evaluator) eval(expression expr) (value, error) {
 		return e.readProperty(node)
 	case newObject:
 		return e.newInstance(node)
+	case yieldExpr:
+		return e.evalYield(node)
+	case cloneExpr:
+		return e.evalClone(node)
+	case dynamicVariable:
+		return e.evalDynamicVariable(node)
 	case methodCall:
-		return e.callMethod(node)
+		v, err := e.callMethod(node)
+		return dereference(v), err
 	case assignment:
 		return e.evalAssignment(node)
+	case referenceAssignment:
+		return e.evalReferenceAssignment(node)
 	case compoundAssignment:
 		return e.evalCompound(node)
 	case increment:
 		return e.evalIncrement(node)
 	case functionCall:
-		return e.callFunction(node)
+		v, err := e.callFunction(node)
+		return dereference(v), err
 	case variable:
 		if v, ok := e.readVariable(node.token.text); ok {
 			return v, nil
@@ -713,9 +1015,16 @@ func (e *evaluator) eval(expression expr) (value, error) {
 		if node.token.text == "this" {
 			return value{}, &runtimeError{node.token.line, "Error", "Using $this when not in object context"}
 		}
-		e.warn(node.token.line, "Undefined variable $"+node.token.text)
+		if err := e.warn(node.token.line, "Undefined variable $"+node.token.text); err != nil {
+			return value{}, err
+		}
 		return value{kind: nullKind}, nil
 	case unary:
+		if node.op.kind == "@" {
+			e.suppressedDiagnostics++
+			defer func() { e.suppressedDiagnostics-- }()
+			return e.eval(node.operand)
+		}
 		v, err := e.eval(node.operand)
 		if err != nil {
 			return value{}, err
@@ -731,7 +1040,9 @@ func (e *evaluator) eval(expression expr) (value, error) {
 			return value{}, &runtimeError{node.op.line, "TypeError", "Unsupported operand types: " + v.typeName()}
 		}
 		if warn {
-			e.warn(node.op.line, "A non-numeric value encountered")
+			if err := e.warn(node.op.line, "A non-numeric value encountered"); err != nil {
+				return value{}, err
+			}
 		}
 		if node.op.kind == "+" {
 			return n, nil
@@ -752,20 +1063,24 @@ func (e *evaluator) eval(expression expr) (value, error) {
 		case "==", "!=", "<>", "<=>", "<", "<=", ">", ">=", "===", "!==":
 			return e.evalComparison(node)
 		}
-		if node.op.kind == "&&" || node.op.kind == "||" {
+		if node.op.kind == "&&" || node.op.kind == "||" || node.op.kind == "and" || node.op.kind == "or" || node.op.kind == "xor" {
 			left, err := e.eval(node.left)
 			if err != nil {
 				return value{}, err
 			}
 			truth := e.toBool(left, expressionLine(node.left))
-			if node.op.kind == "&&" && !truth || node.op.kind == "||" && truth {
+			if (node.op.kind == "&&" || node.op.kind == "and") && !truth || (node.op.kind == "||" || node.op.kind == "or") && truth {
 				return boolean(truth), nil
 			}
 			right, err := e.eval(node.right)
 			if err != nil {
 				return value{}, err
 			}
-			return boolean(e.toBool(right, expressionLine(node.right))), nil
+			rightTruth := e.toBool(right, expressionLine(node.right))
+			if node.op.kind == "xor" {
+				return boolean(truth != rightTruth), nil
+			}
+			return boolean(rightTruth), nil
 		}
 		values, err := e.evalOperands(node.left, node.right, expressionLine(node), false)
 		if err != nil {
@@ -803,7 +1118,9 @@ func (e *evaluator) evalOperands(left, right expr, line int, reverse bool) ([2]v
 			var ok bool
 			values[i], ok = e.readVariable(v.token.text)
 			if !ok {
-				e.warn(line, "Undefined variable $"+v.token.text)
+				if err := e.warn(line, "Undefined variable $"+v.token.text); err != nil {
+					return values, err
+				}
 			}
 		}
 	}
@@ -856,17 +1173,77 @@ func (e *evaluator) binaryOperation(op string, left, right value, line int) (val
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %s %s", left.typeName(), op, right.typeName())}
 	}
 	if warnA {
-		e.warn(line, "A non-numeric value encountered")
+		if err := e.warn(line, "A non-numeric value encountered"); err != nil {
+			return value{}, err
+		}
 	}
 	b, warnB, okB := right.numeric()
 	if !okB {
 		return value{}, &runtimeError{line, "TypeError", fmt.Sprintf("Unsupported operand types: %s %s %s", left.typeName(), op, right.typeName())}
 	}
 	if warnB {
-		e.warn(line, "A non-numeric value encountered")
+		if err := e.warn(line, "A non-numeric value encountered"); err != nil {
+			return value{}, err
+		}
 	}
 	if op == "/" && b.asFloat() == 0 {
 		return value{}, &runtimeError{line, "DivisionByZeroError", "Division by zero"}
 	}
 	return arithmetic(op, a, b), nil
+}
+
+func (e *evaluator) callDynamic(node dynamicCall) (value, error) {
+	callee, err := e.eval(node.callee)
+	if err != nil {
+		return value{}, err
+	}
+	if callee.kind == stringKind {
+		if strings.Contains(callee.s, "::") {
+			target, ok := e.resolveCallable(callee, node.line)
+			if !ok {
+				return value{}, &runtimeError{node.line, "Error", "Call to invalid callback " + callee.s}
+			}
+			args, err := e.evalArguments(node.args)
+			if err != nil {
+				return value{}, err
+			}
+			return e.invokeResolved(target, args, node.line)
+		}
+		return e.callFunction(functionCall{name: strings.TrimPrefix(callee.s, "\\"), args: node.args, line: node.line})
+	}
+	if callee.kind == objectKind && callee.o.closure != nil {
+		return e.invokeClosure(callee.o.closure, node.args, node.line)
+	}
+	if callee.kind == objectKind {
+		return e.callMethod(methodCall{receiver: literal{value: callee, line: node.line}, name: "__invoke", args: node.args, line: node.line})
+	}
+	if callee.kind == arrayKind && len(callee.a.entries) == 2 && !callee.a.entries[0].key.isString && callee.a.entries[0].key.index == 0 && !callee.a.entries[1].key.isString && callee.a.entries[1].key.index == 1 {
+		receiver, member := dereference(callee.a.entries[0].value), dereference(callee.a.entries[1].value)
+		if member.kind == stringKind && receiver.kind == objectKind {
+			return e.callMethod(methodCall{receiver: literal{value: receiver, line: node.line}, name: member.s, args: node.args, line: node.line})
+		}
+		if member.kind == stringKind && receiver.kind == stringKind {
+			e.initClasses()
+			class := e.classes[strings.ToLower(strings.TrimPrefix(receiver.s, "\\"))]
+			if class == nil {
+				return value{}, &runtimeError{node.line, "Error", fmt.Sprintf("Class %q not found", receiver.s)}
+			}
+			method := e.lookupMethod(class, member.s)
+			if method == nil {
+				return value{}, &runtimeError{node.line, "Error", "Call to undefined method " + class.name + "::" + member.s + "()"}
+			}
+			if err := e.methodAccess(class, method, node.line); err != nil {
+				return value{}, err
+			}
+			if !method.static {
+				return value{}, &runtimeError{node.line, "Error", "Non-static method " + method.owner.name + "::" + method.name + "() cannot be called statically"}
+			}
+			args, err := e.evalArguments(node.args)
+			if err != nil {
+				return value{}, err
+			}
+			return e.invokeWithClass(value{}, class, method, args, node.line)
+		}
+	}
+	return value{}, &runtimeError{node.line, "Error", "Value of type " + callee.typeName() + " is not callable"}
 }

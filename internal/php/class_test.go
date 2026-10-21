@@ -14,6 +14,7 @@ class Box {
     function read($other) { return $other->value; }
     function fail() { return 1 / 0; }
 }
+
 $o = new Box; $same = $o;
 echo $o->read($same);
 `
@@ -47,13 +48,99 @@ echo $o->read($same);
 	}
 }
 
+func TestReadonlyClassInheritance(t *testing.T) {
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, diagnostic bytes.Buffer
+		source := `<?php
+echo "before";
+readonly class Base {}
+class Invalid extends Base {}
+echo "after";
+`
+		code := RunWithVersion(source, "readonly-inheritance.php", &out, &diagnostic, version)
+		if code != 255 || out.Len() != 0 || !strings.Contains(diagnostic.String(), "Non-readonly class Invalid cannot extend readonly class Base") {
+			t.Fatalf("PHP %s: exit=%d stdout=%q stderr=%q", version, code, out.String(), diagnostic.String())
+		}
+		out.Reset()
+		diagnostic.Reset()
+		code = RunWithVersion("<?php readonly class Base {} readonly class Child extends Base {} echo 'ok';", "readonly-legal.php", &out, &diagnostic, version)
+		if code != 0 || out.String() != "ok" || diagnostic.Len() != 0 {
+			t.Fatalf("PHP %s legal: exit=%d stdout=%q stderr=%q", version, code, out.String(), diagnostic.String())
+		}
+	}
+}
+
+func TestTypedPropertyInitializationAndWrites(t *testing.T) {
+	const source = `<?php
+class ParentBox { private int $value = 2; public function parentValue() { return $this->value; } }
+class ChildBox extends ParentBox {
+    private string $value = 'child';
+    public ?int $optional;
+    public static int $shared;
+    public function childValue() { return $this->value; }
+}
+
+$box = new ChildBox;
+echo $box->parentValue(), '|', $box->childValue(), '|';
+echo isset($box->optional) ? 'set' : 'unset';
+echo '|';
+try { echo $box->optional; } catch (Error $e) { echo 'uninitialized'; }
+echo '|';
+$box->optional = '12'; echo $box->optional;
+echo '|'; unset($box->optional); echo isset($box->optional) ? 'set' : 'unset';
+echo '|';
+try { $box->optional = []; } catch (TypeError $e) { echo 'TypeError'; }
+echo '|';
+try { echo ChildBox::$shared; } catch (Error $e) { echo 'static'; }
+ChildBox::$shared = 4; echo '|', ChildBox::$shared;
+`
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, diagnostic bytes.Buffer
+		code := RunWithVersion(source, "typed.php", &out, &diagnostic, version)
+		if code != 0 || out.String() != "2|child|unset|uninitialized|12|unset|TypeError|static|4" || diagnostic.Len() != 0 {
+			t.Fatalf("PHP %s: exit=%d stdout=%q stderr=%q", version, code, out.String(), diagnostic.String())
+		}
+	}
+}
+
+func TestTypedDynamicStaticProperty(t *testing.T) {
+	const source = `<?php
+class DynamicTyped { public static int $value; }
+$class = 'DynamicTyped'; $name = 'value';
+$class::${$name} = '4';
+echo $class::${$name};
+`
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, diagnostic bytes.Buffer
+		code := RunWithVersion(source, "dynamic-typed.php", &out, &diagnostic, version)
+		if code != 0 || out.String() != "4" || diagnostic.Len() != 0 {
+			t.Fatalf("PHP %s: exit=%d stdout=%q stderr=%q", version, code, out.String(), diagnostic.String())
+		}
+	}
+}
+
+func TestConcreteChildChecksDeferredInterfaceContract(t *testing.T) {
+	const source = `<?php
+interface Needed { public function work(); }
+abstract class Deferred implements Needed {}
+echo "before|";
+if (true) { class Missing extends Deferred {} }
+echo "after";
+`
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, diagnostic bytes.Buffer
+		code := RunWithVersion(source, "deferred.php", &out, &diagnostic, version)
+		if code != 255 || out.String() != "before|" || !strings.Contains(diagnostic.String(), "Needed::work") {
+			t.Fatalf("PHP %s: exit=%d stdout=%q stderr=%q", version, code, out.String(), diagnostic.String())
+		}
+	}
+}
+
 func TestUnsupportedClassFeatures(t *testing.T) {
 	for _, source := range []string{
 		"class C extends P {}", "class C implements I {}",
-		"class C { public int $x; }",
-		"class C { function f(&$x) {} }", "class C { function f(...$args, $tail) {} }",
-		"class C { function f(): int|float { return 1; } }", "class C { function __get($x) {} }",
-		"class C { function __destruct() {} }",
+		"class C { function f(...$args, $tail) {} }",
+		"class C { function f(): int&float { return 1; } }",
 	} {
 		var out, err bytes.Buffer
 		if code := Run("<?php echo 'must not execute'; "+source, "class.php", &out, &err); code != 255 || out.Len() != 0 || err.Len() == 0 {
@@ -288,6 +375,56 @@ func TestClassCompileErrorsBeforeExecution(t *testing.T) {
 		var out, err bytes.Buffer
 		if code := Run("<?php echo 'must not execute'; "+source, "class.php", &out, &err); code != 255 || out.Len() != 0 {
 			t.Fatalf("source=%s exit=%d out=%q err=%q", source, code, &out, &err)
+		}
+	}
+}
+
+func TestDynamicStaticMemberResolutionAndIsolation(t *testing.T) {
+	source := `<?php
+class DynamicCell {
+    public static $count = 1;
+    public static function value($x) { return static::class . ':' . $x; }
+}
+$class = 'DynamicCell'; $method = 'value'; $property = 'count';
+echo $class::$method(4), '|', $class::${$property}++, '|', $class::$count;
+`
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		for repeat := 0; repeat < 2; repeat++ {
+			var out, err bytes.Buffer
+			code := RunWithVersion(source, "dynamic-cell.php", &out, &err, version)
+			if code != 0 || out.String() != "DynamicCell:4|1|2" || err.Len() != 0 {
+				t.Fatalf("version=%s repeat=%d exit=%d stdout=%q stderr=%q", version, repeat, code, &out, &err)
+			}
+		}
+	}
+}
+
+func TestDynamicClassNameDoesNotInterpretScopeKeywords(t *testing.T) {
+	source := `<?php class C { static function value() { echo 'wrong'; } static function run() { $name = 'self'; try { $name::value(); } catch (Error $e) { echo 'missing'; } } } C::run();`
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, err bytes.Buffer
+		if code := RunWithVersion(source, "dynamic-keyword.php", &out, &err, version); code != 0 || out.String() != "missing" || err.Len() != 0 {
+			t.Fatalf("version=%s exit=%d stdout=%q stderr=%q", version, code, &out, &err)
+		}
+	}
+}
+
+func TestEnumReservedMethodsAreCheckedAtDeclaration(t *testing.T) {
+	cases := []struct {
+		source, stdout, diagnostic string
+		code                       int
+	}{
+		{`<?php echo 'before'; enum E: int { case A = 1; public static function from(int $x): self { return self::A; } }`, "before", "Cannot redeclare E::from()", 255},
+		{`<?php echo 'before'; enum E { case A; public static function cases(): array { return []; } }`, "before", "Cannot redeclare E::cases()", 255},
+		{`<?php trait T { public static function tryFrom(int $x): ?self { return null; } } echo 'before'; enum E: int { use T; case A = 1; } echo 'after';`, "beforeafter", "", 0},
+	}
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		for _, tc := range cases {
+			var out, diagnostic bytes.Buffer
+			code := RunWithVersion(tc.source, "enum.php", &out, &diagnostic, version)
+			if code != tc.code || out.String() != tc.stdout || (tc.diagnostic == "" && diagnostic.Len() != 0) || (tc.diagnostic != "" && !strings.Contains(diagnostic.String(), tc.diagnostic)) {
+				t.Fatalf("version=%s source=%s exit=%d stdout=%q stderr=%q", version, tc.source, code, &out, &diagnostic)
+			}
 		}
 	}
 }

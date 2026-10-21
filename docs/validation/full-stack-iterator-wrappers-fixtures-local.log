@@ -1,0 +1,65 @@
+=== RUN   TestFixtures
+=== RUN   TestFixtures/success/array_paginator_vendor.php
+=== RUN   TestFixtures/success/array_paginator_vendor.php/default
+=== RUN   TestFixtures/success/array_paginator_vendor.php/8.3
+=== RUN   TestFixtures/success/array_paginator_vendor.php/8.4
+=== RUN   TestFixtures/success/array_paginator_vendor.php/8.5
+=== RUN   TestFixtures/success/iterator_count_basic.php
+=== RUN   TestFixtures/success/iterator_count_basic.php/default
+=== RUN   TestFixtures/success/iterator_count_basic.php/8.3
+=== RUN   TestFixtures/success/iterator_count_basic.php/8.4
+=== RUN   TestFixtures/success/iterator_count_basic.php/8.5
+=== RUN   TestFixtures/success/iterator_wrapper_aggregate.php
+=== RUN   TestFixtures/success/iterator_wrapper_aggregate.php/default
+=== RUN   TestFixtures/success/iterator_wrapper_aggregate.php/8.3
+=== RUN   TestFixtures/success/iterator_wrapper_aggregate.php/8.4
+=== RUN   TestFixtures/success/iterator_wrapper_aggregate.php/8.5
+=== RUN   TestFixtures/success/iterator_wrapper_basic.php
+=== RUN   TestFixtures/success/iterator_wrapper_basic.php/default
+=== RUN   TestFixtures/success/iterator_wrapper_basic.php/8.3
+=== RUN   TestFixtures/success/iterator_wrapper_basic.php/8.4
+=== RUN   TestFixtures/success/iterator_wrapper_basic.php/8.5
+=== RUN   TestFixtures/success/limit_iterator_basic.php
+=== RUN   TestFixtures/success/limit_iterator_basic.php/default
+=== RUN   TestFixtures/success/limit_iterator_basic.php/8.3
+=== RUN   TestFixtures/success/limit_iterator_basic.php/8.4
+=== RUN   TestFixtures/success/limit_iterator_basic.php/8.5
+=== RUN   TestFixtures/success/limit_iterator_invalid.php
+=== RUN   TestFixtures/success/limit_iterator_invalid.php/default
+=== RUN   TestFixtures/success/limit_iterator_invalid.php/8.3
+=== RUN   TestFixtures/success/limit_iterator_invalid.php/8.4
+=== RUN   TestFixtures/success/limit_iterator_invalid.php/8.5
+--- PASS: TestFixtures (0.08s)
+    --- PASS: TestFixtures/success/array_paginator_vendor.php (0.06s)
+        --- PASS: TestFixtures/success/array_paginator_vendor.php/default (0.02s)
+        --- PASS: TestFixtures/success/array_paginator_vendor.php/8.3 (0.02s)
+        --- PASS: TestFixtures/success/array_paginator_vendor.php/8.4 (0.01s)
+        --- PASS: TestFixtures/success/array_paginator_vendor.php/8.5 (0.02s)
+    --- PASS: TestFixtures/success/iterator_count_basic.php (0.00s)
+        --- PASS: TestFixtures/success/iterator_count_basic.php/default (0.00s)
+        --- PASS: TestFixtures/success/iterator_count_basic.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/iterator_count_basic.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/iterator_count_basic.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/iterator_wrapper_aggregate.php (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_aggregate.php/default (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_aggregate.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_aggregate.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_aggregate.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/iterator_wrapper_basic.php (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_basic.php/default (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_basic.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_basic.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/iterator_wrapper_basic.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/limit_iterator_basic.php (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_basic.php/default (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_basic.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_basic.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_basic.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/limit_iterator_invalid.php (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_invalid.php/default (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_invalid.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_invalid.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/limit_iterator_invalid.php/8.5 (0.00s)
+PASS
+ok  	example.com/gophp/internal/php	0.162s
+exit_code: 0

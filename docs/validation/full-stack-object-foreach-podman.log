@@ -1,0 +1,6 @@
+command: podman ps --format ...
+result: Podman socket connection refused at 127.0.0.1:52097 (operation not permitted).
+exit_code: 125
+
+This is a summary of the observed command result, not a verbatim terminal transcript.
+Observed during the 2026-10-21 continuation. No official PHP fixture comparison was run after this connection failure.

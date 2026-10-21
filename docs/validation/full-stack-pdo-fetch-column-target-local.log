@@ -1,0 +1,9 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/pdo_statement_fetch_column.php
+2|3|end|negative|missing|both
+exit_code: 0
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/pdo_statement_fetch_column.php
+2|3|end|negative|missing|assoc
+exit_code: 0
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/pdo_statement_fetch_column.php
+2|3|end|negative|missing|assoc
+exit_code: 0

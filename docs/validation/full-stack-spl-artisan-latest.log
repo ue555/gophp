@@ -1,0 +1,20 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/artisan list
+stdout:
+
+In ReflectionClassRecursiveIterator.php line 42:
+                                                               
+  Call to undefined function ApiPlatform\Metadata\Util\hash()  
+                                                               
+
+
+stderr:
+Fatal error: Uncaught ReflectionException: Function does not exist in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php:817
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php(789): Illuminate\Foundation\Application->getClassForCallable(Object(Closure))
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1466): Illuminate\Foundation\Application->call(Object(Closure))
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(219): Illuminate\Foundation\Application->terminate()
+#3 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1240): Illuminate\Foundation\Console\Kernel->terminate(Object(Symfony\Component\Console\Input\ArgvInput), 1)
+#4 /Users/kouji/dev/php/research/laravel-api/artisan(8): Illuminate\Foundation\Application->handleCommand(Object(Symfony\Component\Console\Input\ArgvInput))
+#5 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 817
+exit_code: 255

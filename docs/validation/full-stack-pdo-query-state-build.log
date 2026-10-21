@@ -1,0 +1,2 @@
+go build -o bin/gophp ./cmd/gophp
+exit_code: 0

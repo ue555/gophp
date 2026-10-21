@@ -1,0 +1,7 @@
+=== RUN   TestFixedLaravelProbeAcrossVersions
+--- PASS: TestFixedLaravelProbeAcrossVersions (1.03s)
+PASS
+ok  	example.com/gophp/cmd/gophp	1.312s
+
+command: go test ./cmd/gophp -run ^TestFixedLaravelProbeAcrossVersions$ -count=1 -v
+exit_code: 0

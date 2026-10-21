@@ -62,3 +62,55 @@ func TestUserClassCannotImplementThrowableDirectly(t *testing.T) {
 		t.Errorf("exit=%d stdout=%q stderr=%q", code, out.String(), diagnostic.String())
 	}
 }
+
+func TestExceptionChainPreservesIdentityAndAvoidsCycles(t *testing.T) {
+	first := value{kind: objectKind, o: &phpObject{exception: &exceptionData{message: "first"}}}
+	second := value{kind: objectKind, o: &phpObject{exception: &exceptionData{message: "second", previous: first}}}
+	third := value{kind: objectKind, o: &phpObject{exception: &exceptionData{message: "third"}}}
+	chainException(third, second)
+	if third.o.exception.previous.o != second.o || second.o.exception.previous.o != first.o {
+		t.Fatal("chain did not retain the original throwable objects")
+	}
+	chainException(first, third)
+	if first.o.exception.previous.kind != nullKind {
+		t.Fatal("cycle was accepted")
+	}
+}
+
+func TestVariadicTraceKeepsCallArguments(t *testing.T) {
+	cases := []string{
+		`$xs[0] = 99;`,
+		`$xs[] = 30;`,
+		`unset($xs[0]);`,
+	}
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		for _, change := range cases {
+			source := `<?php function makeE(...$xs) { ` + change + ` return new Exception; } ` +
+				`$args = makeE(10, 20)->getTrace()[0]['args']; ` +
+				`echo count($args), '|', $args[0], '|', $args[1];`
+			var out, diagnostic bytes.Buffer
+			code := RunWithVersion(source, "variadic_trace.php", &out, &diagnostic, version)
+			if code != 0 || out.String() != "2|10|20" || diagnostic.Len() != 0 {
+				t.Errorf("version=%s change=%s exit=%d stdout=%q stderr=%q", version, change, code, out.String(), diagnostic.String())
+			}
+		}
+	}
+}
+
+func TestClosureTraceNameByVersion(t *testing.T) {
+	source := "<?php\n$make = function () { return new Exception; };\n$e = $make();\necho $e->getTrace()[0]['function'];\n"
+	for _, tc := range []struct {
+		version Version
+		want    string
+	}{
+		{PHP83, "{closure}"},
+		{PHP84, "{closure:closure_trace.php:2}"},
+		{PHP85, "{closure:closure_trace.php:2}"},
+	} {
+		var out, diagnostic bytes.Buffer
+		code := RunWithVersion(source, "closure_trace.php", &out, &diagnostic, tc.version)
+		if code != 0 || out.String() != tc.want || diagnostic.Len() != 0 {
+			t.Errorf("version=%s exit=%d stdout=%q stderr=%q; want %q", tc.version, code, out.String(), diagnostic.String(), tc.want)
+		}
+	}
+}

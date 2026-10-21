@@ -1,0 +1,10 @@
+command: ./bin/gophp /private/tmp/gophp-finder-multi.php
+Fatal error: Uncaught Error: Typed property Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator::$ignoreFirstRewind must not be accessed before initialization in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php:126
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/symfony/finder/Iterator/LazyIterator.php(30): Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator->rewind()
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/symfony/finder/Finder.php(681): Symfony\Component\Finder\Iterator\LazyIterator->getIterator()
+#2 /private/tmp/gophp-finder-multi.php(6): Symfony\Component\Finder\Finder->getIterator()
+#3 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/symfony/finder/Iterator/RecursiveDirectoryIterator.php on line 126
+
+exit_code: 255

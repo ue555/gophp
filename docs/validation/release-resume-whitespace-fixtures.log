@@ -1,0 +1,73 @@
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_control_methods.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_property.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.3.35 (containers/php-version/bin/php83)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_static.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_control_methods.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_property.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_static.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_control_methods.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/generator_reference_basic.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_array.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_property.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/reference_return_static.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures
+PASS: all six formatting-only fixtures on three versions

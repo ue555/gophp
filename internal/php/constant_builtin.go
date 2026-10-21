@@ -56,7 +56,9 @@ func (e *evaluator) callConstantBuiltin(node functionCall) (result value, err er
 		return value{}, builtinTypeError(node.line, name, 1, "constant_name", "string", bound[0])
 	}
 	if bound[0].kind == nullKind {
-		e.diagnostic("Deprecated", node.line, name+"(): Passing null to parameter #1 ($constant_name) of type string is deprecated")
+		if err := e.diagnostic("Deprecated", node.line, name+"(): Passing null to parameter #1 ($constant_name) of type string is deprecated"); err != nil {
+			return value{}, err
+		}
 	}
 	constant, err := e.toText(bound[0], node.line)
 	if err != nil {
@@ -66,7 +68,22 @@ func (e *evaluator) callConstantBuiltin(node functionCall) (result value, err er
 		constant = strings.TrimPrefix(constant, "\\")
 	}
 	if strings.Contains(constant, "::") {
-		return value{}, &runtimeError{node.line, "Error", "gophp: class constants are not supported"}
+		if name == "define" {
+			return value{}, &runtimeError{node.line, "ValueError", "define(): Argument #1 ($constant_name) must not be a class constant"}
+		}
+		parts := strings.SplitN(constant, "::", 2)
+		class, classErr := e.resolveClassName(parts[0], node.line)
+		if classErr != nil {
+			if name == "defined" {
+				return boolean(false), nil
+			}
+			return value{}, classErr
+		}
+		if name == "defined" {
+			_, found := class.constants[parts[1]]
+			return boolean(found), nil
+		}
+		return e.readClassConstant(classConstantExpr{className: class.name, name: parts[1], line: node.line})
 	}
 	if name == "define" {
 		if present[2] {
@@ -74,7 +91,9 @@ func (e *evaluator) callConstantBuiltin(node functionCall) (result value, err er
 				return value{}, builtinTypeError(node.line, name, 3, "case_insensitive", "bool", bound[2])
 			}
 			if bound[2].kind == nullKind {
-				e.diagnostic("Deprecated", node.line, "define(): Passing null to parameter #3 ($case_insensitive) of type bool is deprecated")
+				if err := e.diagnostic("Deprecated", node.line, "define(): Passing null to parameter #3 ($case_insensitive) of type bool is deprecated"); err != nil {
+					return value{}, err
+				}
 			}
 			if e.toBool(bound[2], node.line) {
 				e.warn(node.line, "define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported")
@@ -89,6 +108,9 @@ func (e *evaluator) callConstantBuiltin(node functionCall) (result value, err er
 	}
 	if !ok {
 		return value{}, &runtimeError{node.line, "Error", fmt.Sprintf("Undefined constant %q", constant)}
+	}
+	if err := e.constantDeprecation(constant, node.line); err != nil {
+		return value{}, err
 	}
 	return v, nil
 }

@@ -31,11 +31,11 @@ def command(args):
     return result.stdout.strip()
 
 
-def request(port, method, path, body=None, accept="application/json"):
+def request(port, method, path, body=None, accept="application/json", content_type=None, include_content_type=False):
     data = None if body is None else json.dumps(body).encode()
     headers = {"Accept": accept}
     if data is not None:
-        headers["Content-Type"] = accept
+        headers["Content-Type"] = content_type or accept
     req = Request(f"http://127.0.0.1:{port}{path}", data=data,
                   headers=headers, method=method)
     def decoded(raw):
@@ -48,9 +48,13 @@ def request(port, method, path, body=None, accept="application/json"):
     try:
         with urlopen(req, timeout=5) as response:
             result = response.status, decoded(response.read())
+            response_content_type = response.headers.get("Content-Type", "")
     except HTTPError as error:
         result = error.code, decoded(error.read())
+        response_content_type = error.headers.get("Content-Type", "")
     print(f"HTTP {method} {path}: {result[0]} {result[1]!r}", flush=True)
+    if include_content_type:
+        return result[0], result[1], response_content_type
     return result
 
 

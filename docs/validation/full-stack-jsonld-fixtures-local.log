@@ -1,0 +1,14 @@
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/is_subclass_of_fqn.php
+result: MATCH exit_code: 0 stdout: '1|1|0|1|1|1' stderr: ''
+command: ./bin/gophp --php-version=8.3 tests/fixtures/success/hash_xxh3_long.php
+result: MATCH exit_code: 0 stdout: '16:short|16:same|16:same|16:same|16:same|' stderr: ''
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/is_subclass_of_fqn.php
+result: MATCH exit_code: 0 stdout: '1|1|0|1|1|1' stderr: ''
+command: ./bin/gophp --php-version=8.4 tests/fixtures/success/hash_xxh3_long.php
+result: MATCH exit_code: 0 stdout: '16:short|16:same|16:same|16:same|16:same|' stderr: ''
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/is_subclass_of_fqn.php
+result: MATCH exit_code: 0 stdout: '1|1|0|1|1|1' stderr: ''
+command: ./bin/gophp --php-version=8.5 tests/fixtures/success/hash_xxh3_long.php
+result: MATCH exit_code: 0 stdout: '16:short|16:same|16:same|16:same|16:same|' stderr: ''
+total: 6 matched: 6 different: 0
+exit_code: 0

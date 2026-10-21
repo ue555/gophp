@@ -1,0 +1,6 @@
+8.3: HTTP contract PASS; 2000 sustained GET (1750 probe + 250 manual); 8 parallel GET; server_exit_code -15; exit_code 0; source=docs/validation/full-stack-real-http-83-mac.log
+8.4: HTTP contract PASS; 2000 sustained GET (1750 probe + 250 manual); 8 parallel GET; server_exit_code -15; exit_code 0; source=docs/validation/full-stack-real-http-84-mac.log
+8.5: HTTP contract PASS; 2000 sustained GET (1750 probe + 250 manual); 8 parallel GET; server_exit_code -15; exit_code 0; source=docs/validation/full-stack-real-http-85-mac.log
+8.3.35: 1169 MATCH, 0 different, 0 errors, exit_code 0; source=docs/validation/full-stack-1169-oracle-nulls-83-mac.log
+8.4.26: 1169 MATCH, 0 different, 0 errors, exit_code 0; source=docs/validation/full-stack-1169-oracle-nulls-84-mac.log
+8.5.11: 1169 MATCH, 0 different, 0 errors, exit_code 0; source=docs/validation/full-stack-1169-oracle-nulls-85-mac.log

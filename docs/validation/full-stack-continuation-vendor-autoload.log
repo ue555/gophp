@@ -1,0 +1,18 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Deprecated: Laravel\Prompts\text(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 13
+Deprecated: Laravel\Prompts\autocomplete(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 32
+Deprecated: Laravel\Prompts\number(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 50
+Deprecated: Laravel\Prompts\textarea(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 60
+Deprecated: Laravel\Prompts\password(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 78
+Deprecated: Laravel\Prompts\select(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 97
+Deprecated: Laravel\Prompts\multiselect(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 120
+Deprecated: Laravel\Prompts\confirm(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 139
+Deprecated: Laravel\Prompts\suggest(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 179
+Deprecated: Laravel\Prompts\search(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 202
+Deprecated: Laravel\Prompts\multisearch(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 224
+Deprecated: Laravel\Prompts\datatable(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 453
+
+exit_code: 0

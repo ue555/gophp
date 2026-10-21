@@ -1,0 +1,28 @@
+command: ./bin/gophp --php-version=8.4 research/laravel-api/vendor/autoload.php
+stdout:
+
+stderr:
+Deprecated: Laravel\Prompts\text(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 13
+Deprecated: Laravel\Prompts\autocomplete(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 32
+Deprecated: Laravel\Prompts\number(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 50
+Deprecated: Laravel\Prompts\textarea(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 60
+Deprecated: Laravel\Prompts\password(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 78
+Deprecated: Laravel\Prompts\select(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 97
+Deprecated: Laravel\Prompts\multiselect(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 120
+Deprecated: Laravel\Prompts\confirm(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 139
+Deprecated: Laravel\Prompts\suggest(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 179
+Deprecated: Laravel\Prompts\search(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 202
+Deprecated: Laravel\Prompts\multisearch(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 224
+Deprecated: Laravel\Prompts\datatable(): Implicitly marking parameter $validate as nullable is deprecated, the explicit nullable type must be used instead in /Users/kouji/dev/php/research/laravel-api/vendor/laravel/prompts/src/helpers.php on line 453
+Fatal error: Uncaught Error: Call to undefined function Composer\Autoload\substr() in /Users/kouji/dev/php/research/laravel-api/vendor/composer/ClassLoader.php:501
+Stack trace:
+#0 /Users/kouji/dev/php/research/laravel-api/vendor/composer/ClassLoader.php(458): Composer\Autoload\ClassLoader->findFileWithExtension('Faker\\Factory', '.php')
+#1 /Users/kouji/dev/php/research/laravel-api/vendor/composer/ClassLoader.php(425): Composer\Autoload\ClassLoader->findFile('Faker\\Factory')
+#2 /Users/kouji/dev/php/research/laravel-api/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(509): Composer\Autoload\ClassLoader->loadClass('Faker\\Factory')
+#3 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(41): require()
+#4 /Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php(45): {closure:/Users/kouji/dev/php/research/laravel-api/vendor/composer/autoload_real.php:37}('f0906e6318348a7...', '/Users/kouji/de...')
+#5 /Users/kouji/dev/php/research/laravel-api/vendor/autoload.php(22): ComposerAutoloaderInit9081827c28c13f81a15682fabebfd1c7::getLoader()
+#6 {main}
+  thrown in /Users/kouji/dev/php/research/laravel-api/vendor/composer/ClassLoader.php on line 501
+
+exit_code: 255

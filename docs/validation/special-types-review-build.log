@@ -1,0 +1,3 @@
+command: GOPROXY=off make build
+go build -o bin/gophp ./cmd/gophp
+command exit: 0
