@@ -1,0 +1,4 @@
+PHP: 8.4.26 (containers/php-version/bin/php84)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/getmypid_arguments.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures

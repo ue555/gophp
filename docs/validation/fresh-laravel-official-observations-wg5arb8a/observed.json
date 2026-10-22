@@ -1,0 +1,12 @@
+{
+  "success/array_unique_regular_nested.php": {
+    "stdout": "[\"first\",\"different\"]\n3\n[0,2]\n{\"0\":\"a\",\"2\":\"b\"}\nTypeError: array_unique(): Argument #2 ($flags) must be of type int, array given\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/get_defined_vars_scope.php": {
+    "stdout": "[\"alias\",\"argument\",\"counter\",\"local\",\"outer\"]\n8|2|20|1\nbad\nisolated\nArgumentCountError: get_defined_vars() expects exactly 0 arguments, 1 given\nError: Unknown named parameter $unknown\n",
+    "stderr": "Warning: Undefined array key \"this\" in {file} on line 21\n",
+    "exit": 0
+  }
+}

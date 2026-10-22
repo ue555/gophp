@@ -18,7 +18,7 @@ type phpProcess struct {
 
 func processBuiltin(name string) bool {
 	switch strings.ToLower(name) {
-	case "proc_open", "proc_get_status", "proc_close", "proc_terminate":
+	case "getmypid", "getcwd", "proc_open", "proc_get_status", "proc_close", "proc_terminate":
 		return true
 	}
 	return false
@@ -32,6 +32,23 @@ func (e *evaluator) callProcessBuiltin(node functionCall) (value, error) {
 	args, err := e.evalArguments(node.args)
 	if err != nil {
 		return value{}, err
+	}
+	if name == "getmypid" || name == "getcwd" {
+		if _, _, _, err := bindCallArguments(args, nil, node.line); err != nil {
+			return value{}, err
+		}
+		if len(args) != 0 {
+			e.captureFailure(callFrame{method: name, line: node.line, filename: e.filename, args: argumentValues(args)})
+			return value{}, &runtimeError{node.line, "ArgumentCountError", fmt.Sprintf("%s() expects exactly 0 arguments, %d given", name, len(args))}
+		}
+		if name == "getcwd" {
+			cwd, err := os.Getwd()
+			if err != nil {
+				return boolean(false), nil
+			}
+			return value{kind: stringKind, s: cwd}, nil
+		}
+		return integer(int64(os.Getpid())), nil
 	}
 	if len(args) < 1 || args[0].value.kind != resourceKind || args[0].value.stream == nil || args[0].value.stream.process == nil {
 		return value{}, &runtimeError{node.line, "TypeError", name + "(): Argument #1 ($process) must be of type resource"}

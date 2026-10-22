@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "research/fresh-laravel/observe.py",
+    "tests/fixtures/success/getmypid_namespaces.php",
+    "tests/fixtures/success/getmypid_arguments.php",
+    "tests/fixtures/runtime/getmypid_argument_count.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

@@ -1,0 +1,4 @@
+Fatal error: Uncaught Error: Call to undefined function Laravel\Pao\getmypid() in /Users/kouji/dev/gophp-app/docs/repro/getmypid.php:3
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/gophp-app/docs/repro/getmypid.php on line 3

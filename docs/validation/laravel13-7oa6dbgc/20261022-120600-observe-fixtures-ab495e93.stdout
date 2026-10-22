@@ -1,0 +1,10 @@
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-official-observations-wq_sbwzb
+8.4.26 success/getmypid_namespaces.php exit 0
+8.4.26 success/getmypid_arguments.php exit 0
+8.4.26 runtime/getmypid_argument_count.php exit 255
+8.3.35 success/getmypid_namespaces.php exit 0
+8.3.35 success/getmypid_arguments.php exit 0
+8.3.35 runtime/getmypid_argument_count.php exit 255
+8.5.11 success/getmypid_namespaces.php exit 0
+8.5.11 success/getmypid_arguments.php exit 0
+8.5.11 runtime/getmypid_argument_count.php exit 255

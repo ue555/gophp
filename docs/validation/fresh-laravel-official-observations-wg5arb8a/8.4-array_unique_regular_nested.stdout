@@ -1,0 +1,5 @@
+["first","different"]
+3
+[0,2]
+{"0":"a","2":"b"}
+TypeError: array_unique(): Argument #2 ($flags) must be of type int, array given

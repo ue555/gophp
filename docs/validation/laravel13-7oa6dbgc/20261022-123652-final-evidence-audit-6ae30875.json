@@ -1,0 +1,8 @@
+{
+  "command": [
+    "python3",
+    "docs/validation/laravel13-7oa6dbgc/final-audit.py"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

@@ -6,6 +6,9 @@ import (
 )
 
 func builtinName(name string) bool {
+	if strings.EqualFold(name, "get_defined_vars") {
+		return true
+	}
 	if strings.EqualFold(name, "hash_hmac") || strings.EqualFold(name, "hash_equals") {
 		return true
 	}
@@ -262,6 +265,9 @@ func builtinRedeclaration(name string, version Version) string {
 }
 
 func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
+	if strings.EqualFold(node.name, "get_defined_vars") {
+		return e.callGetDefinedVars(node)
+	}
 	if strings.EqualFold(node.name, "token_get_all") || strings.EqualFold(node.name, "token_name") {
 		return e.callTokenizer(node)
 	}

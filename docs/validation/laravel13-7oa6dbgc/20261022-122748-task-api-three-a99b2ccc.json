@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "research/task-api/verify.py",
+    "--interpreter",
+    "/Users/kouji/dev/php/.cache/laravel13/gophp"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

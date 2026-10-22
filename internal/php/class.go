@@ -20,6 +20,7 @@ type propertyDecl struct {
 	traitSource      string
 	line             int
 	owner            *classDecl
+	setHook          *methodDecl
 }
 type parameter struct {
 	attributes       []attributeDecl
@@ -45,6 +46,7 @@ type methodDecl struct {
 	returnType              string
 	returnNullable          bool
 	arrow                   bool
+	propertyHook            bool
 	version                 Version
 	body                    []statement
 	line                    int
@@ -394,6 +396,7 @@ func (p *parser) classDeclarationNamed(kind string, name token) (*classDecl, err
 		if kind == "interface" || methodFinal || methodAbstract || (!explicit && !methodStatic && !memberReadonly && propertyType == "") || p.current().kind != "variable" {
 			return nil, syntax(p.current().line, "unsupported class member %q", p.current().text)
 		}
+		hasHooks := false
 		for {
 			name := p.current()
 			if err := p.expect("variable"); err != nil {
@@ -421,13 +424,24 @@ func (p *parser) classDeclarationNamed(kind string, name token) (*classDecl, err
 					return nil, err
 				}
 			}
+			if p.current().kind == "{" && p.version != PHP83 {
+				if err := p.propertySetHook(&property); err != nil {
+					return nil, err
+				}
+				hasHooks = true
+			}
 			decl.properties = append(decl.properties, property)
+			if hasHooks {
+				break
+			}
 			if !p.accept(",") {
 				break
 			}
 		}
-		if err := p.expect(";"); err != nil {
-			return nil, err
+		if !hasHooks {
+			if err := p.expect(";"); err != nil {
+				return nil, err
+			}
 		}
 	}
 	return decl, p.expect("}")
@@ -2832,6 +2846,10 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			return value{}, argErr
 		}
 		switch strings.ToLower(node.name) {
+		case "setrawvalue", "getrawvalue":
+			if e.version != PHP83 {
+				return e.reflectionRawProperty(object.o.reflectedProperty, node.name, args, node.line)
+			}
 		case "getname":
 			return value{kind: stringKind, s: object.o.reflectedProperty.name}, nil
 		case "gettype":
@@ -3336,6 +3354,10 @@ func (e *evaluator) readonlyScopeError(property *propertyDecl, line int, action 
 }
 
 func (e *evaluator) storeObjectProperty(object *phpObject, key arrayKey, property *propertyDecl, v value, line int) error {
+	if property != nil && property.setHook != nil && !(e.currentMethod == property.setHook && e.variables["this"].o == object) {
+		_, err := e.invoke(value{kind: objectKind, o: object}, property.setHook, []callArgument{{value: v}}, line)
+		return err
+	}
 	if object.enumCase != "" {
 		return &runtimeError{line, "Error", "Cannot modify readonly property " + object.className() + "::$" + key.text}
 	}
@@ -3702,7 +3724,11 @@ func (e *evaluator) invokeWithCapture(object value, called *classDecl, method *m
 		if parameter.typeName != "" {
 			coerced, selected, ok := e.coerceType(v, parameter.typeName, parameter.nullable, callerStrict)
 			if !ok {
-				return value{}, &runtimeError{method.line, "TypeError", fmt.Sprintf("%s(): Argument #%d ($%s) must be of type %s, %s given, called in %s on line %d and defined", callableName, i+1, parameter.name, declaredTypeText(parameter.typeName, parameter.nullable), v.diagnosticName(), sourceFilename, line)}
+				suffix := " and defined"
+				if method.propertyHook {
+					suffix = ""
+				}
+				return value{}, &runtimeError{method.line, "TypeError", fmt.Sprintf("%s(): Argument #%d ($%s) must be of type %s, %s given, called in %s on line %d%s", callableName, i+1, parameter.name, declaredTypeText(parameter.typeName, parameter.nullable), v.diagnosticName(), sourceFilename, line, suffix)}
 			}
 			if present[i] {
 				if err := e.warnLossyIntTypeCoercion(v, selected, callerStrict, method.line); err != nil {

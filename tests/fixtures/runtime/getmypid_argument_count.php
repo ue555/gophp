@@ -1,0 +1,2 @@
+<?php
+getmypid(1);

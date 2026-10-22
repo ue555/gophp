@@ -1,0 +1,7 @@
+Error: Indirect modification of HookEdges::$x is not allowed
+Error: Indirect modification of HookEdges::$items is not allowed
+TypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7
+1|0
+{"x":[]}
+ReflectionException: Given object is not an instance of the class this property was declared in
+6

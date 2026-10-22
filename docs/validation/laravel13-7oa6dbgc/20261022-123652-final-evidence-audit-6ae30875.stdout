@@ -1,0 +1,2 @@
+audit: /Users/kouji/dev/php/docs/validation/laravel13-7oa6dbgc/final-audit-xina2qig.json
+PASS source, binary, 3 x 1201 fixtures, 24 targeted comparisons, all required regressions, protection and cleanup

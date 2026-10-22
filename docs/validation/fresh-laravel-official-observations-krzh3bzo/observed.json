@@ -1,0 +1,7 @@
+{
+  "success/getcwd_arguments.php": {
+    "stdout": "string|directory|stable\nArgumentCountError: getcwd() expects exactly 0 arguments, 1 given\nError: Unknown named parameter $unknown\nunchanged\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

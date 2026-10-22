@@ -19,6 +19,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.SetOutput(stderr)
 	target := flags.String("php-version", string(php.PHP84), "target PHP version: 8.3, 8.4 or 8.5")
 	listen := flags.String("serve", "", "serve PHP requests at this local address")
+	documentRoot := flags.String("document-root", "", "serve public static assets from this directory (requires --serve)")
 	flags.Usage = func() {
 		fmt.Fprintln(stderr, "usage: gophp [--php-version=8.3|8.4|8.5] <file.php> [arguments...]")
 	}
@@ -48,11 +49,23 @@ func run(args []string, stdout, stderr io.Writer) int {
 		return 1
 	}
 	if *listen != "" {
-		if err := http.ListenAndServe(*listen, phpHandler(string(source), filename, version, stderr)); err != nil {
+		handler := phpHandler(string(source), filename, version, stderr)
+		if *documentRoot != "" {
+			handler, err = publicAssetHandler(*documentRoot, handler)
+			if err != nil {
+				fmt.Fprintln(stderr, err)
+				return 1
+			}
+		}
+		if err := http.ListenAndServe(*listen, handler); err != nil {
 			fmt.Fprintln(stderr, err)
 			return 1
 		}
 		return 0
+	}
+	if *documentRoot != "" {
+		fmt.Fprintln(stderr, "gophp: --document-root requires --serve")
+		return 2
 	}
 	return php.RunWithArguments(string(source), filename, append([]string{flags.Arg(0)}, flags.Args()[1:]...), stdout, stderr, version)
 }

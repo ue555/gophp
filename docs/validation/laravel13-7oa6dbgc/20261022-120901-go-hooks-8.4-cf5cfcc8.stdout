@@ -1,0 +1,9 @@
+6|1
+7|1|7
+negative
+7|2
+TypeError: Cannot assign array to property HookBox::$number of type int
+ReflectionException: Given object is not an instance of the class this property was declared in
+7|2
+ArgumentCountError: ReflectionProperty::getRawValue() expects exactly 1 arguments, 0 given
+Error: Unknown named parameter $unknown

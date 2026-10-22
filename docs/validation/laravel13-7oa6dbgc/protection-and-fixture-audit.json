@@ -1,0 +1,22 @@
+{
+  "protected_files": 8999,
+  "changed": [],
+  "fixture_files": 1201,
+  "expectations": 1201,
+  "categories": {
+    "success": 771,
+    "runtime": 296,
+    "parser": 134
+  },
+  "old_expectations_changed": [],
+  "new_expectations": [
+    "runtime/getmypid_argument_count.php",
+    "success/array_unique_regular_nested.php",
+    "success/get_defined_vars_scope.php",
+    "success/getcwd_arguments.php",
+    "success/getmypid_arguments.php",
+    "success/getmypid_namespaces.php",
+    "success/property_set_hook_failures.php",
+    "success/property_set_hook_raw.php"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "podman",
+    "ps",
+    "--format",
+    "{{.Names}}"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

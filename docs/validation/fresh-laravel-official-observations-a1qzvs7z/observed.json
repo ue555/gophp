@@ -1,0 +1,10 @@
+{
+  "success/property_set_hook_failures.php": {
+    "stdout": "Error: Indirect modification of HookEdges::$x is not allowed\nError: Indirect modification of HookEdges::$items is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in {file} on line 7\n1|0\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "hooks unavailable\n"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+ref=5
+TypeError: X::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/.cache/laravel13/hooks-extra.php on line 5 and defined

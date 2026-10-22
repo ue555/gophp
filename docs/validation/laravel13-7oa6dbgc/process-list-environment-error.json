@@ -1,0 +1,6 @@
+{
+  "command": "ps -axo pid,ppid,etime,command | rg 'compare_php.py|verify.py|verify-gophp|gophp --php-version|php-version/bin'",
+  "exit_code": 1,
+  "stderr": "zsh:1: operation not permitted: ps\n",
+  "effect": "Cannot inspect all system processes. Own verifiers retain process handles and termination exit logs. No retry or permission changes."
+}

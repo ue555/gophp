@@ -1,0 +1,4 @@
+PHP: 8.5.11 (containers/php-version/bin/php85)
+Working directory: /Users/kouji/dev/php
+MATCH /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_raw.php (exit 0)
+1 matched, 0 different, 0 errors; 1 fixtures

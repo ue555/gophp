@@ -1,5 +1,7 @@
 # 固定検証アプリへ向けた6段階の連続実装
 
+2026-10-22追記：既存の固定アプリ完成記録を維持し、別対象のLaravel 13.38.0（開発依存込み110パッケージ）をGo8.5で実起動した。autoload、CLI、標準migration、実HTTP、Blade冷/温キャッシュ、静的アセット、非公開経路、20連続/4並列要求を確認。現行1201 fixtureは公式PHP3版と全件一致。今回の共通実装修正後に、固定Laravel/API PlatformはGo3設定で96連続/8並列、タスクAPIは公式/Go3組で各191要求、Laravel12は8.5の公式/Go各111要求を再検証した。[変更範囲・実行証拠・部分対応の制限](validation/laravel13-7oa6dbgc/REPORT.md)。以下の2000要求や旧件数は当時の履歴であり、今回の実測数とは区別する。
+
 2026-10-21現在。主基準はPHP 8.4.26、比較対象は8.3.35・8.5.11。完成判定は[固定アプリのHTTP・DB契約](laravel-api-target.md)と、Go製PHPによる`vendor/autoload.php`、Laravel CLI・HTTP、API Platformの実行結果に従う。固定した`research/laravel-api/composer.lock`と`vendor/`は変更しない。公式PHPでのアプリ成功はGoでの実行成功ではない。
 
 追加の実用アプリ検証として[research/task-api](../research/task-api/README.md)を作成した。Laravel／Eloquent／SQLiteによるTask CRUDの実HTTP比較は公式PHP・Goの3組、各191要求で成功。新規4 fixtureを含む現行**1173件（正常745・実行時294・構文134）**も公式3版すべて一致し、既存BookアプリのGo3設定実TCP回帰も成功した。[タスクAPIの実装範囲・検証結果・制限・ログ](validation/task-api-results.md)。以下の6段階の完成記録と既存成果は保持する。

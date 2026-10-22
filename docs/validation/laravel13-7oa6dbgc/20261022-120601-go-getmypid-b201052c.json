@@ -1,0 +1,9 @@
+{
+  "command": [
+    ".cache/laravel13/gophp",
+    "--php-version=8.5",
+    "/Users/kouji/dev/gophp-app/docs/repro/getmypid.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

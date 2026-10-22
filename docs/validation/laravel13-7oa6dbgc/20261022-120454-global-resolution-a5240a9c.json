@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/Users/kouji/dev/gophp-app/.cache/runtime/gophp",
+    "--php-version=8.5",
+    ".cache/laravel13/name-resolution.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 255
+}

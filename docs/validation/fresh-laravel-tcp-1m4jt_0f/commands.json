@@ -1,0 +1,378 @@
+[
+  {
+    "label": "official-8.5-autoload",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/autoload.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-environment",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/environment.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-list",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "artisan",
+      "list",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-about",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "artisan",
+      "about",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-routes",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "artisan",
+      "route:list",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-migrate",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-migrate-again",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "official-8.5-server",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "--name",
+      "fresh-laravel-3be333e6383a",
+      "-p",
+      "127.0.0.1:51544:8080",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "-S",
+      "0.0.0.0:8080",
+      "-t",
+      "public",
+      "public/index.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "pid": 76035,
+    "container_cleanup_exit_code": 0,
+    "exit_code": 137
+  },
+  {
+    "label": "official-8.5-blade-tokens",
+    "command": [
+      "/opt/homebrew/bin/podman",
+      "run",
+      "--entrypoint=/usr/local/bin/docker-php-entrypoint",
+      "--rm",
+      "-v",
+      "/Users/kouji/dev/php:/Users/kouji/dev/php",
+      "-w",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+      "-e",
+      "LC_ALL=C",
+      "-e",
+      "LANG=C",
+      "-e",
+      "TZ=UTC",
+      "-e",
+      "COLUMNS=120",
+      "-e",
+      "PATH=/usr/bin:/bin",
+      "localhost/gophp-dependency-research:8.5.11",
+      "/usr/local/bin/php",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/blade-tokens.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/official-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-autoload",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/autoload.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-environment",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/environment.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-list",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "artisan",
+      "list",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-about",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "artisan",
+      "about",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-routes",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "artisan",
+      "route:list",
+      "--json",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-migrate",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-migrate-again",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "artisan",
+      "migrate",
+      "--force",
+      "--no-ansi"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  },
+  {
+    "label": "go-8.5-server",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "--serve=127.0.0.1:51810",
+      "public/index.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "pid": 76742,
+    "exit_code": -15
+  },
+  {
+    "label": "go-8.5-blade-tokens",
+    "command": [
+      "/Users/kouji/dev/php/.cache/laravel13/gophp",
+      "--php-version=8.5",
+      "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/blade-tokens.php"
+    ],
+    "cwd": "/Users/kouji/dev/php/.cache/fresh-laravel/run-95oi81t9/go-8.5/app",
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,31 @@
+
+ Environment .. 
+ Application Name .. Laravel 
+ Laravel Version .. 13.38.0 
+ PHP Version .. 8.5.11 
+ Composer Version .. - 
+ Environment .. local 
+ Debug Mode .. ENABLED 
+ URL .. 127.0.0.1:8092 
+ Maintenance Mode .. OFF 
+ Timezone .. UTC 
+ Locale .. en 
+
+ Cache .. 
+ Config .. NOT CACHED 
+ Events .. NOT CACHED 
+ Routes .. NOT CACHED 
+ Views .. NOT CACHED 
+
+ Drivers .. 
+ Broadcasting .. log 
+ Cache .. database 
+ Database .. sqlite 
+ Logs .. stderr 
+ Mail .. log 
+ Queue .. database 
+ Session .. database 
+
+ Storage .. 
+ public/storage .. NOT LINKED 
+

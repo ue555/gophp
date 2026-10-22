@@ -1,0 +1,9 @@
+{
+  "command": [
+    ".cache/laravel13/gophp",
+    "--php-version=8.5",
+    ".cache/laravel13/hooks-extra.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 255
+}

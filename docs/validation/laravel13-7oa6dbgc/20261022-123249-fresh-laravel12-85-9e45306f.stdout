@@ -1,0 +1,20 @@
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-tcp-1m4jt_0f
+RUN official-8.5-autoload
+RUN official-8.5-environment
+RUN official-8.5-list
+RUN official-8.5-about
+RUN official-8.5-routes
+RUN official-8.5-migrate
+RUN official-8.5-migrate-again
+PASS official-8.5 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN official-8.5-blade-tokens
+RUN go-8.5-autoload
+RUN go-8.5-environment
+RUN go-8.5-list
+RUN go-8.5-about
+RUN go-8.5-routes
+RUN go-8.5-migrate
+RUN go-8.5-migrate-again
+PASS go-8.5 CLI/migration/HTTP/Blade cold/warm 111 requests
+RUN go-8.5-blade-tokens
+MATCH 8.5 CLI/DB/HTTP/Blade token streams

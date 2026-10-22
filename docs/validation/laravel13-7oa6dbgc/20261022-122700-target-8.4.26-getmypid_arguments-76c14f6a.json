@@ -1,0 +1,20 @@
+{
+  "command": [
+    "python3",
+    "skills/php-go-interpreter/scripts/compare_php.py",
+    "--php",
+    "containers/php-version/bin/php84",
+    "--php-version",
+    "8.4.26",
+    "--fixtures",
+    "tests/fixtures/success/getmypid_arguments.php",
+    "--timeout",
+    "30",
+    "--interpreter",
+    "/Users/kouji/dev/php/.cache/laravel13/gophp",
+    "--php-version=8.4",
+    "{file}"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

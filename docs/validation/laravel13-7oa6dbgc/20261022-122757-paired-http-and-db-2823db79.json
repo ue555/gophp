@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "scripts/compare-validation.py",
+    "docs/validation/20261022-121925-5367ae79-official",
+    "docs/validation/20261022-122544-776c16d7-gophp"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "exit_code": 0
+}

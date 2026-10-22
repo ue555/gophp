@@ -1,0 +1,8 @@
+{
+  "command": [
+    "/Users/kouji/dev/gophp-app/scripts/verify",
+    "--official"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "exit_code": 0
+}

@@ -1,0 +1,10 @@
+{
+  "success/property_set_hook_raw.php": {
+    "stdout": "6|1\n7|1|7\nnegative\n7|2\nTypeError: Cannot assign array to property HookBox::$number of type int\n7|2\nArgumentCountError: ReflectionProperty::getRawValue() expects exactly 1 argument, 0 given\nError: Unknown named parameter $unknown\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "hooks unavailable\n"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+Fatal error: Uncaught Error: Call to undefined function getmypid() in /Users/kouji/dev/php/.cache/laravel13/name-resolution.php:1
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/.cache/laravel13/name-resolution.php on line 1

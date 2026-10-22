@@ -1,0 +1,28 @@
+=== RUN   TestFixtures
+=== RUN   TestFixtures/success/property_set_hook_failures.php
+=== RUN   TestFixtures/success/property_set_hook_failures.php/default
+    php_test.go:121: stdout: got "Error: Indirect modification of HookEdges::$x is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|1\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n", want "Error: Indirect modification of HookEdges::$x is not allowed\nError: Indirect modification of HookEdges::$items is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|0\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n"
+=== RUN   TestFixtures/success/property_set_hook_failures.php/8.3
+=== RUN   TestFixtures/success/property_set_hook_failures.php/8.4
+    php_test.go:121: stdout: got "Error: Indirect modification of HookEdges::$x is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|1\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n", want "Error: Indirect modification of HookEdges::$x is not allowed\nError: Indirect modification of HookEdges::$items is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|0\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n"
+=== RUN   TestFixtures/success/property_set_hook_failures.php/8.5
+    php_test.go:121: stdout: got "Error: Indirect modification of HookEdges::$x is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|1\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n", want "Error: Indirect modification of HookEdges::$x is not allowed\nError: Indirect modification of HookEdges::$items is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/tests/fixtures/success/property_set_hook_failures.php on line 7\n1|0\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n"
+=== RUN   TestFixtures/success/property_set_hook_raw.php
+=== RUN   TestFixtures/success/property_set_hook_raw.php/default
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.3
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.4
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.5
+--- FAIL: TestFixtures (0.01s)
+    --- FAIL: TestFixtures/success/property_set_hook_failures.php (0.00s)
+        --- FAIL: TestFixtures/success/property_set_hook_failures.php/default (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_failures.php/8.3 (0.00s)
+        --- FAIL: TestFixtures/success/property_set_hook_failures.php/8.4 (0.00s)
+        --- FAIL: TestFixtures/success/property_set_hook_failures.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/property_set_hook_raw.php (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/default (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.5 (0.00s)
+FAIL
+FAIL	example.com/gophp/internal/php	0.288s
+FAIL

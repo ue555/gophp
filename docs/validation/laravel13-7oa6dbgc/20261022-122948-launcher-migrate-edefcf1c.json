@@ -1,0 +1,9 @@
+{
+  "command": [
+    "scripts/artisan",
+    "migrate",
+    "--force"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "exit_code": 0
+}

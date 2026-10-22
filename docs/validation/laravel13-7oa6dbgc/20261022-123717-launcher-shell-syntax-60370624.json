@@ -1,0 +1,11 @@
+{
+  "command": [
+    "sh",
+    "-n",
+    "scripts/runtime.sh",
+    "scripts/artisan",
+    "scripts/serve"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "exit_code": 0
+}

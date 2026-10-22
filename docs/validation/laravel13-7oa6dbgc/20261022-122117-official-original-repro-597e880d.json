@@ -1,0 +1,17 @@
+{
+  "command": [
+    "podman",
+    "run",
+    "--rm",
+    "--pull=never",
+    "-v",
+    "/Users/kouji/dev/gophp-app:/Users/kouji/dev/gophp-app",
+    "-w",
+    "/Users/kouji/dev/gophp-app",
+    "localhost/gophp-dependency-research:8.5.11",
+    "php",
+    "docs/repro/getmypid.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

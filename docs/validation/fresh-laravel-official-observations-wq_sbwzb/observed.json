@@ -1,0 +1,17 @@
+{
+  "success/getmypid_namespaces.php": {
+    "stdout": "integer|positive\nstable\ndynamic\nexists\nfallback\nCall to undefined function Probe\\getmypid()\nlocal|global\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/getmypid_arguments.php": {
+    "stdout": "ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given\nArgumentCountError: getmypid() expects exactly 0 arguments, 2 given\nError: Unknown named parameter $unknown\neval:1\neval:2\nArgumentCountError: getmypid() expects exactly 0 arguments, 2 given\neval:3\nError: Unknown named parameter $unknown\nunchanged\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/getmypid_argument_count.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in {file}:2\nStack trace:\n#0 {file}(2): getmypid(1)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  }
+}

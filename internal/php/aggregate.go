@@ -436,6 +436,7 @@ const (
 	locationReadWrite
 	locationIncrement
 	locationModify
+	locationIndirectWrite
 )
 
 func (e *evaluator) locate(target expr, modes ...locationMode) (location, error) {
@@ -443,7 +444,7 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 	if len(modes) > 0 {
 		mode = modes[0]
 	}
-	rw := mode != locationWrite
+	rw := mode != locationWrite && mode != locationIndirectWrite
 	switch node := target.(type) {
 	case literal:
 		if node.value.kind == objectKind && node.value.o != nil && classImplements(node.value.o.class, "ArrayAccess") {
@@ -524,6 +525,9 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			return location{}, err
 		}
 		property := propertyForKey(base.o, k)
+		if (mode == locationModify || mode == locationIndirectWrite) && property != nil && property.setHook != nil && !(e.currentMethod == property.setHook && e.variables["this"].o == base.o) {
+			return location{}, &runtimeError{node.line, "Error", "Indirect modification of " + property.owner.name + "::$" + property.name + " is not allowed"}
+		}
 		if property == nil && base.o.properties.find(k) < 0 {
 			if method := e.lookupMethod(base.o.class, "__set"); method != nil && !rw {
 				return location{get: func() value { return value{} }, set: func(v value) error {
@@ -589,7 +593,7 @@ func (e *evaluator) locate(target expr, modes ...locationMode) (location, error)
 			}
 			return e.variableScopeSlot(e.rootScope, name, node.line), nil
 		}
-		parentMode := locationWrite
+		parentMode := locationIndirectWrite
 		if rw {
 			parentMode = locationModify
 		}

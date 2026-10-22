@@ -1,0 +1,7 @@
+evidence: /Users/kouji/dev/php/docs/validation/fresh-laravel-official-observations-wg5arb8a
+8.4.26 success/array_unique_regular_nested.php exit 0
+8.4.26 success/get_defined_vars_scope.php exit 0
+8.3.35 success/array_unique_regular_nested.php exit 0
+8.3.35 success/get_defined_vars_scope.php exit 0
+8.5.11 success/array_unique_regular_nested.php exit 0
+8.5.11 success/get_defined_vars_scope.php exit 0

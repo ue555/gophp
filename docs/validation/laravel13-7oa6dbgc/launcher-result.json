@@ -1,0 +1,143 @@
+{
+  "command": [
+    "scripts/serve"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "port": 49413,
+  "http": [
+    {
+      "path": "/up",
+      "status": 200,
+      "headers": [
+        [
+          "Cache-Control",
+          "no-cache, private"
+        ],
+        [
+          "Content-Type",
+          "text/html; charset=utf-8"
+        ],
+        [
+          "Date",
+          "Thu, 22 Oct 2026 03:29:50 GMT"
+        ],
+        [
+          "Content-Length",
+          "1829"
+        ],
+        [
+          "Connection",
+          "close"
+        ]
+      ],
+      "sha256": "756ff24a25896d825bd75441e490f663ee3de1373654cfc22b79667c7352be9d"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "headers": [
+        [
+          "Cache-Control",
+          "no-cache, private"
+        ],
+        [
+          "Content-Type",
+          "text/html; charset=utf-8"
+        ],
+        [
+          "Date",
+          "Thu, 22 Oct 2026 03:29:50 GMT"
+        ],
+        [
+          "Set-Cookie",
+          "XSRF-TOKEN=eyJpdiI6IlV1N0Z2U29pbkcrTWR4dGhNKzJRa2c9PSIsInZhbHVlIjoiblBsNFdVenJDVlBJSUtxRWZsZytwY0t6TUFCLzVad0tkbkRTNC9xRS9RRFZTNzY4ekFVdUNKcDQ4T3NielpoNU9mdGxmQ0t0bkhhREhjbFpjYlhGNHM1RWJ1WE5razM4b3FYN3dFOVhRdnducTV3bURTRlhmLzFJV3Q1YmRXaDMiLCJtYWMiOiJiZjU1MjA1MzgzOTE2ZjIxM2UyYTEwZDdmYWY5MzQ3N2U2MjFkOWI4ZDQ5NDM3ZDFhN2M4NzVlODE4MWFkM2QzIiwidGFnIjoiIn0%3D; expires=Thu, 22 Oct 2026 05:29:50 GMT; Max-Age=7200; path=/; samesite=lax"
+        ],
+        [
+          "Set-Cookie",
+          "laravel-session=eyJpdiI6IlloaTlSclZ5dVMySmltTEtzOFZHcmc9PSIsInZhbHVlIjoiUTdzNi9UNkRVWnVRaEplYnNHdDZ6NlhCMDFmR3RVMGVhRmVjZllvWGVVSXFFd2ordUY1RHo5dU16MktFSVV2dW1CSldTUkwreXovWkN3WDRvY2MxVkZXU29QUGRyUFlZV3dEdnZVUkRHQ3l1NndGR0tuMU4xQkN6Um5RaWZJQVQiLCJtYWMiOiI3ZDYwNjQ2ZDAzZmMxODNkMmQwYTU3NjAyZGUxYmJlMmEwYzA2NGEzYTI5NGFkNzEwNzAyMzFlNDExYzRhNDEyIiwidGFnIjoiIn0%3D; expires=Thu, 22 Oct 2026 05:29:50 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+        ],
+        [
+          "Connection",
+          "close"
+        ],
+        [
+          "Transfer-Encoding",
+          "chunked"
+        ]
+      ],
+      "sha256": "97a133fe50eb89550aa54bc0555e570553e900e28bba9ff9103779aa95382485"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "headers": [
+        [
+          "Cache-Control",
+          "no-cache, private"
+        ],
+        [
+          "Content-Type",
+          "text/html; charset=utf-8"
+        ],
+        [
+          "Date",
+          "Thu, 22 Oct 2026 03:29:51 GMT"
+        ],
+        [
+          "Set-Cookie",
+          "XSRF-TOKEN=eyJpdiI6ImFHaXkvRzBsY2ZJaFZjbFM3MXVsVkE9PSIsInZhbHVlIjoiRjZzTXp4S2dFcVkrS1dTc3Q0TUhGOFZjeGprUGhzSEhkVUwxWElvNXkrcFhzdnIrd21uK0xPeGZQYVJWRmhUQm9GWVc0YkpzVTBUeGhUcmZodTAzNGYwVEhxcTErUnNZdnRrL0NTQ2pVQU5FV3BBWUx3L3dSZWYvL0tjM2E4SGYiLCJtYWMiOiIyYWM3OWIxM2EyNjEyZmIzNTFlZWI2NjBkMDAyY2Q0ZTc0MGRhY2U4YjRmMmQ5NjA4N2E2MzdhYjA2ZjRlNjlkIiwidGFnIjoiIn0%3D; expires=Thu, 22 Oct 2026 05:29:51 GMT; Max-Age=7200; path=/; samesite=lax"
+        ],
+        [
+          "Set-Cookie",
+          "laravel-session=eyJpdiI6IkV6SmVNeFJlOG1vcmtoN2Rxa0pkbnc9PSIsInZhbHVlIjoiRjc4eGZ2a1ByVzg3M0dXNWFrU212WFZpK1FNNG1GaWsyZjdySXZEOFdSYXpaajdGWlA3QXdvNnJ0UmJhcjJ5VHhtOWRFYW5Sc3lSaWp3dGRwYVAvVGowaThHNnA0MkhHdmFZaEhYbjdjNkE2VXNQN0lMV05vYTdoU1FjcDFFdjAiLCJtYWMiOiI3ODk4MTEyMmMxNzYxZmU0ZWZhZTQ2NzI0OTI4M2EyMWQxMjdlMTAxMWVjZmUxMGUwMDc0ZDk5M2FmOTIyM2M2IiwidGFnIjoiIn0%3D; expires=Thu, 22 Oct 2026 05:29:51 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+        ],
+        [
+          "Connection",
+          "close"
+        ],
+        [
+          "Transfer-Encoding",
+          "chunked"
+        ]
+      ],
+      "sha256": "97a133fe50eb89550aa54bc0555e570553e900e28bba9ff9103779aa95382485"
+    },
+    {
+      "path": "/build/assets/app-6jSCucsl.css",
+      "status": 200,
+      "headers": [
+        [
+          "Accept-Ranges",
+          "bytes"
+        ],
+        [
+          "Content-Length",
+          "37715"
+        ],
+        [
+          "Content-Type",
+          "text/css; charset=utf-8"
+        ],
+        [
+          "Last-Modified",
+          "Thu, 22 Oct 2026 02:33:57 GMT"
+        ],
+        [
+          "X-Content-Type-Options",
+          "nosniff"
+        ],
+        [
+          "Date",
+          "Thu, 22 Oct 2026 03:29:51 GMT"
+        ],
+        [
+          "Connection",
+          "close"
+        ]
+      ],
+      "sha256": "b8cc9eb16ceedb06d9f0a241a942c7290c9ffbe3bb2ac2067eeb2f345c539134"
+    }
+  ],
+  "server_exit_code": -15,
+  "terminated_by_verifier": true
+}

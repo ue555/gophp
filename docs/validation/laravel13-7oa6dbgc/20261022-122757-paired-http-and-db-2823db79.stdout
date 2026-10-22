@@ -1,0 +1,88 @@
+{
+  "result": "PASS",
+  "http_requests_per_runtime": 46,
+  "compared_bodies": 37,
+  "private_paths": 9,
+  "documented_differences": [
+    {
+      "request": "asset-1.http.json",
+      "kind": "javascript-mime",
+      "content_type": [
+        "application/javascript",
+        "text/javascript; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-0.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-1.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-2.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-3.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-4.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-5.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-6.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    },
+    {
+      "request": "private-8.http.json",
+      "kind": "private-path-rejection",
+      "content_type": [
+        "text/html; charset=utf-8",
+        "text/plain; charset=utf-8"
+      ]
+    }
+  ],
+  "normalizations": [
+    "runtime base URL",
+    "health render duration",
+    "validated CSRF token"
+  ],
+  "official": "docs/validation/20261022-121925-5367ae79-official",
+  "gophp": "docs/validation/20261022-122544-776c16d7-gophp",
+  "binary_sha256": "2fdf4f3f01f59a3df1fb5e0607014bb664724aa9b021762c257be59b45c36cf2"
+}

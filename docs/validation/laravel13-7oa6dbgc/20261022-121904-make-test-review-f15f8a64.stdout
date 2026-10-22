@@ -1,0 +1,6 @@
+go test ./...
+ok  	example.com/gophp/cmd/gophp	73.537s
+ok  	example.com/gophp/internal/php	2.192s
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+RUN failed
+RUN passed

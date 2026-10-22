@@ -1,0 +1,182 @@
+[
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php84",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_namespaces.php"
+    ],
+    "version": "8.4.26",
+    "fixture": "success/getmypid_namespaces.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php84",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_arguments.php"
+    ],
+    "version": "8.4.26",
+    "fixture": "success/getmypid_arguments.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php84",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php"
+    ],
+    "version": "8.4.26",
+    "fixture": "runtime/getmypid_argument_count.php",
+    "exit_code": 255
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php83",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_namespaces.php"
+    ],
+    "version": "8.3.35",
+    "fixture": "success/getmypid_namespaces.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php83",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_arguments.php"
+    ],
+    "version": "8.3.35",
+    "fixture": "success/getmypid_arguments.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php83",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php"
+    ],
+    "version": "8.3.35",
+    "fixture": "runtime/getmypid_argument_count.php",
+    "exit_code": 255
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php85",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_namespaces.php"
+    ],
+    "version": "8.5.11",
+    "fixture": "success/getmypid_namespaces.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php85",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/success/getmypid_arguments.php"
+    ],
+    "version": "8.5.11",
+    "fixture": "success/getmypid_arguments.php",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/Users/kouji/dev/php/containers/php-version/bin/php85",
+      "-n",
+      "-d",
+      "display_errors=stderr",
+      "-d",
+      "log_errors=0",
+      "-d",
+      "html_errors=0",
+      "-d",
+      "error_reporting=-1",
+      "-d",
+      "date.timezone=UTC",
+      "/Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php"
+    ],
+    "version": "8.5.11",
+    "fixture": "runtime/getmypid_argument_count.php",
+    "exit_code": 255
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "command": [
+    "make",
+    "vet"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

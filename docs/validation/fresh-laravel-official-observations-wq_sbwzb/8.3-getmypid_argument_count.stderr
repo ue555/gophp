@@ -1,0 +1,5 @@
+Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2
+Stack trace:
+#0 /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php(2): getmypid(1)
+#1 {main}
+  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2

@@ -6583,5 +6583,51 @@
       "8.3": "[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_PUBLIC\",\"public\",1],\"(\",[\"T_STRING\",\"set\",1],\")\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"string\",1],[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$p\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],[\"T_WHITESPACE\",\" \",1],\"|\",\">\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"trim\",1],\"(\",[\"T_ELLIPSIS\",\"...\",1],\")\",\";\",[\"T_WHITESPACE\",\" \",1],\"(\",[\"T_STRING\",\"void\",1],\")\",[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"__PROPERTY__\",1],\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_CLASS\",\"class\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_WHITESPACE\",\" \",1],\"{\",[\"T_WHITESPACE\",\" \",1],[\"T_PUBLIC\",\"public\",1],[\"T_WHITESPACE\",\" \",1],[\"T_FUNCTION\",\"function\",1],[\"T_WHITESPACE\",\" \",1],[\"T_MATCH\",\"match\",1],\"(\",\")\",[\"T_WHITESPACE\",\" \",1],\"{\",\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_CONST\",\"const\",1],[\"T_WHITESPACE\",\" \",1],[\"T_MATCH\",\"MATCH\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_WHITESPACE\",\" \",1],\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_DOUBLE_COLON\",\"::\",1],[\"T_MATCH\",\"match\",1],\"(\",\")\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_CLASS\",\"class\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_WHITESPACE\",\" \",1],\"{\",[\"T_WHITESPACE\",\" \",1],[\"T_PUBLIC\",\"public\",1],[\"T_WHITESPACE\",\" \",1],[\"T_FUNCTION\",\"function\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"match\",1],\"(\",\")\",[\"T_WHITESPACE\",\" \",1],\"{\",\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_CONST\",\"const\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"MATCH\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_WHITESPACE\",\" \",1],\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_DOUBLE_COLON\",\"::\",1],[\"T_STRING\",\"match\",1],\"(\",\")\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php\\n\",1],[\"T_VARIABLE\",\"$x\",2],\"=\",[\"T_START_HEREDOC\",\"<<<TXT\\n\",2],[\"T_ENCAPSED_AND_WHITESPACE\",\"    abc \",3],[\"T_VARIABLE\",\"$name\",3],[\"T_ENCAPSED_AND_WHITESPACE\",\"\\n\",3],[\"T_END_HEREDOC\",\"    TXT\",4],\";\",[\"T_WHITESPACE\",\"\\n\",4]]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_VARIABLE\",\"$x\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],\"\\\"\",[\"T_CURLY_OPEN\",\"{\",1],[\"T_VARIABLE\",\"$a\",1],\"[\",[\"T_CONSTANT_ENCAPSED_STRING\",\"\\\"key\\\"\",1],\"]\",\"}\",\"\\\"\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_COMMENT\",\"/* a */\",1],[\"T_WHITESPACE\",\" \",1],[\"T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG\",\"&\",1],[\"T_WHITESPACE\",\" \",1],[\"T_COMMENT\",\"/* comment */\",1],[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_CONSTANT_ENCAPSED_STRING\",\"b\\\"raw\\\"\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_ECHO\",\"echo\",1],[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_CLOSE_TAG\",\"?>\",1],[\"T_INLINE_HTML\",\"tail\",1]]\n",
       "8.5": "[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_PUBLIC_SET\",\"public(set)\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"string\",1],[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$p\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],[\"T_WHITESPACE\",\" \",1],[\"T_PIPE\",\"|>\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"trim\",1],\"(\",[\"T_ELLIPSIS\",\"...\",1],\")\",\";\",[\"T_WHITESPACE\",\" \",1],[\"T_VOID_CAST\",\"(void)\",1],[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_PROPERTY_C\",\"__PROPERTY__\",1],\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_CLASS\",\"class\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_WHITESPACE\",\" \",1],\"{\",[\"T_WHITESPACE\",\" \",1],[\"T_PUBLIC\",\"public\",1],[\"T_WHITESPACE\",\" \",1],[\"T_FUNCTION\",\"function\",1],[\"T_WHITESPACE\",\" \",1],[\"T_MATCH\",\"match\",1],\"(\",\")\",[\"T_WHITESPACE\",\" \",1],\"{\",\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_CONST\",\"const\",1],[\"T_WHITESPACE\",\" \",1],[\"T_MATCH\",\"MATCH\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_WHITESPACE\",\" \",1],\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_DOUBLE_COLON\",\"::\",1],[\"T_MATCH\",\"match\",1],\"(\",\")\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_CLASS\",\"class\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_WHITESPACE\",\" \",1],\"{\",[\"T_WHITESPACE\",\" \",1],[\"T_PUBLIC\",\"public\",1],[\"T_WHITESPACE\",\" \",1],[\"T_FUNCTION\",\"function\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"match\",1],\"(\",\")\",[\"T_WHITESPACE\",\" \",1],\"{\",\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_CONST\",\"const\",1],[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"MATCH\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_WHITESPACE\",\" \",1],\"}\",[\"T_WHITESPACE\",\" \",1],[\"T_STRING\",\"C\",1],[\"T_DOUBLE_COLON\",\"::\",1],[\"T_STRING\",\"match\",1],\"(\",\")\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php\\n\",1],[\"T_VARIABLE\",\"$x\",2],\"=\",[\"T_START_HEREDOC\",\"<<<TXT\\n\",2],[\"T_ENCAPSED_AND_WHITESPACE\",\"    abc \",3],[\"T_VARIABLE\",\"$name\",3],[\"T_ENCAPSED_AND_WHITESPACE\",\"\\n\",3],[\"T_END_HEREDOC\",\"    TXT\",4],\";\",[\"T_WHITESPACE\",\"\\n\",4]]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_VARIABLE\",\"$x\",1],[\"T_WHITESPACE\",\" \",1],\"=\",[\"T_WHITESPACE\",\" \",1],\"\\\"\",[\"T_CURLY_OPEN\",\"{\",1],[\"T_VARIABLE\",\"$a\",1],\"[\",[\"T_CONSTANT_ENCAPSED_STRING\",\"\\\"key\\\"\",1],\"]\",\"}\",\"\\\"\",\";\"]\n[[\"T_OPEN_TAG\",\"<?php \",1],[\"T_COMMENT\",\"/* a */\",1],[\"T_WHITESPACE\",\" \",1],[\"T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG\",\"&\",1],[\"T_WHITESPACE\",\" \",1],[\"T_COMMENT\",\"/* comment */\",1],[\"T_WHITESPACE\",\" \",1],[\"T_VARIABLE\",\"$x\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_CONSTANT_ENCAPSED_STRING\",\"b\\\"raw\\\"\",1],\";\",[\"T_WHITESPACE\",\" \",1],[\"T_ECHO\",\"echo\",1],[\"T_WHITESPACE\",\" \",1],[\"T_LNUMBER\",\"1\",1],\";\",[\"T_CLOSE_TAG\",\"?>\",1],[\"T_INLINE_HTML\",\"tail\",1]]\n"
     }
+  },
+  "success/getmypid_namespaces.php": {
+    "stdout": "integer|positive\nstable\ndynamic\nexists\nfallback\nCall to undefined function Probe\\getmypid()\nlocal|global\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/getmypid_arguments.php": {
+    "stdout": "ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given\nArgumentCountError: getmypid() expects exactly 0 arguments, 2 given\nError: Unknown named parameter $unknown\neval:1\neval:2\nArgumentCountError: getmypid() expects exactly 0 arguments, 2 given\neval:3\nError: Unknown named parameter $unknown\nunchanged\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "runtime/getmypid_argument_count.php": {
+    "stdout": "",
+    "stderr": "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in {file}:2\nStack trace:\n#0 {file}(2): getmypid(1)\n#1 {main}\n  thrown in {file} on line 2\n",
+    "exit": 255
+  },
+  "success/property_set_hook_raw.php": {
+    "stdout": "6|1\n7|1|7\nnegative\n7|2\nTypeError: Cannot assign array to property HookBox::$number of type int\n7|2\nArgumentCountError: ReflectionProperty::getRawValue() expects exactly 1 argument, 0 given\nError: Unknown named parameter $unknown\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "hooks unavailable\n"
+    }
+  },
+  "success/getcwd_arguments.php": {
+    "stdout": "string|directory|stable\nArgumentCountError: getcwd() expects exactly 0 arguments, 1 given\nError: Unknown named parameter $unknown\nunchanged\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/array_unique_regular_nested.php": {
+    "stdout": "[\"first\",\"different\"]\n3\n[0,2]\n{\"0\":\"a\",\"2\":\"b\"}\nTypeError: array_unique(): Argument #2 ($flags) must be of type int, array given\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/get_defined_vars_scope.php": {
+    "stdout": "[\"alias\",\"argument\",\"counter\",\"local\",\"outer\"]\n8|2|21|2\n21|2\nthis excluded\nisolated\nArgumentCountError: get_defined_vars() expects exactly 0 arguments, 1 given\nError: Unknown named parameter $unknown\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/property_set_hook_failures.php": {
+    "stdout": "Error: Indirect modification of HookEdges::$x is not allowed\nError: Indirect modification of HookEdges::$items is not allowed\nTypeError: HookEdges::$x::set(): Argument #1 ($value) must be of type int, array given, called in {file} on line 7\n1|0\n{\"x\":[]}\nReflectionException: Given object is not an instance of the class this property was declared in\n6\n",
+    "stderr": "",
+    "exit": 0,
+    "stdout_by_version": {
+      "8.3": "hooks unavailable\n"
+    }
   }
 }

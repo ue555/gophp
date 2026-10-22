@@ -1,0 +1,4 @@
+Fatal error: Uncaught TypeError: Cannot assign ReflectionProperty to reference held by property X::$x of type int in /Users/kouji/dev/php/.cache/laravel13/hooks-extra.php:6
+Stack trace:
+#0 {main}
+  thrown in /Users/kouji/dev/php/.cache/laravel13/hooks-extra.php on line 6

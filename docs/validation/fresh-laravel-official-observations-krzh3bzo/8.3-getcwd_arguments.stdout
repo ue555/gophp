@@ -1,0 +1,4 @@
+string|directory|stable
+ArgumentCountError: getcwd() expects exactly 0 arguments, 1 given
+Error: Unknown named parameter $unknown
+unchanged

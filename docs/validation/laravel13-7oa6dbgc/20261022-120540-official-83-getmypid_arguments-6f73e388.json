@@ -1,0 +1,13 @@
+{
+  "command": [
+    "./containers/php-version/bin/php83",
+    "-n",
+    "-d",
+    "display_errors=stderr",
+    "-d",
+    "log_errors=0",
+    "tests/fixtures/success/getmypid_arguments.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

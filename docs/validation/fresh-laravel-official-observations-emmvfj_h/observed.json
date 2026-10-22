@@ -1,0 +1,7 @@
+{
+  "success/get_defined_vars_scope.php": {
+    "stdout": "[\"alias\",\"argument\",\"counter\",\"local\",\"outer\"]\n8|2|21|2\n21|2\nthis excluded\nisolated\nArgumentCountError: get_defined_vars() expects exactly 0 arguments, 1 given\nError: Unknown named parameter $unknown\n",
+    "stderr": "",
+    "exit": 0
+  }
+}

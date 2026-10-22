@@ -1,0 +1,11 @@
+{
+  "command": [
+    "go",
+    "build",
+    "-o",
+    ".cache/laravel13/gophp",
+    "./cmd/gophp"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

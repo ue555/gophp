@@ -1,0 +1,13 @@
+{
+  "commit": "e1e1ba0c76401ae84908e3f852499c3d1d094d54",
+  "fixture_files": 1193,
+  "expectations": 1193,
+  "packages": 110,
+  "dev_packages": 33,
+  "framework": [
+    "v13.38.0"
+  ],
+  "protected_count": 8999,
+  "composer_lock_sha256": "802c12e5dd5733a25123300cf461bd279b831f398f9a9b211b81fa20bedf4b25",
+  "npm_lock_sha256": "33ffe5ba021c97fe011c1196f8979bbdb7e4af21a88de245e87872017e4c02e3"
+}

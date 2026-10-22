@@ -1,0 +1,4 @@
+Error: Indirect modification of X::$x is not allowed
+TypeError: X::$x::set(): Argument #1 ($value) must be of type int, array given, called in /Users/kouji/dev/php/.cache/laravel13/hooks-extra.php on line 5
+{"x":[]}
+ReflectionException: Given object is not an instance of the class this property was declared in

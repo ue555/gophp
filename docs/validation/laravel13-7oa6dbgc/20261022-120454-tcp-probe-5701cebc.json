@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "-c",
+    "import socket; s=socket.socket(); s.bind((\"127.0.0.1\",0)); print(s.getsockname()); s.close()"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

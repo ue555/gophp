@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "research/fresh-laravel/observe.py",
+    "tests/fixtures/success/property_set_hook_failures.php"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "research/fresh-laravel/verify.py",
+    "--binary",
+    "/Users/kouji/dev/php/.cache/laravel13/gophp",
+    "--version",
+    "8.5"
+  ],
+  "exit_code": 0
+}

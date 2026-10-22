@@ -1,0 +1,79 @@
+=== RUN   TestFixtures
+=== RUN   TestFixtures/runtime/getmypid_argument_count.php
+=== RUN   TestFixtures/runtime/getmypid_argument_count.php/default
+    php_test.go:138: stderr: got "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n", want "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php(2): getmypid(1)\n#1 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n"
+=== RUN   TestFixtures/runtime/getmypid_argument_count.php/8.3
+    php_test.go:138: stderr: got "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n", want "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php(2): getmypid(1)\n#1 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n"
+=== RUN   TestFixtures/runtime/getmypid_argument_count.php/8.4
+    php_test.go:138: stderr: got "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n", want "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php(2): getmypid(1)\n#1 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n"
+=== RUN   TestFixtures/runtime/getmypid_argument_count.php/8.5
+    php_test.go:138: stderr: got "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n", want "Fatal error: Uncaught ArgumentCountError: getmypid() expects exactly 0 arguments, 1 given in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php:2\nStack trace:\n#0 /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php(2): getmypid(1)\n#1 {main}\n  thrown in /Users/kouji/dev/php/tests/fixtures/runtime/getmypid_argument_count.php on line 2\n"
+=== RUN   TestFixtures/success/array_unique_regular_nested.php
+=== RUN   TestFixtures/success/array_unique_regular_nested.php/default
+=== RUN   TestFixtures/success/array_unique_regular_nested.php/8.3
+=== RUN   TestFixtures/success/array_unique_regular_nested.php/8.4
+=== RUN   TestFixtures/success/array_unique_regular_nested.php/8.5
+=== RUN   TestFixtures/success/get_defined_vars_scope.php
+=== RUN   TestFixtures/success/get_defined_vars_scope.php/default
+=== RUN   TestFixtures/success/get_defined_vars_scope.php/8.3
+=== RUN   TestFixtures/success/get_defined_vars_scope.php/8.4
+=== RUN   TestFixtures/success/get_defined_vars_scope.php/8.5
+=== RUN   TestFixtures/success/getcwd_arguments.php
+=== RUN   TestFixtures/success/getcwd_arguments.php/default
+=== RUN   TestFixtures/success/getcwd_arguments.php/8.3
+=== RUN   TestFixtures/success/getcwd_arguments.php/8.4
+=== RUN   TestFixtures/success/getcwd_arguments.php/8.5
+=== RUN   TestFixtures/success/getmypid_arguments.php
+=== RUN   TestFixtures/success/getmypid_arguments.php/default
+=== RUN   TestFixtures/success/getmypid_arguments.php/8.3
+=== RUN   TestFixtures/success/getmypid_arguments.php/8.4
+=== RUN   TestFixtures/success/getmypid_arguments.php/8.5
+=== RUN   TestFixtures/success/getmypid_namespaces.php
+=== RUN   TestFixtures/success/getmypid_namespaces.php/default
+=== RUN   TestFixtures/success/getmypid_namespaces.php/8.3
+=== RUN   TestFixtures/success/getmypid_namespaces.php/8.4
+=== RUN   TestFixtures/success/getmypid_namespaces.php/8.5
+=== RUN   TestFixtures/success/property_set_hook_raw.php
+=== RUN   TestFixtures/success/property_set_hook_raw.php/default
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.3
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.4
+=== RUN   TestFixtures/success/property_set_hook_raw.php/8.5
+--- FAIL: TestFixtures (0.02s)
+    --- FAIL: TestFixtures/runtime/getmypid_argument_count.php (0.00s)
+        --- FAIL: TestFixtures/runtime/getmypid_argument_count.php/default (0.00s)
+        --- FAIL: TestFixtures/runtime/getmypid_argument_count.php/8.3 (0.00s)
+        --- FAIL: TestFixtures/runtime/getmypid_argument_count.php/8.4 (0.00s)
+        --- FAIL: TestFixtures/runtime/getmypid_argument_count.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/array_unique_regular_nested.php (0.00s)
+        --- PASS: TestFixtures/success/array_unique_regular_nested.php/default (0.00s)
+        --- PASS: TestFixtures/success/array_unique_regular_nested.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/array_unique_regular_nested.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/array_unique_regular_nested.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/get_defined_vars_scope.php (0.00s)
+        --- PASS: TestFixtures/success/get_defined_vars_scope.php/default (0.00s)
+        --- PASS: TestFixtures/success/get_defined_vars_scope.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/get_defined_vars_scope.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/get_defined_vars_scope.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/getcwd_arguments.php (0.00s)
+        --- PASS: TestFixtures/success/getcwd_arguments.php/default (0.00s)
+        --- PASS: TestFixtures/success/getcwd_arguments.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/getcwd_arguments.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/getcwd_arguments.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/getmypid_arguments.php (0.00s)
+        --- PASS: TestFixtures/success/getmypid_arguments.php/default (0.00s)
+        --- PASS: TestFixtures/success/getmypid_arguments.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/getmypid_arguments.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/getmypid_arguments.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/getmypid_namespaces.php (0.00s)
+        --- PASS: TestFixtures/success/getmypid_namespaces.php/default (0.00s)
+        --- PASS: TestFixtures/success/getmypid_namespaces.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/getmypid_namespaces.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/getmypid_namespaces.php/8.5 (0.00s)
+    --- PASS: TestFixtures/success/property_set_hook_raw.php (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/default (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.3 (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.4 (0.00s)
+        --- PASS: TestFixtures/success/property_set_hook_raw.php/8.5 (0.00s)
+FAIL
+FAIL	example.com/gophp/internal/php	0.357s
+FAIL

@@ -1,0 +1,8 @@
+{
+  "command": [
+    "scripts/artisan",
+    "about"
+  ],
+  "cwd": "/Users/kouji/dev/gophp-app",
+  "exit_code": 0
+}

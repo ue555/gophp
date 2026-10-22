@@ -214,6 +214,9 @@ func (e *evaluator) referencePlace(x expr, asSource bool) (referencePlace, error
 			return referencePlace{}, err
 		}
 		property := propertyForKey(object, key)
+		if property != nil && property.setHook != nil && !(e.currentMethod == property.setHook && e.variables["this"].o == object) {
+			return referencePlace{}, &runtimeError{n.line, "Error", "Indirect modification of " + property.owner.name + "::$" + property.name + " is not allowed"}
+		}
 		if property == nil && object.class != nil && object.class.readonly {
 			return referencePlace{}, &runtimeError{n.line, "Error", "Cannot create dynamic property " + object.class.name + "::$" + name}
 		}

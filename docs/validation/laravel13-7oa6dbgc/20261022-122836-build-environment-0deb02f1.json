@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/usr/bin/env",
+    "go",
+    "version"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

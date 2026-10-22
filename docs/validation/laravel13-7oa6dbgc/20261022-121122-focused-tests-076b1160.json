@@ -1,0 +1,13 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/php",
+    "./cmd/gophp",
+    "-run",
+    "Getmypid|PublicAssets|TestFixtures/(success/(getmypid|getcwd|property_set)|runtime/getmypid)",
+    "-count=1"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

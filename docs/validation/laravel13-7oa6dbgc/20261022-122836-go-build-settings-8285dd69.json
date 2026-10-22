@@ -1,0 +1,14 @@
+{
+  "command": [
+    "go",
+    "env",
+    "GOOS",
+    "GOARCH",
+    "CGO_ENABLED",
+    "CC",
+    "CGO_CFLAGS",
+    "CGO_LDFLAGS"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

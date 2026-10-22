@@ -1,0 +1,7 @@
+integer|positive
+stable
+dynamic
+exists
+fallback
+Call to undefined function Probe\getmypid()
+local|global

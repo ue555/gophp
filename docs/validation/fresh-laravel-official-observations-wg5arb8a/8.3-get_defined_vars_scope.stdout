@@ -1,0 +1,6 @@
+["alias","argument","counter","local","outer"]
+8|2|20|1
+bad
+isolated
+ArgumentCountError: get_defined_vars() expects exactly 0 arguments, 1 given
+Error: Unknown named parameter $unknown

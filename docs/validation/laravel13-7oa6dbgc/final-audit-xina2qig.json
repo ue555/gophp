@@ -1,0 +1,744 @@
+{
+  "result": "PASS",
+  "fixtures_per_version": 1201,
+  "new_fixtures": 8,
+  "target_comparisons": 24,
+  "protected_files_unchanged": 8999,
+  "old_expectations_unchanged": 1193,
+  "head": "e1e1ba0c76401ae84908e3f852499c3d1d094d54",
+  "source_sha256": "2bbb66d86cc1e6d15c83a3b62799036240fe292324ffe6e56aec9d0f557bed3a",
+  "candidate_sha256": "2fdf4f3f01f59a3df1fb5e0607014bb664724aa9b021762c257be59b45c36cf2",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "full-fixtures-8.3.35",
+      "metadata": "20261022-122544-full-fixtures-8.3.35-4fd96ee7.json",
+      "stdout": "20261022-122544-full-fixtures-8.3.35-4fd96ee7.stdout",
+      "stderr": "20261022-122544-full-fixtures-8.3.35-4fd96ee7.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "full-fixtures-8.4.26",
+      "metadata": "20261022-122831-full-fixtures-8.4.26-f5a3630f.json",
+      "stdout": "20261022-122831-full-fixtures-8.4.26-f5a3630f.stdout",
+      "stderr": "20261022-122831-full-fixtures-8.4.26-f5a3630f.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "full-fixtures-8.5.11",
+      "metadata": "20261022-123101-full-fixtures-8.5.11-a7c9324a.json",
+      "stdout": "20261022-123101-full-fixtures-8.5.11-a7c9324a.stdout",
+      "stderr": "20261022-123101-full-fixtures-8.5.11-a7c9324a.stderr"
+    },
+    {
+      "command": [
+        "make",
+        "test"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "final-make-test",
+      "metadata": "20261022-122544-final-make-test-ca85defe.json",
+      "stdout": "20261022-122544-final-make-test-ca85defe.stdout",
+      "stderr": "20261022-122544-final-make-test-ca85defe.stderr"
+    },
+    {
+      "command": [
+        "make",
+        "vet"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "final-make-vet",
+      "metadata": "20261022-122728-final-make-vet-af9c5d7c.json",
+      "stdout": "20261022-122728-final-make-vet-af9c5d7c.stdout",
+      "stderr": "20261022-122728-final-make-vet-af9c5d7c.stderr"
+    },
+    {
+      "command": [
+        "make",
+        "build"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "final-make-build",
+      "metadata": "20261022-122729-final-make-build-40621b68.json",
+      "stdout": "20261022-122729-final-make-build-40621b68.stdout",
+      "stderr": "20261022-122729-final-make-build-40621b68.stderr"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "final-diff-check",
+      "metadata": "20261022-122730-final-diff-check-b9e75e12.json",
+      "stdout": "20261022-122730-final-diff-check-b9e75e12.stdout",
+      "stderr": "20261022-122730-final-diff-check-b9e75e12.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "research/laravel-api/verify-gophp.py",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "fixed-laravel-api-platform-three",
+      "metadata": "20261022-122544-fixed-laravel-api-platform-three-116525d7.json",
+      "stdout": "20261022-122544-fixed-laravel-api-platform-three-116525d7.stdout",
+      "stderr": "20261022-122544-fixed-laravel-api-platform-three-116525d7.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "research/task-api/verify.py",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "task-api-three",
+      "metadata": "20261022-122748-task-api-three-a99b2ccc.json",
+      "stdout": "20261022-122748-task-api-three-a99b2ccc.stdout",
+      "stderr": "20261022-122748-task-api-three-a99b2ccc.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "research/fresh-laravel/verify.py",
+        "--binary",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--version",
+        "8.5"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "fresh-laravel12-85",
+      "metadata": "20261022-123249-fresh-laravel12-85-9e45306f.json",
+      "stdout": "20261022-123249-fresh-laravel12-85-9e45306f.stdout",
+      "stderr": "20261022-123249-fresh-laravel12-85-9e45306f.stderr"
+    },
+    {
+      "command": [
+        "scripts/verify"
+      ],
+      "cwd": "/Users/kouji/dev/gophp-app",
+      "exit_code": 0,
+      "label": "go-final-http",
+      "metadata": "20261022-122544-go-final-http-73a07aad.json",
+      "stdout": "20261022-122544-go-final-http-73a07aad.stdout",
+      "stderr": "20261022-122544-go-final-http-73a07aad.stderr"
+    },
+    {
+      "command": [
+        "/Users/kouji/dev/gophp-app/scripts/verify",
+        "--official"
+      ],
+      "cwd": "/Users/kouji/dev/gophp-app",
+      "exit_code": 0,
+      "label": "official-final-http",
+      "metadata": "20261022-121924-official-final-http-007eacd9.json",
+      "stdout": "20261022-121924-official-final-http-007eacd9.stdout",
+      "stderr": "20261022-121924-official-final-http-007eacd9.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/compare-validation.py",
+        "docs/validation/20261022-121925-5367ae79-official",
+        "docs/validation/20261022-122544-776c16d7-gophp"
+      ],
+      "cwd": "/Users/kouji/dev/gophp-app",
+      "exit_code": 0,
+      "label": "paired-http-and-db",
+      "metadata": "20261022-122757-paired-http-and-db-2823db79.json",
+      "stdout": "20261022-122757-paired-http-and-db-2823db79.stdout",
+      "stderr": "20261022-122757-paired-http-and-db-2823db79.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/validation/laravel13-7oa6dbgc/check-launchers.py"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "daily-launchers",
+      "metadata": "20261022-122946-daily-launchers-4bdeca84.json",
+      "stdout": "20261022-122946-daily-launchers-4bdeca84.stdout",
+      "stderr": "20261022-122946-daily-launchers-4bdeca84.stderr"
+    },
+    {
+      "command": [
+        ".cache/laravel13/gophp",
+        "--php-version=8.5",
+        "/Users/kouji/dev/gophp-app/docs/repro/getmypid.php"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "label": "original-repro-fixed",
+      "metadata": "20261022-123248-original-repro-fixed-f176ff3f.json",
+      "stdout": "20261022-123248-original-repro-fixed-f176ff3f.stdout",
+      "stderr": "20261022-123248-original-repro-fixed-f176ff3f.stderr"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/array_unique_regular_nested.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122656-target-8.3.35-array_unique_regular_nested-7c359e5e.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/get_defined_vars_scope.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122656-target-8.3.35-get_defined_vars_scope-a05424f9.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/runtime/getmypid_argument_count.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122656-target-8.3.35-getmypid_argument_count-d03c15cc.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/getcwd_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122657-target-8.3.35-getcwd_arguments-7fb03c2a.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122657-target-8.3.35-getmypid_arguments-dc2d2cb0.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_namespaces.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122658-target-8.3.35-getmypid_namespaces-f6e3e0d1.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_failures.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122658-target-8.3.35-property_set_hook_failures-3066cba8.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php83",
+        "--php-version",
+        "8.3.35",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_raw.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.3",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122658-target-8.3.35-property_set_hook_raw-ed22862d.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/array_unique_regular_nested.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122659-target-8.4.26-array_unique_regular_nested-3119d94f.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/get_defined_vars_scope.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122659-target-8.4.26-get_defined_vars_scope-c89f7ea2.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/runtime/getmypid_argument_count.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122659-target-8.4.26-getmypid_argument_count-ff26a6c2.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/getcwd_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122700-target-8.4.26-getcwd_arguments-11523e72.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122700-target-8.4.26-getmypid_arguments-76c14f6a.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_namespaces.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122700-target-8.4.26-getmypid_namespaces-76579e6c.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_failures.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122701-target-8.4.26-property_set_hook_failures-4a5c4eca.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php84",
+        "--php-version",
+        "8.4.26",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_raw.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.4",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122701-target-8.4.26-property_set_hook_raw-239b64b0.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/runtime/getmypid_argument_count.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122701-target-8.5.11-getmypid_argument_count-6cb69651.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/array_unique_regular_nested.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122702-target-8.5.11-array_unique_regular_nested-3c408fd3.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/get_defined_vars_scope.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122702-target-8.5.11-get_defined_vars_scope-15dd539a.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/getcwd_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122702-target-8.5.11-getcwd_arguments-2bfe728d.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_arguments.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122703-target-8.5.11-getmypid_arguments-2522bd0c.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/getmypid_namespaces.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122703-target-8.5.11-getmypid_namespaces-ddb491bc.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_failures.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122703-target-8.5.11-property_set_hook_failures-562f15c4.json"
+    },
+    {
+      "command": [
+        "python3",
+        "skills/php-go-interpreter/scripts/compare_php.py",
+        "--php",
+        "containers/php-version/bin/php85",
+        "--php-version",
+        "8.5.11",
+        "--fixtures",
+        "tests/fixtures/success/property_set_hook_raw.php",
+        "--timeout",
+        "30",
+        "--interpreter",
+        "/Users/kouji/dev/php/.cache/laravel13/gophp",
+        "--php-version=8.5",
+        "{file}"
+      ],
+      "cwd": "/Users/kouji/dev/php",
+      "exit_code": 0,
+      "metadata": "20261022-122704-target-8.5.11-property_set_hook_raw-d986a095.json"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "go",
+    "test",
+    "./internal/php",
+    "-run",
+    "TestFixtures/(success|runtime)/(getmypid|getcwd|property_set|array_unique_regular|get_defined_vars)",
+    "-count=1",
+    "-v"
+  ],
+  "cwd": "/Users/kouji/dev/php",
+  "exit_code": 0
+}

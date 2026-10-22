@@ -24,6 +24,17 @@ func (e *evaluator) callArrayFilterOrUnique(node functionCall) (value, error) {
 	}
 	out := arrayValue()
 	seen := make(map[string]bool)
+	flags := int64(2) // array_unique defaults to SORT_STRING.
+	if name == "array_unique" && present[1] {
+		v, _, ok := e.coerceType(bound[1], "int", false, e.strictTypes)
+		if !ok {
+			return value{}, builtinTypeError(node.line, name, 2, "flags", "int", bound[1])
+		}
+		flags = v.i
+		if flags != 0 && flags != 2 {
+			return value{}, &runtimeError{node.line, "Error", "gophp: array_unique() supports SORT_REGULAR and SORT_STRING"}
+		}
+	}
 	var callback resolvedCallable
 	if name == "array_filter" && present[1] && bound[1].kind != nullKind {
 		var ok bool
@@ -36,12 +47,25 @@ func (e *evaluator) callArrayFilterOrUnique(node functionCall) (value, error) {
 		item := dereference(entry.value)
 		keep := true
 		if name == "array_unique" {
-			key, convertErr := e.toText(item, node.line)
-			if convertErr != nil {
-				return value{}, convertErr
+			if flags == 0 {
+				for _, previous := range out.a.entries {
+					order, err := e.valueOrder(item, dereference(previous.value), node.line, make(map[*phpArray]bool))
+					if err != nil {
+						return value{}, err
+					}
+					if order == 0 {
+						keep = false
+						break
+					}
+				}
+			} else {
+				key, convertErr := e.toText(item, node.line)
+				if convertErr != nil {
+					return value{}, convertErr
+				}
+				keep = !seen[key]
+				seen[key] = true
 			}
-			keep = !seen[key]
-			seen[key] = true
 		} else if present[1] && bound[1].kind != nullKind {
 			callArgs := []callArgument{{value: item}}
 			if present[2] && bound[2].i != 0 {
