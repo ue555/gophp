@@ -1,6 +1,6 @@
 # PHP互換性と検証状況
 
-2026-10-22：現行**1201件**（正常771・実行時296・構文134）は公式PHP8.3.35・8.4.26・8.5.11と各1201一致、差異0・エラー0、終了0。旧1193件の期待値は変更せず、8件を公式観測に基づき追加した。固定Laravel 13.38.0はGo8.5と公式PHP8.5.11で各47検査・46実HTTP要求を完了。既存固定Laravel/API Platform・タスクAPIの3設定回帰、新規Laravel12の8.5回帰、make test/vet/buildも成功した。[今回の全結果と生ログ](validation/laravel13-7oa6dbgc/REPORT.md)。
+2026-11-08：現行**1209件**（正常779・実行時296・構文134）は公式PHP8.3.35・8.4.26・8.5.11と各1209一致、差異0・エラー0、終了0。前回1201件から8件を追加し、既存の期待値は変更していない。WSL2 Arch Linuxでの版別生ログは[8.3](validation/all-fixtures-1209-php83-wsl-2026-11-08.log)・[8.4](validation/all-fixtures-1209-php84-wsl-2026-11-08.log)・[8.5](validation/all-fixtures-1209-php85-wsl-2026-11-08.log)。2026-10-22時点の固定Laravel 13.38.0はGo8.5と公式PHP8.5.11で各47検査・46実HTTP要求を完了し、既存固定Laravel/API Platform・タスクAPIの3設定回帰、新規Laravel12の8.5回帰、make test/vet/buildも成功した。[当時の全結果と生ログ](validation/laravel13-7oa6dbgc/REPORT.md)。
 
 今回追加した`getmypid()`・`getcwd()`はOSの実情報を返す。PHP8.4/8.5のproperty hooksはbacked block setとraw reflectionの必要範囲のみ対応し、getter/virtual/arrow等は未対応。`get_defined_vars()`の変数値・参照は維持するが、キー順は変数名順。`array_unique`はSORT_STRING/SORT_REGULARに限定。`--document-root`の静的配信は明示したpublic内の既知アセットに限定する。これらの境界、HTTP比較で観測したMIME/非公開404本文の差、再実行コマンドは上記記録を参照。
 
@@ -12,7 +12,7 @@
 
 タスクAPIで必要になったmanifest生成のfilesystem関数・スカラー／配列の`var_export`、Carbon日時JSON化のDateTime書式を補完した。通常オブジェクトの`var_export`、`umask(mask)`による変更、filesystem stream context、DateTime全仕様は未対応・未網羅。上記一致をPHP全機能の互換と扱わない。
 
-以下の機能別記録にある古い件数や「比較待ち」は作業当時の履歴であり、現行1201件の比較状況は冒頭を基準とする。既存固定アプリの2000回連続／8並列要求の以前の成功記録は[従来の完成記録](full-stack-development.md)に維持する。
+以下の機能別記録にある古い件数や「比較待ち」は作業当時の履歴であり、現行1209件の比較状況は冒頭を基準とする。既存固定アプリの2000回連続／8並列要求の以前の成功記録は[従来の完成記録](full-stack-development.md)に維持する。
 
 `IteratorAggregate::getIterator()`を経由した`yield from`の24段有限連鎖をGoの3設定で確認した。[対応範囲・循環時の制限](full-stack-development.md)。初回1169件比較では別のGenerator委譲境界に差異が出て修正し、現行fixtureの範囲では後続の公式3版比較で一致した。循環時の診断など未収録の境界は未確認。
 
