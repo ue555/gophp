@@ -4,7 +4,7 @@
 
 初回の解決に使った `resolve.sh` はPHP 8.3.35でlockを生成し、同じlockを8.4.26・8.5.11で検査しました。**確定したlockの再構築には下記の `composer install` を使い、`resolve.sh` の `composer update` は再実行しません。** 比較用コンテナの設定は変更しません。
 
-`composer.lock` は保存対象、`vendor/`、`.cache/`、一時SQLiteと生成キャッシュはGit管理対象外です。Composerの自動スクリプトを実行しないため、依存解決とアプリ起動の検証は別です。
+`composer.lock` は保存対象、`vendor/`、`.cache/`、一時SQLiteと生成キャッシュはGit管理対象外です。`bootstrap/cache/` もGit管理対象外のため、新規チェックアウトでは `mkdir -p research/laravel-api/bootstrap/cache` を先に作る。無いとLaravelが `PackageManifest` の書き込みで失敗し、HTTP応答は `Class "view" not found` になる（2026-10-21にWSL2のArch Linuxで確認）。Composerの自動スクリプトを実行しないため、依存解決とアプリ起動の検証は別です。
 
 2026-10-13 時点で `composer.lock` と `vendor/` は作成済みです。提供されたMacでの検証ログは3版でHTTP成功を示します。このエージェント環境からのPodmanソケット接続は `operation not permitted` で拒否されるため、今回ここでの再実行はできません。[依存コード調査](../../docs/dependency-audit.md)は実vendorの代表コードまで更新しています。
 

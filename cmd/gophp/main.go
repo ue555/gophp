@@ -14,14 +14,27 @@ import (
 	"example.com/gophp/internal/php"
 )
 
+// version is the gophp release; overridable at build time with
+// -ldflags "-X main.version=...".
+var version = "0.4.0"
+
+func versionText(target php.Version) string {
+	return fmt.Sprintf("gophp %s (cli) compatible with PHP %s subset\nSupported targets: --php-version=8.3 (%s), 8.4 (%s), 8.5 (%s, default)\n",
+		version, target.Patch(), php.PHP83.Patch(), php.PHP84.Patch(), php.PHP85.Patch())
+}
+
 func run(args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("gophp", flag.ContinueOnError)
 	flags.SetOutput(stderr)
-	target := flags.String("php-version", string(php.PHP84), "target PHP version: 8.3, 8.4 or 8.5")
+	target := flags.String("php-version", string(php.PHP85), "target PHP version: 8.3, 8.4 or 8.5 (default 8.5)")
+	var showVersion bool
+	flags.BoolVar(&showVersion, "v", false, "print the gophp version and exit")
+	flags.BoolVar(&showVersion, "version", false, "print the gophp version and exit")
 	listen := flags.String("serve", "", "serve PHP requests at this local address")
 	documentRoot := flags.String("document-root", "", "serve public static assets from this directory (requires --serve)")
 	flags.Usage = func() {
 		fmt.Fprintln(stderr, "usage: gophp [--php-version=8.3|8.4|8.5] <file.php> [arguments...]")
+		fmt.Fprintln(stderr, "       gophp -v | --version")
 	}
 	if err := flags.Parse(args); err != nil {
 		if err == flag.ErrHelp {
@@ -29,13 +42,17 @@ func run(args []string, stdout, stderr io.Writer) int {
 		}
 		return 2
 	}
-	if flags.NArg() < 1 {
-		flags.Usage()
-		return 2
-	}
 	version, err := php.ParseVersion(*target)
 	if err != nil {
 		fmt.Fprintf(stderr, "gophp: %v\n", err)
+		return 2
+	}
+	if showVersion {
+		fmt.Fprint(stdout, versionText(version))
+		return 0
+	}
+	if flags.NArg() < 1 {
+		flags.Usage()
 		return 2
 	}
 	filename, err := filepath.Abs(flags.Arg(0))

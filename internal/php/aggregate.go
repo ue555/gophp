@@ -50,6 +50,8 @@ type phpObject struct {
 	reflectedAttribute *attributeDecl
 	attributeScope     *classDecl
 	reflectedParameter *parameter
+	reflectedFunction  *phpObject // ReflectionParameter: the ReflectionFunction/Method object the parameter came from
+	reflectedPosition  int
 	reflectedOwner     *classDecl
 	reflectedTypeName  string
 	reflectedNullable  bool
@@ -84,6 +86,7 @@ type phpObject struct {
 	directoryFlags     int64
 	recursiveItems     []recursiveItem
 	recursiveIndex     int
+	recursiveMaxDepth  int // RecursiveIteratorIterator::setMaxDepth(): 0 = unlimited, n = limit n-1
 	recursiveInner     value
 	priorityItems      []priorityEntry
 	priorityFlags      int64
@@ -397,6 +400,10 @@ func (e *evaluator) readProperty(node propertyExpr) (value, error) {
 	}
 	if base.o.reflectedProperty != nil && node.name == "name" {
 		return value{kind: stringKind, s: base.o.reflectedProperty.name}, nil
+	}
+	if base.o.reflectedProperty != nil && node.name == "class" && base.o.reflectedProperty.owner != nil {
+		// ReflectionProperty::$class is the declaring class, as for ReflectionMethod.
+		return value{kind: stringKind, s: base.o.reflectedProperty.owner.name}, nil
 	}
 	if base.o.reflectedMethod != nil && node.name == "name" {
 		return value{kind: stringKind, s: base.o.reflectedMethod.name}, nil

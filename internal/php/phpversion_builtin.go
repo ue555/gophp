@@ -18,12 +18,5 @@ func (e *evaluator) callPHPVersion(node functionCall) (value, error) {
 		}
 		return boolean(false), nil
 	}
-	switch e.version {
-	case PHP83:
-		return value{kind: stringKind, s: "8.3.35"}, nil
-	case PHP85:
-		return value{kind: stringKind, s: "8.5.11"}, nil
-	default:
-		return value{kind: stringKind, s: "8.4.26"}, nil
-	}
+	return value{kind: stringKind, s: e.version.Patch()}, nil
 }

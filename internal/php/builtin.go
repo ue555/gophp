@@ -54,7 +54,7 @@ func builtinName(name string) bool {
 	if strings.EqualFold(name, "dirname") || strings.EqualFold(name, "strtr") || strings.EqualFold(name, "strpos") || strings.EqualFold(name, "strrpos") || strings.EqualFold(name, "stripos") || strings.EqualFold(name, "substr") || strings.EqualFold(name, "function_exists") || strings.EqualFold(name, "extension_loaded") || strings.EqualFold(name, "class_exists") || strings.EqualFold(name, "interface_exists") || strings.EqualFold(name, "trait_exists") || strings.EqualFold(name, "enum_exists") || strings.EqualFold(name, "file_exists") || strings.EqualFold(name, "is_dir") || strings.EqualFold(name, "is_file") || strings.EqualFold(name, "is_link") {
 		return true
 	}
-	if strings.EqualFold(name, "file_get_contents") || strings.EqualFold(name, "file_put_contents") {
+	if strings.EqualFold(name, "file_get_contents") || strings.EqualFold(name, "file_put_contents") || strings.EqualFold(name, "file") {
 		return true
 	}
 	if strings.EqualFold(name, "fileinode") {
@@ -555,6 +555,9 @@ func (e *evaluator) callBuiltin(node functionCall) (result value, err error) {
 	}
 	if strings.EqualFold(node.name, "file_get_contents") {
 		return e.callFileGetContents(node)
+	}
+	if strings.EqualFold(node.name, "file") {
+		return e.callFileLines(node)
 	}
 	if strings.EqualFold(node.name, "fileinode") {
 		return e.callFileInode(node)

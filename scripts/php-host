@@ -1,0 +1,25 @@
+#!/bin/sh
+# Run the host-installed official PHP as the comparison reference, without a
+# container. The Go implementation and the stored expectations follow the
+# pinned docker.io/library/php:*-cli-bookworm images, whose PHP is built with
+# pdo_sqlite/sqlite3 compiled in and include_path '.:/usr/local/lib/php'.
+# Distribution builds (Arch Linux: pacman -S php php-sqlite) ship those two
+# extensions as shared modules and use a different include_path, so this
+# wrapper restores the image defaults. The comparator passes -n, therefore the
+# extensions must be loaded here rather than through php.ini.
+# Usage: scripts/php-host [php arguments...]
+#   PHP_HOST_BINARY=/usr/bin/php (default) selects another php executable.
+set -eu
+php=${PHP_HOST_BINARY:-/usr/bin/php}
+if [ ! -x "$php" ]; then
+  echo "php-host: $php is not executable; install PHP (Arch Linux: sudo pacman -S php php-sqlite)" >&2
+  exit 2
+fi
+ext_dir=$("$php" -n -r 'echo ini_get("extension_dir");')
+set -- -d "include_path=.:/usr/local/lib/php" "$@"
+for ext in pdo_sqlite sqlite3; do
+  if [ -f "$ext_dir/$ext.so" ]; then
+    set -- -d "extension=$ext" "$@"
+  fi
+done
+exec "$php" "$@"

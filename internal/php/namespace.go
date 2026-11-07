@@ -364,7 +364,7 @@ func (e *evaluator) initConstants() {
 			"STR_PAD_LEFT": integer(0), "STR_PAD_RIGHT": integer(1), "STR_PAD_BOTH": integer(2),
 			"SORT_REGULAR": integer(0), "SORT_NUMERIC": integer(1), "SORT_STRING": integer(2), "SORT_LOCALE_STRING": integer(5), "SORT_NATURAL": integer(6), "SORT_FLAG_CASE": integer(8),
 			"OPENSSL_RAW_DATA": integer(1), "OPENSSL_ZERO_PADDING": integer(2), "OPENSSL_DONT_ZERO_PAD_KEY": integer(4),
-			"LOCK_SH": integer(1), "LOCK_EX": integer(2), "LOCK_UN": integer(3), "LOCK_NB": integer(4), "FILE_APPEND": integer(8),
+			"LOCK_SH": integer(1), "LOCK_EX": integer(2), "LOCK_UN": integer(3), "LOCK_NB": integer(4), "FILE_APPEND": integer(8), "FILE_USE_INCLUDE_PATH": integer(1), "FILE_IGNORE_NEW_LINES": integer(2), "FILE_SKIP_EMPTY_LINES": integer(4),
 			"SEEK_SET": integer(0), "SEEK_CUR": integer(1), "SEEK_END": integer(2),
 			"GLOB_ONLYDIR": integer(8192), "GLOB_NOSORT": integer(4), "GLOB_MARK": integer(2),
 			"PHP_URL_SCHEME": integer(0), "PHP_URL_HOST": integer(1), "PHP_URL_PORT": integer(2), "PHP_URL_USER": integer(3), "PHP_URL_PASS": integer(4), "PHP_URL_PATH": integer(5), "PHP_URL_QUERY": integer(6), "PHP_URL_FRAGMENT": integer(7),

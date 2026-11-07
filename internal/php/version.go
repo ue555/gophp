@@ -21,3 +21,15 @@ func ParseVersion(text string) (Version, error) {
 		return "", fmt.Errorf("unsupported PHP version %q (expected 8.3, 8.4 or 8.5)", text)
 	}
 }
+
+// Patch returns the official PHP patch release this target is compared with.
+func (v Version) Patch() string {
+	switch v {
+	case PHP83:
+		return "8.3.35"
+	case PHP85:
+		return "8.5.11"
+	default:
+		return "8.4.26"
+	}
+}

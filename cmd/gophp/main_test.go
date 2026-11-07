@@ -647,6 +647,10 @@ func TestCLI(t *testing.T) {
 		{"missing version", []string{"--php-version"}, 2, "", "flag needs an argument"},
 		{"unknown option", []string{"--unknown", file}, 2, "", "flag provided but not defined"},
 		{"help", []string{"--help"}, 0, "", "usage:"},
+		{"version short", []string{"-v"}, 0, versionText(php.PHP85), ""},
+		{"version long", []string{"--version"}, 0, versionText(php.PHP85), ""},
+		{"version with target", []string{"--php-version=8.4", "-v"}, 0, versionText(php.PHP84), ""},
+		{"version with bad target", []string{"--php-version=8.6", "-v"}, 2, "", "unsupported PHP version"},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			var stdout, stderr bytes.Buffer
@@ -689,7 +693,8 @@ func TestCLINaNVersion(t *testing.T) {
 			var stdout, stderr bytes.Buffer
 			code := run(args, &stdout, &stderr)
 			wantWarning := ""
-			if version == "8.5" {
+			// The CLI default target is 8.5, so an empty target warns too.
+			if version == "8.5" || version == "" {
 				wantWarning = "Warning: unexpected NAN value was coerced to bool in " + file + " on line 21\n"
 			}
 			if code != 0 || stdout.String() != strings.Repeat("1", 20)+"\n" || stderr.String() != wantWarning {

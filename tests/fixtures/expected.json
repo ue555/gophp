@@ -6629,5 +6629,45 @@
     "stdout_by_version": {
       "8.3": "hooks unavailable\n"
     }
+  },
+  "success/reflection_property_class.php": {
+    "stdout": "Book|title\nBook::$title|Book|own\nBook::$year|Book|own\nBase::$inherited|Base|inherited\nBase::$count|Base|inherited\nBook|describe\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/preg_match_unmatched_groups.php": {
+    "stdout": "[\"> 0\",\">\",\"0\"]|>\n[\"0\",\"\",\"0\"]|==\n[\"== 1k\",\"==\",\"1\",\"k\"]|==\n[\" 5 \",\"\",\"5\"]|==\n[\"c\",\"\",\"\",\"c\"]\n[\"c\",null,null,\"c\"]\n[[\"c\",1],[\"\",-1],[\"\",-1],[\"c\",1]]\n[[\"c\",1],[null,-1],[null,-1],[\"c\",1]]\n{\"0\":\"b\",\"x\":\"\",\"1\":\"\",\"2\":\"b\"}\n{\"0\":\"b\",\"x\":null,\"1\":null,\"2\":\"b\",\"y\":null,\"3\":null}\n{\"0\":\"hi\",\"word\":\"hi\",\"1\":\"hi\"}\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/recursive_iterator_max_depth.php": {
+    "stdout": "0/false: a@0=1 c@1=2 e@2=3 f@0=4\n0/0: a@0=1 f@0=4\n0/1: a@0=1 c@1=2 f@0=4\n1/false: a@0=1 b@0[] c@1=2 d@1[] e@2=3 f@0=4\n1/0: a@0=1 b@0[] f@0=4\n1/1: a@0=1 b@0[] c@1=2 d@1[] f@0=4\n2/false: a@0=1 c@1=2 e@2=3 d@1[] b@0[] f@0=4\n2/0: a@0=1 b@0[] f@0=4\n2/1: a@0=1 c@1=2 d@1[] b@0[] f@0=4\nfalse\nfalse\nValueError: RecursiveIteratorIterator::setMaxDepth(): Argument #1 ($maxDepth) must be greater than or equal to -1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reflector_interface.php": {
+    "stdout": "ReflectionClass|Reflector|Stringable\nReflectionMethod|Reflector|Stringable\nReflectionParameter|Reflector|Stringable\nReflectionProperty|Reflector|Stringable\nReflectionFunction|Reflector|Stringable\nReflectionNamedType|no|Stringable\ninterface|Reflector,Stringable\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/class_implements_order.php": {
+    "stdout": "A: B,Z\nF: D,Z\nC: A,D,Z,B\nE: A,D,Z,B,Countable\nG: A,D,Z,B,Countable,F,Stringable\nA,D,Z,B,Countable,F,Stringable\n[]|true\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/file_lines.php": {
+    "stdout": "4|[\"first line\\n\",\"\\n\",\"third\\r\\n\",\"last without newline\"]\n[\"first line\",\"\",\"third\",\"last without newline\"]\n[\"first line\",\"third\",\"last without newline\"]\n[\"first line\\n\",\"\\n\",\"third\\r\\n\",\"last without newline\"]\n[]\nfalse\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reflection_namespace_promoted.php": {
+    "stdout": "App\\Models\\Book|App\\Models|Book|in\nempty|global\nisbn|declared|mutable\ntitle|promoted|mutable\nyear|promoted|readonly\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/reflection_parameter_function.php": {
+    "stdout": "ReflectionMethod|__construct|0|title|Book|copy\nReflectionMethod|__construct|1|year|Book|copy\nReflectionMethod|make|0|title|Book|copy\nReflectionMethod|make|1|years|Book|copy\nReflectionFunction|describe|0|book|-|copy\nReflectionFunction|describe|1|prefix|-|copy\n",
+    "stderr": "",
+    "exit": 0
   }
 }

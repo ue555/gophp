@@ -120,26 +120,41 @@ func (e *evaluator) callPregMatch(node functionCall) (value, error) {
 	if len(node.args) >= 3 {
 		out := arrayValue()
 		if index != nil {
+			// PHP reports an unmatched group as "" (null with
+			// PREG_UNMATCHED_AS_NULL) when a later group matched, and drops
+			// trailing unmatched groups unless that flag is set. A named group
+			// is stored under its name before its number.
+			last := 0
+			for i := 0; i < len(index)/2; i++ {
+				if index[2*i] >= 0 {
+					last = i
+				}
+			}
 			for i := 0; i < len(index)/2; i++ {
 				start, stop := index[2*i], index[2*i+1]
-				if start < 0 && flags&512 == 0 {
+				if start < 0 && i > last && flags&512 == 0 {
 					continue
 				}
 				item := value{kind: nullKind}
 				if start >= 0 {
 					item = value{kind: stringKind, s: s.s[int(offset)+start : int(offset)+stop]}
+				} else if flags&512 == 0 {
+					item = value{kind: stringKind, s: ""}
 				}
-				if flags&256 != 0 && start >= 0 {
+				if flags&256 != 0 {
+					position := int64(-1)
+					if start >= 0 {
+						position = int64(start) + offset
+					}
 					pair := arrayValue()
 					pair.a = pair.a.with(arrayKey{index: 0}, item)
-					pair.a = pair.a.with(arrayKey{index: 1}, integer(int64(start)+offset))
+					pair.a = pair.a.with(arrayKey{index: 1}, integer(position))
 					item = pair
 				}
-				out.a = out.a.with(arrayKey{index: int64(i)}, item)
 				if i < len(names) && names[i] != "" {
-					name := names[i]
-					out.a = out.a.with(arrayKey{isString: true, text: name}, item)
+					out.a = out.a.with(arrayKey{isString: true, text: names[i]}, item)
 				}
+				out.a = out.a.with(arrayKey{index: int64(i)}, item)
 			}
 		}
 		if !writable(node.args[2]) {

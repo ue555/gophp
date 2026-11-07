@@ -122,7 +122,8 @@ c:水:3:3
 2:2:1:0:integer
 ```
 
-CLIは `gophp [--php-version=8.3|8.4|8.5] <file.php> [arguments...]`。既定は8.4です。
+CLIは `gophp [--php-version=8.3|8.4|8.5] <file.php> [arguments...]`。既定は8.5です（2026-10-21にホストへ導入した公式PHP 8.5.11に合わせて8.4から変更。比較スクリプトと[gophpenv](https://github.com/ue555/gophpenv)のシムは常に版を明示するため、比較結果やモード選択には影響しない）。
+`gophp -v`／`--version`はgophpの版と対象PHPパッチ版を標準出力へ表示して終了0。日常利用の導入はgophpenv（リリースタグからビルドし、`gophpenv global 8.5`や`.gophp-version`でモードを選ぶ）を推奨する。開発中の作業ツリーを直接置く場合は`make install`で`~/.local/bin/gophp`に配置できる（配置先は`BINDIR=`で変更）。
 標準出力はプログラムの出力、標準エラーは診断とヘルプです。
 終了コードは成功0、ファイル読み込み等の失敗1、引数の誤り2、PHP構文・致命エラー255です。
 ファイル名の前に `--` を指定できます。PHPの `-r`・`-l`、stdin実行は未対応です。
@@ -176,6 +177,20 @@ make compare-parser
 ```
 
 比較環境の起動方法は [コンテナの案内](containers/php-version/README.md) を参照してください。
+
+### ホストに導入した公式PHPで比較する（コンテナを使わない）
+
+Arch Linuxでは公式リポジトリ`extra`の`php`が基準と同じ8.5.11のため、`sudo pacman -S --needed php php-sqlite`で導入したPHPを比較基準に使える。Go実装と期待値は固定Dockerイメージの既定（`include_path='.:/usr/local/lib/php'`、組み込みのpdo_sqlite／sqlite3）に合わせているので、ホストPHPは[scripts/php-host](scripts/php-host)経由で呼び、`-d`でこの2点を揃える。比較スクリプトは`php -n`でphp.iniを読まないため、拡張の読み込みもこのラッパーが行う。
+
+```sh
+make build
+python3 skills/php-go-interpreter/scripts/compare_php.py \
+  --php scripts/php-host --php-version 8.5.11 \
+  --fixtures tests/fixtures --timeout 15 \
+  --interpreter ./bin/gophp --php-version=8.5 '{file}'
+```
+
+2026-10-21にWSL2上のArch Linux（php 8.5.11-1）で実行した[1173件時点の生ログ](docs/validation/host-php85-arch-1173-compare-wsl.log)はvendor未導入の8件がエラー、[両vendor導入後の1175件](docs/validation/host-php85-arch-1175-compare-after-interface-fix-wsl.log)は全件一致。8.3・8.4はArchに同じパッチ版のパッケージがないため、従来どおりコンテナで比較する。
 [php-go-interpreterスキル](skills/php-go-interpreter/SKILL.md) の比較スクリプトを使用し、
 stdout・stderrをバイト単位、終了コードを厳密に比較します。trim・警告の削除・fixtureの除外は行いません。
 正常系がどちらか一方でも非ゼロ終了なら検証エラーとします。

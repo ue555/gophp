@@ -4,13 +4,19 @@ PHP ?= $(CURDIR)/containers/php-version/bin/php84
 PHP_VERSION ?= 8.4.26
 PHP_TARGET = $(basename $(PHP_VERSION))
 GOPHP_FILE ?= examples/report.php
-GOPHP_TARGET ?= 8.4
+GOPHP_TARGET ?= 8.5
 # Keep build cache inside the writable workspace, including sandboxed runs.
 export GOCACHE := $(CURDIR)/.cache/go-build
 
-.PHONY: build test vet compare compare-parser compare-all container-build container-run container-check
+.PHONY: build install test vet compare compare-parser compare-all container-build container-run container-check
 build:
 	$(GO) build -o bin/gophp ./cmd/gophp
+
+# Put gophp on PATH for the current user (override with BINDIR=/usr/local/bin).
+BINDIR ?= $(HOME)/.local/bin
+install: build
+	install -d "$(BINDIR)"
+	install -m 0755 bin/gophp "$(BINDIR)/gophp"
 
 test:
 	$(GO) test ./...

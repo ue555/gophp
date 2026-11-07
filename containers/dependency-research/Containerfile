@@ -1,5 +1,5 @@
 ARG PHP_VERSION=8.3.35
-FROM composer:2 AS composer
+FROM docker.io/library/composer:2 AS composer
 FROM php:${PHP_VERSION}-cli-bookworm
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 RUN apt-get update \

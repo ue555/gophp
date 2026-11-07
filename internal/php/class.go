@@ -21,6 +21,7 @@ type propertyDecl struct {
 	line             int
 	owner            *classDecl
 	setHook          *methodDecl
+	promoted         bool // declared through constructor property promotion
 }
 type parameter struct {
 	attributes       []attributeDecl
@@ -373,7 +374,7 @@ func (p *parser) classDeclarationNamed(kind string, name token) (*classDecl, err
 						return nil, &fatalDiagnostic{param.line, "Cannot redeclare " + decl.name + "::$" + param.name}
 					}
 				}
-				decl.properties = append(decl.properties, propertyDecl{name: param.name, visibility: param.visibility, typeName: param.typeName, nullable: param.nullable, readonly: param.readonly, line: param.line, owner: decl})
+				decl.properties = append(decl.properties, propertyDecl{name: param.name, visibility: param.visibility, typeName: param.typeName, nullable: param.nullable, readonly: param.readonly, line: param.line, owner: decl, promoted: true})
 			}
 			decl.methods[lower] = method
 			decl.methodOrder = append(decl.methodOrder, method)
@@ -565,6 +566,7 @@ func (e *evaluator) initClasses() {
 		backedEnum := &classDecl{name: "BackedEnum", kind: "interface", interfaces: []*classDecl{unitEnum}}
 		countable := &classDecl{name: "Countable", kind: "interface"}
 		stringable := &classDecl{name: "Stringable", kind: "interface", methods: make(map[string]*methodDecl)}
+		reflector := &classDecl{name: "Reflector", kind: "interface", interfaces: []*classDecl{stringable}, methods: make(map[string]*methodDecl)}
 		toStringMethod := &methodDecl{name: "__toString", visibility: "public", abstract: true, returnType: "string", owner: stringable}
 		stringable.methods["__tostring"] = toStringMethod
 		stringable.methodOrder = []*methodDecl{toStringMethod}
@@ -709,7 +711,7 @@ func (e *evaluator) initClasses() {
 			recursiveDirectoryIterator.methodOrder = append(recursiveDirectoryIterator.methodOrder, method)
 		}
 		recursiveIteratorIterator := &classDecl{name: "RecursiveIteratorIterator", kind: "class", interfaces: []*classDecl{outerIterator}, methods: make(map[string]*methodDecl), constants: make(map[string]classConstantValue)}
-		for _, name := range []string{"__construct", "rewind", "valid", "key", "current", "next", "getDepth", "getInnerIterator", "getSubIterator"} {
+		for _, name := range []string{"__construct", "rewind", "valid", "key", "current", "next", "getDepth", "getInnerIterator", "getSubIterator", "setMaxDepth", "getMaxDepth"} {
 			method := &methodDecl{name: name, visibility: "public", owner: recursiveIteratorIterator}
 			recursiveIteratorIterator.methods[strings.ToLower(name)] = method
 			recursiveIteratorIterator.methodOrder = append(recursiveIteratorIterator.methodOrder, method)
@@ -798,7 +800,7 @@ func (e *evaluator) initClasses() {
 		fiber := &classDecl{name: "Fiber", kind: "class", final: true, methods: make(map[string]*methodDecl)}
 		fiber.methods["getcurrent"] = &methodDecl{name: "getCurrent", visibility: "public", static: true, owner: fiber}
 		fiber.methodOrder = []*methodDecl{fiber.methods["getcurrent"]}
-		reflectionFunctionAbstract := &classDecl{name: "ReflectionFunctionAbstract", kind: "class", abstract: true}
+		reflectionFunctionAbstract := &classDecl{name: "ReflectionFunctionAbstract", kind: "class", abstract: true, interfaces: []*classDecl{reflector}}
 		reflectionFunction := &classDecl{name: "ReflectionFunction", kind: "class", parent: reflectionFunctionAbstract, methods: make(map[string]*methodDecl)}
 		reflectionFunction.methods["__construct"] = &methodDecl{name: "__construct", visibility: "public", owner: reflectionFunction}
 		reflectionFunction.methodOrder = []*methodDecl{reflectionFunction.methods["__construct"]}
@@ -806,7 +808,7 @@ func (e *evaluator) initClasses() {
 		for name, n := range map[string]int64{"IS_PUBLIC": 1, "IS_PROTECTED": 2, "IS_PRIVATE": 4, "IS_STATIC": 16, "IS_FINAL": 32, "IS_ABSTRACT": 64} {
 			reflectionMethod.constants[name] = classConstantValue{value: integer(n), decl: classConstantDecl{name: name, visibility: "public", owner: reflectionMethod}}
 		}
-		reflectionProperty := &classDecl{name: "ReflectionProperty", kind: "class", constants: make(map[string]classConstantValue)}
+		reflectionProperty := &classDecl{name: "ReflectionProperty", kind: "class", interfaces: []*classDecl{reflector}, constants: make(map[string]classConstantValue)}
 		for name, n := range map[string]int64{"IS_PUBLIC": 1, "IS_PROTECTED": 2, "IS_PRIVATE": 4, "IS_STATIC": 16, "IS_READONLY": 128} {
 			reflectionProperty.constants[name] = classConstantValue{value: integer(n), decl: classConstantDecl{name: name, visibility: "public", owner: reflectionProperty}}
 		}
@@ -922,16 +924,17 @@ func (e *evaluator) initClasses() {
 			"pdostatement":               pdoStatement,
 			"splpriorityqueue":           priorityQueue,
 			"emptyiterator":              emptyIterator,
-			"reflectionclass":            {name: "ReflectionClass", kind: "class"},
-			"reflectionenum":             {name: "ReflectionEnum", kind: "class"},
+			"reflector":                  reflector,
+			"reflectionclass":            {name: "ReflectionClass", kind: "class", interfaces: []*classDecl{reflector}},
+			"reflectionenum":             {name: "ReflectionEnum", kind: "class", interfaces: []*classDecl{reflector}},
 			"reflectionfunctionabstract": reflectionFunctionAbstract,
 			"sessionhandlerinterface":    sessionHandlerInterface,
 			"reflectionfunction":         reflectionFunction,
 			"reflectionmethod":           reflectionMethod,
 			"reflectionproperty":         reflectionProperty,
-			"reflectionparameter":        {name: "ReflectionParameter", kind: "class"},
-			"reflectionattribute":        {name: "ReflectionAttribute", kind: "class", constants: map[string]classConstantValue{"IS_INSTANCEOF": {value: integer(2), decl: classConstantDecl{name: "IS_INSTANCEOF", visibility: "public"}}}},
-			"reflectionnamedtype":        {name: "ReflectionNamedType", kind: "class"},
+			"reflectionparameter":        {name: "ReflectionParameter", kind: "class", interfaces: []*classDecl{reflector}},
+			"reflectionattribute":        {name: "ReflectionAttribute", kind: "class", interfaces: []*classDecl{reflector}, constants: map[string]classConstantValue{"IS_INSTANCEOF": {value: integer(2), decl: classConstantDecl{name: "IS_INSTANCEOF", visibility: "public"}}}},
+			"reflectionnamedtype":        {name: "ReflectionNamedType", kind: "class", interfaces: []*classDecl{stringable}},
 			"iteratoraggregate":          iteratorAggregate,
 			"outeriterator":              outerIterator,
 			"filteriterator":             filterIterator,
@@ -965,6 +968,20 @@ func (e *evaluator) initClasses() {
 			"valueerror":                 {name: "ValueError", kind: "class", parent: baseError},
 			"divisionbyzeroerror":        {name: "DivisionByZeroError", kind: "class", parent: baseError},
 			"unhandledmatcherror":        {name: "UnhandledMatchError", kind: "class", parent: baseError},
+		}
+		// Reflector extends Stringable; give the engine-defined Reflection classes
+		// a concrete __toString so user subclasses (Laravel's ReflectionClosure
+		// extends ReflectionFunction) are not treated as abstract.
+		for _, key := range []string{"reflectionfunctionabstract", "reflectionproperty", "reflectionclass", "reflectionenum", "reflectionparameter", "reflectionattribute", "reflectionnamedtype"} {
+			cls := e.classes[key]
+			if cls.methods == nil {
+				cls.methods = make(map[string]*methodDecl)
+			}
+			if cls.methods["__tostring"] == nil {
+				method := &methodDecl{name: "__toString", visibility: "public", returnType: "string", owner: cls}
+				cls.methods["__tostring"] = method
+				cls.methodOrder = append(cls.methodOrder, method)
+			}
 		}
 	}
 }
@@ -2712,10 +2729,16 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			}
 			e.initClasses()
 			out := arrayValue()
-			for c := object.o.reflected; c != nil; c = c.parent {
-				for i := range c.properties {
-					property := &c.properties[i]
-					if c != object.o.reflected && property.visibility == "private" {
+			// A class's property list already holds the inherited declarations
+			// (parent entries first, then its own). PHP lists the class's own
+			// properties first, then the inherited ones, and never a parent's
+			// private property.
+			reflected := object.o.reflected
+			for _, own := range []bool{true, false} {
+				for i := range reflected.properties {
+					property := &reflected.properties[i]
+					inherited := property.owner != nil && property.owner != reflected
+					if inherited == own || inherited && property.visibility == "private" {
 						continue
 					}
 					ref := value{kind: objectKind, o: &phpObject{class: e.classes["reflectionproperty"], properties: &phpArray{}, reflectedProperty: property}}
@@ -2738,7 +2761,7 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			for c := object.o.reflected; c != nil; c = c.parent {
 				for i := range c.properties {
 					property := &c.properties[i]
-					if property.name != name.s || c != object.o.reflected && property.visibility == "private" {
+					if property.name != name.s || property.owner != nil && property.owner != object.o.reflected && property.visibility == "private" {
 						continue
 					}
 					if strings.EqualFold(node.name, "hasProperty") {
@@ -2803,6 +2826,13 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 		case "getshortname":
 			parts := strings.Split(object.o.reflected.name, "\\")
 			return value{kind: stringKind, s: parts[len(parts)-1]}, nil
+		case "getnamespacename":
+			if i := strings.LastIndex(object.o.reflected.name, "\\"); i >= 0 {
+				return value{kind: stringKind, s: object.o.reflected.name[:i]}, nil
+			}
+			return value{kind: stringKind, s: ""}, nil
+		case "innamespace":
+			return boolean(strings.Contains(object.o.reflected.name, "\\")), nil
 		case "isabstract":
 			return boolean(object.o.reflected.abstract), nil
 		case "isinstantiable":
@@ -2860,6 +2890,8 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			return value{kind: objectKind, o: &phpObject{class: e.classes["reflectionnamedtype"], properties: &phpArray{}, reflectedTypeName: object.o.reflectedProperty.typeName, reflectedNullable: object.o.reflectedProperty.nullable}}, nil
 		case "isreadonly":
 			return boolean(object.o.reflectedProperty.readonly), nil
+		case "ispromoted":
+			return boolean(object.o.reflectedProperty.promoted), nil
 		case "getmodifiers":
 			property := object.o.reflectedProperty
 			flags := int64(1)
@@ -3042,7 +3074,7 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			for i := range object.o.reflectedMethod.parameters {
 				param := &object.o.reflectedMethod.parameters[i]
 				props := (&phpArray{}).with(arrayKey{isString: true, text: "name"}, value{kind: stringKind, s: param.name})
-				wrapped := value{kind: objectKind, o: &phpObject{class: e.classes["reflectionparameter"], reflectedParameter: param, reflectedOwner: object.o.reflectedMethod.owner, properties: props}}
+				wrapped := value{kind: objectKind, o: &phpObject{class: e.classes["reflectionparameter"], reflectedParameter: param, reflectedOwner: object.o.reflectedMethod.owner, reflectedFunction: object.o, reflectedPosition: i, properties: props}}
 				out.a = out.a.with(arrayKey{index: int64(i)}, wrapped)
 			}
 			return out, nil
@@ -3087,6 +3119,15 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			}
 			e.initClasses()
 			return value{kind: objectKind, o: &phpObject{class: e.classes["reflectionclass"], reflected: object.o.reflectedOwner, properties: &phpArray{}}}, nil
+		case "getposition":
+			return integer(int64(object.o.reflectedPosition)), nil
+		case "getdeclaringfunction":
+			source := object.o.reflectedFunction
+			if source == nil {
+				return value{}, &runtimeError{node.line, "Error", "gophp: ReflectionParameter::getDeclaringFunction() needs a parameter obtained from getParameters()"}
+			}
+			// PHP returns a fresh ReflectionFunction/ReflectionMethod for the same declaration.
+			return value{kind: objectKind, o: &phpObject{class: source.class, properties: &phpArray{}, reflectedMethod: source.reflectedMethod, reflectedClosure: source.reflectedClosure, reflectedOwner: source.reflectedOwner}}, nil
 		}
 	}
 	if object.o.class != nil && object.o.class.name == "ReflectionNamedType" {
