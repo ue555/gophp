@@ -565,6 +565,14 @@ func (e *evaluator) initClasses() {
 		unitEnum := &classDecl{name: "UnitEnum", kind: "interface"}
 		backedEnum := &classDecl{name: "BackedEnum", kind: "interface", interfaces: []*classDecl{unitEnum}}
 		countable := &classDecl{name: "Countable", kind: "interface"}
+		serializable := &classDecl{name: "Serializable", kind: "interface", methods: make(map[string]*methodDecl)}
+		for _, method := range []*methodDecl{
+			{name: "serialize", visibility: "public", abstract: true, owner: serializable},
+			{name: "unserialize", visibility: "public", abstract: true, owner: serializable, parameters: []parameter{{name: "data", typeName: "string"}}},
+		} {
+			serializable.methods[method.name] = method
+			serializable.methodOrder = append(serializable.methodOrder, method)
+		}
 		stringable := &classDecl{name: "Stringable", kind: "interface", methods: make(map[string]*methodDecl)}
 		reflector := &classDecl{name: "Reflector", kind: "interface", interfaces: []*classDecl{stringable}, methods: make(map[string]*methodDecl)}
 		toStringMethod := &methodDecl{name: "__toString", visibility: "public", abstract: true, returnType: "string", owner: stringable}
@@ -913,6 +921,7 @@ func (e *evaluator) initClasses() {
 			"unexpectedvalueexception":             {name: "UnexpectedValueException", kind: "class", parent: runtimeException},
 			"unitenum":                             unitEnum, "backedenum": backedEnum,
 			"countable":                  countable,
+			"serializable":               serializable,
 			"stringable":                 stringable,
 			"traversable":                traversable,
 			"iterator":                   iterator,
@@ -2809,6 +2818,9 @@ func (e *evaluator) callMethod(node methodCall) (value, error) {
 			}
 			if strings.EqualFold(node.name, "implementsInterface") {
 				return boolean(classImplements(object.o.reflected, bound[0].s)), nil
+			}
+			if classImplements(object.o.reflected, bound[0].s) {
+				return boolean(true), nil
 			}
 			for c := object.o.reflected.parent; c != nil; c = c.parent {
 				if strings.EqualFold(c.name, bound[0].s) {

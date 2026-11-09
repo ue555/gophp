@@ -428,3 +428,47 @@ func TestEnumReservedMethodsAreCheckedAtDeclaration(t *testing.T) {
 		}
 	}
 }
+
+func TestReflectionClassIsSubclassOfInterfaces(t *testing.T) {
+	source := `<?php
+interface A {}
+interface B extends A {}
+class P implements A {}
+class C extends P implements B {}
+$checks = [['C', 'A'], ['C', 'B'], ['C', 'P'], ['C', 'C'], ['P', 'A'], ['P', 'P'], ['B', 'A'], ['B', 'B'], ['A', 'A']];
+foreach ($checks as $check) {
+    $rc = new ReflectionClass($check[0]);
+    echo $check[0], '->', $check[1], '=', $rc->isSubclassOf($check[1]) ? 'true' : 'false', "\n";
+}
+`
+	want := "C->A=true\nC->B=true\nC->P=true\nC->C=false\nP->A=true\nP->P=false\nB->A=true\nB->B=false\nA->A=false\n"
+	for _, version := range []Version{PHP83, PHP84, PHP85} {
+		var out, err bytes.Buffer
+		if code := RunWithVersion(source, "reflection.php", &out, &err, version); code != 0 || out.String() != want || err.Len() != 0 {
+			t.Fatalf("PHP %s: exit=%d stdout=%q stderr=%q", version, code, &out, &err)
+		}
+	}
+}
+
+func TestSerializableRequiresMethods(t *testing.T) {
+	for _, test := range []struct {
+		name, source, diagnostic string
+	}{
+		{"missing both", `class C implements Serializable {}`, "Serializable::serialize"},
+		{"missing unserialize", `class C implements Serializable { public function serialize() {} }`, "Serializable::unserialize"},
+		{"missing serialize", `class C implements Serializable { public function unserialize($data) {} }`, "Serializable::serialize"},
+		{"inherited contract", `abstract class P implements Serializable {} class C extends P {}`, "Serializable::serialize"},
+		{"wrong arity", `class C implements Serializable { public function serialize() {} public function unserialize() {} }`, "must be compatible with Serializable::unserialize(string $data)"},
+		{"wrong type", `class C implements Serializable { public function serialize() {} public function unserialize(int $data) {} }`, "must be compatible with Serializable::unserialize(string $data)"},
+	} {
+		for _, version := range []Version{PHP83, PHP84, PHP85} {
+			t.Run(test.name+"/"+string(version), func(t *testing.T) {
+				var out, stderr bytes.Buffer
+				code := RunWithVersion("<?php "+test.source+` echo 'must not execute';`, "serializable.php", &out, &stderr, version)
+				if code != 255 || out.Len() != 0 || !strings.Contains(stderr.String(), test.diagnostic) {
+					t.Fatalf("exit=%d stdout=%q stderr=%q", code, &out, &stderr)
+				}
+			})
+		}
+	}
+}

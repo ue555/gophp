@@ -17,8 +17,12 @@ func (e *evaluator) callStrReplace(node functionCall) (value, error) {
 			search = append(search, dereference(entry.value))
 		}
 	}
+	replaceIsArray := args[1].value.kind == arrayKind
+	if args[0].value.kind != arrayKind && replaceIsArray {
+		return value{}, &runtimeError{node.line, "TypeError", "str_replace(): Argument #2 ($replace) must be of type string when argument #1 ($search) is a string"}
+	}
 	replace := []value{args[1].value}
-	if args[1].value.kind == arrayKind {
+	if replaceIsArray {
 		replace = nil
 		for _, entry := range args[1].value.a.entries {
 			replace = append(replace, dereference(entry.value))
@@ -36,7 +40,9 @@ func (e *evaluator) callStrReplace(node functionCall) (value, error) {
 				return value{}, err
 			}
 			newValue := value{kind: stringKind}
-			if i < len(replace) {
+			if !replaceIsArray {
+				newValue = replace[0]
+			} else if i < len(replace) {
 				newValue = replace[i]
 			}
 			newText, err := e.toText(newValue, node.line)

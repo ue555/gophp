@@ -42,6 +42,16 @@ func (p *parser) foreachStatement(line int) (statement, error) {
 	if err = p.expect(")"); err != nil {
 		return s, err
 	}
+	if p.accept(":") {
+		s.thenBranch, err = p.alternativeStatements("endforeach")
+		if err != nil {
+			return s, err
+		}
+		if !p.acceptKeyword("endforeach") {
+			return s, unexpected(p.current(), "endforeach")
+		}
+		return s, p.expect(";")
+	}
 	s.thenBranch, err = p.body()
 	return s, err
 }

@@ -64,16 +64,36 @@ func TestFunctionRecursionLimit(t *testing.T) {
 	}
 }
 
-func TestUnsupportedFunctionAndLoopSyntax(t *testing.T) {
+func TestUnsupportedFunctionSyntax(t *testing.T) {
 	for _, source := range []string{
 		"function f(...$args, $tail) {}", "function f(int&float $x) {}",
 		"function f(): int&float {}",
-		"while (false): endwhile;", "for (;;): endfor;",
 	} {
 		var out, err bytes.Buffer
 		code := Run("<?php echo 'must not execute'; "+source, "input.php", &out, &err)
 		if code != 255 || out.Len() != 0 || err.Len() == 0 {
 			t.Errorf("%s: exit=%d stdout=%q stderr=%q", source, code, &out, &err)
+		}
+	}
+}
+
+func TestAlternativeLoopSyntax(t *testing.T) {
+	for _, test := range []struct {
+		source string
+		want   string
+	}{
+		{"foreach ([1, 2, 3] as $v): echo $v; endforeach;", "123"},
+		{"foreach (['a' => 1, 'b' => 2] as $k => $v): echo $k, $v; endforeach;", "a1b2"},
+		{"$i = 0; while ($i < 3): echo $i; $i++; endwhile;", "012"},
+		{"for ($i = 0; $i < 3; $i++): echo $i; endfor;", "012"},
+		{"foreach ([1, 2, 3] as $v): if ($v === 2): continue; endif; echo $v; endforeach;", "13"},
+		{"foreach ([1, 2] as $v): foreach ([3, 4] as $w): echo $v, $w; endforeach; endforeach;", "13142324"},
+		{"$i = 0; while (true): $i++; if ($i > 2): break; endif; endwhile; echo $i;", "3"},
+	} {
+		var out, err bytes.Buffer
+		code := Run("<?php "+test.source, "input.php", &out, &err)
+		if code != 0 || out.String() != test.want || err.Len() != 0 {
+			t.Errorf("%s: exit=%d stdout=%q stderr=%q", test.source, code, &out, &err)
 		}
 	}
 }

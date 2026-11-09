@@ -6669,5 +6669,15 @@
     "stdout": "ReflectionMethod|__construct|0|title|Book|copy\nReflectionMethod|__construct|1|year|Book|copy\nReflectionMethod|make|0|title|Book|copy\nReflectionMethod|make|1|years|Book|copy\nReflectionFunction|describe|0|book|-|copy\nReflectionFunction|describe|1|prefix|-|copy\n",
     "stderr": "",
     "exit": 0
+  },
+  "success/reflection_is_subclass_of.php": {
+    "stdout": "C->A=true\nC->B=true\nC->P=true\nC->C=false\nP->A=true\nP->P=false\nB->A=true\nB->B=false\nA->A=false\nArrayIterator->Traversable=true\nArrayIterator->Iterator=true\nArrayIterator->Countable=true\nArrayObject->IteratorAggregate=true\nReflectionClass->Reflector=true\nReflectionClass->Stringable=true\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "success/serializable_contract.php": {
+    "stdout": "serialize\nunserialize\npayload\nrestored\n",
+    "stderr": "",
+    "exit": 0
   }
 }

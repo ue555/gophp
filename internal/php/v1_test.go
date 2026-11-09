@@ -12,7 +12,6 @@ import (
 func TestV1UnsupportedForms(t *testing.T) {
 	for _, source := range []string{
 		"foreach ([] as &$v) {}", "foreach ([] as &$k => $v) {}",
-		"foreach ([] as $v): endforeach;",
 		"echo (integer)1;", "echo (boolean)1;", "echo (double)1;", "echo (real)1;",
 		"echo (binary)1;", "echo (unset)1;",
 		"echo count_normal;", "echo isset();", "empty(1, 2);", "unset();",

@@ -52,6 +52,17 @@ func (p *parser) loopStatement(kind string, line int) (statement, error) {
 	if kind == "do" {
 		return s, p.expect(";")
 	}
+	if p.accept(":") {
+		end := "end" + kind
+		s.thenBranch, err = p.alternativeStatements(end)
+		if err != nil {
+			return s, err
+		}
+		if !p.acceptKeyword(end) {
+			return s, unexpected(p.current(), end)
+		}
+		return s, p.expect(";")
+	}
 	s.thenBranch, err = p.body()
 	return s, err
 }
